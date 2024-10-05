@@ -1,0 +1,25 @@
+WPI MQP Image Process Software Initial Version. This project is a basic YUV video player with OpenGL rendering. The current UI is very simple and rough (and ugly :)) and will be gradually improved over the vacations.
+
+Basic Development Information
+-
+1. Language: C++
+2. Application：QT creator. 
+3. Version: Qt 6.7.2 (MSVC 2019, x86_64). Built on Aug 6 2024 00:17:40. (not the LST one)
+
+Currently Implemented Features
+-
+1. YUV to Video Conversion: <br>The player can load YUV data and convert it into video using OpenGL for rendering.
+2. Basic Playback: <br>You can play the video by pressing the Play button.
+3. Video Resolution: <br>The default video resolution is 176x144, but this can be adjusted as needed.
+4. Frame Rate: <br>The current frame rate is 30 FPS, which can also be modified if necessary.
+
+Future Improvements
+-
+1. UI Optimization: <br>The user interface will be redesigned and optimized in future versions to enhance the overall user experience.
+2. Board Testing: <br>Once the hardware board is successfully set up, we will test the data directly from the board.
+3. RGB Data Support: <br>Will convert RGB data into video if needed.
+4. Feature Prioritization: <br>If any key features are identified, we will work on them earlier.
+
+Challenges
+-
+1. Window adaption is difficult to achieve
