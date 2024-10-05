@@ -1,43 +1,71 @@
 #include "glvideowidget.h"
 
-
 //trans yuv to rgb
-static const QMatrix4x4 yuv2rgb_bt601 =
-    QMatrix4x4(
-        1.0f,  0.000f,  1.402f, 0.0f,
-        1.0f, -0.344f, -0.714f, 0.0f,
-        1.0f,  1.772f,  0.000f, 0.0f,
-        0.0f,  0.000f,  0.000f, 1.0f)
-    *
-    QMatrix4x4(
-        1.0f, 0.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f, -0.5f,
-        0.0f, 0.0f, 1.0f, -0.5f,
-        0.0f, 0.0f, 0.0f, 1.0f);
+static const QMatrix4x4 yuv2rgb_bt601 = QMatrix4x4(1.0f,
+                                                   0.000f,
+                                                   1.402f,
+                                                   0.0f,
+                                                   1.0f,
+                                                   -0.344f,
+                                                   -0.714f,
+                                                   0.0f,
+                                                   1.0f,
+                                                   1.772f,
+                                                   0.000f,
+                                                   0.0f,
+                                                   0.0f,
+                                                   0.000f,
+                                                   0.000f,
+                                                   1.0f)
+                                        * QMatrix4x4(1.0f,
+                                                     0.0f,
+                                                     0.0f,
+                                                     0.0f,
+                                                     0.0f,
+                                                     1.0f,
+                                                     0.0f,
+                                                     -0.5f,
+                                                     0.0f,
+                                                     0.0f,
+                                                     1.0f,
+                                                     -0.5f,
+                                                     0.0f,
+                                                     0.0f,
+                                                     0.0f,
+                                                     1.0f);
 
 const GLfloat kVertices[] = {
-    -1, 1,
-    -1, -1,
-    1, 1,
-    1, -1,
+    -1,
+    1,
+    -1,
+    -1,
+    1,
+    1,
+    1,
+    -1,
 };
 const GLfloat kTexCoords[] = {
-    0, 0,
-    0, 1,
-    1, 0,
-    1, 1,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
 };
 
-char const *const* attributes()
+char const *const *attributes()
 {
     static const char a0[] = {0x61, 0x5f, 0x50, 0x6f, 0x73, 0x0};
     static const char a1[] = {0x61, 0x5f, 0x54, 0x65, 0x78, 0x0};
     static const char a2[] = {0x00, 0x51, 0x74, 0x41, 0x56, 0x0};
-    static const char* A[] = { a0, a1, a2};
+    static const char *A[] = {a0, a1, a2};
     return A;
 }
 
-typedef struct {
+typedef struct
+{
     QImage::Format qfmt;
     GLint internal_fmt;
     GLenum fmt;
@@ -47,35 +75,27 @@ typedef struct {
 
 #define glsl(x) #x
 static const char kVertexShader[] = glsl(
-    attribute vec4 a_Pos;
-    attribute vec2 a_Tex;
-    uniform mat4 u_MVP_matrix;
-    varying vec2 v_TexCoords;
+    attribute vec4 a_Pos; attribute vec2 a_Tex; uniform mat4 u_MVP_matrix; varying vec2 v_TexCoords;
     void main() {
         gl_Position = u_MVP_matrix * a_Pos;
         v_TexCoords = a_Tex;
     });
 
 static const char kFragmentShader[] = glsl(
-    uniform sampler2D u_Texture0;
-    uniform sampler2D u_Texture1;
-    uniform sampler2D u_Texture2;
+    uniform sampler2D u_Texture0; uniform sampler2D u_Texture1; uniform sampler2D u_Texture2;
     varying mediump vec2 v_TexCoords;
     uniform mat4 u_colorMatrix;
-    void main()
-    {
+    void main() {
         gl_FragColor = clamp(u_colorMatrix
-                                 * vec4(
-                                     texture2D(u_Texture0, v_TexCoords).r,
-                                     texture2D(u_Texture1, v_TexCoords).r,
-                                     texture2D(u_Texture2, v_TexCoords).r,
-                                     1)
-                             , 0.0, 1.0);
+                                 * vec4(texture2D(u_Texture0, v_TexCoords).r,
+                                        texture2D(u_Texture1, v_TexCoords).r,
+                                        texture2D(u_Texture2, v_TexCoords).r,
+                                        1),
+                             0.0,
+                             1.0);
     });
 static const char kFragmentShaderRGB[] = glsl(
-    uniform sampler2D u_Texture0;
-    varying mediump vec2 v_TexCoords;
-    void main() {
+    uniform sampler2D u_Texture0; varying mediump vec2 v_TexCoords; void main() {
         vec4 c = texture2D(u_Texture0, v_TexCoords);
         gl_FragColor = c.rgba;
     });
@@ -91,7 +111,6 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     setAttribute(Qt::WA_NoSystemBackground);
     //default: swap in qpainter dtor. we should swap before QPainter.endNativePainting()
     memset(tex, 0, 3 * sizeof(GLuint));
-
 }
 
 void GLVideoWidget::setFrameData(const QByteArray &data)
@@ -100,21 +119,20 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
     Q_UNUSED(lock);
     upload_tex = true;
     m_data = data;
-    plane[0].data = (char*)m_data.constData();
+    plane[0].data = (char *) m_data.constData();
 
     //debug
     qDebug() << "Received frame data size:" << m_data.size();
 
     if (plane.size() > 1) {
-        plane[1].data = plane[0].data + plane[0].stride*height;
-        plane[2].data = plane[1].data + plane[1].stride*height/2;
+        plane[1].data = plane[0].data + plane[0].stride * height;
+        plane[2].data = plane[1].data + plane[1].stride * height / 2;
     }
     update();
 }
 
-
-
-void GLVideoWidget::nextFrame(const QByteArray &data) {
+void GLVideoWidget::nextFrame(const QByteArray &data)
+{
     videoData = data;
     currentFrameIndex = 0; // reset
     // set timer
@@ -123,7 +141,8 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     frameTimer->start(32); // 30FPS
 }
 
-void GLVideoWidget::processNextFrame() {
+void GLVideoWidget::processNextFrame()
+{
     const int frameSize = 176 * 144 * 3; // 176x144
     if (currentFrameIndex * frameSize < videoData.size()) {
         QByteArray frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
@@ -131,7 +150,7 @@ void GLVideoWidget::processNextFrame() {
         currentFrameIndex++;
     } else {
         frameTimer->stop(); // stop timer
-        delete frameTimer; // delete timer
+        delete frameTimer;  // delete timer
         qDebug() << "All frames processed.";
     }
 }
@@ -142,7 +161,7 @@ void GLVideoWidget::setImage(const QImage &img)
     Q_UNUSED(lock);
     upload_tex = true;
     m_image = img;
-    plane[0].data = (char*)m_image.constBits();
+    plane[0].data = (char *) m_image.constBits();
     update();
 }
 
@@ -164,7 +183,15 @@ void GLVideoWidget::bindPlane(int p)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     const Plane &P = plane[p];
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, P.upload_size.width(), P.upload_size.height(), P.fmt, P.type, P.data);
+    glTexSubImage2D(GL_TEXTURE_2D,
+                    0,
+                    0,
+                    0,
+                    P.upload_size.width(),
+                    P.upload_size.height(),
+                    P.fmt,
+                    P.type,
+                    P.data);
 }
 
 void GLVideoWidget::initTextures()
@@ -182,7 +209,15 @@ void GLVideoWidget::initTextures()
         // This is necessary for non-power-of-two textures
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-        glTexImage2D(GL_TEXTURE_2D, 0, P.internal_fmt, P.tex_size.width(), P.tex_size.height(), 0/*border, ES not support*/, P.fmt, P.type, NULL);
+        glTexImage2D(GL_TEXTURE_2D,
+                     0,
+                     P.internal_fmt,
+                     P.tex_size.width(),
+                     P.tex_size.height(),
+                     0 /*border, ES not support*/,
+                     P.fmt,
+                     P.type,
+                     NULL);
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 }
@@ -209,11 +244,11 @@ void GLVideoWidget::setYUV420pParameters(int w, int h, int *strides)
     p.bpp = 1;
     for (int i = 1; i < plane.size(); ++i) {
         Plane &p = plane[i];
-        p.stride = strides && strides[i] ? strides[i] : w/2;
+        p.stride = strides && strides[i] ? strides[i] : w / 2;
         p.tex_size.setWidth(p.stride);
         p.upload_size.setWidth(p.stride);
-        p.tex_size.setHeight(h/2);
-        p.upload_size.setHeight(h/2);
+        p.tex_size.setHeight(h / 2);
+        p.upload_size.setHeight(h / 2);
         p.internal_fmt = p.fmt = GL_LUMINANCE;
         p.type = GL_UNSIGNED_BYTE;
         p.bpp = 1;
@@ -234,10 +269,9 @@ void GLVideoWidget::setQImageParameters(QImage::Format fmt, int w, int h, int st
     Plane &p = plane[0];
     p.data = 0;
     p.stride = stride ? stride : QImage(w, h, fmt).bytesPerLine();
-    static const gl_fmt_entry_t fmts[] = {
-        { QImage::Format_RGB888, GL_RGB, GL_RGB, GL_UNSIGNED_BYTE, 3},
-        { QImage::Format_Invalid, 0, 0, 0, 0}
-    };
+    static const gl_fmt_entry_t fmts[]
+        = {{QImage::Format_RGB888, GL_RGB, GL_RGB, GL_UNSIGNED_BYTE, 3},
+           {QImage::Format_Invalid, 0, 0, 0, 0}};
     for (int i = 0; fmts[i].bpp; ++i) {
         if (fmts[i].qfmt == fmt) {
             Plane &p = plane[0];
@@ -247,8 +281,8 @@ void GLVideoWidget::setQImageParameters(QImage::Format fmt, int w, int h, int st
             p.internal_fmt = fmts[i].internal_fmt;
             p.bpp = fmts[i].bpp;
 
-            p.tex_size.setWidth(p.stride/p.bpp);
-            p.upload_size.setWidth(p.stride/p.bpp);
+            p.tex_size.setWidth(p.stride / p.bpp);
+            p.upload_size.setWidth(p.stride / p.bpp);
             p.tex_size.setHeight(h);
             p.upload_size.setHeight(h);
             return;
@@ -261,7 +295,7 @@ void GLVideoWidget::paintGL()
 {
     QMutexLocker lock(&m_mutex);
     Q_UNUSED(lock);
-    if (!plane[0].data){
+    if (!plane[0].data) {
         qDebug() << "No frame data to render!";
         return;
     }
@@ -276,7 +310,7 @@ void GLVideoWidget::paintGL()
     bind();
     m_program->bind();
     for (int i = 0; i < plane.size(); ++i) {
-        m_program->setUniformValue(u_Texture[i], (GLint)i);
+        m_program->setUniformValue(u_Texture[i], (GLint) i);
     }
     m_program->setUniformValue(u_colorMatrix, yuv2rgb_bt601);
     m_program->setUniformValue(u_MVP_matrix, m_mat);

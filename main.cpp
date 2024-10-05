@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 //#include "glvideowidget.h"
+#include "usbinterface.h"
 #include <QApplication>
 #include <QtCore>
 #include <QtGui/QImage>
@@ -28,7 +29,6 @@ int main(int argc, char *argv[])
     //     qDebug("data size: %lld", data.size());
     //     const int w = 176, h = 144;
 
-
     //     glw.setYUV420pParameters(w, h); //call once
     //     glw.setFrameData(data);
     // } else {
@@ -38,12 +38,18 @@ int main(int argc, char *argv[])
     // }
     // glw.show();
 
+    uint16_t vendor_id = 0x04B4;  // Example Vendor ID
+    uint16_t product_id = 0x00F1; // Example Product ID
+    uint8_t endpoint_in = 0x01;
+
+    USBInterface usb(vendor_id, product_id, endpoint_in);
+
+    usb.initializeUSB();
 
     //with ui
     MainWindow mainWindow;
     mainWindow.setWindowTitle("Image & Video Viewer");
     mainWindow.show();
-
 
     return a.exec();
 }
