@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>1280x720.yuv</file>
+        <file>test.png</file>
+        <file>akiyo_qcif.yuv</file>
+    </qresource>
+</RCC>
