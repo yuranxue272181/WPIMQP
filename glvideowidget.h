@@ -23,7 +23,7 @@ public:
     void setYUV420pParameters(int w, int h, int* strides = NULL);
     void setFrameData(const QByteArray& data);
     void nextFrame(const QByteArray &data);
-    void processNextFrame();
+
     // QImage
     /*!
      * \brief setQImageParameters
@@ -34,6 +34,9 @@ public:
     void setQImageParameters(QImage::Format fmt, int w, int h, int stride);
     void setImage(const QImage& img);
     bool pauseVideo();
+    void saveYUVDataToFile();
+
+
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
 protected:
     void bind();
@@ -52,11 +55,10 @@ private:
     //char *pitch[3];
     QByteArray m_data;
     QImage m_image;
-
     QTimer *frameTimer;
     int currentFrameIndex = 0;
-
     QByteArray videoData;
+    QByteArray frameData;
 
     typedef struct {
         char* data;
@@ -76,6 +78,8 @@ private:
     QOpenGLShaderProgram *m_program;
     QMutex m_mutex;
     QMatrix4x4 m_mat;
+
+    void processNextFrame();
 
 signals:
     void videoFinished();

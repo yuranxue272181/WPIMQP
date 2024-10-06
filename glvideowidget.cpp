@@ -1,4 +1,6 @@
 #include "glvideowidget.h"
+#include <QFile>
+#include <QFileDialog>
 
 
 //trans yuv to rgb
@@ -126,7 +128,7 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
 void GLVideoWidget::processNextFrame() {
     const int frameSize = 176 * 144 * 3; // 176x144
     if (currentFrameIndex * frameSize < videoData.size()) {
-        QByteArray frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
+        frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
         setFrameData(frameData);
         currentFrameIndex++;
     } else {
@@ -136,6 +138,40 @@ void GLVideoWidget::processNextFrame() {
         qDebug() << "All frames processed.";
         emit videoFinished();
     }
+}
+
+
+void GLVideoWidget::saveYUVDataToFile() {
+    if (frameData.isEmpty()) {
+        qDebug() << "No frame data to save.";
+        return;
+    }
+    QString directory = QFileDialog::getExistingDirectory(this, tr("Select Directory"), QString(),
+                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if (directory.isEmpty()) {
+        qDebug() << "No directory selected.";
+        return;
+    }
+    QString filePath = directory + "/frame_" + QString::number(currentFrameIndex) + ".yuv";
+
+    QFile file(filePath);
+    if (file.open(QIODevice::WriteOnly)) {
+        file.write(frameData);
+        file.close();
+        qDebug() << "Frame" << currentFrameIndex << "saved to" << filePath;
+    } else {
+        qDebug() << "Failed to save frame to" << filePath;
+    }
+
+    // QString filePath = "frame_" + QString::number(currentFrameIndex) + ".yuv";
+    // QFile file(filePath);
+    // if (file.open(QIODevice::WriteOnly)) {
+    //     file.write(frameData);
+    //     file.close();
+    //     qDebug() << "Frame" << currentFrameIndex << "saved to" << filePath;
+    // } else {
+    //     qDebug() << "Failed to save frame to" << filePath;
+    // }
 }
 
 bool GLVideoWidget::pauseVideo(){

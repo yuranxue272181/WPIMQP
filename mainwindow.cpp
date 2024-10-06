@@ -55,6 +55,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(gl, &GLVideoWidget::videoFinished, this, &MainWindow::onVideoFinished);
     connect(zoomInBtn,&QToolButton::clicked, this, &MainWindow::zoomIn);
     connect(zoomOutBtn,&QToolButton::clicked, this, &MainWindow::zoomOut);
+    connect(shootBtn, &QToolButton::clicked, gl, &GLVideoWidget::saveYUVDataToFile);
 
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
     gl-> setYUV420pParameters(176, 144); //call once
