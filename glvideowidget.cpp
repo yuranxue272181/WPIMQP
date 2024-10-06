@@ -146,13 +146,21 @@ void GLVideoWidget::saveYUVDataToFile() {
         qDebug() << "No frame data to save.";
         return;
     }
-    QString directory = QFileDialog::getExistingDirectory(this, tr("Select Directory"), QString(),
-                                                          QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    if (directory.isEmpty()) {
-        qDebug() << "No directory selected.";
-        return;
+    // QString directory = QFileDialog::getExistingDirectory(this, tr("Select Directory"), QString(),
+    //                                                       QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    // if (directory.isEmpty()) {
+    //     qDebug() << "No directory selected.";
+    //     return;
+    // }
+   // QString filePath = directory + "/frame_" + QString::number(currentFrameIndex) + ".yuv";
+
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Save YUV File"),
+                                                    QString(),
+                                                    tr("YUV Files (*.yuv);;All Files (*)"));
+    if (filePath.isEmpty()) {
+        qDebug() << "No file selected.";
+        return;  // 用户没有选择文件名
     }
-    QString filePath = directory + "/frame_" + QString::number(currentFrameIndex) + ".yuv";
 
     QFile file(filePath);
     if (file.open(QIODevice::WriteOnly)) {
@@ -163,15 +171,6 @@ void GLVideoWidget::saveYUVDataToFile() {
         qDebug() << "Failed to save frame to" << filePath;
     }
 
-    // QString filePath = "frame_" + QString::number(currentFrameIndex) + ".yuv";
-    // QFile file(filePath);
-    // if (file.open(QIODevice::WriteOnly)) {
-    //     file.write(frameData);
-    //     file.close();
-    //     qDebug() << "Frame" << currentFrameIndex << "saved to" << filePath;
-    // } else {
-    //     qDebug() << "Failed to save frame to" << filePath;
-    // }
 }
 
 bool GLVideoWidget::pauseVideo(){
