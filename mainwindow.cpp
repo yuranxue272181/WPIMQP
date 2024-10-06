@@ -90,7 +90,8 @@ void MainWindow::renderVideo(){
     //set playPauseBtn
     playPauseBtn->setEnabled(true);
     playPauseBtn->setIcon(QIcon(":/icons/play.png"));
-
+    //set startBtn
+    startBtn->setEnabled(false);
     //176x144
     QFile f(":/akiyo_qcif.yuv");
     f.open(QIODevice::ReadOnly);
@@ -112,6 +113,7 @@ void MainWindow::pauseVideo(){
 void MainWindow::onVideoFinished(){
     playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
     playPauseBtn->setEnabled(false);
+    startBtn->setEnabled(true);
 }
 
 void MainWindow::enableButton(){
