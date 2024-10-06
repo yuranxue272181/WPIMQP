@@ -146,20 +146,13 @@ void GLVideoWidget::saveYUVDataToFile() {
         qDebug() << "No frame data to save.";
         return;
     }
-    // QString directory = QFileDialog::getExistingDirectory(this, tr("Select Directory"), QString(),
-    //                                                       QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    // if (directory.isEmpty()) {
-    //     qDebug() << "No directory selected.";
-    //     return;
-    // }
-   // QString filePath = directory + "/frame_" + QString::number(currentFrameIndex) + ".yuv";
 
     QString filePath = QFileDialog::getSaveFileName(this, tr("Save YUV File"),
                                                     QString(),
                                                     tr("YUV Files (*.yuv);;All Files (*)"));
     if (filePath.isEmpty()) {
         qDebug() << "No file selected.";
-        return;  // 用户没有选择文件名
+        return;
     }
 
     QFile file(filePath);

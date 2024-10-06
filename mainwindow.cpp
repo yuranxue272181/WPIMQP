@@ -38,8 +38,10 @@ MainWindow::MainWindow(QWidget *parent)
     playPauseBtn->setEnabled(false);
     shootBtn->setIcon(QIcon(":/icons/shoot.png"));
     shootBtn->setIconSize(QSize(30,30));
+    shootBtn->setEnabled(false);
     recordBtn->setIcon(QIcon(":/icons/record.png"));
     recordBtn->setIconSize(QSize(30,30));
+    recordBtn->setEnabled(false);
     zoomInBtn->setIcon(QIcon(":/icons/zoomIn.png"));
     zoomInBtn->setIconSize(QSize(30,30));
     zoomOutBtn->setIcon(QIcon(":/icons/zoomOut.png"));
@@ -88,11 +90,12 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::renderVideo(){
-    //set playPauseBtn
+    //button
     playPauseBtn->setEnabled(true);
     playPauseBtn->setIcon(QIcon(":/icons/play.png"));
-    //set startBtn
     startBtn->setEnabled(false);
+    shootBtn->setEnabled(true);
+
     //176x144
     QFile f(":/akiyo_qcif.yuv");
     f.open(QIODevice::ReadOnly);
