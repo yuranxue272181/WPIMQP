@@ -41,9 +41,6 @@
      <height>10</height>
     </size>
    </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: rgb(255, 255, 255);</string>
-   </property>
    <widget class="QWidget" name="videoWidget" native="true">
     <property name="geometry">
      <rect>
@@ -198,7 +195,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <rect>
       <x>-10</x>
       <y>10</y>
-      <width>402</width>
+      <width>360</width>
       <height>23</height>
      </rect>
     </property>

@@ -33,6 +33,7 @@ private:
     GLVideoWidget *gl;
 
     QToolButton *playBtn;
+    QWidget *mainWidget;
 
 
 

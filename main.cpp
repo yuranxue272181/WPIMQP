@@ -38,7 +38,6 @@ int main(int argc, char *argv[])
     // }
     // glw.show();
 
-
     //with ui
     MainWindow mainWindow;
     mainWindow.setWindowTitle("Image & Video Viewer");

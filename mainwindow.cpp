@@ -11,6 +11,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //dark model
+    //mainWidget = ui->centralwidget;
+    //mainWidget -> setStyleSheet("background-color: #353535;");
+
     //ui
     playBtn = ui->playButton;
 

@@ -110,7 +110,6 @@ public:
         sizePolicy.setHeightForWidth(centralwidget->sizePolicy().hasHeightForWidth());
         centralwidget->setSizePolicy(sizePolicy);
         centralwidget->setSizeIncrement(QSize(10, 10));
-        centralwidget->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
         videoWidget = new QWidget(centralwidget);
         videoWidget->setObjectName("videoWidget");
         videoWidget->setGeometry(QRect(12, 41, 352, 288));
@@ -159,7 +158,7 @@ public:
         splitter->addWidget(label_6);
         layoutWidget = new QWidget(centralwidget);
         layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(-10, 10, 402, 23));
+        layoutWidget->setGeometry(QRect(-10, 10, 360, 23));
         horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
