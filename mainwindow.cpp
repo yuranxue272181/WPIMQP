@@ -26,12 +26,13 @@ MainWindow::MainWindow(QWidget *parent)
     //dock widget
     leftDk = ui-> leftDock;
     rightDk = ui -> rightDock;
+    //widget
+    videoWdt = ui->videoWidget;
 
 
     //set icons
     startBtn->setIcon(QIcon(":/icons/restart.png"));
     startBtn->setIconSize(QSize(30,30));
-    //startBtn->setEnabled(false); //waiting for loading opengl
     playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
     playPauseBtn->setIconSize(QSize(30,30));
     playPauseBtn->setEnabled(false);
@@ -52,7 +53,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(startBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
     connect(playPauseBtn, &QToolButton::clicked, this, &MainWindow::pauseVideo);
     connect(gl, &GLVideoWidget::videoFinished, this, &MainWindow::onVideoFinished);
-    //connect(this,&MainWindow::glInitialized,this, &MainWindow::enableButton);
+    connect(zoomInBtn,&QToolButton::clicked, this, &MainWindow::zoomIn);
+    connect(zoomOutBtn,&QToolButton::clicked, this, &MainWindow::zoomOut);
 
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
     gl-> setYUV420pParameters(176, 144); //call once
@@ -116,3 +118,11 @@ void MainWindow::enableButton(){
     startBtn->setEnabled(true);
 }
 
+void MainWindow::zoomIn(){
+    videoWdt->resize(videoWdt->width() * 1.1, videoWdt->height() * 1.1);
+}
+
+void MainWindow::zoomOut(){
+    videoWdt->resize(videoWdt->width() * 0.9, videoWdt->height() * 0.9);
+
+}

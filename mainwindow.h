@@ -31,6 +31,8 @@ private slots:
     void pauseVideo();
     void onVideoFinished();
     void enableButton();
+    void zoomIn();
+    void zoomOut();
 
 private:
     Ui::MainWindow *ui;
@@ -45,6 +47,7 @@ private:
     QToolButton *zoomOutBtn;
 
     QWidget *mainWidget;
+    QWidget *videoWdt;
     QDockWidget *leftDk;
     QDockWidget *rightDk;
 
