@@ -46,7 +46,7 @@ public:
     QSplitter *splitter;
     QLabel *label_5;
     QLabel *label_6;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QToolButton *startButton;
     QToolButton *playPauseButton;
@@ -85,7 +85,7 @@ public:
     QWidget *Sharpen_2;
     QWidget *tab_2;
     QTextEdit *textEdit;
-    QWidget *widget1;
+    QWidget *widget;
     QLabel *label_2;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
@@ -119,8 +119,9 @@ public:
         videoWidget->setSizeIncrement(QSize(10, 10));
         tabWidget_2 = new QTabWidget(centralwidget);
         tabWidget_2->setObjectName("tabWidget_2");
-        tabWidget_2->setGeometry(QRect(12, 361, 341, 140));
+        tabWidget_2->setGeometry(QRect(10, 360, 341, 140));
         tabWidget_2->setMinimumSize(QSize(0, 140));
+        tabWidget_2->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
         tab_4 = new QWidget();
         tab_4->setObjectName("tab_4");
         tableWidget_2 = new QTableWidget(tab_4);
@@ -132,12 +133,23 @@ public:
         tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
         tableWidget_2->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        if (tableWidget_2->rowCount() < 1)
+            tableWidget_2->setRowCount(1);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        __qtablewidgetitem3->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(0, 0, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        __qtablewidgetitem4->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(0, 1, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        __qtablewidgetitem5->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(0, 2, __qtablewidgetitem5);
         tableWidget_2->setObjectName("tableWidget_2");
         tableWidget_2->setGeometry(QRect(10, 0, 311, 101));
         tableWidget_2->horizontalHeader()->setVisible(true);
         tableWidget_2->horizontalHeader()->setCascadingSectionResizes(false);
         tableWidget_2->horizontalHeader()->setHighlightSections(false);
-        tableWidget_2->verticalHeader()->setVisible(true);
+        tableWidget_2->verticalHeader()->setVisible(false);
         tabWidget_2->addTab(tab_4, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName("tab_5");
@@ -156,43 +168,43 @@ public:
         label_6 = new QLabel(splitter);
         label_6->setObjectName("label_6");
         splitter->addWidget(label_6);
-        widget = new QWidget(centralwidget);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(1, 7, 371, 32));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(1, 7, 371, 32));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        startButton = new QToolButton(widget);
+        startButton = new QToolButton(layoutWidget);
         startButton->setObjectName("startButton");
         startButton->setMinimumSize(QSize(30, 30));
 
         horizontalLayout->addWidget(startButton);
 
-        playPauseButton = new QToolButton(widget);
+        playPauseButton = new QToolButton(layoutWidget);
         playPauseButton->setObjectName("playPauseButton");
         playPauseButton->setMinimumSize(QSize(30, 30));
 
         horizontalLayout->addWidget(playPauseButton);
 
-        shootButton = new QToolButton(widget);
+        shootButton = new QToolButton(layoutWidget);
         shootButton->setObjectName("shootButton");
         shootButton->setMinimumSize(QSize(30, 30));
 
         horizontalLayout->addWidget(shootButton);
 
-        recordButton = new QToolButton(widget);
+        recordButton = new QToolButton(layoutWidget);
         recordButton->setObjectName("recordButton");
         recordButton->setMinimumSize(QSize(30, 30));
 
         horizontalLayout->addWidget(recordButton);
 
-        zoomInButton = new QToolButton(widget);
+        zoomInButton = new QToolButton(layoutWidget);
         zoomInButton->setObjectName("zoomInButton");
         zoomInButton->setMinimumSize(QSize(30, 30));
 
         horizontalLayout->addWidget(zoomInButton);
 
-        zoomOutButton = new QToolButton(widget);
+        zoomOutButton = new QToolButton(layoutWidget);
         zoomOutButton->setObjectName("zoomOutButton");
         zoomOutButton->setMinimumSize(QSize(30, 30));
 
@@ -230,29 +242,29 @@ public:
         tableWidget = new QTableWidget(dockWidgetContents_7);
         if (tableWidget->columnCount() < 2)
             tableWidget->setColumnCount(2);
-        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem3);
-        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem7);
         if (tableWidget->rowCount() < 2)
             tableWidget->setRowCount(2);
-        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
-        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem5);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        __qtablewidgetitem6->setTextAlignment(Qt::AlignCenter);
-        tableWidget->setItem(0, 0, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        __qtablewidgetitem7->setTextAlignment(Qt::AlignCenter);
-        tableWidget->setItem(0, 1, __qtablewidgetitem7);
-        QFont font;
-        font.setKerning(true);
         QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        __qtablewidgetitem8->setTextAlignment(Qt::AlignCenter);
-        __qtablewidgetitem8->setFont(font);
-        tableWidget->setItem(1, 0, __qtablewidgetitem8);
+        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem8);
         QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
         __qtablewidgetitem9->setTextAlignment(Qt::AlignCenter);
-        tableWidget->setItem(1, 1, __qtablewidgetitem9);
+        tableWidget->setItem(0, 0, __qtablewidgetitem9);
+        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
+        __qtablewidgetitem10->setTextAlignment(Qt::AlignCenter);
+        tableWidget->setItem(0, 1, __qtablewidgetitem10);
+        QFont font;
+        font.setKerning(true);
+        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
+        __qtablewidgetitem11->setTextAlignment(Qt::AlignCenter);
+        __qtablewidgetitem11->setFont(font);
+        tableWidget->setItem(1, 0, __qtablewidgetitem11);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        __qtablewidgetitem12->setTextAlignment(Qt::AlignCenter);
+        tableWidget->setItem(1, 1, __qtablewidgetitem12);
         tableWidget->setObjectName("tableWidget");
         tableWidget->setGeometry(QRect(0, 0, 201, 481));
         QSizePolicy sizePolicy2(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
@@ -348,25 +360,25 @@ public:
         textEdit->setObjectName("textEdit");
         textEdit->setGeometry(QRect(30, 30, 104, 61));
         tabWidget->addTab(tab_2, QString());
-        widget1 = new QWidget(dockWidgetContents_8);
-        widget1->setObjectName("widget1");
-        widget1->setGeometry(QRect(0, 350, 211, 121));
-        label_2 = new QLabel(widget1);
+        widget = new QWidget(dockWidgetContents_8);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(0, 350, 211, 121));
+        label_2 = new QLabel(widget);
         label_2->setObjectName("label_2");
         label_2->setGeometry(QRect(130, 10, 51, 20));
-        pushButton = new QPushButton(widget1);
+        pushButton = new QPushButton(widget);
         pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(120, 30, 75, 31));
-        pushButton_2 = new QPushButton(widget1);
+        pushButton_2 = new QPushButton(widget);
         pushButton_2->setObjectName("pushButton_2");
         pushButton_2->setGeometry(QRect(120, 60, 75, 31));
-        label_4 = new QLabel(widget1);
+        label_4 = new QLabel(widget);
         label_4->setObjectName("label_4");
         label_4->setGeometry(QRect(10, 10, 111, 20));
-        pushButton_3 = new QPushButton(widget1);
+        pushButton_3 = new QPushButton(widget);
         pushButton_3->setObjectName("pushButton_3");
         pushButton_3->setGeometry(QRect(20, 40, 75, 23));
-        pushButton_4 = new QPushButton(widget1);
+        pushButton_4 = new QPushButton(widget);
         pushButton_4->setObjectName("pushButton_4");
         pushButton_4->setGeometry(QRect(20, 60, 75, 23));
         rightDock->setWidget(dockWidgetContents_8);
@@ -399,6 +411,17 @@ public:
         ___qtablewidgetitem1->setText(QCoreApplication::translate("MainWindow", "Qx", nullptr));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget_2->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QCoreApplication::translate("MainWindow", "Qy", nullptr));
+
+        const bool __sortingEnabled = tableWidget_2->isSortingEnabled();
+        tableWidget_2->setSortingEnabled(false);
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget_2->item(0, 0);
+        ___qtablewidgetitem3->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget_2->item(0, 1);
+        ___qtablewidgetitem4->setText(QCoreApplication::translate("MainWindow", "1200", nullptr));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidget_2->item(0, 2);
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindow", "1100", nullptr));
+        tableWidget_2->setSortingEnabled(__sortingEnabled);
+
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Grab Coordinates", nullptr));
         textBrowser->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
@@ -431,24 +454,24 @@ public:
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
         menuView->setTitle(QCoreApplication::translate("MainWindow", "View", nullptr));
         leftDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Feature Properties", nullptr));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(0);
-        ___qtablewidgetitem3->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
-        QTableWidgetItem *___qtablewidgetitem4 = tableWidget->horizontalHeaderItem(1);
-        ___qtablewidgetitem4->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
-        QTableWidgetItem *___qtablewidgetitem5 = tableWidget->verticalHeaderItem(0);
-        ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem6->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
+        QTableWidgetItem *___qtablewidgetitem8 = tableWidget->verticalHeaderItem(0);
+        ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
 
-        const bool __sortingEnabled = tableWidget->isSortingEnabled();
+        const bool __sortingEnabled1 = tableWidget->isSortingEnabled();
         tableWidget->setSortingEnabled(false);
-        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->item(0, 0);
-        ___qtablewidgetitem6->setText(QCoreApplication::translate("MainWindow", "Contrast", nullptr));
-        QTableWidgetItem *___qtablewidgetitem7 = tableWidget->item(0, 1);
-        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
-        QTableWidgetItem *___qtablewidgetitem8 = tableWidget->item(1, 0);
-        ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "Brightness", nullptr));
-        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->item(1, 1);
-        ___qtablewidgetitem9->setText(QCoreApplication::translate("MainWindow", "50", nullptr));
-        tableWidget->setSortingEnabled(__sortingEnabled);
+        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->item(0, 0);
+        ___qtablewidgetitem9->setText(QCoreApplication::translate("MainWindow", "Contrast", nullptr));
+        QTableWidgetItem *___qtablewidgetitem10 = tableWidget->item(0, 1);
+        ___qtablewidgetitem10->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
+        QTableWidgetItem *___qtablewidgetitem11 = tableWidget->item(1, 0);
+        ___qtablewidgetitem11->setText(QCoreApplication::translate("MainWindow", "Brightness", nullptr));
+        QTableWidgetItem *___qtablewidgetitem12 = tableWidget->item(1, 1);
+        ___qtablewidgetitem12->setText(QCoreApplication::translate("MainWindow", "50", nullptr));
+        tableWidget->setSortingEnabled(__sortingEnabled1);
 
         rightDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "50", nullptr));

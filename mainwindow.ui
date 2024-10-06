@@ -72,8 +72,8 @@
    <widget class="QTabWidget" name="tabWidget_2">
     <property name="geometry">
      <rect>
-      <x>12</x>
-      <y>361</y>
+      <x>10</x>
+      <y>360</y>
       <width>341</width>
       <height>140</height>
      </rect>
@@ -83,6 +83,9 @@
       <width>0</width>
       <height>140</height>
      </size>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="currentIndex">
      <number>0</number>
@@ -110,8 +113,9 @@
        <bool>false</bool>
       </attribute>
       <attribute name="verticalHeaderVisible">
-       <bool>true</bool>
+       <bool>false</bool>
       </attribute>
+      <row/>
       <column>
        <property name="text">
         <string>No.</string>
@@ -127,6 +131,30 @@
         <string>Qy</string>
        </property>
       </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>1</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="0" column="1">
+       <property name="text">
+        <string>1200</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="0" column="2">
+       <property name="text">
+        <string>1100</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_5">
@@ -190,7 +218,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>1</x>
