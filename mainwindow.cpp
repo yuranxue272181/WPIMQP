@@ -16,18 +16,41 @@ MainWindow::MainWindow(QWidget *parent)
     //mainWidget -> setStyleSheet("background-color: #353535;");
 
     //ui connection
-    playBtn = ui->playButton;
+    //button
+    startBtn = ui->startButton;
+    playPauseBtn = ui->playPauseButton;
+    shootBtn = ui->shootButton;
+    recordBtn = ui->recordButton;
+    zoomInBtn = ui->zoomInButton;
+    zoomOutBtn = ui->zoomOutButton;
+    //dock widget
     leftDk = ui-> leftDock;
     rightDk = ui -> rightDock;
 
 
+    //set icons
+    startBtn->setIcon(QIcon(":/icons/restart.png"));
+    startBtn->setIconSize(QSize(30,30));
+    playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
+    playPauseBtn->setIconSize(QSize(30,30));
+    playPauseBtn->setEnabled(false);
+    shootBtn->setIcon(QIcon(":/icons/shoot.png"));
+    shootBtn->setIconSize(QSize(30,30));
+    recordBtn->setIcon(QIcon(":/icons/record.png"));
+    recordBtn->setIconSize(QSize(30,30));
+    zoomInBtn->setIcon(QIcon(":/icons/zoomIn.png"));
+    zoomInBtn->setIconSize(QSize(30,30));
+    zoomOutBtn->setIcon(QIcon(":/icons/zoomOut.png"));
+    zoomOutBtn->setIconSize(QSize(30,30));
 
 
     //opengl
     gl = new GLVideoWidget(this);
 
     //Connect the signal to the slot
-    connect(playBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
+    connect(startBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
+    connect(playPauseBtn, &QToolButton::clicked, this, &MainWindow::pauseVideo);
+    connect(gl, &GLVideoWidget::videoFinished, this, &MainWindow::onVideoFinished);
 
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
     gl-> setYUV420pParameters(176, 144); //call once
@@ -65,6 +88,10 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::renderVideo(){
+    //set playPauseBtn
+    playPauseBtn->setEnabled(true);
+    playPauseBtn->setIcon(QIcon(":/icons/play.png"));
+
     //176x144
     QFile f(":/akiyo_qcif.yuv");
     f.open(QIODevice::ReadOnly);
@@ -72,6 +99,19 @@ void MainWindow::renderVideo(){
     qDebug("data size: %lld", data.size());
     gl->setFrameData(data);
     gl-> nextFrame(data);
+}
 
+void MainWindow::pauseVideo(){
+    if(gl->pauseVideo()){
+        playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
+    }
+    else{
+        playPauseBtn->setIcon(QIcon(":/icons/play.png"));
+    }
+}
+
+void MainWindow::onVideoFinished(){
+    playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
+    playPauseBtn->setEnabled(false);
 }
 

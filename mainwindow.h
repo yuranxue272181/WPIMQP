@@ -27,17 +27,26 @@ public:
     ~MainWindow();
 
 private slots:
-     void renderVideo();
+    void renderVideo();
+    void pauseVideo();
+    void onVideoFinished();
 
 private:
     Ui::MainWindow *ui;
     GLVideoWidget *gl;
 
     //ui
-    QToolButton *playBtn;
+    QToolButton *startBtn;
+    QToolButton *playPauseBtn;
+    QToolButton *shootBtn;
+    QToolButton *recordBtn;
+    QToolButton *zoomInBtn;
+    QToolButton *zoomOutBtn;
+
     QWidget *mainWidget;
     QDockWidget *leftDk;
     QDockWidget *rightDk;
+
 
 
 

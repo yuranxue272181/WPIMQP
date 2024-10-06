@@ -118,8 +118,10 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     videoData = data;
     currentFrameIndex = 0; // reset
     // set timer
+    if (!frameTimer) {
     frameTimer = new QTimer(this);
     connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextFrame);
+     }
     frameTimer->start(1000/30); // 30FPS
 }
 
@@ -130,11 +132,31 @@ void GLVideoWidget::processNextFrame() {
         setFrameData(frameData);
         currentFrameIndex++;
     } else {
-        frameTimer->stop(); // stop timer
-        delete frameTimer; // delete timer
+        frameTimer->stop();
+        delete frameTimer;
+        frameTimer = nullptr;
         qDebug() << "All frames processed.";
+        emit videoFinished();
     }
 }
+
+bool GLVideoWidget::pauseVideo(){
+    if (frameTimer) {
+        if (isPaused) {
+            //resume
+            frameTimer->start(1000 / 30);
+            isPaused = false;
+            qDebug() << "Video resumed.";
+        } else {
+            // pasue
+            frameTimer->stop();
+            isPaused = true;
+            qDebug() << "Video paused.";
+        }
+    }
+    return isPaused;
+}
+
 
 void GLVideoWidget::setImage(const QImage &img)
 {
