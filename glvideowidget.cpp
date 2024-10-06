@@ -120,7 +120,7 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     // set timer
     frameTimer = new QTimer(this);
     connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextFrame);
-    frameTimer->start(32); // 30FPS
+    frameTimer->start(1000/30); // 30FPS
 }
 
 void GLVideoWidget::processNextFrame() {
