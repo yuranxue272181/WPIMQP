@@ -6,6 +6,7 @@
 #include <QWidget>
 #include <QPushButton>
 #include <QToolButton>
+#include <QDockWidget>
 
 
 QT_BEGIN_NAMESPACE
@@ -32,8 +33,12 @@ private:
     Ui::MainWindow *ui;
     GLVideoWidget *gl;
 
+    //ui
     QToolButton *playBtn;
     QWidget *mainWidget;
+    QDockWidget *leftDk;
+    QDockWidget *rightDk;
+
 
 
 
