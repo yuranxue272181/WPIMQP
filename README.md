@@ -23,3 +23,4 @@ Future Improvements
 Challenges
 -
 1. Window adaption is difficult to achieve
+2. How to configure files on different computers
