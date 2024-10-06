@@ -30,6 +30,7 @@ private slots:
     void renderVideo();
     void pauseVideo();
     void onVideoFinished();
+    void enableButton();
 
 private:
     Ui::MainWindow *ui;
@@ -46,6 +47,9 @@ private:
     QWidget *mainWidget;
     QDockWidget *leftDk;
     QDockWidget *rightDk;
+
+signals:
+    // void glInitialized();
 
 
 

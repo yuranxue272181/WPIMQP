@@ -80,6 +80,7 @@ private:
 signals:
     void videoFinished();
 
+
 };
 
 #endif // WIDGET_H

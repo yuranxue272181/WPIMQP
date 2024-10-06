@@ -91,7 +91,6 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     setAttribute(Qt::WA_NoSystemBackground);
     //default: swap in qpainter dtor. we should swap before QPainter.endNativePainting()
     memset(tex, 0, 3 * sizeof(GLuint));
-
 }
 
 void GLVideoWidget::setFrameData(const QByteArray &data)
@@ -294,6 +293,7 @@ void GLVideoWidget::paintGL()
         initializeShader();
         initTextures();
         update_res = false;
+
     }
     bind();
     m_program->bind();

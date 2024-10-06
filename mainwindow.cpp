@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     //set icons
     startBtn->setIcon(QIcon(":/icons/restart.png"));
     startBtn->setIconSize(QSize(30,30));
+    //startBtn->setEnabled(false); //waiting for loading opengl
     playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
     playPauseBtn->setIconSize(QSize(30,30));
     playPauseBtn->setEnabled(false);
@@ -51,16 +52,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(startBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
     connect(playPauseBtn, &QToolButton::clicked, this, &MainWindow::pauseVideo);
     connect(gl, &GLVideoWidget::videoFinished, this, &MainWindow::onVideoFinished);
+    //connect(this,&MainWindow::glInitialized,this, &MainWindow::enableButton);
 
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
     gl-> setYUV420pParameters(176, 144); //call once
 
-    //show the first frame
-    // QFile f(":/akiyo_qcif.yuv");
-    // f.open(QIODevice::ReadOnly);
-    // QByteArray data(f.readAll());
-    // qDebug("data size: %lld", data.size());
-    // gl->setFrameData(data);
 
 
     // clear the old layout
@@ -78,6 +74,7 @@ MainWindow::MainWindow(QWidget *parent)
     QVBoxLayout *layout = new QVBoxLayout(ui->videoWidget);
     layout->addWidget(gl);
     ui->videoWidget->setLayout(layout);
+    //emit glInitialized();
 
 
 }
@@ -97,7 +94,7 @@ void MainWindow::renderVideo(){
     f.open(QIODevice::ReadOnly);
     QByteArray data(f.readAll());
     qDebug("data size: %lld", data.size());
-    gl->setFrameData(data);
+    //gl->setFrameData(data);
     gl-> nextFrame(data);
 }
 
@@ -113,5 +110,9 @@ void MainWindow::pauseVideo(){
 void MainWindow::onVideoFinished(){
     playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
     playPauseBtn->setEnabled(false);
+}
+
+void MainWindow::enableButton(){
+    startBtn->setEnabled(true);
 }
 
