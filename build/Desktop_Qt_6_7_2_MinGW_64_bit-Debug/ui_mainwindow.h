@@ -46,14 +46,14 @@ public:
     QSplitter *splitter;
     QLabel *label_5;
     QLabel *label_6;
-    QWidget *layoutWidget;
+    QWidget *widget;
     QHBoxLayout *horizontalLayout;
-    QToolButton *playButton;
-    QToolButton *toolButton_2;
-    QToolButton *toolButton_5;
-    QToolButton *toolButton_6;
-    QToolButton *toolButton_3;
-    QToolButton *toolButton_4;
+    QToolButton *startButton;
+    QToolButton *playPauseButton;
+    QToolButton *shootButton;
+    QToolButton *recordButton;
+    QToolButton *zoomInButton;
+    QToolButton *zoomOutButton;
     QMenuBar *menuBar;
     QMenu *menuhe_p;
     QMenu *menuCollection;
@@ -85,7 +85,7 @@ public:
     QWidget *Sharpen_2;
     QWidget *tab_2;
     QTextEdit *textEdit;
-    QWidget *widget;
+    QWidget *widget1;
     QLabel *label_2;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
@@ -156,46 +156,52 @@ public:
         label_6 = new QLabel(splitter);
         label_6->setObjectName("label_6");
         splitter->addWidget(label_6);
-        layoutWidget = new QWidget(centralwidget);
-        layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(-10, 10, 366, 24));
-        horizontalLayout = new QHBoxLayout(layoutWidget);
+        widget = new QWidget(centralwidget);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(1, 7, 371, 32));
+        horizontalLayout = new QHBoxLayout(widget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        playButton = new QToolButton(layoutWidget);
-        playButton->setObjectName("playButton");
+        startButton = new QToolButton(widget);
+        startButton->setObjectName("startButton");
+        startButton->setMinimumSize(QSize(30, 30));
 
-        horizontalLayout->addWidget(playButton);
+        horizontalLayout->addWidget(startButton);
 
-        toolButton_2 = new QToolButton(layoutWidget);
-        toolButton_2->setObjectName("toolButton_2");
+        playPauseButton = new QToolButton(widget);
+        playPauseButton->setObjectName("playPauseButton");
+        playPauseButton->setMinimumSize(QSize(30, 30));
 
-        horizontalLayout->addWidget(toolButton_2);
+        horizontalLayout->addWidget(playPauseButton);
 
-        toolButton_5 = new QToolButton(layoutWidget);
-        toolButton_5->setObjectName("toolButton_5");
+        shootButton = new QToolButton(widget);
+        shootButton->setObjectName("shootButton");
+        shootButton->setMinimumSize(QSize(30, 30));
 
-        horizontalLayout->addWidget(toolButton_5);
+        horizontalLayout->addWidget(shootButton);
 
-        toolButton_6 = new QToolButton(layoutWidget);
-        toolButton_6->setObjectName("toolButton_6");
+        recordButton = new QToolButton(widget);
+        recordButton->setObjectName("recordButton");
+        recordButton->setMinimumSize(QSize(30, 30));
 
-        horizontalLayout->addWidget(toolButton_6);
+        horizontalLayout->addWidget(recordButton);
 
-        toolButton_3 = new QToolButton(layoutWidget);
-        toolButton_3->setObjectName("toolButton_3");
+        zoomInButton = new QToolButton(widget);
+        zoomInButton->setObjectName("zoomInButton");
+        zoomInButton->setMinimumSize(QSize(30, 30));
 
-        horizontalLayout->addWidget(toolButton_3);
+        horizontalLayout->addWidget(zoomInButton);
 
-        toolButton_4 = new QToolButton(layoutWidget);
-        toolButton_4->setObjectName("toolButton_4");
+        zoomOutButton = new QToolButton(widget);
+        zoomOutButton->setObjectName("zoomOutButton");
+        zoomOutButton->setMinimumSize(QSize(30, 30));
 
-        horizontalLayout->addWidget(toolButton_4);
+        horizontalLayout->addWidget(zoomOutButton);
 
         MainWindow->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 800, 20));
+        menuBar->setGeometry(QRect(0, 0, 800, 21));
         menuhe_p = new QMenu(menuBar);
         menuhe_p->setObjectName("menuhe_p");
         menuCollection = new QMenu(menuBar);
@@ -216,7 +222,7 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(leftDock->sizePolicy().hasHeightForWidth());
         leftDock->setSizePolicy(sizePolicy1);
-        leftDock->setMinimumSize(QSize(201, 33));
+        leftDock->setMinimumSize(QSize(201, 39));
         leftDock->setMaximumSize(QSize(201, 524287));
         leftDock->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
         dockWidgetContents_7 = new QWidget();
@@ -266,7 +272,7 @@ public:
         sizePolicy3.setVerticalStretch(0);
         sizePolicy3.setHeightForWidth(rightDock->sizePolicy().hasHeightForWidth());
         rightDock->setSizePolicy(sizePolicy3);
-        rightDock->setMinimumSize(QSize(221, 33));
+        rightDock->setMinimumSize(QSize(221, 39));
         rightDock->setMaximumSize(QSize(221, 524287));
         rightDock->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
         dockWidgetContents_8 = new QWidget();
@@ -342,25 +348,25 @@ public:
         textEdit->setObjectName("textEdit");
         textEdit->setGeometry(QRect(30, 30, 104, 61));
         tabWidget->addTab(tab_2, QString());
-        widget = new QWidget(dockWidgetContents_8);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(0, 350, 211, 121));
-        label_2 = new QLabel(widget);
+        widget1 = new QWidget(dockWidgetContents_8);
+        widget1->setObjectName("widget1");
+        widget1->setGeometry(QRect(0, 350, 211, 121));
+        label_2 = new QLabel(widget1);
         label_2->setObjectName("label_2");
         label_2->setGeometry(QRect(130, 10, 51, 20));
-        pushButton = new QPushButton(widget);
+        pushButton = new QPushButton(widget1);
         pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(120, 30, 75, 31));
-        pushButton_2 = new QPushButton(widget);
+        pushButton_2 = new QPushButton(widget1);
         pushButton_2->setObjectName("pushButton_2");
         pushButton_2->setGeometry(QRect(120, 60, 75, 31));
-        label_4 = new QLabel(widget);
+        label_4 = new QLabel(widget1);
         label_4->setObjectName("label_4");
         label_4->setGeometry(QRect(10, 10, 111, 20));
-        pushButton_3 = new QPushButton(widget);
+        pushButton_3 = new QPushButton(widget1);
         pushButton_3->setObjectName("pushButton_3");
         pushButton_3->setGeometry(QRect(20, 40, 75, 23));
-        pushButton_4 = new QPushButton(widget);
+        pushButton_4 = new QPushButton(widget1);
         pushButton_4->setObjectName("pushButton_4");
         pushButton_4->setGeometry(QRect(20, 60, 75, 23));
         rightDock->setWidget(dockWidgetContents_8);
@@ -412,12 +418,12 @@ public:
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Device Connection", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Time: 60s", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "FPS: 30", nullptr));
-        playButton->setText(QCoreApplication::translate("MainWindow", "play", nullptr));
-        toolButton_2->setText(QCoreApplication::translate("MainWindow", "pause", nullptr));
-        toolButton_5->setText(QCoreApplication::translate("MainWindow", "shoot", nullptr));
-        toolButton_6->setText(QCoreApplication::translate("MainWindow", "record", nullptr));
-        toolButton_3->setText(QCoreApplication::translate("MainWindow", "zoom in", nullptr));
-        toolButton_4->setText(QCoreApplication::translate("MainWindow", "zoom out ", nullptr));
+        startButton->setText(QString());
+        playPauseButton->setText(QString());
+        shootButton->setText(QString());
+        recordButton->setText(QString());
+        zoomInButton->setText(QString());
+        zoomOutButton->setText(QString());
         menuhe_p->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
         menuCollection->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
         menuEdit->setTitle(QCoreApplication::translate("MainWindow", "Edit", nullptr));

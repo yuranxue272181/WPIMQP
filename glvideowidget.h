@@ -33,6 +33,7 @@ public:
      */
     void setQImageParameters(QImage::Format fmt, int w, int h, int stride);
     void setImage(const QImage& img);
+    bool pauseVideo();
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
 protected:
     void bind();
@@ -43,6 +44,7 @@ protected:
     virtual void paintGL();
     virtual void resizeGL(int w, int h);
 private:
+    bool isPaused = false;
     bool update_res;
     bool upload_tex;
     int width;
@@ -74,6 +76,10 @@ private:
     QOpenGLShaderProgram *m_program;
     QMutex m_mutex;
     QMatrix4x4 m_mat;
+
+signals:
+    void videoFinished();
+
 };
 
 #endif // WIDGET_H

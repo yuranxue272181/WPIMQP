@@ -190,55 +190,91 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="layoutWidget">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>-10</x>
-      <y>10</y>
-      <width>366</width>
-      <height>24</height>
+      <x>1</x>
+      <y>7</y>
+      <width>371</width>
+      <height>32</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QToolButton" name="playButton">
+      <widget class="QToolButton" name="startButton">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text">
-        <string>play</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButton_2">
+      <widget class="QToolButton" name="playPauseButton">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text">
-        <string>pause</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButton_5">
+      <widget class="QToolButton" name="shootButton">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text">
-        <string>shoot</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButton_6">
+      <widget class="QToolButton" name="recordButton">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text">
-        <string>record</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButton_3">
+      <widget class="QToolButton" name="zoomInButton">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text">
-        <string>zoom in</string>
+        <string/>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolButton_4">
+      <widget class="QToolButton" name="zoomOutButton">
+       <property name="minimumSize">
+        <size>
+         <width>30</width>
+         <height>30</height>
+        </size>
+       </property>
        <property name="text">
-        <string>zoom out </string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -251,7 +287,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuhe_p">
@@ -301,7 +337,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <property name="minimumSize">
     <size>
      <width>201</width>
-     <height>33</height>
+     <height>39</height>
     </size>
    </property>
    <property name="maximumSize">
@@ -410,7 +446,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
    <property name="minimumSize">
     <size>
      <width>221</width>
-     <height>33</height>
+     <height>39</height>
     </size>
    </property>
    <property name="maximumSize">

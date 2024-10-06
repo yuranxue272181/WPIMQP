@@ -3,5 +3,12 @@
         <file>1280x720.yuv</file>
         <file>test.png</file>
         <file>akiyo_qcif.yuv</file>
+        <file>icons/play.png</file>
+        <file>icons/pause.png</file>
+        <file>icons/record.png</file>
+        <file>icons/shoot.png</file>
+        <file>icons/zoomIn.png</file>
+        <file>icons/zoomOut.png</file>
+        <file>icons/restart.png</file>
     </qresource>
 </RCC>
