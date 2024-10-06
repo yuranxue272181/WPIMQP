@@ -117,10 +117,9 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     videoData = data;
     currentFrameIndex = 0; // reset
     // set timer
-    if (!frameTimer) {
     frameTimer = new QTimer(this);
+    qDebug() << "Timer setted.";
     connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextFrame);
-     }
     frameTimer->start(1000/30); // 30FPS
 }
 
