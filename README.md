@@ -11,8 +11,9 @@ Currently Implemented Features
 1. YUV to Video Conversion: <br>The player can load YUV data and convert it into video using OpenGL for rendering.
 2. Start Button: Click this button to initiate video playback or replay the current video.
 3. Play/Pause Button: This button is used to control the playback and pause of the video.
-4. Video Resolution: <br>The default video resolution is 176x144, but this can be adjusted as needed.
-5. Frame Rate: <br>The current frame rate is 30 FPS, which can also be modified if necessary.
+4. Zoom In/Zoom Out: This buttons are used to zoom in and zoom out the video (window adaption problems remaining).
+5. Video Resolution: <br>The default video resolution is 176x144, but this can be adjusted as needed.
+6. Frame Rate: <br>The current frame rate is 30 FPS, which can also be modified if necessary.
 
 Future Improvements
 -
