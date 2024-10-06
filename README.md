@@ -1,4 +1,4 @@
-WPI MQP Image Process Software Initial Version. This project is a basic YUV video player with OpenGL rendering. The current UI is very simple and rough (and ugly :)) and will be gradually improved over the vacations.
+WPI MQP Image Process Software Initial Version. This project is a basic YUV video player with OpenGL rendering. The current UI is very simple and rough (and ugly :)) and will be gradually improved.
 
 Basic Development Information
 -
