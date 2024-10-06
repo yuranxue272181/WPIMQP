@@ -33,6 +33,7 @@ private slots:
     void enableButton();
     void zoomIn();
     void zoomOut();
+    void recordingStatu();
 
 private:
     Ui::MainWindow *ui;

@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     shootBtn->setIcon(QIcon(":/icons/shoot.png"));
     shootBtn->setIconSize(QSize(30,30));
     shootBtn->setEnabled(false);
-    recordBtn->setIcon(QIcon(":/icons/record.png"));
+    recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
     recordBtn->setIconSize(QSize(30,30));
     recordBtn->setEnabled(false);
     zoomInBtn->setIcon(QIcon(":/icons/zoomIn.png"));
@@ -57,8 +57,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(gl, &GLVideoWidget::videoFinished, this, &MainWindow::onVideoFinished);
     connect(zoomInBtn,&QToolButton::clicked, this, &MainWindow::zoomIn);
     connect(zoomOutBtn,&QToolButton::clicked, this, &MainWindow::zoomOut);
-    connect(shootBtn, &QToolButton::clicked, gl, &GLVideoWidget::saveYUVDataToFile);
-
+    connect(shootBtn, &QToolButton::clicked, gl, &GLVideoWidget::saveYUVImageDataToFile);
+    connect(recordBtn,&QToolButton::clicked, this, &MainWindow::recordingStatu);
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
     gl-> setYUV420pParameters(176, 144); //call once
 
@@ -95,6 +95,7 @@ void MainWindow::renderVideo(){
     playPauseBtn->setIcon(QIcon(":/icons/play.png"));
     startBtn->setEnabled(false);
     shootBtn->setEnabled(true);
+    recordBtn->setEnabled(true);
 
     //176x144
     QFile f(":/akiyo_qcif.yuv");
@@ -118,6 +119,9 @@ void MainWindow::onVideoFinished(){
     playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
     playPauseBtn->setEnabled(false);
     startBtn->setEnabled(true);
+    recordBtn->setEnabled(false);
+    gl->stopRecording();
+    recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
 }
 
 void MainWindow::enableButton(){
@@ -130,5 +134,12 @@ void MainWindow::zoomIn(){
 
 void MainWindow::zoomOut(){
     videoWdt->resize(videoWdt->width() * 0.9, videoWdt->height() * 0.9);
+}
 
+void MainWindow::recordingStatu(){
+    if(gl->toggleRecording()){
+        recordBtn->setIcon(QIcon(":/icons/recordRed.png"));
+    }else{
+        recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
+    }
 }

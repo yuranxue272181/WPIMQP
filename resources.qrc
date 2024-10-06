@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>1280x720.yuv</file>
-        <file>test.png</file>
         <file>akiyo_qcif.yuv</file>
         <file>icons/play.png</file>
         <file>icons/pause.png</file>
@@ -10,5 +9,7 @@
         <file>icons/zoomIn.png</file>
         <file>icons/zoomOut.png</file>
         <file>icons/restart.png</file>
+        <file>icons/recordGray.png</file>
+        <file>icons/recordRed.png</file>
     </qresource>
 </RCC>

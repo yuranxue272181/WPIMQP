@@ -34,7 +34,11 @@ public:
     void setQImageParameters(QImage::Format fmt, int w, int h, int stride);
     void setImage(const QImage& img);
     bool pauseVideo();
-    void saveYUVDataToFile();
+    void saveYUVImageDataToFile();
+    void saveYUVVideoDataToFile();
+    void startRecording();
+    void stopRecording();
+    bool toggleRecording();
 
 
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
@@ -48,6 +52,7 @@ protected:
     virtual void resizeGL(int w, int h);
 private:
     bool isPaused = false;
+    bool isRecording = false;
     bool update_res;
     bool upload_tex;
     int width;
@@ -59,6 +64,7 @@ private:
     int currentFrameIndex = 0;
     QByteArray videoData;
     QByteArray frameData;
+    QByteArray recordingData;
 
     typedef struct {
         char* data;
