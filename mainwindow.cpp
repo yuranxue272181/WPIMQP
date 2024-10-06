@@ -15,8 +15,13 @@ MainWindow::MainWindow(QWidget *parent)
     //mainWidget = ui->centralwidget;
     //mainWidget -> setStyleSheet("background-color: #353535;");
 
-    //ui
+    //ui connection
     playBtn = ui->playButton;
+    leftDk = ui-> leftDock;
+    rightDk = ui -> rightDock;
+
+
+
 
     //opengl
     gl = new GLVideoWidget(this);
@@ -44,10 +49,13 @@ MainWindow::MainWindow(QWidget *parent)
         }
     }
 
+
+
     // add GLVideoWidget to videoWidget
     QVBoxLayout *layout = new QVBoxLayout(ui->videoWidget);
     layout->addWidget(gl);
     ui->videoWidget->setLayout(layout);
+
 
 }
 
