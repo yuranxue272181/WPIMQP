@@ -30,7 +30,6 @@ private slots:
     void renderVideo();
     void pauseVideo();
     void onVideoFinished();
-    void enableButton();
     void zoomIn();
     void zoomOut();
     void recordingStatu();

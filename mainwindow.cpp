@@ -11,26 +11,22 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //dark model
-    //mainWidget = ui->centralwidget;
-    //mainWidget -> setStyleSheet("background-color: #353535;");
-
-    //ui connection
-    //button
+    // ui connection
+    // button
     startBtn = ui->startButton;
     playPauseBtn = ui->playPauseButton;
     shootBtn = ui->shootButton;
     recordBtn = ui->recordButton;
     zoomInBtn = ui->zoomInButton;
     zoomOutBtn = ui->zoomOutButton;
-    //dock widget
+    // dock widget
     leftDk = ui-> leftDock;
     rightDk = ui -> rightDock;
-    //widget
+    // widget
     videoWdt = ui->videoWidget;
 
 
-    //set icons
+    // set icons
     startBtn->setIcon(QIcon(":/icons/restart.png"));
     startBtn->setIconSize(QSize(30,30));
     playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
@@ -48,10 +44,12 @@ MainWindow::MainWindow(QWidget *parent)
     zoomOutBtn->setIconSize(QSize(30,30));
 
 
-    //opengl
+    // openGL
     gl = new GLVideoWidget(this);
+    QApplication::setAttribute(Qt::AA_UseOpenGLES);
+    gl-> setYUV420pParameters(176, 144); //call once, frame size
 
-    //Connect the signal to the slot
+    // Connect the signal to the slot
     connect(startBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
     connect(playPauseBtn, &QToolButton::clicked, this, &MainWindow::pauseVideo);
     connect(gl, &GLVideoWidget::videoFinished, this, &MainWindow::onVideoFinished);
@@ -59,12 +57,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(zoomOutBtn,&QToolButton::clicked, this, &MainWindow::zoomOut);
     connect(shootBtn, &QToolButton::clicked, gl, &GLVideoWidget::saveYUVImageDataToFile);
     connect(recordBtn,&QToolButton::clicked, this, &MainWindow::recordingStatu);
-    QApplication::setAttribute(Qt::AA_UseOpenGLES);
-    gl-> setYUV420pParameters(176, 144); //call once
 
-
-
-    // clear the old layout
+    // connect the video to ui
+    // clear the old layout of videoWidget
     if (ui->videoWidget->layout()) {
         QLayoutItem *item;
         while ((item = ui->videoWidget->layout()->takeAt(0)) != nullptr) {
@@ -72,16 +67,10 @@ MainWindow::MainWindow(QWidget *parent)
             delete item;
         }
     }
-
-
-
     // add GLVideoWidget to videoWidget
     QVBoxLayout *layout = new QVBoxLayout(ui->videoWidget);
     layout->addWidget(gl);
     ui->videoWidget->setLayout(layout);
-    //emit glInitialized();
-
-
 }
 
 MainWindow::~MainWindow()
@@ -89,6 +78,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// Render the video by OpenGL, display on the videoWidget, and reset UI
 void MainWindow::renderVideo(){
     //button
     playPauseBtn->setEnabled(true);
@@ -97,24 +87,28 @@ void MainWindow::renderVideo(){
     shootBtn->setEnabled(true);
     recordBtn->setEnabled(true);
 
+    //open the YUV file
     //176x144
     QFile f(":/akiyo_qcif.yuv");
     f.open(QIODevice::ReadOnly);
     QByteArray data(f.readAll());
     qDebug("data size: %lld", data.size());
-    //gl->setFrameData(data);
     gl-> nextFrame(data);
 }
 
+// Play or pause video, reset UI
 void MainWindow::pauseVideo(){
     if(gl->pauseVideo()){
         playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
+        recordBtn->setEnabled(false);
     }
     else{
         playPauseBtn->setIcon(QIcon(":/icons/play.png"));
+        recordBtn->setEnabled(true);
     }
 }
 
+// when the video finishes, reset the UI and stop recording
 void MainWindow::onVideoFinished(){
     playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
     playPauseBtn->setEnabled(false);
@@ -124,18 +118,17 @@ void MainWindow::onVideoFinished(){
     recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
 }
 
-void MainWindow::enableButton(){
-    startBtn->setEnabled(true);
-}
-
+// Zoom in the video
 void MainWindow::zoomIn(){
     videoWdt->resize(videoWdt->width() * 1.1, videoWdt->height() * 1.1);
 }
 
+// Zoom in the video
 void MainWindow::zoomOut(){
     videoWdt->resize(videoWdt->width() * 0.9, videoWdt->height() * 0.9);
 }
 
+// Start recording or stop recording, reset the UI
 void MainWindow::recordingStatu(){
     if(gl->toggleRecording()){
         recordBtn->setIcon(QIcon(":/icons/recordRed.png"));
