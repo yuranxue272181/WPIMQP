@@ -32,9 +32,6 @@ public:
      * \param stride QImage.bytesPerLine()
      */
     void setQImageParameters(QImage::Format fmt, int w, int h, int stride);
-<<<<<<< HEAD
-    void setImage(const QImage &img);
-=======
     void setImage(const QImage& img);
     bool pauseVideo();
     void saveYUVImageDataToFile();
@@ -43,8 +40,6 @@ public:
     void stopRecording();
     bool toggleRecording();
 
-
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
 protected:
     void bind();

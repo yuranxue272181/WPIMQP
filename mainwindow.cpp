@@ -47,11 +47,7 @@ MainWindow::MainWindow(QWidget *parent)
     // openGL
     gl = new GLVideoWidget(this);
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
-<<<<<<< HEAD
-    gl->setYUV420pParameters(176, 144); //call once
-=======
     gl-> setYUV420pParameters(176, 144); //call once, frame size
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
 
     // Connect the signal to the slot
     connect(startBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
@@ -62,12 +58,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(shootBtn, &QToolButton::clicked, gl, &GLVideoWidget::saveYUVImageDataToFile);
     connect(recordBtn,&QToolButton::clicked, this, &MainWindow::recordingStatu);
 
-<<<<<<< HEAD
-    // clear the old layout
-=======
     // connect the video to ui
     // clear the old layout of videoWidget
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
     if (ui->videoWidget->layout()) {
         QLayoutItem *item;
         while ((item = ui->videoWidget->layout()->takeAt(0)) != nullptr) {
@@ -86,10 +78,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-<<<<<<< HEAD
-void MainWindow::renderVideo()
-{
-=======
 // Render the video by OpenGL, display on the videoWidget, and reset UI
 void MainWindow::renderVideo(){
     //button
@@ -100,17 +88,11 @@ void MainWindow::renderVideo(){
     recordBtn->setEnabled(true);
 
     //open the YUV file
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
     //176x144
     QFile f(":/akiyo_qcif.yuv");
     f.open(QIODevice::ReadOnly);
     QByteArray data(f.readAll());
     qDebug("data size: %lld", data.size());
-<<<<<<< HEAD
-    gl->setFrameData(data);
-    gl->nextFrame(data);
-}
-=======
     gl-> nextFrame(data);
 }
 
@@ -154,4 +136,3 @@ void MainWindow::recordingStatu(){
         recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
     }
 }
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438

@@ -135,14 +135,8 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
     update();
 }
 
-<<<<<<< HEAD
-void GLVideoWidget::nextFrame(const QByteArray &data)
-{
-=======
-
 // display video by switching frames (frame rate)
 void GLVideoWidget::nextFrame(const QByteArray &data) {
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
     videoData = data;
     currentFrameIndex = 0; // reset
     // set timer
@@ -152,15 +146,9 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     frameTimer->start(1000 / 30); // 30FPS
 }
 
-<<<<<<< HEAD
-void GLVideoWidget::processNextFrame()
-{
-    const int frameSize = 176 * 144 * 3; // 176x144
-=======
 //Get the data for each frame and render it
 void GLVideoWidget::processNextFrame() {
     const int frameSize = width * height * 3;
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
     if (currentFrameIndex * frameSize < videoData.size()) {
         frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
         setFrameData(frameData);
@@ -169,14 +157,9 @@ void GLVideoWidget::processNextFrame() {
         }
         currentFrameIndex++;
     } else {
-<<<<<<< HEAD
-        frameTimer->stop(); // stop timer
-        delete frameTimer;  // delete timer
-=======
         frameTimer->stop();
         delete frameTimer;
         frameTimer = nullptr;
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
         qDebug() << "All frames processed.";
 
         emit videoFinished();

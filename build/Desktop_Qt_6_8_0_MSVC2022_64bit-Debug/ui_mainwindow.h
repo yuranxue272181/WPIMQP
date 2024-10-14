@@ -29,6 +29,10 @@
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBox>
 #include <QtWidgets/QToolButton>
+<<<<<<< HEAD
+=======
+#include <QtWidgets/QVBoxLayout>
+>>>>>>> usb
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -38,6 +42,7 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QWidget *videoWidget;
+<<<<<<< HEAD
     QTabWidget *tabWidget_2;
     QWidget *tab_4;
     QTableWidget *tableWidget_2;
@@ -54,6 +59,26 @@ public:
     QToolButton *toolButton_6;
     QToolButton *toolButton_3;
     QToolButton *toolButton_4;
+=======
+    QWidget *layoutWidget;
+    QHBoxLayout *horizontalLayout;
+    QToolButton *startButton;
+    QToolButton *playPauseButton;
+    QToolButton *shootButton;
+    QToolButton *recordButton;
+    QToolButton *zoomInButton;
+    QToolButton *zoomOutButton;
+    QWidget *layoutWidget1;
+    QVBoxLayout *verticalLayout;
+    QSplitter *splitter;
+    QLabel *label_5;
+    QLabel *label_6;
+    QTabWidget *tabWidget_2;
+    QWidget *tab_5;
+    QTextBrowser *textBrowser;
+    QWidget *tab_4;
+    QTableWidget *tableWidget_2;
+>>>>>>> usb
     QMenuBar *menuBar;
     QMenu *menuhe_p;
     QMenu *menuCollection;
@@ -61,10 +86,17 @@ public:
     QMenu *menuRecord;
     QMenu *menuHelp;
     QMenu *menuView;
+<<<<<<< HEAD
     QDockWidget *dockWidget_2;
     QWidget *dockWidgetContents_7;
     QTableWidget *tableWidget;
     QDockWidget *dockWidget_3;
+=======
+    QDockWidget *leftDock;
+    QWidget *dockWidgetContents_7;
+    QTableWidget *tableWidget;
+    QDockWidget *rightDock;
+>>>>>>> usb
     QWidget *dockWidgetContents_8;
     QTabWidget *tabWidget;
     QWidget *tab;
@@ -109,6 +141,7 @@ public:
         centralwidget->setObjectName("centralwidget");
         sizePolicy.setHeightForWidth(centralwidget->sizePolicy().hasHeightForWidth());
         centralwidget->setSizePolicy(sizePolicy);
+<<<<<<< HEAD
         centralwidget->setSizeIncrement(QSize(10, 10));
         videoWidget = new QWidget(centralwidget);
         videoWidget->setObjectName("videoWidget");
@@ -121,6 +154,94 @@ public:
         tabWidget_2->setObjectName("tabWidget_2");
         tabWidget_2->setGeometry(QRect(12, 361, 341, 140));
         tabWidget_2->setMinimumSize(QSize(0, 140));
+=======
+        centralwidget->setSizeIncrement(QSize(0, 0));
+        QFont font;
+        font.setBold(false);
+        centralwidget->setFont(font);
+        videoWidget = new QWidget(centralwidget);
+        videoWidget->setObjectName("videoWidget");
+        videoWidget->setGeometry(QRect(11, 42, 352, 288));
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(videoWidget->sizePolicy().hasHeightForWidth());
+        videoWidget->setSizePolicy(sizePolicy1);
+        videoWidget->setMinimumSize(QSize(352, 288));
+        videoWidget->setMaximumSize(QSize(1056, 864));
+        videoWidget->setSizeIncrement(QSize(0, 0));
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(1, 7, 371, 32));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
+        horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        startButton = new QToolButton(layoutWidget);
+        startButton->setObjectName("startButton");
+        startButton->setMinimumSize(QSize(30, 30));
+
+        horizontalLayout->addWidget(startButton);
+
+        playPauseButton = new QToolButton(layoutWidget);
+        playPauseButton->setObjectName("playPauseButton");
+        playPauseButton->setMinimumSize(QSize(30, 30));
+
+        horizontalLayout->addWidget(playPauseButton);
+
+        shootButton = new QToolButton(layoutWidget);
+        shootButton->setObjectName("shootButton");
+        shootButton->setMinimumSize(QSize(30, 30));
+
+        horizontalLayout->addWidget(shootButton);
+
+        recordButton = new QToolButton(layoutWidget);
+        recordButton->setObjectName("recordButton");
+        recordButton->setMinimumSize(QSize(30, 30));
+
+        horizontalLayout->addWidget(recordButton);
+
+        zoomInButton = new QToolButton(layoutWidget);
+        zoomInButton->setObjectName("zoomInButton");
+        zoomInButton->setMinimumSize(QSize(30, 30));
+
+        horizontalLayout->addWidget(zoomInButton);
+
+        zoomOutButton = new QToolButton(layoutWidget);
+        zoomOutButton->setObjectName("zoomOutButton");
+        zoomOutButton->setMinimumSize(QSize(30, 30));
+
+        horizontalLayout->addWidget(zoomOutButton);
+
+        layoutWidget1 = new QWidget(centralwidget);
+        layoutWidget1->setObjectName("layoutWidget1");
+        layoutWidget1->setGeometry(QRect(10, 350, 351, 164));
+        verticalLayout = new QVBoxLayout(layoutWidget1);
+        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        splitter = new QSplitter(layoutWidget1);
+        splitter->setObjectName("splitter");
+        splitter->setOrientation(Qt::Orientation::Horizontal);
+        label_5 = new QLabel(splitter);
+        label_5->setObjectName("label_5");
+        splitter->addWidget(label_5);
+        label_6 = new QLabel(splitter);
+        label_6->setObjectName("label_6");
+        splitter->addWidget(label_6);
+
+        verticalLayout->addWidget(splitter);
+
+        tabWidget_2 = new QTabWidget(layoutWidget1);
+        tabWidget_2->setObjectName("tabWidget_2");
+        tabWidget_2->setMinimumSize(QSize(0, 140));
+        tabWidget_2->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+        tab_5 = new QWidget();
+        tab_5->setObjectName("tab_5");
+        textBrowser = new QTextBrowser(tab_5);
+        textBrowser->setObjectName("textBrowser");
+        textBrowser->setGeometry(QRect(10, 0, 321, 101));
+        textBrowser->setMinimumSize(QSize(321, 101));
+        tabWidget_2->addTab(tab_5, QString());
+>>>>>>> usb
         tab_4 = new QWidget();
         tab_4->setObjectName("tab_4");
         tableWidget_2 = new QTableWidget(tab_4);
@@ -132,6 +253,7 @@ public:
         tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
         tableWidget_2->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+<<<<<<< HEAD
         tableWidget_2->setObjectName("tableWidget_2");
         tableWidget_2->setGeometry(QRect(10, 0, 311, 101));
         tableWidget_2->horizontalHeader()->setVisible(true);
@@ -191,11 +313,37 @@ public:
         toolButton_4->setObjectName("toolButton_4");
 
         horizontalLayout->addWidget(toolButton_4);
+=======
+        if (tableWidget_2->rowCount() < 1)
+            tableWidget_2->setRowCount(1);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        __qtablewidgetitem3->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(0, 0, __qtablewidgetitem3);
+        QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
+        __qtablewidgetitem4->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(0, 1, __qtablewidgetitem4);
+        QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
+        __qtablewidgetitem5->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(0, 2, __qtablewidgetitem5);
+        tableWidget_2->setObjectName("tableWidget_2");
+        tableWidget_2->setGeometry(QRect(0, 0, 311, 101));
+        tableWidget_2->horizontalHeader()->setVisible(true);
+        tableWidget_2->horizontalHeader()->setCascadingSectionResizes(false);
+        tableWidget_2->horizontalHeader()->setHighlightSections(false);
+        tableWidget_2->verticalHeader()->setVisible(false);
+        tabWidget_2->addTab(tab_4, QString());
+
+        verticalLayout->addWidget(tabWidget_2);
+>>>>>>> usb
 
         MainWindow->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
+<<<<<<< HEAD
         menuBar->setGeometry(QRect(0, 0, 800, 25));
+=======
+        menuBar->setGeometry(QRect(0, 0, 800, 21));
+>>>>>>> usb
         menuhe_p = new QMenu(menuBar);
         menuhe_p->setObjectName("menuhe_p");
         menuCollection = new QMenu(menuBar);
@@ -209,6 +357,7 @@ public:
         menuView = new QMenu(menuBar);
         menuView->setObjectName("menuView");
         MainWindow->setMenuBar(menuBar);
+<<<<<<< HEAD
         dockWidget_2 = new QDockWidget(MainWindow);
         dockWidget_2->setObjectName("dockWidget_2");
         QSizePolicy sizePolicy1(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
@@ -218,11 +367,24 @@ public:
         dockWidget_2->setSizePolicy(sizePolicy1);
         dockWidget_2->setMaximumSize(QSize(201, 524287));
         dockWidget_2->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
+=======
+        leftDock = new QDockWidget(MainWindow);
+        leftDock->setObjectName("leftDock");
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(leftDock->sizePolicy().hasHeightForWidth());
+        leftDock->setSizePolicy(sizePolicy2);
+        leftDock->setMinimumSize(QSize(201, 39));
+        leftDock->setMaximumSize(QSize(201, 524287));
+        leftDock->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
+>>>>>>> usb
         dockWidgetContents_7 = new QWidget();
         dockWidgetContents_7->setObjectName("dockWidgetContents_7");
         tableWidget = new QTableWidget(dockWidgetContents_7);
         if (tableWidget->columnCount() < 2)
             tableWidget->setColumnCount(2);
+<<<<<<< HEAD
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem3);
         QTableWidgetItem *__qtablewidgetitem4 = new QTableWidgetItem();
@@ -264,6 +426,53 @@ public:
         dockWidget_3->setSizePolicy(sizePolicy1);
         dockWidget_3->setMaximumSize(QSize(221, 524287));
         dockWidget_3->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
+=======
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem7);
+        if (tableWidget->rowCount() < 2)
+            tableWidget->setRowCount(2);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem8);
+        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
+        __qtablewidgetitem9->setTextAlignment(Qt::AlignCenter);
+        tableWidget->setItem(0, 0, __qtablewidgetitem9);
+        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
+        __qtablewidgetitem10->setTextAlignment(Qt::AlignCenter);
+        tableWidget->setItem(0, 1, __qtablewidgetitem10);
+        QFont font1;
+        font1.setKerning(true);
+        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
+        __qtablewidgetitem11->setTextAlignment(Qt::AlignCenter);
+        __qtablewidgetitem11->setFont(font1);
+        tableWidget->setItem(1, 0, __qtablewidgetitem11);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        __qtablewidgetitem12->setTextAlignment(Qt::AlignCenter);
+        tableWidget->setItem(1, 1, __qtablewidgetitem12);
+        tableWidget->setObjectName("tableWidget");
+        tableWidget->setGeometry(QRect(0, 0, 201, 511));
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(tableWidget->sizePolicy().hasHeightForWidth());
+        tableWidget->setSizePolicy(sizePolicy3);
+        tableWidget->horizontalHeader()->setHighlightSections(true);
+        tableWidget->verticalHeader()->setVisible(false);
+        tableWidget->verticalHeader()->setProperty("showSortIndicator", QVariant(false));
+        leftDock->setWidget(dockWidgetContents_7);
+        MainWindow->addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, leftDock);
+        rightDock = new QDockWidget(MainWindow);
+        rightDock->setObjectName("rightDock");
+        QSizePolicy sizePolicy4(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Expanding);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(rightDock->sizePolicy().hasHeightForWidth());
+        rightDock->setSizePolicy(sizePolicy4);
+        rightDock->setMinimumSize(QSize(221, 39));
+        rightDock->setMaximumSize(QSize(221, 524287));
+        rightDock->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
+>>>>>>> usb
         dockWidgetContents_8 = new QWidget();
         dockWidgetContents_8->setObjectName("dockWidgetContents_8");
         tabWidget = new QTabWidget(dockWidgetContents_8);
@@ -275,11 +484,19 @@ public:
         tab->setObjectName("tab");
         toolBox = new QToolBox(tab);
         toolBox->setObjectName("toolBox");
+<<<<<<< HEAD
         toolBox->setGeometry(QRect(10, 10, 181, 251));
         toolBox->setStyleSheet(QString::fromUtf8(""));
         page = new QWidget();
         page->setObjectName("page");
         page->setGeometry(QRect(0, 0, 98, 28));
+=======
+        toolBox->setGeometry(QRect(10, 10, 181, 241));
+        toolBox->setStyleSheet(QString::fromUtf8(""));
+        page = new QWidget();
+        page->setObjectName("page");
+        page->setGeometry(QRect(0, 0, 181, 154));
+>>>>>>> usb
         horizontalSlider = new QSlider(page);
         horizontalSlider->setObjectName("horizontalSlider");
         horizontalSlider->setGeometry(QRect(0, 20, 121, 22));
@@ -290,7 +507,11 @@ public:
         toolBox->addItem(page, QString::fromUtf8("Brightness"));
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
+<<<<<<< HEAD
         page_2->setGeometry(QRect(0, 0, 98, 28));
+=======
+        page_2->setGeometry(QRect(0, 0, 181, 154));
+>>>>>>> usb
         verticalSlider = new QSlider(page_2);
         verticalSlider->setObjectName("verticalSlider");
         verticalSlider->setGeometry(QRect(20, 30, 22, 111));
@@ -298,7 +519,11 @@ public:
         toolBox->addItem(page_2, QString::fromUtf8("Contrast"));
         Sharpen = new QWidget();
         Sharpen->setObjectName("Sharpen");
+<<<<<<< HEAD
         Sharpen->setGeometry(QRect(0, 0, 98, 28));
+=======
+        Sharpen->setGeometry(QRect(0, 0, 181, 154));
+>>>>>>> usb
         verticalScrollBar = new QScrollBar(Sharpen);
         verticalScrollBar->setObjectName("verticalScrollBar");
         verticalScrollBar->setGeometry(QRect(120, 20, 16, 111));
@@ -313,7 +538,11 @@ public:
         toolBox_2->setStyleSheet(QString::fromUtf8(""));
         page_5 = new QWidget();
         page_5->setObjectName("page_5");
+<<<<<<< HEAD
         page_5->setGeometry(QRect(0, 0, 98, 28));
+=======
+        page_5->setGeometry(QRect(0, 0, 191, 94));
+>>>>>>> usb
         horizontalSlider_2 = new QSlider(page_5);
         horizontalSlider_2->setObjectName("horizontalSlider_2");
         horizontalSlider_2->setGeometry(QRect(0, 20, 121, 22));
@@ -358,8 +587,14 @@ public:
         pushButton_4 = new QPushButton(widget);
         pushButton_4->setObjectName("pushButton_4");
         pushButton_4->setGeometry(QRect(20, 60, 75, 23));
+<<<<<<< HEAD
         dockWidget_3->setWidget(dockWidgetContents_8);
         MainWindow->addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, dockWidget_3);
+=======
+        rightDock->setWidget(dockWidgetContents_8);
+        MainWindow->addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, rightDock);
+        rightDock->raise();
+>>>>>>> usb
 
         menuBar->addAction(menuhe_p->menuAction());
         menuBar->addAction(menuCollection->menuAction());
@@ -382,6 +617,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+<<<<<<< HEAD
         QTableWidgetItem *___qtablewidgetitem = tableWidget_2->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "No.", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget_2->horizontalHeaderItem(1);
@@ -389,12 +625,23 @@ public:
         QTableWidgetItem *___qtablewidgetitem2 = tableWidget_2->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QCoreApplication::translate("MainWindow", "Qy", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Grab Coordinates", nullptr));
+=======
+        startButton->setText(QString());
+        playPauseButton->setText(QString());
+        shootButton->setText(QString());
+        recordButton->setText(QString());
+        zoomInButton->setText(QString());
+        zoomOutButton->setText(QString());
+        label_5->setText(QCoreApplication::translate("MainWindow", "Time: 60s", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "FPS: 30", nullptr));
+>>>>>>> usb
         textBrowser->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
+<<<<<<< HEAD
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI';\">Camera 1:</span></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI';\">  connecting</span></p>\n"
@@ -415,10 +662,43 @@ public:
         toolButton_4->setText(QCoreApplication::translate("MainWindow", "zoom out ", nullptr));
         menuhe_p->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
         menuCollection->setTitle(QCoreApplication::translate("MainWindow", "Collection", nullptr));
+=======
+"</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Camera 1:</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  connecting</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  1000x1000</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-i"
+                        "ndent:0; text-indent:0px;\">   etc</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Camera 2:</p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  disconnecting</p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+        tabWidget_2->setTabText(tabWidget_2->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Device Connection", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget_2->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "No.", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_2->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QCoreApplication::translate("MainWindow", "Qx", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_2->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QCoreApplication::translate("MainWindow", "Qy", nullptr));
+
+        const bool __sortingEnabled = tableWidget_2->isSortingEnabled();
+        tableWidget_2->setSortingEnabled(false);
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget_2->item(0, 0);
+        ___qtablewidgetitem3->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        QTableWidgetItem *___qtablewidgetitem4 = tableWidget_2->item(0, 1);
+        ___qtablewidgetitem4->setText(QCoreApplication::translate("MainWindow", "1200", nullptr));
+        QTableWidgetItem *___qtablewidgetitem5 = tableWidget_2->item(0, 2);
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindow", "1100", nullptr));
+        tableWidget_2->setSortingEnabled(__sortingEnabled);
+
+        tabWidget_2->setTabText(tabWidget_2->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Grab Coordinates", nullptr));
+        menuhe_p->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
+        menuCollection->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
+>>>>>>> usb
         menuEdit->setTitle(QCoreApplication::translate("MainWindow", "Edit", nullptr));
         menuRecord->setTitle(QCoreApplication::translate("MainWindow", "Record", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
         menuView->setTitle(QCoreApplication::translate("MainWindow", "View", nullptr));
+<<<<<<< HEAD
         dockWidget_2->setWindowTitle(QCoreApplication::translate("MainWindow", "Feature Properties", nullptr));
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem3->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
@@ -440,6 +720,29 @@ public:
         tableWidget->setSortingEnabled(__sortingEnabled);
 
         dockWidget_3->setWindowTitle(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
+=======
+        leftDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Feature Properties", nullptr));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem6->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
+        QTableWidgetItem *___qtablewidgetitem8 = tableWidget->verticalHeaderItem(0);
+        ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
+
+        const bool __sortingEnabled1 = tableWidget->isSortingEnabled();
+        tableWidget->setSortingEnabled(false);
+        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->item(0, 0);
+        ___qtablewidgetitem9->setText(QCoreApplication::translate("MainWindow", "Contrast", nullptr));
+        QTableWidgetItem *___qtablewidgetitem10 = tableWidget->item(0, 1);
+        ___qtablewidgetitem10->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
+        QTableWidgetItem *___qtablewidgetitem11 = tableWidget->item(1, 0);
+        ___qtablewidgetitem11->setText(QCoreApplication::translate("MainWindow", "Brightness", nullptr));
+        QTableWidgetItem *___qtablewidgetitem12 = tableWidget->item(1, 1);
+        ___qtablewidgetitem12->setText(QCoreApplication::translate("MainWindow", "50", nullptr));
+        tableWidget->setSortingEnabled(__sortingEnabled1);
+
+        rightDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
+>>>>>>> usb
         label->setText(QCoreApplication::translate("MainWindow", "50", nullptr));
         toolBox->setItemText(toolBox->indexOf(page), QCoreApplication::translate("MainWindow", "Brightness", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_2), QCoreApplication::translate("MainWindow", "Contrast", nullptr));
@@ -456,11 +759,19 @@ public:
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
+<<<<<<< HEAD
 "</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI';\"><br /></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI'; font-weight:700;\">Input</span></p>\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0p"
                         "x; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI'; font-weight:700;\"><br /></p></body></html>", nullptr));
+=======
+"</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Input</span></p>\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; "
+                        "text-indent:0px; font-weight:700;\"><br /></p></body></html>", nullptr));
+>>>>>>> usb
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Feature3 ", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Device ", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Connnect", nullptr));

@@ -5,12 +5,7 @@
 #include <QOpenGLWidget>
 #include <QPushButton>
 #include <QToolButton>
-<<<<<<< HEAD
-#include <QWidget>
-=======
 #include <QDockWidget>
-
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,15 +25,11 @@ public:
 
 private slots:
     void renderVideo();
-<<<<<<< HEAD
-=======
     void pauseVideo();
     void onVideoFinished();
     void zoomIn();
     void zoomOut();
     void recordingStatu();
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
-
 private:
     Ui::MainWindow *ui;
     GLVideoWidget *gl;
@@ -52,19 +43,11 @@ private:
     QToolButton *zoomOutBtn;
 
     QWidget *mainWidget;
-<<<<<<< HEAD
-=======
     QWidget *videoWdt;
     QDockWidget *leftDk;
     QDockWidget *rightDk;
 
 signals:
-    // void glInitialized();
-
-
-
-
-
->>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
+         // void glInitialized();
 };
 #endif // MAINWINDOW_H
