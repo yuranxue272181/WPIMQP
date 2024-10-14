@@ -52,7 +52,7 @@ private:
     QDockWidget *rightDk;
 
 signals:
-    // void glInitialized();
+         // void glInitialized();
 
 
 
