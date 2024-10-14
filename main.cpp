@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
     //     qDebug("data size: %lld", data.size());
     //     const int w = 176, h = 144;
 
-
     //     glw.setYUV420pParameters(w, h); //call once
     //     glw.setFrameData(data);
     // } else {
@@ -42,7 +41,6 @@ int main(int argc, char *argv[])
     MainWindow mainWindow;
     mainWindow.setWindowTitle("Image & Video Viewer");
     mainWindow.show();
-
 
     return a.exec();
 }

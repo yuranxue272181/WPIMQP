@@ -21,6 +21,8 @@ HEADERS += \
 FORMS += \
     mainwindow.ui
 
+INCLUDEPATH += "$$(EZUSB_DEV_DIR)/include"
+LIBS += -L"$$(EZUSB_DEV_DIR)/lib/x64"
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

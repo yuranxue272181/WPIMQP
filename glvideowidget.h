@@ -1,10 +1,10 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include <QtOpenGL>
-#include <QtGui/QImage>
-#include <QOpenGLWidget>
 #include <QOpenGLShaderProgram>
+#include <QOpenGLWidget>
+#include <QtGui/QImage>
+#include <QtOpenGL>
 
 class GLVideoWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -20,8 +20,8 @@ public:
      * \param h frame height
      * \param strides strides of each plane. If null, it's equals to {w, w/2, w/2}.
      */
-    void setYUV420pParameters(int w, int h, int* strides = NULL);
-    void setFrameData(const QByteArray& data);
+    void setYUV420pParameters(int w, int h, int *strides = NULL);
+    void setFrameData(const QByteArray &data);
     void nextFrame(const QByteArray &data);
     void processNextFrame();
     // QImage
@@ -32,7 +32,7 @@ public:
      * \param stride QImage.bytesPerLine()
      */
     void setQImageParameters(QImage::Format fmt, int w, int h, int stride);
-    void setImage(const QImage& img);
+    void setImage(const QImage &img);
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
 protected:
     void bind();
@@ -42,6 +42,7 @@ protected:
     virtual void initializeGL();
     virtual void paintGL();
     virtual void resizeGL(int w, int h);
+
 private:
     bool update_res;
     bool upload_tex;
@@ -56,8 +57,9 @@ private:
 
     QByteArray videoData;
 
-    typedef struct {
-        char* data;
+    typedef struct
+    {
+        char *data;
         int stride;
         GLint internal_fmt;
         GLenum fmt;

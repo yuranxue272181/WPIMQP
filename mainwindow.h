@@ -3,10 +3,9 @@
 
 #include <QMainWindow>
 #include <QOpenGLWidget>
-#include <QWidget>
 #include <QPushButton>
 #include <QToolButton>
-
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -15,7 +14,6 @@ class MainWindow;
 QT_END_NAMESPACE
 
 class GLVideoWidget;
-
 
 class MainWindow : public QMainWindow
 {
@@ -26,7 +24,7 @@ public:
     ~MainWindow();
 
 private slots:
-     void renderVideo();
+    void renderVideo();
 
 private:
     Ui::MainWindow *ui;
@@ -34,8 +32,5 @@ private:
 
     QToolButton *playBtn;
     QWidget *mainWidget;
-
-
-
 };
 #endif // MAINWINDOW_H

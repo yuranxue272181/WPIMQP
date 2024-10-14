@@ -1,6 +1,6 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 #include "glvideowidget.h"
+#include "ui_mainwindow.h"
 
 //ui
 #include <QVBoxLayout>
@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(playBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
 
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
-    gl-> setYUV420pParameters(176, 144); //call once
+    gl->setYUV420pParameters(176, 144); //call once
 
     //show the first frame
     // QFile f(":/akiyo_qcif.yuv");
@@ -33,7 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     // QByteArray data(f.readAll());
     // qDebug("data size: %lld", data.size());
     // gl->setFrameData(data);
-
 
     // clear the old layout
     if (ui->videoWidget->layout()) {
@@ -48,7 +47,6 @@ MainWindow::MainWindow(QWidget *parent)
     QVBoxLayout *layout = new QVBoxLayout(ui->videoWidget);
     layout->addWidget(gl);
     ui->videoWidget->setLayout(layout);
-
 }
 
 MainWindow::~MainWindow()
@@ -56,14 +54,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::renderVideo(){
+void MainWindow::renderVideo()
+{
     //176x144
     QFile f(":/akiyo_qcif.yuv");
     f.open(QIODevice::ReadOnly);
     QByteArray data(f.readAll());
     qDebug("data size: %lld", data.size());
     gl->setFrameData(data);
-    gl-> nextFrame(data);
-
+    gl->nextFrame(data);
 }
-
