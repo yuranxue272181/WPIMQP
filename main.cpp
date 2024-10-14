@@ -14,13 +14,6 @@ int main(int argc, char *argv[])
     // GLVideoWidget glw;
     // if (!a.arguments().contains("-img")) {
 
-    //     //sample1 1280x720
-    //     // QFile f(":/1280x720.yuv");
-    //     // f.open(QIODevice::ReadOnly);
-    //     // QByteArray data(f.readAll());
-    //     // qDebug("data size: %lld", data.size());
-    //     // const int w = 1280, h = 720;
-
     //     //sample2 176x144
     //     QFile f(":/akiyo_qcif.yuv");
     //     f.open(QIODevice::ReadOnly);
@@ -39,7 +32,7 @@ int main(int argc, char *argv[])
 
     //with ui
     MainWindow mainWindow;
-    mainWindow.setWindowTitle("Image & Video Viewer");
+    mainWindow.setWindowTitle("AySight");
     mainWindow.show();
 
     return a.exec();

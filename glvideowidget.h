@@ -23,7 +23,7 @@ public:
     void setYUV420pParameters(int w, int h, int *strides = NULL);
     void setFrameData(const QByteArray &data);
     void nextFrame(const QByteArray &data);
-    void processNextFrame();
+
     // QImage
     /*!
      * \brief setQImageParameters
@@ -32,7 +32,19 @@ public:
      * \param stride QImage.bytesPerLine()
      */
     void setQImageParameters(QImage::Format fmt, int w, int h, int stride);
+<<<<<<< HEAD
     void setImage(const QImage &img);
+=======
+    void setImage(const QImage& img);
+    bool pauseVideo();
+    void saveYUVImageDataToFile();
+    void saveYUVVideoDataToFile();
+    void startRecording();
+    void stopRecording();
+    bool toggleRecording();
+
+
+>>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
 protected:
     void bind();
@@ -44,6 +56,8 @@ protected:
     virtual void resizeGL(int w, int h);
 
 private:
+    bool isPaused = false;
+    bool isRecording = false;
     bool update_res;
     bool upload_tex;
     int width;
@@ -51,11 +65,11 @@ private:
     //char *pitch[3];
     QByteArray m_data;
     QImage m_image;
-
     QTimer *frameTimer;
     int currentFrameIndex = 0;
-
     QByteArray videoData;
+    QByteArray frameData;
+    QByteArray recordingData;
 
     typedef struct
     {
@@ -76,6 +90,13 @@ private:
     QOpenGLShaderProgram *m_program;
     QMutex m_mutex;
     QMatrix4x4 m_mat;
+
+    void processNextFrame();
+
+signals:
+    void videoFinished();
+
+
 };
 
 #endif // WIDGET_H

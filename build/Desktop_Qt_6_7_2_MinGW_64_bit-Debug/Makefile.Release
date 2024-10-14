@@ -112,7 +112,15 @@ release/qrc_resources.cpp: ../../resources.qrc \
 		E:/Qt/6.7.2/mingw_64/bin/rcc.exe \
 		../../1280x720.yuv \
 		../../akiyo_qcif.yuv \
-		../../test.png
+		../../icons/shoot.png \
+		../../icons/recordRed.png \
+		../../icons/record.png \
+		../../icons/pause.png \
+		../../icons/restart.png \
+		../../icons/recordGray.png \
+		../../icons/zoomIn.png \
+		../../icons/play.png \
+		../../icons/zoomOut.png
 	E:\Qt\6.7.2\mingw_64\bin\rcc.exe -name resources --no-zstd ..\..\resources.qrc -o release\qrc_resources.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h
@@ -766,6 +774,8 @@ release/moc_mainwindow.cpp: ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QToolButton \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtoolbutton.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QDockWidget \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdockwidget.h \
 		release/moc_predefs.h \
 		E:/Qt/6.7.2/mingw_64/bin/moc.exe
 	E:\Qt\6.7.2\mingw_64\bin\moc.exe $(DEFINES) --include E:/APPData/Qtdocument/mqp1/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/release/moc_predefs.h -IE:/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IE:/APPData/Qtdocument/mqp1 -IE:/Qt/6.7.2/mingw_64/include -IE:/Qt/6.7.2/mingw_64/include/QtOpenGLWidgets -IE:/Qt/6.7.2/mingw_64/include/QtOpenGL -IE:/Qt/6.7.2/mingw_64/include/QtWidgets -IE:/Qt/6.7.2/mingw_64/include/QtGui -IE:/Qt/6.7.2/mingw_64/include/QtCore -I. -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IE:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o release\moc_mainwindow.cpp
@@ -1226,7 +1236,11 @@ release/glvideowidget.o: ../../glvideowidget.cpp ../../glvideowidget.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgets-config.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtwidgetsexports.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qsizepolicy.h \
-		E:/Qt/6.7.2/mingw_64/include/QtOpenGL/QOpenGLShaderProgram
+		E:/Qt/6.7.2/mingw_64/include/QtOpenGL/QOpenGLShaderProgram \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/QFile \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QFileDialog \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qfiledialog.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\glvideowidget.o ..\..\glvideowidget.cpp
 
 release/main.o: ../../main.cpp ../../mainwindow.h \
@@ -1433,6 +1447,8 @@ release/main.o: ../../main.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QToolButton \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtoolbutton.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QDockWidget \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdockwidget.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/QtCore \
@@ -1772,13 +1788,13 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QToolButton \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtoolbutton.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QDockWidget \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdockwidget.h \
 		ui_mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/QVariant \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/QAction \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QDockWidget \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdockwidget.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QHBoxLayout \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qboxlayout.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
@@ -1828,6 +1844,7 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QTextEdit \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QToolBox \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtoolbox.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		../../glvideowidget.h \
 		E:/Qt/6.7.2/mingw_64/include/QtOpenGL/QtOpenGL \
 		E:/Qt/6.7.2/mingw_64/include/QtOpenGL/QtOpenGLDepends \
@@ -2055,8 +2072,7 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/QOpenGLContext \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/QImage \
 		E:/Qt/6.7.2/mingw_64/include/QtOpenGL/qtopenglversion.h \
-		E:/Qt/6.7.2/mingw_64/include/QtOpenGL/QOpenGLShaderProgram \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QVBoxLayout
+		E:/Qt/6.7.2/mingw_64/include/QtOpenGL/QOpenGLShaderProgram
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\..\mainwindow.cpp
 
 release/qrc_resources.o: release/qrc_resources.cpp 

@@ -1,4 +1,6 @@
 #include "glvideowidget.h"
+#include <QFile>
+#include <QFileDialog>
 
 //trans yuv to rgb
 static const QMatrix4x4 yuv2rgb_bt601 = QMatrix4x4(1.0f,
@@ -101,6 +103,7 @@ static const char kFragmentShaderRGB[] = glsl(
     });
 #undef glsl
 
+// Constructor
 GLVideoWidget::GLVideoWidget(QWidget *parent)
     : QOpenGLWidget(parent)
     , update_res(true)
@@ -113,6 +116,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     memset(tex, 0, 3 * sizeof(GLuint));
 }
 
+// render one frame
 void GLVideoWidget::setFrameData(const QByteArray &data)
 {
     QMutexLocker lock(&m_mutex);
@@ -131,30 +135,148 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
     update();
 }
 
+<<<<<<< HEAD
 void GLVideoWidget::nextFrame(const QByteArray &data)
 {
+=======
+
+// display video by switching frames (frame rate)
+void GLVideoWidget::nextFrame(const QByteArray &data) {
+>>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
     videoData = data;
     currentFrameIndex = 0; // reset
     // set timer
     frameTimer = new QTimer(this);
+    qDebug() << "Timer setted.";
     connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextFrame);
     frameTimer->start(1000 / 30); // 30FPS
 }
 
+<<<<<<< HEAD
 void GLVideoWidget::processNextFrame()
 {
     const int frameSize = 176 * 144 * 3; // 176x144
+=======
+//Get the data for each frame and render it
+void GLVideoWidget::processNextFrame() {
+    const int frameSize = width * height * 3;
+>>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
     if (currentFrameIndex * frameSize < videoData.size()) {
-        QByteArray frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
+        frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
         setFrameData(frameData);
+        if (isRecording) {
+            recordingData.append(frameData);
+        }
         currentFrameIndex++;
     } else {
+<<<<<<< HEAD
         frameTimer->stop(); // stop timer
         delete frameTimer;  // delete timer
+=======
+        frameTimer->stop();
+        delete frameTimer;
+        frameTimer = nullptr;
+>>>>>>> d94f1ab4bcbd0a3ebaa74b4cfa5c3a5d49c22438
         qDebug() << "All frames processed.";
+
+        emit videoFinished();
     }
 }
 
+// start or stop recording
+bool GLVideoWidget::toggleRecording() {
+    if (isRecording) {
+        stopRecording();
+    } else {
+        startRecording();
+    }
+    return isRecording;
+}
+
+// start recording
+void GLVideoWidget::startRecording(){
+    isRecording = true;
+    recordingData.clear();
+    qDebug() << "Recording started.";
+}
+
+// stop recording and save the YUV file
+void GLVideoWidget::stopRecording(){
+    if(isRecording){
+        isRecording = false;
+        saveYUVVideoDataToFile();
+        qDebug() << "Recording stopped.";
+    }
+}
+
+// save the screenshoot
+void GLVideoWidget::saveYUVImageDataToFile() {
+    if (frameData.isEmpty()) {
+        qDebug() << "No frame data to save.";
+        return;
+    }
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Save YUV File of Image"),
+                                                    QString(),
+                                                    tr("YUV Files (*.yuv);;All Files (*)"));
+    if (filePath.isEmpty()) {
+        qDebug() << "No file selected.";
+        return;
+    }
+    QFile file(filePath);
+    if (file.open(QIODevice::WriteOnly)) {
+        file.write(frameData);
+        file.close();
+        qDebug() << "Frame" << currentFrameIndex << "saved to" << filePath;
+        qDebug() << "Saved frame size:" << frameData.size()/width/height/3;
+    } else {
+        qDebug() << "Failed to save frame to" << filePath;
+    }
+}
+
+// save the recording
+void GLVideoWidget::saveYUVVideoDataToFile() {
+    if (recordingData.isEmpty()) {
+        qDebug() << "No frame data to save.";
+        return;
+    }
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Save YUV File of Video"),
+                                                    QString(),
+                                                    tr("YUV Files (*.yuv);;All Files (*)"));
+    if (filePath.isEmpty()) {
+        qDebug() << "No file selected.";
+        return;
+    }
+    QFile file(filePath);
+    if (file.open(QIODevice::WriteOnly)) {
+        file.write(recordingData);
+        file.close();
+        qDebug() << "Frame" << currentFrameIndex << "saved to" << filePath;
+        qDebug() << "Saved frame:" << recordingData.size()/width/height/3;
+    } else {
+        qDebug() << "Failed to save frame to" << filePath;
+    }
+
+}
+
+// play or pause the video (frame rate)
+bool GLVideoWidget::pauseVideo(){
+    if (frameTimer) {
+        if (isPaused) {
+            //resume
+            frameTimer->start(1000 / 30);
+            isPaused = false;
+            qDebug() << "Video resumed.";
+        } else {
+            // pasue
+            frameTimer->stop();
+            isPaused = true;
+            qDebug() << "Video paused.";
+        }
+    }
+    return isPaused;
+}
+
+// set image
 void GLVideoWidget::setImage(const QImage &img)
 {
     QMutexLocker lock(&m_mutex);
@@ -165,6 +287,7 @@ void GLVideoWidget::setImage(const QImage &img)
     update();
 }
 
+// Binds an OpenGL resource to the current OpenGL
 void GLVideoWidget::bind()
 {
     for (int i = 0; i < plane.size(); ++i) {
@@ -173,6 +296,7 @@ void GLVideoWidget::bind()
     upload_tex = false;
 }
 
+// Binds plane to the current OpenGL
 void GLVideoWidget::bindPlane(int p)
 {
     glActiveTexture(GL_TEXTURE0 + p);
@@ -193,7 +317,7 @@ void GLVideoWidget::bindPlane(int p)
                     P.type,
                     P.data);
 }
-
+// initialize textures
 void GLVideoWidget::initTextures()
 {
     glDeleteTextures(3, tex);
@@ -222,6 +346,7 @@ void GLVideoWidget::initTextures()
     }
 }
 
+// Setting parameters for video frames in YUV420p format (frame size)
 void GLVideoWidget::setYUV420pParameters(int w, int h, int *strides)
 {
     QMutexLocker lock(&m_mutex);
@@ -256,6 +381,7 @@ void GLVideoWidget::setYUV420pParameters(int w, int h, int *strides)
     }
 }
 
+// set Qimage parameters
 void GLVideoWidget::setQImageParameters(QImage::Format fmt, int w, int h, int stride)
 {
     QMutexLocker lock(&m_mutex);
@@ -291,6 +417,7 @@ void GLVideoWidget::setQImageParameters(QImage::Format fmt, int w, int h, int st
     qFatal("Unsupported QImage format %d!", fmt);
 }
 
+// paint
 void GLVideoWidget::paintGL()
 {
     QMutexLocker lock(&m_mutex);
@@ -306,6 +433,7 @@ void GLVideoWidget::paintGL()
         initializeShader();
         initTextures();
         update_res = false;
+
     }
     bind();
     m_program->bind();
@@ -330,18 +458,20 @@ void GLVideoWidget::paintGL()
     //update();
 }
 
+// initialize openGL
 void GLVideoWidget::initializeGL()
 {
     initializeOpenGLFunctions();
 }
 
+// resize openGL
 void GLVideoWidget::resizeGL(int w, int h)
 {
     glViewport(0, 0, w, h);
     m_mat.setToIdentity();
     //m_mat.ortho(QRectF(0, 0, w, h));
 }
-
+// initialize shader
 void GLVideoWidget::initializeShader()
 {
     if (m_program) {
