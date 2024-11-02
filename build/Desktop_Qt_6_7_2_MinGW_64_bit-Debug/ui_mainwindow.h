@@ -367,11 +367,11 @@ public:
         toolBox_2->addItem(page_5, QString::fromUtf8("test"));
         page_6 = new QWidget();
         page_6->setObjectName("page_6");
-        page_6->setGeometry(QRect(0, 0, 98, 28));
+        page_6->setGeometry(QRect(0, 0, 100, 30));
         toolBox_2->addItem(page_6, QString::fromUtf8("test"));
         Sharpen_2 = new QWidget();
         Sharpen_2->setObjectName("Sharpen_2");
-        Sharpen_2->setGeometry(QRect(0, 0, 98, 28));
+        Sharpen_2->setGeometry(QRect(0, 0, 100, 30));
         toolBox_2->addItem(Sharpen_2, QString::fromUtf8("test"));
         tabWidget->addTab(tab_3, QString());
         tab_2 = new QWidget();
@@ -432,7 +432,7 @@ public:
         recordButton->setText(QString());
         zoomInButton->setText(QString());
         zoomOutButton->setText(QString());
-        label_5->setText(QCoreApplication::translate("MainWindow", "Time: 60s", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "176X144", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "FPS: 30", nullptr));
         textBrowser->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"

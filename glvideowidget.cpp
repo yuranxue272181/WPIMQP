@@ -106,7 +106,7 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
     plane[0].data = (char*)m_data.constData();
 
     //debug
-    qDebug() << "Received frame data size:" << m_data.size();
+    //qDebug() << "Received frame data size:" << m_data.size();
 
     if (plane.size() > 1) {
         plane[1].data = plane[0].data + plane[0].stride*height;
@@ -142,7 +142,6 @@ void GLVideoWidget::processNextFrame() {
         delete frameTimer;
         frameTimer = nullptr;
         qDebug() << "All frames processed.";
-
         emit videoFinished();
     }
 }
@@ -376,7 +375,7 @@ void GLVideoWidget::paintGL()
         return;
     }
 
-    qDebug() << "Rendering frame with width:" << width << "height:" << height;
+    //qDebug() << "Rendering frame with width:" << width << "height:" << height;
 
     if (update_res || !tex[0]) {
         initializeShader();
