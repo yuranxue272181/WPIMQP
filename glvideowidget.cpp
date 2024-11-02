@@ -97,6 +97,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     , upload_tex(true)
     , m_program(0)
     , currentBrightnessValue(0.0f)
+    ,frameCount(0)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
@@ -142,9 +143,6 @@ void GLVideoWidget::processNextFrame() {
     if (currentFrameIndex * frameSize < videoData.size()) {
         frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
         setFrameData(frameData);
-        if (isRecording) {
-            recordingData.append(frameData);
-        }
         currentFrameIndex++;
     } else {
         frameTimer->stop();
@@ -165,19 +163,36 @@ bool GLVideoWidget::toggleRecording() {
     return isRecording;
 }
 
+void GLVideoWidget::saveRecordingData(){
+    recordingData.append(frameData);
+}
+
 // start recording
 void GLVideoWidget::startRecording(){
     isRecording = true;
     recordingData.clear();
-    qDebug() << "Recording started.";
+    saveYUVVideoDataToFile();
+    connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::saveRecordingData);
+    connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::onTimerTimeout);
+
 }
 
 // stop recording and save the YUV file
 void GLVideoWidget::stopRecording(){
     if(isRecording){
         isRecording = false;
-        saveYUVVideoDataToFile();
+        disconnect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::saveRecordingData);
+        disconnect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::onTimerTimeout);
+        writeYUVVideoDataToFile();
         qDebug() << "Recording stopped.";
+    }
+}
+// write data to the file every second
+void GLVideoWidget::onTimerTimeout(){
+    frameCount++;
+    if (frameCount >= 30) {
+        writeYUVVideoDataToFile();
+        frameCount = 0;
     }
 }
 
@@ -207,27 +222,32 @@ void GLVideoWidget::saveYUVImageDataToFile() {
 
 // save the recording
 void GLVideoWidget::saveYUVVideoDataToFile() {
-    if (recordingData.isEmpty()) {
-        qDebug() << "No frame data to save.";
-        return;
-    }
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Save YUV File of Video"),
+    recordingData.clear();
+    qDebug() << "Recording started.";
+    filePath = QFileDialog::getSaveFileName(this, tr("Save YUV File of Video"),
                                                     QString(),
                                                     tr("YUV Files (*.yuv);;All Files (*)"));
     if (filePath.isEmpty()) {
         qDebug() << "No file selected.";
         return;
     }
+}
+
+void GLVideoWidget::writeYUVVideoDataToFile(){
+    if (recordingData.isEmpty()) {
+        qDebug() << "No frame data to save.";
+        return;
+    }
+    QByteArray saveData = recordingData;
     QFile file(filePath);
-    if (file.open(QIODevice::WriteOnly)) {
-        file.write(recordingData);
+    if (file.open(QIODevice::WriteOnly| QIODevice::Append)) {
+        file.write(saveData);
+        recordingData.remove(0,saveData.size());
         file.close();
-        qDebug() << "Frame" << currentFrameIndex << "saved to" << filePath;
-        qDebug() << "Saved frame:" << recordingData.size()/width/height/3;
+        qDebug() <<"saved to" << filePath;
     } else {
         qDebug() << "Failed to save frame to" << filePath;
     }
-
 }
 
 // play or pause the video (frame rate)

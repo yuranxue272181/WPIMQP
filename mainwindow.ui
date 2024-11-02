@@ -395,7 +395,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <number>1</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_7">
-    <widget class="QTableWidget" name="tableWidget">
+    <widget class="QTableWidget" name="FeatureTable">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -579,12 +579,28 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <rect>
            <x>0</x>
            <y>20</y>
-           <width>160</width>
+           <width>151</width>
            <height>22</height>
           </rect>
          </property>
          <property name="orientation">
           <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="brightness">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>20</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </widget>

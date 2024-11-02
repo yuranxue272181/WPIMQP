@@ -36,6 +36,7 @@ public:
     bool pauseVideo();
     void saveYUVImageDataToFile();
     void saveYUVVideoDataToFile();
+    void writeYUVVideoDataToFile();
     void startRecording();
     void stopRecording();
     bool toggleRecording();
@@ -68,6 +69,8 @@ private:
     QByteArray videoData;
     QByteArray frameData;
     QByteArray recordingData;
+    QString filePath;
+    int frameCount;
 
     typedef struct {
         char* data;
@@ -95,6 +98,10 @@ signals:
 
 public slots:
     void setBrightness(float value);
+
+private slots:
+    void onTimerTimeout();
+    void saveRecordingData();
 
 
 };

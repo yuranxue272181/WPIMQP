@@ -8,6 +8,8 @@
 #include <QToolButton>
 #include <QDockWidget>
 #include <QSlider>
+#include <QLabel>
+#include <QTableWidget>
 
 
 QT_BEGIN_NAMESPACE
@@ -54,6 +56,10 @@ private:
     QDockWidget *rightDk;
 
     QSlider *brightnessSlider;
+
+    QLabel *brightnessValue;
+
+    QTableWidget *featuresTable;
 
 signals:
     // void glInitialized();

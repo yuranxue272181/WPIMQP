@@ -27,6 +27,12 @@ MainWindow::MainWindow(QWidget *parent)
     //slider
     brightnessSlider = ui->BrightnessSlider;
 
+    //label
+    brightnessValue = ui->brightness;
+
+    //table
+    featuresTable = ui->FeatureTable;
+
     //initialize slider
     brightnessSlider ->setRange(-100, 100);
     brightnessSlider ->setValue(0);
@@ -96,7 +102,8 @@ void MainWindow::renderVideo(){
 
     //open the YUV file
     //176x144
-    QFile f(":/akiyo_qcif.yuv");
+    //QFile f(":/akiyo_qcif.yuv");
+    QFile f(":/112.yuv");
     f.open(QIODevice::ReadOnly);
     QByteArray data(f.readAll());
     qDebug("data size: %lld", data.size());
@@ -144,6 +151,9 @@ void MainWindow::recordingStatu(){
     }
 }
 void MainWindow::setBrightness(int value){
+    brightnessValue->setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(0,1);
+    item->setText(QString::number(value));
     float brightness = value / 100.0f;
     gl->setBrightness(brightness);
 }
