@@ -20,7 +20,6 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QScrollBar>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSplitter>
 #include <QtWidgets/QTabWidget>
@@ -73,12 +72,11 @@ public:
     QWidget *tab;
     QToolBox *toolBox;
     QWidget *page;
-    QSlider *horizontalSlider;
-    QLabel *label;
+    QSlider *BrightnessSlider;
     QWidget *page_2;
-    QSlider *verticalSlider;
-    QWidget *Sharpen;
-    QScrollBar *verticalScrollBar;
+    QSlider *horizontalSlider_3;
+    QWidget *Sharpeness;
+    QSlider *horizontalSlider_4;
     QWidget *tab_3;
     QToolBox *toolBox_2;
     QWidget *page_5;
@@ -233,7 +231,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 800, 21));
+        menuBar->setGeometry(QRect(0, 0, 800, 22));
         menuhe_p = new QMenu(menuBar);
         menuhe_p->setObjectName("menuhe_p");
         menuCollection = new QMenu(menuBar);
@@ -254,7 +252,7 @@ public:
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(leftDock->sizePolicy().hasHeightForWidth());
         leftDock->setSizePolicy(sizePolicy2);
-        leftDock->setMinimumSize(QSize(201, 39));
+        leftDock->setMinimumSize(QSize(201, 40));
         leftDock->setMaximumSize(QSize(201, 524287));
         leftDock->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
         dockWidgetContents_7 = new QWidget();
@@ -266,25 +264,33 @@ public:
         tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem6);
         QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
         tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem7);
-        if (tableWidget->rowCount() < 2)
-            tableWidget->setRowCount(2);
+        if (tableWidget->rowCount() < 3)
+            tableWidget->setRowCount(3);
         QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
         tableWidget->setVerticalHeaderItem(0, __qtablewidgetitem8);
         QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        __qtablewidgetitem9->setTextAlignment(Qt::AlignCenter);
-        tableWidget->setItem(0, 0, __qtablewidgetitem9);
+        tableWidget->setVerticalHeaderItem(1, __qtablewidgetitem9);
         QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
         __qtablewidgetitem10->setTextAlignment(Qt::AlignCenter);
-        tableWidget->setItem(0, 1, __qtablewidgetitem10);
-        QFont font1;
-        font1.setKerning(true);
+        tableWidget->setItem(0, 0, __qtablewidgetitem10);
         QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
         __qtablewidgetitem11->setTextAlignment(Qt::AlignCenter);
-        __qtablewidgetitem11->setFont(font1);
-        tableWidget->setItem(1, 0, __qtablewidgetitem11);
+        tableWidget->setItem(0, 1, __qtablewidgetitem11);
         QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
         __qtablewidgetitem12->setTextAlignment(Qt::AlignCenter);
-        tableWidget->setItem(1, 1, __qtablewidgetitem12);
+        tableWidget->setItem(1, 0, __qtablewidgetitem12);
+        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
+        __qtablewidgetitem13->setTextAlignment(Qt::AlignCenter);
+        tableWidget->setItem(1, 1, __qtablewidgetitem13);
+        QFont font1;
+        font1.setKerning(true);
+        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
+        __qtablewidgetitem14->setTextAlignment(Qt::AlignCenter);
+        __qtablewidgetitem14->setFont(font1);
+        tableWidget->setItem(2, 0, __qtablewidgetitem14);
+        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
+        __qtablewidgetitem15->setTextAlignment(Qt::AlignCenter);
+        tableWidget->setItem(2, 1, __qtablewidgetitem15);
         tableWidget->setObjectName("tableWidget");
         tableWidget->setGeometry(QRect(0, 0, 201, 511));
         QSizePolicy sizePolicy3(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
@@ -304,7 +310,7 @@ public:
         sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(rightDock->sizePolicy().hasHeightForWidth());
         rightDock->setSizePolicy(sizePolicy4);
-        rightDock->setMinimumSize(QSize(221, 39));
+        rightDock->setMinimumSize(QSize(221, 40));
         rightDock->setMaximumSize(QSize(221, 524287));
         rightDock->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
         dockWidgetContents_8 = new QWidget();
@@ -322,31 +328,28 @@ public:
         toolBox->setStyleSheet(QString::fromUtf8(""));
         page = new QWidget();
         page->setObjectName("page");
-        page->setGeometry(QRect(0, 0, 181, 154));
-        horizontalSlider = new QSlider(page);
-        horizontalSlider->setObjectName("horizontalSlider");
-        horizontalSlider->setGeometry(QRect(0, 20, 121, 22));
-        horizontalSlider->setOrientation(Qt::Orientation::Horizontal);
-        label = new QLabel(page);
-        label->setObjectName("label");
-        label->setGeometry(QRect(130, 20, 21, 16));
+        page->setGeometry(QRect(0, 0, 181, 151));
+        BrightnessSlider = new QSlider(page);
+        BrightnessSlider->setObjectName("BrightnessSlider");
+        BrightnessSlider->setGeometry(QRect(0, 20, 160, 22));
+        BrightnessSlider->setOrientation(Qt::Orientation::Horizontal);
         toolBox->addItem(page, QString::fromUtf8("Brightness"));
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
-        page_2->setGeometry(QRect(0, 0, 181, 154));
-        verticalSlider = new QSlider(page_2);
-        verticalSlider->setObjectName("verticalSlider");
-        verticalSlider->setGeometry(QRect(20, 30, 22, 111));
-        verticalSlider->setOrientation(Qt::Orientation::Vertical);
+        page_2->setGeometry(QRect(0, 0, 181, 151));
+        horizontalSlider_3 = new QSlider(page_2);
+        horizontalSlider_3->setObjectName("horizontalSlider_3");
+        horizontalSlider_3->setGeometry(QRect(0, 10, 160, 22));
+        horizontalSlider_3->setOrientation(Qt::Orientation::Horizontal);
         toolBox->addItem(page_2, QString::fromUtf8("Contrast"));
-        Sharpen = new QWidget();
-        Sharpen->setObjectName("Sharpen");
-        Sharpen->setGeometry(QRect(0, 0, 181, 154));
-        verticalScrollBar = new QScrollBar(Sharpen);
-        verticalScrollBar->setObjectName("verticalScrollBar");
-        verticalScrollBar->setGeometry(QRect(120, 20, 16, 111));
-        verticalScrollBar->setOrientation(Qt::Orientation::Vertical);
-        toolBox->addItem(Sharpen, QString::fromUtf8("Sharpen"));
+        Sharpeness = new QWidget();
+        Sharpeness->setObjectName("Sharpeness");
+        Sharpeness->setGeometry(QRect(0, 0, 181, 151));
+        horizontalSlider_4 = new QSlider(Sharpeness);
+        horizontalSlider_4->setObjectName("horizontalSlider_4");
+        horizontalSlider_4->setGeometry(QRect(10, 20, 160, 22));
+        horizontalSlider_4->setOrientation(Qt::Orientation::Horizontal);
+        toolBox->addItem(Sharpeness, QString::fromUtf8("Sharpeness"));
         tabWidget->addTab(tab, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName("tab_3");
@@ -356,7 +359,7 @@ public:
         toolBox_2->setStyleSheet(QString::fromUtf8(""));
         page_5 = new QWidget();
         page_5->setObjectName("page_5");
-        page_5->setGeometry(QRect(0, 0, 191, 94));
+        page_5->setGeometry(QRect(0, 0, 191, 91));
         horizontalSlider_2 = new QSlider(page_5);
         horizontalSlider_2->setObjectName("horizontalSlider_2");
         horizontalSlider_2->setGeometry(QRect(0, 20, 121, 22));
@@ -440,15 +443,15 @@ public:
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Camera 1:</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  connecting</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  1000x1000</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-i"
-                        "ndent:0; text-indent:0px;\">   etc</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Camera 2:</p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">  disconnecting</p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI';\">Camera 1:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI';\">  connecting</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span s"
+                        "tyle=\" font-family:'Microsoft YaHei UI';\">  1000x1000</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI';\">   etc</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI';\">Camera 2:</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI';\">  disconnecting</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI';\"><br /></p></body></html>", nullptr));
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Device Connection", nullptr));
         QTableWidgetItem *___qtablewidgetitem = tableWidget_2->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "No.", nullptr));
@@ -481,24 +484,29 @@ public:
         ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
         QTableWidgetItem *___qtablewidgetitem8 = tableWidget->verticalHeaderItem(0);
         ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
+        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->verticalHeaderItem(1);
+        ___qtablewidgetitem9->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
 
         const bool __sortingEnabled1 = tableWidget->isSortingEnabled();
         tableWidget->setSortingEnabled(false);
-        QTableWidgetItem *___qtablewidgetitem9 = tableWidget->item(0, 0);
-        ___qtablewidgetitem9->setText(QCoreApplication::translate("MainWindow", "Contrast", nullptr));
-        QTableWidgetItem *___qtablewidgetitem10 = tableWidget->item(0, 1);
-        ___qtablewidgetitem10->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
-        QTableWidgetItem *___qtablewidgetitem11 = tableWidget->item(1, 0);
-        ___qtablewidgetitem11->setText(QCoreApplication::translate("MainWindow", "Brightness", nullptr));
-        QTableWidgetItem *___qtablewidgetitem12 = tableWidget->item(1, 1);
-        ___qtablewidgetitem12->setText(QCoreApplication::translate("MainWindow", "50", nullptr));
+        QTableWidgetItem *___qtablewidgetitem10 = tableWidget->item(0, 0);
+        ___qtablewidgetitem10->setText(QCoreApplication::translate("MainWindow", "Brightness", nullptr));
+        QTableWidgetItem *___qtablewidgetitem11 = tableWidget->item(0, 1);
+        ___qtablewidgetitem11->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem12 = tableWidget->item(1, 0);
+        ___qtablewidgetitem12->setText(QCoreApplication::translate("MainWindow", "Contrast", nullptr));
+        QTableWidgetItem *___qtablewidgetitem13 = tableWidget->item(1, 1);
+        ___qtablewidgetitem13->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem14 = tableWidget->item(2, 0);
+        ___qtablewidgetitem14->setText(QCoreApplication::translate("MainWindow", "Sharpness", nullptr));
+        QTableWidgetItem *___qtablewidgetitem15 = tableWidget->item(2, 1);
+        ___qtablewidgetitem15->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         tableWidget->setSortingEnabled(__sortingEnabled1);
 
         rightDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "50", nullptr));
         toolBox->setItemText(toolBox->indexOf(page), QCoreApplication::translate("MainWindow", "Brightness", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_2), QCoreApplication::translate("MainWindow", "Contrast", nullptr));
-        toolBox->setItemText(toolBox->indexOf(Sharpen), QCoreApplication::translate("MainWindow", "Sharpen", nullptr));
+        toolBox->setItemText(toolBox->indexOf(Sharpeness), QCoreApplication::translate("MainWindow", "Sharpeness", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "   Image Enhancement", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "50", nullptr));
         toolBox_2->setItemText(toolBox_2->indexOf(page_5), QCoreApplication::translate("MainWindow", "test", nullptr));
@@ -511,11 +519,11 @@ public:
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Microsoft YaHei UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-weight:700;\">Input</span></p>\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; "
-                        "text-indent:0px; font-weight:700;\"><br /></p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI';\"><br /></p>\n"
+"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI'; font-weight:700;\">Input</span></p>\n"
+"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0p"
+                        "x; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI'; font-weight:700;\"><br /></p></body></html>", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Feature3 ", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Device ", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Connnect", nullptr));

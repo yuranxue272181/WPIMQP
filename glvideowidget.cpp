@@ -64,22 +64,29 @@ static const char kFragmentShader[] = glsl(
     uniform sampler2D u_Texture2;
     varying mediump vec2 v_TexCoords;
     uniform mat4 u_colorMatrix;
+    uniform float u_Brightness;
     void main()
     {
-        gl_FragColor = clamp(u_colorMatrix
-                                 * vec4(
-                                     texture2D(u_Texture0, v_TexCoords).r,
-                                     texture2D(u_Texture1, v_TexCoords).r,
-                                     texture2D(u_Texture2, v_TexCoords).r,
-                                     1)
-                             , 0.0, 1.0);
+        vec4 color = u_colorMatrix
+                     * vec4(
+                         texture2D(u_Texture0, v_TexCoords).r,
+                         texture2D(u_Texture1, v_TexCoords).r,
+                         texture2D(u_Texture2, v_TexCoords).r,
+                         1);
+        color.rgb += u_Brightness;
+        gl_FragColor = clamp(color, 0.0, 1.0);
+
     });
+// not used
 static const char kFragmentShaderRGB[] = glsl(
     uniform sampler2D u_Texture0;
     varying mediump vec2 v_TexCoords;
     void main() {
         vec4 c = texture2D(u_Texture0, v_TexCoords);
         gl_FragColor = c.rgba;
+        // vec4 color = texture2D(u_Texture0, v_TexCoords);
+        // color.rgb += u_brightness; // change brightness
+        // gl_FragColor = clamp(color, 0.0, 1.0);
     });
 #undef glsl
 
@@ -89,11 +96,13 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     , update_res(true)
     , upload_tex(true)
     , m_program(0)
+    , currentBrightnessValue(0.0f)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
     //default: swap in qpainter dtor. we should swap before QPainter.endNativePainting()
     memset(tex, 0, 3 * sizeof(GLuint));
+
 }
 
 // render one frame
@@ -250,6 +259,12 @@ void GLVideoWidget::setImage(const QImage &img)
     update();
 }
 
+//set brightness
+void GLVideoWidget::setBrightness(float value){
+    currentBrightnessValue = value;
+    update();
+}
+
 // Binds an OpenGL resource to the current OpenGL
 void GLVideoWidget::bind()
 {
@@ -385,6 +400,7 @@ void GLVideoWidget::paintGL()
     }
     bind();
     m_program->bind();
+    m_program->setUniformValue(u_brightness, currentBrightnessValue);
     for (int i = 0; i < plane.size(); ++i) {
         m_program->setUniformValue(u_Texture[i], (GLint)i);
     }
@@ -454,7 +470,10 @@ void GLVideoWidget::initializeShader()
         qWarning() << m_program->log();
         qDebug("frag: %s", plane.size() > 1 ? kFragmentShader : kFragmentShaderRGB);
     }
-
+    u_brightness = m_program->uniformLocation("u_Brightness");
+    if (u_brightness == -1) {
+        qDebug() << "Uniform 'u_Brightness' not found in shader.";
+    }
     u_MVP_matrix = m_program->uniformLocation("u_MVP_matrix");
     // fragment shader
     u_colorMatrix = m_program->uniformLocation("u_colorMatrix");
@@ -465,4 +484,5 @@ void GLVideoWidget::initializeShader()
     }
     qDebug("glGetUniformLocation(\"u_MVP_matrix\") = %d", u_MVP_matrix);
     qDebug("glGetUniformLocation(\"u_colorMatrix\") = %d", u_colorMatrix);
+
 }

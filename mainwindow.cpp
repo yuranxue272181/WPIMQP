@@ -24,6 +24,12 @@ MainWindow::MainWindow(QWidget *parent)
     rightDk = ui -> rightDock;
     // widget
     videoWdt = ui->videoWidget;
+    //slider
+    brightnessSlider = ui->BrightnessSlider;
+
+    //initialize slider
+    brightnessSlider ->setRange(-100, 100);
+    brightnessSlider ->setValue(0);
 
 
     // set icons
@@ -44,6 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
     zoomOutBtn->setIconSize(QSize(30,30));
 
 
+
     // openGL
     gl = new GLVideoWidget(this);
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
@@ -57,7 +64,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(zoomOutBtn,&QToolButton::clicked, this, &MainWindow::zoomOut);
     connect(shootBtn, &QToolButton::clicked, gl, &GLVideoWidget::saveYUVImageDataToFile);
     connect(recordBtn,&QToolButton::clicked, this, &MainWindow::recordingStatu);
-
+    connect(brightnessSlider, &QSlider::sliderMoved, this, &MainWindow::setBrightness);
     // connect the video to ui
     // clear the old layout of videoWidget
     if (ui->videoWidget->layout()) {
@@ -135,4 +142,8 @@ void MainWindow::recordingStatu(){
     }else{
         recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
     }
+}
+void MainWindow::setBrightness(int value){
+    float brightness = value / 100.0f;
+    gl->setBrightness(brightness);
 }

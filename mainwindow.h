@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QToolButton>
 #include <QDockWidget>
+#include <QSlider>
 
 
 QT_BEGIN_NAMESPACE
@@ -33,6 +34,7 @@ private slots:
     void zoomIn();
     void zoomOut();
     void recordingStatu();
+    void setBrightness(int value);
 
 private:
     Ui::MainWindow *ui;
@@ -50,6 +52,8 @@ private:
     QWidget *videoWdt;
     QDockWidget *leftDk;
     QDockWidget *rightDk;
+
+    QSlider *brightnessSlider;
 
 signals:
     // void glInitialized();

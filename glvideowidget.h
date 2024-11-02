@@ -50,7 +50,10 @@ protected:
     virtual void initializeGL();
     virtual void paintGL();
     virtual void resizeGL(int w, int h);
+
 private:
+    GLint u_brightness;
+    float currentBrightnessValue;
     bool isPaused = false;
     bool isRecording = false;
     bool update_res;
@@ -89,6 +92,9 @@ private:
 
 signals:
     void videoFinished();
+
+public slots:
+    void setBrightness(float value);
 
 
 };
