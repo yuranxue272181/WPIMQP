@@ -75,7 +75,8 @@ public:
     QSlider *BrightnessSlider;
     QLabel *brightness;
     QWidget *page_2;
-    QSlider *horizontalSlider_3;
+    QSlider *ContrastSlider;
+    QLabel *contrast;
     QWidget *Sharpeness;
     QSlider *horizontalSlider_4;
     QWidget *tab_3;
@@ -342,10 +343,14 @@ public:
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
         page_2->setGeometry(QRect(0, 0, 181, 151));
-        horizontalSlider_3 = new QSlider(page_2);
-        horizontalSlider_3->setObjectName("horizontalSlider_3");
-        horizontalSlider_3->setGeometry(QRect(0, 10, 160, 22));
-        horizontalSlider_3->setOrientation(Qt::Orientation::Horizontal);
+        ContrastSlider = new QSlider(page_2);
+        ContrastSlider->setObjectName("ContrastSlider");
+        ContrastSlider->setGeometry(QRect(0, 20, 151, 22));
+        ContrastSlider->setOrientation(Qt::Orientation::Horizontal);
+        contrast = new QLabel(page_2);
+        contrast->setObjectName("contrast");
+        contrast->setGeometry(QRect(150, 20, 31, 21));
+        contrast->setAlignment(Qt::AlignmentFlag::AlignCenter);
         toolBox->addItem(page_2, QString::fromUtf8("Contrast"));
         Sharpeness = new QWidget();
         Sharpeness->setObjectName("Sharpeness");
@@ -424,7 +429,7 @@ public:
 
         tabWidget_2->setCurrentIndex(0);
         tabWidget->setCurrentIndex(0);
-        toolBox->setCurrentIndex(0);
+        toolBox->setCurrentIndex(1);
         toolBox_2->setCurrentIndex(0);
 
 
@@ -511,6 +516,7 @@ public:
         rightDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
         brightness->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(page), QCoreApplication::translate("MainWindow", "Brightness", nullptr));
+        contrast->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_2), QCoreApplication::translate("MainWindow", "Contrast", nullptr));
         toolBox->setItemText(toolBox->indexOf(Sharpeness), QCoreApplication::translate("MainWindow", "Sharpeness", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "   Image Enhancement", nullptr));

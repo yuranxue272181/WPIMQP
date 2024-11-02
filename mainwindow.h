@@ -37,6 +37,7 @@ private slots:
     void zoomOut();
     void recordingStatu();
     void setBrightness(int value);
+    void setContrast(int value);
 
 private:
     Ui::MainWindow *ui;
@@ -56,8 +57,10 @@ private:
     QDockWidget *rightDk;
 
     QSlider *brightnessSlider;
+    QSlider *contrastSlider;
 
     QLabel *brightnessValue;
+    QLabel *contrastValue;
 
     QTableWidget *featuresTable;
 

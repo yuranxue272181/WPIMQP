@@ -26,9 +26,10 @@ MainWindow::MainWindow(QWidget *parent)
     videoWdt = ui->videoWidget;
     //slider
     brightnessSlider = ui->BrightnessSlider;
-
+    contrastSlider = ui-> ContrastSlider;
     //label
     brightnessValue = ui->brightness;
+    contrastValue = ui-> contrast;
 
     //table
     featuresTable = ui->FeatureTable;
@@ -36,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent)
     //initialize slider
     brightnessSlider ->setRange(-100, 100);
     brightnessSlider ->setValue(0);
+    contrastSlider ->setRange(-100, 100);
+    contrastSlider ->setValue(0);
 
 
     // set icons
@@ -71,6 +74,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(shootBtn, &QToolButton::clicked, gl, &GLVideoWidget::saveYUVImageDataToFile);
     connect(recordBtn,&QToolButton::clicked, this, &MainWindow::recordingStatu);
     connect(brightnessSlider, &QSlider::sliderMoved, this, &MainWindow::setBrightness);
+    connect(contrastSlider, &QSlider::sliderMoved, this, &MainWindow::setContrast);
+
     // connect the video to ui
     // clear the old layout of videoWidget
     if (ui->videoWidget->layout()) {
@@ -102,8 +107,7 @@ void MainWindow::renderVideo(){
 
     //open the YUV file
     //176x144
-    //QFile f(":/akiyo_qcif.yuv");
-    QFile f(":/112.yuv");
+    QFile f(":/akiyo_qcif.yuv");
     f.open(QIODevice::ReadOnly);
     QByteArray data(f.readAll());
     qDebug("data size: %lld", data.size());
@@ -150,10 +154,16 @@ void MainWindow::recordingStatu(){
         recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
     }
 }
-void MainWindow::setBrightness(int value){
-    brightnessValue->setText(QString::number(value));
+void MainWindow::setBrightness(int brightness){
+    brightnessValue->setText(QString::number(brightness));
     QTableWidgetItem *item = featuresTable->item(0,1);
-    item->setText(QString::number(value));
-    float brightness = value / 100.0f;
-    gl->setBrightness(brightness);
+    item->setText(QString::number(brightness));
+    gl->setBrightness(brightness / 100.0f);
+}
+
+void MainWindow::setContrast(int contrast){
+    contrastValue->setText(QString::number(contrast));
+    QTableWidgetItem *item = featuresTable->item(1,1);
+    item->setText(QString::number(contrast));
+    gl->setContrast(contrast / 100.0f);
 }

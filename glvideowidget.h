@@ -53,8 +53,12 @@ protected:
     virtual void resizeGL(int w, int h);
 
 private:
+    //basic effects
     GLint u_brightness;
+    GLint u_contrast;
     float currentBrightnessValue;
+    float currentContrastValue;
+
     bool isPaused = false;
     bool isRecording = false;
     bool update_res;
@@ -98,6 +102,7 @@ signals:
 
 public slots:
     void setBrightness(float value);
+    void setContrast(float value);
 
 private slots:
     void onTimerTimeout();

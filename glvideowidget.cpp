@@ -65,6 +65,7 @@ static const char kFragmentShader[] = glsl(
     varying mediump vec2 v_TexCoords;
     uniform mat4 u_colorMatrix;
     uniform float u_Brightness;
+    uniform float u_Contrast;
     void main()
     {
         vec4 color = u_colorMatrix
@@ -74,6 +75,7 @@ static const char kFragmentShader[] = glsl(
                          texture2D(u_Texture2, v_TexCoords).r,
                          1);
         color.rgb += u_Brightness;
+        color.rgb = ((color.rgb - 0.5) * (1.0 + u_Contrast)) + 0.5;
         gl_FragColor = clamp(color, 0.0, 1.0);
 
     });
@@ -97,6 +99,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     , upload_tex(true)
     , m_program(0)
     , currentBrightnessValue(0.0f)
+    , currentContrastValue(0.0f)
     ,frameCount(0)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -285,6 +288,12 @@ void GLVideoWidget::setBrightness(float value){
     update();
 }
 
+//set contrast
+void GLVideoWidget::setContrast(float value){
+    currentContrastValue = value;
+    update();
+}
+
 // Binds an OpenGL resource to the current OpenGL
 void GLVideoWidget::bind()
 {
@@ -421,6 +430,7 @@ void GLVideoWidget::paintGL()
     bind();
     m_program->bind();
     m_program->setUniformValue(u_brightness, currentBrightnessValue);
+    m_program->setUniformValue(u_contrast, currentContrastValue);
     for (int i = 0; i < plane.size(); ++i) {
         m_program->setUniformValue(u_Texture[i], (GLint)i);
     }
@@ -493,6 +503,10 @@ void GLVideoWidget::initializeShader()
     u_brightness = m_program->uniformLocation("u_Brightness");
     if (u_brightness == -1) {
         qDebug() << "Uniform 'u_Brightness' not found in shader.";
+    }
+    u_contrast = m_program->uniformLocation("u_Contrast");
+    if (u_contrast == -1) {
+        qDebug() << "Uniform 'u_Contrast' not found in shader.";
     }
     u_MVP_matrix = m_program->uniformLocation("u_MVP_matrix");
     // fragment shader
