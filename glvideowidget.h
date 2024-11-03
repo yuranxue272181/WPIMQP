@@ -56,8 +56,10 @@ private:
     //basic effects
     GLint u_brightness;
     GLint u_contrast;
+    GLint u_sharpness;
     float currentBrightnessValue;
     float currentContrastValue;
+    float currentSharpnessValue;
 
     bool isPaused = false;
     bool isRecording = false;
@@ -103,6 +105,7 @@ signals:
 public slots:
     void setBrightness(float value);
     void setContrast(float value);
+    void setSharpness(float value);
 
 private slots:
     void onTimerTimeout();

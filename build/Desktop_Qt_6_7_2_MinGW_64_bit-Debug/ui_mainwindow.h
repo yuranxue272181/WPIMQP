@@ -78,7 +78,8 @@ public:
     QSlider *ContrastSlider;
     QLabel *contrast;
     QWidget *Sharpeness;
-    QSlider *horizontalSlider_4;
+    QSlider *SharpnessSlider;
+    QLabel *sharpness;
     QWidget *tab_3;
     QToolBox *toolBox_2;
     QWidget *page_5;
@@ -355,10 +356,14 @@ public:
         Sharpeness = new QWidget();
         Sharpeness->setObjectName("Sharpeness");
         Sharpeness->setGeometry(QRect(0, 0, 181, 151));
-        horizontalSlider_4 = new QSlider(Sharpeness);
-        horizontalSlider_4->setObjectName("horizontalSlider_4");
-        horizontalSlider_4->setGeometry(QRect(10, 20, 160, 22));
-        horizontalSlider_4->setOrientation(Qt::Orientation::Horizontal);
+        SharpnessSlider = new QSlider(Sharpeness);
+        SharpnessSlider->setObjectName("SharpnessSlider");
+        SharpnessSlider->setGeometry(QRect(0, 10, 151, 22));
+        SharpnessSlider->setOrientation(Qt::Orientation::Horizontal);
+        sharpness = new QLabel(Sharpeness);
+        sharpness->setObjectName("sharpness");
+        sharpness->setGeometry(QRect(150, 10, 31, 21));
+        sharpness->setAlignment(Qt::AlignmentFlag::AlignCenter);
         toolBox->addItem(Sharpeness, QString::fromUtf8("Sharpeness"));
         tabWidget->addTab(tab, QString());
         tab_3 = new QWidget();
@@ -429,7 +434,7 @@ public:
 
         tabWidget_2->setCurrentIndex(0);
         tabWidget->setCurrentIndex(0);
-        toolBox->setCurrentIndex(1);
+        toolBox->setCurrentIndex(2);
         toolBox_2->setCurrentIndex(0);
 
 
@@ -518,6 +523,7 @@ public:
         toolBox->setItemText(toolBox->indexOf(page), QCoreApplication::translate("MainWindow", "Brightness", nullptr));
         contrast->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_2), QCoreApplication::translate("MainWindow", "Contrast", nullptr));
+        sharpness->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(Sharpeness), QCoreApplication::translate("MainWindow", "Sharpeness", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "   Image Enhancement", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "50", nullptr));

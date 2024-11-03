@@ -27,9 +27,11 @@ MainWindow::MainWindow(QWidget *parent)
     //slider
     brightnessSlider = ui->BrightnessSlider;
     contrastSlider = ui-> ContrastSlider;
+    sharpnessSlider = ui-> SharpnessSlider;
     //label
     brightnessValue = ui->brightness;
     contrastValue = ui-> contrast;
+    sharpnessValue = ui-> sharpness;
 
     //table
     featuresTable = ui->FeatureTable;
@@ -39,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent)
     brightnessSlider ->setValue(0);
     contrastSlider ->setRange(-100, 100);
     contrastSlider ->setValue(0);
+    sharpnessSlider ->setRange(0,100);
+    sharpnessSlider ->setValue(0);
 
 
     // set icons
@@ -75,6 +79,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(recordBtn,&QToolButton::clicked, this, &MainWindow::recordingStatu);
     connect(brightnessSlider, &QSlider::sliderMoved, this, &MainWindow::setBrightness);
     connect(contrastSlider, &QSlider::sliderMoved, this, &MainWindow::setContrast);
+    connect(sharpnessSlider, &QSlider::sliderMoved, this, &MainWindow::setSharpness);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -166,4 +171,10 @@ void MainWindow::setContrast(int contrast){
     QTableWidgetItem *item = featuresTable->item(1,1);
     item->setText(QString::number(contrast));
     gl->setContrast(contrast / 100.0f);
+}
+void MainWindow::setSharpness(int sharpness){
+    sharpnessValue->setText(QString::number(sharpness));
+    QTableWidgetItem *item = featuresTable->item(2,1);
+    item->setText(QString::number(sharpness));
+    gl->setSharpness(sharpness / 100.0f);
 }

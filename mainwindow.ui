@@ -560,7 +560,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="page">
         <property name="geometry">
@@ -658,17 +658,33 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <attribute name="label">
          <string>Sharpeness</string>
         </attribute>
-        <widget class="QSlider" name="horizontalSlider_4">
+        <widget class="QSlider" name="SharpnessSlider">
          <property name="geometry">
           <rect>
-           <x>10</x>
-           <y>20</y>
-           <width>160</width>
+           <x>0</x>
+           <y>10</y>
+           <width>151</width>
            <height>22</height>
           </rect>
          </property>
          <property name="orientation">
           <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="sharpness">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>10</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </widget>

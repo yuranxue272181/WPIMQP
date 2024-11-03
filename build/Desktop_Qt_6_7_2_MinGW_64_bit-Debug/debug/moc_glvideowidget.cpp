@@ -43,6 +43,7 @@ constexpr auto qt_meta_stringdata_CLASSGLVideoWidgetENDCLASS = QtMocHelpers::str
     "setBrightness",
     "value",
     "setContrast",
+    "setSharpness",
     "onTimerTimeout",
     "saveRecordingData"
 );
@@ -57,7 +58,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGLVideoWidgetENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -65,18 +66,20 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGLVideoWidgetENDCLASS[] = {
        1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   44,    2, 0x06,    1 /* Public */,
+       1,    0,   50,    2, 0x06,    1 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       3,    1,   45,    2, 0x0a,    2 /* Public */,
-       5,    1,   48,    2, 0x0a,    4 /* Public */,
-       6,    0,   51,    2, 0x08,    6 /* Private */,
-       7,    0,   52,    2, 0x08,    7 /* Private */,
+       3,    1,   51,    2, 0x0a,    2 /* Public */,
+       5,    1,   54,    2, 0x0a,    4 /* Public */,
+       6,    1,   57,    2, 0x0a,    6 /* Public */,
+       7,    0,   60,    2, 0x08,    8 /* Private */,
+       8,    0,   61,    2, 0x08,    9 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::Float,    4,
     QMetaType::Void, QMetaType::Float,    4,
     QMetaType::Void, QMetaType::Float,    4,
     QMetaType::Void,
@@ -102,6 +105,9 @@ Q_CONSTINIT const QMetaObject GLVideoWidget::staticMetaObject = { {
         // method 'setContrast'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<float, std::false_type>,
+        // method 'setSharpness'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<float, std::false_type>,
         // method 'onTimerTimeout'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'saveRecordingData'
@@ -119,8 +125,9 @@ void GLVideoWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 0: _t->videoFinished(); break;
         case 1: _t->setBrightness((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
         case 2: _t->setContrast((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
-        case 3: _t->onTimerTimeout(); break;
-        case 4: _t->saveRecordingData(); break;
+        case 3: _t->setSharpness((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
+        case 4: _t->onTimerTimeout(); break;
+        case 5: _t->saveRecordingData(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -156,13 +163,13 @@ int GLVideoWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 6)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 5;
+        _id -= 6;
     }
     return _id;
 }

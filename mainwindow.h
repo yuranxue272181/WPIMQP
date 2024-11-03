@@ -38,6 +38,7 @@ private slots:
     void recordingStatu();
     void setBrightness(int value);
     void setContrast(int value);
+    void setSharpness(int value);
 
 private:
     Ui::MainWindow *ui;
@@ -58,9 +59,11 @@ private:
 
     QSlider *brightnessSlider;
     QSlider *contrastSlider;
+    QSlider *sharpnessSlider;
 
     QLabel *brightnessValue;
     QLabel *contrastValue;
+    QLabel *sharpnessValue;
 
     QTableWidget *featuresTable;
 

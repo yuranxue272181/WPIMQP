@@ -66,15 +66,30 @@ static const char kFragmentShader[] = glsl(
     uniform mat4 u_colorMatrix;
     uniform float u_Brightness;
     uniform float u_Contrast;
+    uniform float u_Sharpness;
     void main()
     {
-        vec4 color = u_colorMatrix
-                     * vec4(
-                         texture2D(u_Texture0, v_TexCoords).r,
-                         texture2D(u_Texture1, v_TexCoords).r,
-                         texture2D(u_Texture2, v_TexCoords).r,
-                         1);
+        vec2 texOffset = vec2(1.0 / 144.0, 1.0 / 176.0);
+        vec4 originalColor = u_colorMatrix
+                             * vec4(
+                                 texture2D(u_Texture0, v_TexCoords).r,
+                                 texture2D(u_Texture1, v_TexCoords).r,
+                                 texture2D(u_Texture2, v_TexCoords).r,
+                                 1);
+        //sharpness
+        vec4 sharpColor = vec4(0.0);
+        sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, 0.0)) * (-1.0 * u_Sharpness); // left
+        sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, 0.0)) * (-1.0 * u_Sharpness);  // right
+        sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, -texOffset.y)) * (-1.0 * u_Sharpness); // above
+        sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, texOffset.y)) * (-1.0 * u_Sharpness);  // below
+        sharpColor += texture2D(u_Texture0, v_TexCoords) * (1.0 + 4.0 * u_Sharpness);                      // center
+
+        //vec4 color = (u_Sharpness == 0.0) ? originalColor : mix(originalColor, sharpColor, 0.5);  // mix color
+        vec4 color = mix(originalColor, sharpColor, 0.5); // mix color
+
+        //brightness
         color.rgb += u_Brightness;
+        //contrast
         color.rgb = ((color.rgb - 0.5) * (1.0 + u_Contrast)) + 0.5;
         gl_FragColor = clamp(color, 0.0, 1.0);
 
@@ -100,6 +115,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     , m_program(0)
     , currentBrightnessValue(0.0f)
     , currentContrastValue(0.0f)
+    , currentSharpnessValue(0.0f)
     ,frameCount(0)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -294,6 +310,12 @@ void GLVideoWidget::setContrast(float value){
     update();
 }
 
+//set sharpness
+void GLVideoWidget::setSharpness(float value){
+    currentSharpnessValue = value;
+    update();
+}
+
 // Binds an OpenGL resource to the current OpenGL
 void GLVideoWidget::bind()
 {
@@ -431,6 +453,7 @@ void GLVideoWidget::paintGL()
     m_program->bind();
     m_program->setUniformValue(u_brightness, currentBrightnessValue);
     m_program->setUniformValue(u_contrast, currentContrastValue);
+    m_program->setUniformValue(u_sharpness, currentSharpnessValue);
     for (int i = 0; i < plane.size(); ++i) {
         m_program->setUniformValue(u_Texture[i], (GLint)i);
     }
@@ -507,6 +530,10 @@ void GLVideoWidget::initializeShader()
     u_contrast = m_program->uniformLocation("u_Contrast");
     if (u_contrast == -1) {
         qDebug() << "Uniform 'u_Contrast' not found in shader.";
+    }
+    u_sharpness = m_program->uniformLocation("u_Sharpness");
+    if (u_sharpness == -1) {
+        qDebug() << "Uniform 'u_Sharpness' not found in shader.";
     }
     u_MVP_matrix = m_program->uniformLocation("u_MVP_matrix");
     // fragment shader
