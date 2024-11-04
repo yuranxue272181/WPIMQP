@@ -5,6 +5,11 @@
 #include <QObject>
 #include <QDebug>
 #include "CyAPI.h"
+#include <thread>
+#include <condition_variable>
+#include <vector>
+#include <atomic>
+#include <QFile>
 #pragma comment(lib,"SetupAPI.lib")
 #pragma comment(lib,"User32.lib")
 #pragma comment(lib,"legacy_stdio_definitions.lib")
@@ -16,7 +21,12 @@ public:
     explicit FPGAInterface(QObject *parent = nullptr);
     bool initializeDevice();                // Initialize USB Device
     void refreshDeviceList();               // Refresh connected devices
-    bool configureFPGA(const QString &fwFilePath); // Configure FPGA using firmware file
+    bool writeImageData(const QString& inputFilePath);
+    void stopTransfer();  // Function to stop the transfer
+    // Function to convert grayscale data to YUV format
+    bool convertGrayscaleToYUV(const std::string& inputFilePath, QByteArray& yuvData, int width, int height);
+
+
 
 signals:
     void deviceAttached();   // Signal emitted when a device is attached
@@ -25,6 +35,13 @@ signals:
 private:
     CCyUSBDevice *usbDevice; // USB device handler
     bool isDeviceConnected;
+    std::mutex bufferMutex;
+    std::condition_variable bufferCondition;
+    bool bufferReady = false;
+    bool useBufferA = true;
+    std::vector<UCHAR> bufferA;
+    std::vector<UCHAR> bufferB;
+    std::atomic<bool> stopFlag{false};  // Stop flag for controlling the transfer
 };
 
 #endif // FPGAINTERFACE_H

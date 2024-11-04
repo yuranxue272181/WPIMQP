@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "glvideowidget.h"
+#include "FPGAInterface.h"
 
 //ui
 #include <QVBoxLayout>
@@ -89,10 +90,16 @@ void MainWindow::renderVideo(){
 
     //open the YUV file
     //176x144
-    QFile f(":/akiyo_qcif.yuv");
-    f.open(QIODevice::ReadOnly);
-    QByteArray data(f.readAll());
-    qDebug("data size: %lld", data.size());
+    // QFile f(":/akiyo_qcif.yuv");
+    // f.open(QIODevice::ReadOnly);
+    // QByteArray data(f.readAll());
+    // qDebug("data size: %lld", data.size());
+    FPGAInterface fpgaInterface;
+    QByteArray data;
+    // Assuming you know the width and height of the image
+    int width = 176;  // Example width
+    int height = 144; // Example height
+    fpgaInterface.convertGrayscaleToYUV(":/checkerboard_176x144-0.bin", data, width, height);
     gl-> nextFrame(data);
 }
 
