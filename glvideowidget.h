@@ -61,6 +61,7 @@ private:
     float currentContrastValue;
     float currentSharpnessValue;
 
+    bool histogramEqualizationEnabled;
     bool isPaused = false;
     bool isRecording = false;
     bool update_res;
@@ -98,6 +99,7 @@ private:
     QMatrix4x4 m_mat;
 
     void processNextFrame();
+    void computeHistogramEqualization(char* yuvData);
 
 signals:
     void videoFinished();
@@ -106,6 +108,7 @@ public slots:
     void setBrightness(float value);
     void setContrast(float value);
     void setSharpness(float value);
+    void setHistogramEqualizationEnabled(bool isEnable);
 
 private slots:
     void onTimerTimeout();

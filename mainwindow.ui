@@ -419,16 +419,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <attribute name="verticalHeaderShowSortIndicator" stdset="0">
       <bool>false</bool>
      </attribute>
-     <row>
-      <property name="text">
-       <string>2</string>
-      </property>
-     </row>
-     <row>
-      <property name="text">
-       <string>3</string>
-      </property>
-     </row>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
+     <row/>
      <row/>
      <column>
       <property name="text">
@@ -476,6 +471,54 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <property name="text">
        <string>Sharpness</string>
       </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+     <item row="2" column="1">
+      <property name="text">
+       <string>0</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+     <item row="3" column="0">
+      <property name="text">
+       <string>HIstogram Equalization</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+     <item row="3" column="1">
+      <property name="text">
+       <string>OFF</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+     <item row="4" column="0">
+      <property name="text">
+       <string>Noise Reduction</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+     <item row="4" column="1">
+      <property name="text">
+       <string>OFF</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </item>
+     <item row="5" column="0">
+      <property name="text">
+       <string>Gamma Correction</string>
+      </property>
       <property name="font">
        <font>
         <kerning>true</kerning>
@@ -485,9 +528,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <set>AlignCenter</set>
       </property>
      </item>
-     <item row="2" column="1">
+     <item row="5" column="1">
       <property name="text">
-       <string>0</string>
+       <string>OFF</string>
       </property>
       <property name="textAlignment">
        <set>AlignCenter</set>
@@ -560,7 +603,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="page">
         <property name="geometry">
@@ -568,7 +611,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>151</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -610,7 +653,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>151</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -652,7 +695,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>151</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -687,6 +730,34 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
+       </widget>
+       <widget class="QWidget" name="page_3">
+        <attribute name="label">
+         <string>Histogram Equalization</string>
+        </attribute>
+        <widget class="QCheckBox" name="HEChecker">
+         <property name="geometry">
+          <rect>
+           <x>50</x>
+           <y>0</y>
+           <width>76</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>OFF</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="page_4">
+        <attribute name="label">
+         <string>Noise Reduction</string>
+        </attribute>
+       </widget>
+       <widget class="QWidget" name="page_7">
+        <attribute name="label">
+         <string>Gamma Correction</string>
+        </attribute>
        </widget>
       </widget>
      </widget>

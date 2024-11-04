@@ -83,8 +83,6 @@ static const char kFragmentShader[] = glsl(
         sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, -texOffset.y)) * (-1.0 * u_Sharpness); // above
         sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, texOffset.y)) * (-1.0 * u_Sharpness);  // below
         sharpColor += texture2D(u_Texture0, v_TexCoords) * (1.0 + 4.0 * u_Sharpness);                      // center
-
-        //vec4 color = (u_Sharpness == 0.0) ? originalColor : mix(originalColor, sharpColor, 0.5);  // mix color
         vec4 color = mix(originalColor, sharpColor, 0.5); // mix color
 
         //brightness
@@ -443,6 +441,12 @@ void GLVideoWidget::paintGL()
 
     //qDebug() << "Rendering frame with width:" << width << "height:" << height;
 
+
+    //histogram equalization
+    if (histogramEqualizationEnabled) {
+    computeHistogramEqualization(plane[0].data);
+    }
+
     if (update_res || !tex[0]) {
         initializeShader();
         initTextures();
@@ -546,4 +550,41 @@ void GLVideoWidget::initializeShader()
     qDebug("glGetUniformLocation(\"u_MVP_matrix\") = %d", u_MVP_matrix);
     qDebug("glGetUniformLocation(\"u_colorMatrix\") = %d", u_colorMatrix);
 
+}
+
+//Calculate the Y-component after histogram equalization
+void GLVideoWidget::computeHistogramEqualization(char* data){
+    const int L = 256; //gray scale
+    int histogram[L] = {0};
+    int totalPixels = 176 * 144;
+
+    //calculate the histogram
+    for (int i = 0; i < totalPixels; ++i) {
+        uchar pixelValue = static_cast<uchar>(data[i]);
+        histogram[pixelValue]++;
+    }
+
+    //calculate CDF
+    int cdf[L] = {0};
+    cdf[0] = histogram[0];
+    for (int i = 1; i < L; ++i) {
+        cdf[i] = cdf[i - 1] + histogram[i];
+    }
+
+    //generate the equalizationMap
+    uchar equalizationMap[L];
+    int cdfMin = cdf[0];
+    for (int i = 0; i < L; ++i) {
+        equalizationMap[i] = static_cast<uchar>(((cdf[i] - cdfMin) * (L - 1)) / (totalPixels - cdfMin));
+    }
+
+    //update the Y_component data
+    for (int i = 0; i < totalPixels; ++i) {
+        uchar pixelValue = static_cast<uchar>(data[i]);
+        data[i] = equalizationMap[pixelValue];
+    }
+}
+//set HistogramEqualization Enabled
+void GLVideoWidget::setHistogramEqualizationEnabled(bool isEnable){
+    histogramEqualizationEnabled = isEnable;
 }

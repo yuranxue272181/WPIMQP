@@ -36,6 +36,9 @@ MainWindow::MainWindow(QWidget *parent)
     //table
     featuresTable = ui->FeatureTable;
 
+    //checkBox
+    HECheck = ui->HEChecker;
+
     //initialize slider
     brightnessSlider ->setRange(-100, 100);
     brightnessSlider ->setValue(0);
@@ -44,6 +47,8 @@ MainWindow::MainWindow(QWidget *parent)
     sharpnessSlider ->setRange(0,100);
     sharpnessSlider ->setValue(0);
 
+    //initialize checkBox
+    HECheck->setEnabled(false);
 
     // set icons
     startBtn->setIcon(QIcon(":/icons/restart.png"));
@@ -80,6 +85,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(brightnessSlider, &QSlider::sliderMoved, this, &MainWindow::setBrightness);
     connect(contrastSlider, &QSlider::sliderMoved, this, &MainWindow::setContrast);
     connect(sharpnessSlider, &QSlider::sliderMoved, this, &MainWindow::setSharpness);
+    connect(HECheck, &QCheckBox::stateChanged, this, &MainWindow::setHE);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -109,6 +115,7 @@ void MainWindow::renderVideo(){
     startBtn->setEnabled(false);
     shootBtn->setEnabled(true);
     recordBtn->setEnabled(true);
+    HECheck->setEnabled(true);
 
     //open the YUV file
     //176x144
@@ -124,10 +131,12 @@ void MainWindow::pauseVideo(){
     if(gl->pauseVideo()){
         playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
         recordBtn->setEnabled(false);
+        HECheck->setEnabled(false);
     }
     else{
         playPauseBtn->setIcon(QIcon(":/icons/play.png"));
         recordBtn->setEnabled(true);
+        HECheck->setEnabled(true);
     }
 }
 
@@ -139,6 +148,7 @@ void MainWindow::onVideoFinished(){
     recordBtn->setEnabled(false);
     gl->stopRecording();
     recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
+    HECheck->setEnabled(false);
 }
 
 // Zoom in the video
@@ -178,3 +188,18 @@ void MainWindow::setSharpness(int sharpness){
     item->setText(QString::number(sharpness));
     gl->setSharpness(sharpness / 100.0f);
 }
+
+void MainWindow::setHE(){
+    if(HECheck->isChecked()){
+        HECheck->setText("ON");
+        QTableWidgetItem *item = featuresTable->item(3,1);
+        item->setText("ON");
+    }else{
+        HECheck->setText("OFF");
+        QTableWidgetItem *item = featuresTable->item(3,1);
+        item->setText("OFF");
+    }
+    gl->setHistogramEqualizationEnabled(HECheck->isChecked());
+}
+
+

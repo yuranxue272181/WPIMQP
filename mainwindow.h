@@ -10,6 +10,7 @@
 #include <QSlider>
 #include <QLabel>
 #include <QTableWidget>
+#include <QCheckBox>
 
 
 QT_BEGIN_NAMESPACE
@@ -39,6 +40,7 @@ private slots:
     void setBrightness(int value);
     void setContrast(int value);
     void setSharpness(int value);
+    void setHE();
 
 private:
     Ui::MainWindow *ui;
@@ -66,6 +68,9 @@ private:
     QLabel *sharpnessValue;
 
     QTableWidget *featuresTable;
+
+    QCheckBox *HECheck;
+
 
 signals:
     // void glInitialized();
