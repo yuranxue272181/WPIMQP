@@ -8,6 +8,7 @@ Basic Development Information
 
 Currently Implemented Features
 -
+Video
 1. YUV to Video Conversion: <br>The player can load YUV data and convert it into video using OpenGL for rendering.
 2. Start Button: <br>Click this button to initiate video playback or replay the current video.
 3. Play/Pause Button: <br>This button is used to control the playback and pause of the video.
@@ -16,6 +17,11 @@ Currently Implemented Features
 6. Recording Button: <br>This button is used to save the YUV file of the recording. Clicking this button for the first time will start the recording, clicking it again or the video playback will stop the recording.
 7. Video Resolution: <br>The default video resolution is 176x144, but this can be adjusted as needed.
 8. Frame Rate: <br>The current frame rate is 30 FPS, which can also be modified if necessary.
+Effects
+1. Brightness: Use the slider to control the brightness and display it on the feature properties.
+2. Contrast：Use the slider to control the contrast and display it on the feature properties.
+3. Sharpness: Use the slider to control the sharpness and display it on the feature properties
+
 
 Future Improvements
 -
