@@ -106,52 +106,112 @@ bool FPGAInterface::writeImageData(const QString &inputFilePath)
     return true;
 }
 
-bool FPGAInterface::convertGrayscaleToYUV(const std::string& inputFilePath, QByteArray& yuvData, int width, int height) {
-    // Open the input binary file
-    QFile file(QString::fromStdString(inputFilePath));
-    if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "Error opening input file:" << file.errorString();
-        return false;
-    }
+// bool FPGAInterface::convertGrayscaleToYUV(const std::string& inputFilePath, QByteArray& yuvData, int width, int height) {
+//     // Open the input binary file
+//     QFile file(QString::fromStdString(inputFilePath));
+//     if (!file.open(QIODevice::ReadOnly)) {
+//         qDebug() << "Error opening input file:" << file.errorString();
+//         return false;
+//     }
 
-    // Calculate the size of the YUV data
-    size_t ySize = width * height;
-    size_t uSize = (width / 2) * (height / 2);
-    size_t vSize = (width / 2) * (height / 2);
-    size_t totalSize = ySize + uSize + vSize;
+//     // Calculate the size of the YUV data
+//     size_t ySize = width * height;
+//     size_t uSize = (width / 2) * (height / 2);
+//     size_t vSize = (width / 2) * (height / 2);
+//     size_t totalSize = ySize + uSize + vSize;
 
-    // Resize QByteArray to hold all YUV data
-    yuvData.resize(totalSize);
+//     // Resize QByteArray to hold all YUV data
+//     yuvData.resize(totalSize);
 
-    // Read grayscale data from the file
-    QByteArray grayscaleData = file.readAll();
-    if (grayscaleData.size() != ySize) {
-        qDebug() << "Error: Expected grayscale data size does not match. Expected:" << ySize << "but got:" << grayscaleData.size();
-        return false;
-    }
+//     // Read grayscale data from the file
+//     QByteArray grayscaleData = file.readAll();
+//     if (grayscaleData.size() != ySize) {
+//         qDebug() << "Error: Expected grayscale data size does not match. Expected:" << ySize << "but got:" << grayscaleData.size();
+//         return false;
+//     }
 
-    // Pointers for Y, U, and V data
-    uint8_t* yPlane = reinterpret_cast<uint8_t*>(yuvData.data());
-    uint8_t* uPlane = yPlane + ySize;
-    uint8_t* vPlane = uPlane + uSize;
+//     // Pointers for Y, U, and V data
+//     uint8_t* yPlane = reinterpret_cast<uint8_t*>(yuvData.data());
+//     uint8_t* uPlane = yPlane + ySize;
+//     uint8_t* vPlane = uPlane + uSize;
 
-    // Process grayscale data to generate YUV data
-    for (int j = 0; j < height; j++) {
-        for (int i = 0; i < width; i++) {
-            // Read grayscale value (assuming each byte represents a grayscale value)
-            uint8_t grayscaleValue = static_cast<uint8_t>(grayscaleData[j * width + i]);
+//     // Process grayscale data to generate YUV data
+//     for (int j = 0; j < height; j++) {
+//         for (int i = 0; i < width; i++) {
+//             // Read grayscale value (assuming each byte represents a grayscale value)
+//             uint8_t grayscaleValue = static_cast<uint8_t>(grayscaleData[j * width + i]);
 
-            // Set Y value directly from the grayscale value
-            yPlane[j * width + i] = grayscaleValue;
+//             // Set Y value directly from the grayscale value
+//             yPlane[j * width + i] = grayscaleValue;
 
-            // Set U and V to neutral values (128)
-            if (j % 2 == 0 && i % 2 == 0) { // Subsample for U and V
-                uPlane[(j / 2) * (width / 2) + (i / 2)] = 128; // U
-                vPlane[(j / 2) * (width / 2) + (i / 2)] = 128; // V
+//             // Set U and V to neutral values (128)
+//             if (j % 2 == 0 && i % 2 == 0) { // Subsample for U and V
+//                 uPlane[(j / 2) * (width / 2) + (i / 2)] = 128; // U
+//                 vPlane[(j / 2) * (width / 2) + (i / 2)] = 128; // V
+//             }
+//         }
+//     }
+
+//     file.close();
+//     return true;
+// }
+
+QByteArray FPGAInterface::convertMultipleGrayscaleBinsToYUV(const std::vector<std::string>& inputFiles, int width, int height) {
+    QByteArray combinedYuvData;
+
+    for (const auto& inputFile : inputFiles) {
+        // Open the input binary file
+        QFile file(QString::fromStdString(inputFile));
+        if (!file.open(QIODevice::ReadOnly)) {
+            qDebug() << "Error opening input file:" << file.errorString();
+            continue; // Skip this file and proceed to the next one
+        }
+
+        // Calculate the size of the YUV data for this frame
+        size_t ySize = width * height;
+        size_t uSize = (width / 2) * (height / 2);
+        size_t vSize = (width / 2) * (height / 2);
+        size_t totalSize = ySize + uSize + vSize;
+
+        // Read grayscale data from the file
+        QByteArray grayscaleData = file.readAll();
+        if (grayscaleData.size() != ySize) {
+            qDebug() << "Error: Expected grayscale data size does not match for file:" << QString::fromStdString(inputFile);
+            file.close();
+            continue; // Skip this file if size does not match
+        }
+
+        // Prepare a QByteArray for the current YUV data
+        QByteArray yuvData;
+        yuvData.resize(totalSize);
+
+        // Pointers for Y, U, and V data
+        uint8_t* yPlane = reinterpret_cast<uint8_t*>(yuvData.data());
+        uint8_t* uPlane = yPlane + ySize;
+        uint8_t* vPlane = uPlane + uSize;
+
+        // Process grayscale data to generate YUV data
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+                // Read grayscale value
+                uint8_t grayscaleValue = static_cast<uint8_t>(grayscaleData[j * width + i]);
+
+                // Set Y value directly from the grayscale value
+                yPlane[j * width + i] = grayscaleValue;
+
+                // Set U and V to neutral values (128)
+                if (j % 2 == 0 && i % 2 == 0) { // Subsample for U and V
+                    uPlane[(j / 2) * (width / 2) + (i / 2)] = 128; // U
+                    vPlane[(j / 2) * (width / 2) + (i / 2)] = 128; // V
+                }
             }
         }
+
+        file.close();
+
+        // Append the current YUV data to the combined YUV data
+        combinedYuvData.append(yuvData);
     }
 
-    file.close();
-    return true;
+    return combinedYuvData; // Return the combined YUV data
 }

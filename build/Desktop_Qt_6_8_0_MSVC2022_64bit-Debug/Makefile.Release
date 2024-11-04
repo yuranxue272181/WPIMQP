@@ -183,10 +183,17 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release\qrc_resources.cpp
 release\qrc_resources.cpp: ..\..\resources.qrc \
 		C:\Qt\6.8.0\msvc2022_64\bin\rcc.exe \
+		..\..\checkerboard_176x144-2.bin \
+		..\..\checkerboard_176x144-4.bin \
 		..\..\checkerboard_176x144-0.bin \
 		..\..\1280x720.yuv \
 		..\..\checkerboard_176x144-8.bin \
 		..\..\akiyo_qcif.yuv \
+		..\..\checkerboard_176x144-7.bin \
+		..\..\checkerboard_176x144-1.bin \
+		..\..\checkerboard_176x144-3.bin \
+		..\..\checkerboard_176x144-5.bin \
+		..\..\checkerboard_176x144-6.bin \
 		..\..\icons\shoot.png \
 		..\..\icons\recordRed.png \
 		..\..\icons\record.png \

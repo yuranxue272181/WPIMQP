@@ -24,9 +24,9 @@ public:
     bool writeImageData(const QString& inputFilePath);
     void stopTransfer();  // Function to stop the transfer
     // Function to convert grayscale data to YUV format
-    bool convertGrayscaleToYUV(const std::string& inputFilePath, QByteArray& yuvData, int width, int height);
-
-
+    // bool convertGrayscaleToYUV(const std::string& inputFilePath, QByteArray& yuvData, int width, int height);
+    // Function to convert multiple .bin files to YUV and store results in a single QByteArray
+    QByteArray convertMultipleGrayscaleBinsToYUV(const std::vector<std::string>& inputFiles, int width, int height);
 
 signals:
     void deviceAttached();   // Signal emitted when a device is attached

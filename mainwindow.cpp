@@ -95,11 +95,23 @@ void MainWindow::renderVideo(){
     // QByteArray data(f.readAll());
     // qDebug("data size: %lld", data.size());
     FPGAInterface fpgaInterface;
-    QByteArray data;
+    // QByteArray data;
     // Assuming you know the width and height of the image
     int width = 176;  // Example width
     int height = 144; // Example height
-    fpgaInterface.convertGrayscaleToYUV(":/checkerboard_176x144-0.bin", data, width, height);
+    std::vector<std::string> inputFiles = {
+        ":/checkerboard_176x144-0.bin",
+        ":/checkerboard_176x144-1.bin",
+        ":/checkerboard_176x144-2.bin",
+        ":/checkerboard_176x144-3.bin",
+        ":/checkerboard_176x144-4.bin",
+        ":/checkerboard_176x144-5.bin",
+        ":/checkerboard_176x144-6.bin",
+        ":/checkerboard_176x144-7.bin",
+        ":/checkerboard_176x144-8.bin"
+    };
+    // fpgaInterface.convertGrayscaleToYUV(":/checkerboard_176x144-0.bin", data, width, height);
+    QByteArray data = fpgaInterface.convertMultipleGrayscaleBinsToYUV(inputFiles, width, height);
     gl-> nextFrame(data);
 }
 

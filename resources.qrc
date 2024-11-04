@@ -13,5 +13,12 @@
         <file>icons/recordRed.png</file>
         <file>checkerboard_176x144-0.bin</file>
         <file>checkerboard_176x144-8.bin</file>
+        <file>checkerboard_176x144-2.bin</file>
+        <file>checkerboard_176x144-3.bin</file>
+        <file>checkerboard_176x144-4.bin</file>
+        <file>checkerboard_176x144-5.bin</file>
+        <file>checkerboard_176x144-6.bin</file>
+        <file>checkerboard_176x144-7.bin</file>
+        <file>checkerboard_176x144-1.bin</file>
     </qresource>
 </RCC>
