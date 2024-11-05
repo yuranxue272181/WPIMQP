@@ -352,11 +352,11 @@ public:
         tab->setObjectName("tab");
         toolBox = new QToolBox(tab);
         toolBox->setObjectName("toolBox");
-        toolBox->setGeometry(QRect(10, 10, 181, 241));
+        toolBox->setGeometry(QRect(10, 10, 181, 261));
         toolBox->setStyleSheet(QString::fromUtf8(""));
         page = new QWidget();
         page->setObjectName("page");
-        page->setGeometry(QRect(0, 0, 181, 31));
+        page->setGeometry(QRect(0, 0, 181, 81));
         BrightnessSlider = new QSlider(page);
         BrightnessSlider->setObjectName("BrightnessSlider");
         BrightnessSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -368,7 +368,7 @@ public:
         toolBox->addItem(page, QString::fromUtf8("Brightness"));
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
-        page_2->setGeometry(QRect(0, 0, 181, 31));
+        page_2->setGeometry(QRect(0, 0, 181, 81));
         ContrastSlider = new QSlider(page_2);
         ContrastSlider->setObjectName("ContrastSlider");
         ContrastSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -380,7 +380,7 @@ public:
         toolBox->addItem(page_2, QString::fromUtf8("Contrast"));
         Sharpeness = new QWidget();
         Sharpeness->setObjectName("Sharpeness");
-        Sharpeness->setGeometry(QRect(0, 0, 181, 31));
+        Sharpeness->setGeometry(QRect(0, 0, 181, 81));
         SharpnessSlider = new QSlider(Sharpeness);
         SharpnessSlider->setObjectName("SharpnessSlider");
         SharpnessSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -392,19 +392,19 @@ public:
         toolBox->addItem(Sharpeness, QString::fromUtf8("Sharpeness"));
         page_3 = new QWidget();
         page_3->setObjectName("page_3");
-        page_3->setGeometry(QRect(0, 0, 181, 31));
+        page_3->setGeometry(QRect(0, 0, 181, 51));
         HESlider = new QSlider(page_3);
         HESlider->setObjectName("HESlider");
-        HESlider->setGeometry(QRect(0, 10, 151, 22));
+        HESlider->setGeometry(QRect(0, 20, 151, 22));
         HESlider->setOrientation(Qt::Orientation::Horizontal);
         HE = new QLabel(page_3);
         HE->setObjectName("HE");
-        HE->setGeometry(QRect(150, 10, 31, 21));
+        HE->setGeometry(QRect(150, 20, 31, 21));
         HE->setAlignment(Qt::AlignmentFlag::AlignCenter);
         toolBox->addItem(page_3, QString::fromUtf8("Histogram Equalization"));
         page_4 = new QWidget();
         page_4->setObjectName("page_4");
-        page_4->setGeometry(QRect(0, 0, 181, 31));
+        page_4->setGeometry(QRect(0, 0, 181, 51));
         NRSlider = new QSlider(page_4);
         NRSlider->setObjectName("NRSlider");
         NRSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -416,7 +416,7 @@ public:
         toolBox->addItem(page_4, QString::fromUtf8("Noise Reduction"));
         page_7 = new QWidget();
         page_7->setObjectName("page_7");
-        page_7->setGeometry(QRect(0, 0, 181, 31));
+        page_7->setGeometry(QRect(0, 0, 181, 51));
         GammaSlider = new QSlider(page_7);
         GammaSlider->setObjectName("GammaSlider");
         GammaSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -428,6 +428,7 @@ public:
         toolBox->addItem(page_7, QString::fromUtf8("Gamma Correction"));
         page_8 = new QWidget();
         page_8->setObjectName("page_8");
+        page_8->setGeometry(QRect(0, 0, 181, 51));
         resetButton = new QPushButton(page_8);
         resetButton->setObjectName("resetButton");
         resetButton->setGeometry(QRect(20, 0, 75, 24));
@@ -501,7 +502,7 @@ public:
 
         tabWidget_2->setCurrentIndex(0);
         tabWidget->setCurrentIndex(0);
-        toolBox->setCurrentIndex(2);
+        toolBox->setCurrentIndex(3);
         toolBox_2->setCurrentIndex(0);
 
 

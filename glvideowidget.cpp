@@ -71,7 +71,7 @@ static const char kFragmentShader[] = glsl(
     uniform float u_Gamma;
     void main()
     {
-        vec2 texOffset = vec2(1.0 / 144.0, 1.0 / 176.0);
+        vec2 texOffset = vec2(1.0 / 176.0, 1.0 / 144.0);
         vec4 color = u_colorMatrix
                              * vec4(
                                  texture2D(u_Texture0, v_TexCoords).r,
@@ -103,10 +103,7 @@ static const char kFragmentShader[] = glsl(
             color = mix(color, gaussianColor, u_NoiseReduction);
         }
 
-
-
         //sharpness
-
         if(u_Sharpness != 0.0){
             vec4 sharpColor = vec4(0.0);
             sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, 0.0)) * (-1.0 * u_Sharpness); // left
@@ -120,6 +117,7 @@ static const char kFragmentShader[] = glsl(
         //brightness
         if(u_Brightness != 0.0)
             color.rgb += u_Brightness;
+
         //contrast
         if(u_Contrast != 0.0)
             color.rgb = ((color.rgb - 0.5) * (1.0 + u_Contrast)) + 0.5;
@@ -128,9 +126,7 @@ static const char kFragmentShader[] = glsl(
         if(u_Gamma != 0.0)
             color.rgb = pow(color.rgb, vec3(1.0 / u_Gamma));
 
-
         gl_FragColor = clamp(color, 0.0, 1.0);
-
     });
 // not used
 static const char kFragmentShaderRGB[] = glsl(
@@ -182,6 +178,9 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
         plane[1].data = plane[0].data + plane[0].stride*height;
         plane[2].data = plane[1].data + plane[1].stride*height/2;
     }
+
+    computeHistogramEqualization(plane[0].data);
+
     update();
 }
 
@@ -479,7 +478,6 @@ void GLVideoWidget::setQImageParameters(QImage::Format fmt, int w, int h, int st
             p.type = fmts[i].type;
             p.internal_fmt = fmts[i].internal_fmt;
             p.bpp = fmts[i].bpp;
-
             p.tex_size.setWidth(p.stride/p.bpp);
             p.upload_size.setWidth(p.stride/p.bpp);
             p.tex_size.setHeight(h);
@@ -499,46 +497,41 @@ void GLVideoWidget::paintGL()
         qDebug() << "No frame data to render!";
         return;
     }
-
     //qDebug() << "Rendering frame with width:" << width << "height:" << height;
-
 
     //histogram equalization
     if (currentHEValue != 0.0)
-    computeHistogramEqualization(plane[0].data);
+        computeHistogramEqualization(plane[0].data);
+
 
     if (update_res || !tex[0]) {
         initializeShader();
         initTextures();
         update_res = false;
-
     }
     bind();
     m_program->bind();
     m_program->setUniformValue(u_brightness, currentBrightnessValue);
     m_program->setUniformValue(u_contrast, currentContrastValue);
     m_program->setUniformValue(u_sharpness, currentSharpnessValue);
-    m_program->setUniformValue(u_noiseReduction,currentNRValue);
+    m_program->setUniformValue(u_noiseReduction, currentNRValue);
     m_program->setUniformValue(u_gamma, currentGammaValue);
     for (int i = 0; i < plane.size(); ++i) {
         m_program->setUniformValue(u_Texture[i], (GLint)i);
     }
     m_program->setUniformValue(u_colorMatrix, yuv2rgb_bt601);
     m_program->setUniformValue(u_MVP_matrix, m_mat);
-    // uniform end. attribute begin
-    // kVertices ...
-    // normalize?
+
     m_program->setAttributeArray(0, GL_FLOAT, kVertices, 2);
     m_program->setAttributeArray(1, GL_FLOAT, kTexCoords, 2);
     char const *const *attr = attributes();
     for (int i = 0; attr[i][0]; ++i) {
-        m_program->enableAttributeArray(i); //TODO: in setActiveShader
+        m_program->enableAttributeArray(i);
     }
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     for (int i = 0; attr[i][0]; ++i) {
-        m_program->disableAttributeArray(i); //TODO: in setActiveShader
+        m_program->disableAttributeArray(i);
     }
-    //update();
 }
 
 // initialize openGL
@@ -627,37 +620,30 @@ void GLVideoWidget::initializeShader()
 void GLVideoWidget::computeHistogramEqualization(char* data){
     const int L = 256; //gray scale
     int histogram[L] = {0};
-    int totalPixels = 176 * 144;
+    int totalPixels = width * height;
 
     //calculate the histogram
     for (int i = 0; i < totalPixels; ++i) {
         uchar pixelValue = static_cast<uchar>(data[i]);
         histogram[pixelValue]++;
     }
-
     //calculate CDF
     int cdf[L] = {0};
     cdf[0] = histogram[0];
     for (int i = 1; i < L; ++i) {
         cdf[i] = cdf[i - 1] + histogram[i];
     }
-
     //generate the equalizationMap
     uchar equalizationMap[L];
     int cdfMin = cdf[0];
     for (int i = 0; i < L; ++i) {
         equalizationMap[i] = static_cast<uchar>(((cdf[i] - cdfMin) * (L - 1)) / (totalPixels - cdfMin));
     }
-
     //update the Y_component data
     for (int i = 0; i < totalPixels; ++i) {
         uchar originalPixelValue = static_cast<uchar>(data[i]);
         uchar equalizedPixelValue = equalizationMap[originalPixelValue];
-        if (currentHEValue < 100) {
-            data[i] = static_cast<uchar>(equalizedPixelValue * currentHEValue + originalPixelValue * (1.0f - currentHEValue));
-        } else {
-            data[i] = equalizedPixelValue;
-        }
+        data[i] = static_cast<uchar>(equalizedPixelValue * currentHEValue + originalPixelValue * (1.0f - currentHEValue));
     }
 
 }

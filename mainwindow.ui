@@ -596,14 +596,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <x>10</x>
          <y>10</y>
          <width>181</width>
-         <height>241</height>
+         <height>261</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>2</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="page">
         <property name="geometry">
@@ -611,7 +611,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>31</height>
+          <height>81</height>
          </rect>
         </property>
         <attribute name="label">
@@ -653,7 +653,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>31</height>
+          <height>81</height>
          </rect>
         </property>
         <attribute name="label">
@@ -695,7 +695,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>31</height>
+          <height>81</height>
          </rect>
         </property>
         <attribute name="label">
@@ -737,7 +737,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>31</height>
+          <height>51</height>
          </rect>
         </property>
         <attribute name="label">
@@ -747,7 +747,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>10</y>
+           <y>20</y>
            <width>151</width>
            <height>22</height>
           </rect>
@@ -760,7 +760,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <property name="geometry">
           <rect>
            <x>150</x>
-           <y>10</y>
+           <y>20</y>
            <width>31</width>
            <height>21</height>
           </rect>
@@ -779,7 +779,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>31</height>
+          <height>51</height>
          </rect>
         </property>
         <attribute name="label">
@@ -821,7 +821,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>31</height>
+          <height>51</height>
          </rect>
         </property>
         <attribute name="label">
@@ -858,6 +858,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </widget>
        </widget>
        <widget class="QWidget" name="page_8">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>181</width>
+          <height>51</height>
+         </rect>
+        </property>
         <attribute name="label">
          <string>Reset to Default</string>
         </attribute>
