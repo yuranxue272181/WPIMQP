@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -82,7 +81,6 @@ public:
     QSlider *SharpnessSlider;
     QLabel *sharpness;
     QWidget *page_3;
-    QCheckBox *HEChecker;
     QSlider *HESlider;
     QLabel *HE;
     QWidget *page_4;
@@ -391,16 +389,13 @@ public:
         page_3 = new QWidget();
         page_3->setObjectName("page_3");
         page_3->setGeometry(QRect(0, 0, 181, 61));
-        HEChecker = new QCheckBox(page_3);
-        HEChecker->setObjectName("HEChecker");
-        HEChecker->setGeometry(QRect(50, 0, 76, 20));
         HESlider = new QSlider(page_3);
         HESlider->setObjectName("HESlider");
-        HESlider->setGeometry(QRect(0, 20, 151, 22));
+        HESlider->setGeometry(QRect(0, 10, 151, 22));
         HESlider->setOrientation(Qt::Orientation::Horizontal);
         HE = new QLabel(page_3);
         HE->setObjectName("HE");
-        HE->setGeometry(QRect(150, 20, 31, 21));
+        HE->setGeometry(QRect(150, 10, 31, 21));
         HE->setAlignment(Qt::AlignmentFlag::AlignCenter);
         toolBox->addItem(page_3, QString::fromUtf8("Histogram Equalization"));
         page_4 = new QWidget();
@@ -488,7 +483,7 @@ public:
 
         tabWidget_2->setCurrentIndex(0);
         tabWidget->setCurrentIndex(0);
-        toolBox->setCurrentIndex(4);
+        toolBox->setCurrentIndex(3);
         toolBox_2->setCurrentIndex(0);
 
 
@@ -587,7 +582,6 @@ public:
         toolBox->setItemText(toolBox->indexOf(page_2), QCoreApplication::translate("MainWindow", "Contrast", nullptr));
         sharpness->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(Sharpeness), QCoreApplication::translate("MainWindow", "Sharpeness", nullptr));
-        HEChecker->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
         HE->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_3), QCoreApplication::translate("MainWindow", "Histogram Equalization", nullptr));
         NR->setText(QCoreApplication::translate("MainWindow", "0", nullptr));

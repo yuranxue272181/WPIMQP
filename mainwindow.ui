@@ -603,7 +603,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>4</number>
+        <number>3</number>
        </property>
        <widget class="QWidget" name="page">
         <property name="geometry">
@@ -743,24 +743,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
         <attribute name="label">
          <string>Histogram Equalization</string>
         </attribute>
-        <widget class="QCheckBox" name="HEChecker">
-         <property name="geometry">
-          <rect>
-           <x>50</x>
-           <y>0</y>
-           <width>76</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>OFF</string>
-         </property>
-        </widget>
         <widget class="QSlider" name="HESlider">
          <property name="geometry">
           <rect>
            <x>0</x>
-           <y>20</y>
+           <y>10</y>
            <width>151</width>
            <height>22</height>
           </rect>
@@ -773,7 +760,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <property name="geometry">
           <rect>
            <x>150</x>
-           <y>20</y>
+           <y>10</y>
            <width>31</width>
            <height>21</height>
           </rect>

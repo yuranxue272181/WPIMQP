@@ -62,7 +62,7 @@ private:
     float currentContrastValue;
     float currentSharpnessValue;
     float currentHEValue;
-    float currentNoiseReduction;
+    float currentNRValue;
 
     bool histogramEqualizationEnabled;
     bool isPaused = false;
