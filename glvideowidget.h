@@ -57,10 +57,12 @@ private:
     GLint u_brightness;
     GLint u_contrast;
     GLint u_sharpness;
+    GLint u_noiseReduction;
     float currentBrightnessValue;
     float currentContrastValue;
     float currentSharpnessValue;
     float currentHEValue;
+    float currentNoiseReduction;
 
     bool histogramEqualizationEnabled;
     bool isPaused = false;
@@ -111,6 +113,7 @@ public slots:
     void setSharpness(float value);
     void setHistogramEqualizationEnabled(bool isEnable);
     void setHEValue(float value);
+    void setNoiseReduction(float value);
 
 private slots:
     void onTimerTimeout();

@@ -86,6 +86,8 @@ public:
     QSlider *HESlider;
     QLabel *HE;
     QWidget *page_4;
+    QSlider *NRSlider;
+    QLabel *NR;
     QWidget *page_7;
     QWidget *tab_3;
     QToolBox *toolBox_2;
@@ -404,6 +406,14 @@ public:
         page_4 = new QWidget();
         page_4->setObjectName("page_4");
         page_4->setGeometry(QRect(0, 0, 181, 61));
+        NRSlider = new QSlider(page_4);
+        NRSlider->setObjectName("NRSlider");
+        NRSlider->setGeometry(QRect(0, 10, 151, 22));
+        NRSlider->setOrientation(Qt::Orientation::Horizontal);
+        NR = new QLabel(page_4);
+        NR->setObjectName("NR");
+        NR->setGeometry(QRect(150, 10, 31, 21));
+        NR->setAlignment(Qt::AlignmentFlag::AlignCenter);
         toolBox->addItem(page_4, QString::fromUtf8("Noise Reduction"));
         page_7 = new QWidget();
         page_7->setObjectName("page_7");
@@ -478,7 +488,7 @@ public:
 
         tabWidget_2->setCurrentIndex(0);
         tabWidget->setCurrentIndex(0);
-        toolBox->setCurrentIndex(3);
+        toolBox->setCurrentIndex(4);
         toolBox_2->setCurrentIndex(0);
 
 
@@ -559,11 +569,11 @@ public:
         QTableWidgetItem *___qtablewidgetitem14 = FeatureTable->item(3, 0);
         ___qtablewidgetitem14->setText(QCoreApplication::translate("MainWindow", "HIstogram Equalization", nullptr));
         QTableWidgetItem *___qtablewidgetitem15 = FeatureTable->item(3, 1);
-        ___qtablewidgetitem15->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
+        ___qtablewidgetitem15->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         QTableWidgetItem *___qtablewidgetitem16 = FeatureTable->item(4, 0);
         ___qtablewidgetitem16->setText(QCoreApplication::translate("MainWindow", "Noise Reduction", nullptr));
         QTableWidgetItem *___qtablewidgetitem17 = FeatureTable->item(4, 1);
-        ___qtablewidgetitem17->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
+        ___qtablewidgetitem17->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         QTableWidgetItem *___qtablewidgetitem18 = FeatureTable->item(5, 0);
         ___qtablewidgetitem18->setText(QCoreApplication::translate("MainWindow", "Gamma Correction", nullptr));
         QTableWidgetItem *___qtablewidgetitem19 = FeatureTable->item(5, 1);
@@ -580,6 +590,7 @@ public:
         HEChecker->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
         HE->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_3), QCoreApplication::translate("MainWindow", "Histogram Equalization", nullptr));
+        NR->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_4), QCoreApplication::translate("MainWindow", "Noise Reduction", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_7), QCoreApplication::translate("MainWindow", "Gamma Correction", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "   Image Enhancement", nullptr));

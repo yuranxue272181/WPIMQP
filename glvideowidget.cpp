@@ -67,23 +67,68 @@ static const char kFragmentShader[] = glsl(
     uniform float u_Brightness;
     uniform float u_Contrast;
     uniform float u_Sharpness;
+    uniform float u_NoiseReduction;
     void main()
     {
         vec2 texOffset = vec2(1.0 / 144.0, 1.0 / 176.0);
-        vec4 originalColor = u_colorMatrix
+        vec4 color = u_colorMatrix
                              * vec4(
                                  texture2D(u_Texture0, v_TexCoords).r,
                                  texture2D(u_Texture1, v_TexCoords).r,
                                  texture2D(u_Texture2, v_TexCoords).r,
                                  1);
+
+        //Noise Reduction: Simple mean filter
+        // vec4 meanColor = vec4(0.0);
+        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, -texOffset.y)); // top-left
+        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, -texOffset.y));          // top-center
+        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, -texOffset.y));  // top-right
+        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, 0.0));          // center-left
+        // meanColor += texture2D(u_Texture0, v_TexCoords);                                    // center
+        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, 0.0));           // center-right
+        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, texOffset.y));  // bottom-left
+        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, texOffset.y));           // bottom-center
+        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, texOffset.y));   // bottom-right
+        // meanColor /= 9.0;
+        // color = mix(color, meanColor, u_NoiseReduction);
+
+        // Noise Reduction: Gaussian filter
+        if(u_NoiseReduction != 0.0){
+            vec4 gaussianColor = vec4(0.0);
+            float kernel[9];
+            kernel[0] = 1.0; kernel[1] = 2.0; kernel[2] = 1.0;
+            kernel[3] = 2.0; kernel[4] = 4.0; kernel[5] = 2.0;
+            kernel[6] = 1.0; kernel[7] = 2.0; kernel[8] = 1.0;
+
+            float kernelSum = 16.0;
+
+            gaussianColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, -texOffset.y)) * kernel[0]; // top-left
+            gaussianColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, -texOffset.y)) * kernel[1];          // top-center
+            gaussianColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, -texOffset.y)) * kernel[2];  // top-right
+            gaussianColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, 0.0)) * kernel[3];          // center-left
+            gaussianColor += texture2D(u_Texture0, v_TexCoords) * kernel[4];                                    // center
+            gaussianColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, 0.0)) * kernel[5];           // center-right
+            gaussianColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, texOffset.y)) * kernel[6];  // bottom-left
+            gaussianColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, texOffset.y)) * kernel[7];           // bottom-center
+            gaussianColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, texOffset.y)) * kernel[8];   // bottom-right
+
+            gaussianColor /= kernelSum;
+            color = mix(color, gaussianColor, u_NoiseReduction);
+        }
+
+
+
         //sharpness
-        vec4 sharpColor = vec4(0.0);
-        sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, 0.0)) * (-1.0 * u_Sharpness); // left
-        sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, 0.0)) * (-1.0 * u_Sharpness);  // right
-        sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, -texOffset.y)) * (-1.0 * u_Sharpness); // above
-        sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, texOffset.y)) * (-1.0 * u_Sharpness);  // below
-        sharpColor += texture2D(u_Texture0, v_TexCoords) * (1.0 + 4.0 * u_Sharpness);                      // center
-        vec4 color = mix(originalColor, sharpColor, 0.5); // mix color
+
+        if(u_Sharpness != 0.0){
+            vec4 sharpColor = vec4(0.0);
+            sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, 0.0)) * (-1.0 * u_Sharpness); // left
+            sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, 0.0)) * (-1.0 * u_Sharpness);  // right
+            sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, -texOffset.y)) * (-1.0 * u_Sharpness); // above
+            sharpColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, texOffset.y)) * (-1.0 * u_Sharpness);  // below
+            sharpColor += texture2D(u_Texture0, v_TexCoords) * (1.0 + 4.0 * u_Sharpness);                      // center
+            color = mix(color, sharpColor, 0.5); // mix color
+        }
 
         //brightness
         color.rgb += u_Brightness;
@@ -115,6 +160,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     , currentContrastValue(0.0f)
     , currentSharpnessValue(0.0f)
     , currentHEValue(1.0f)
+    , currentNoiseReduction(0.0f)
     ,frameCount(0)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -315,6 +361,12 @@ void GLVideoWidget::setSharpness(float value){
     update();
 }
 
+//set noise reduction
+void GLVideoWidget::setNoiseReduction(float value){
+    currentSharpnessValue = value;
+    update();
+}
+
 //set histogram equalization strength
 void GLVideoWidget::setHEValue(float value){
     currentHEValue = value;
@@ -470,6 +522,7 @@ void GLVideoWidget::paintGL()
     m_program->setUniformValue(u_brightness, currentBrightnessValue);
     m_program->setUniformValue(u_contrast, currentContrastValue);
     m_program->setUniformValue(u_sharpness, currentSharpnessValue);
+    m_program->setUniformValue(u_noiseReduction,currentNoiseReduction);
     for (int i = 0; i < plane.size(); ++i) {
         m_program->setUniformValue(u_Texture[i], (GLint)i);
     }
@@ -550,6 +603,10 @@ void GLVideoWidget::initializeShader()
     u_sharpness = m_program->uniformLocation("u_Sharpness");
     if (u_sharpness == -1) {
         qDebug() << "Uniform 'u_Sharpness' not found in shader.";
+    }
+    u_noiseReduction= m_program->uniformLocation("u_NoiseReduction");
+    if (u_sharpness == -1) {
+        qDebug() << "Uniform 'u_NoiseReduction' not found in shader.";
     }
     u_MVP_matrix = m_program->uniformLocation("u_MVP_matrix");
     // fragment shader

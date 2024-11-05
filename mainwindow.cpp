@@ -29,12 +29,14 @@ MainWindow::MainWindow(QWidget *parent)
     contrastSlider = ui-> ContrastSlider;
     sharpnessSlider = ui-> SharpnessSlider;
     HESlider = ui->HESlider;
+    NRSlider = ui->NRSlider;
 
     //label
     brightnessValue = ui->brightness;
     contrastValue = ui-> contrast;
     sharpnessValue = ui-> sharpness;
     HEValue = ui->HE;
+    NRValue = ui->NR;
 
     //table
     featuresTable = ui->FeatureTable;
@@ -52,6 +54,8 @@ MainWindow::MainWindow(QWidget *parent)
     HESlider -> setRange(0,100);
     HESlider -> setValue(100);
     HESlider -> setEnabled(false);
+    NRSlider ->setRange(0, 100);
+    NRSlider ->setValue(0);
 
     //initialize label
     HEValue->setText("100");
@@ -94,6 +98,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(sharpnessSlider, &QSlider::sliderMoved, this, &MainWindow::setSharpness);
     connect(HESlider, &QSlider::sliderMoved, this, &MainWindow::setHEValue);
     connect(HECheck, &QCheckBox::stateChanged, this, &MainWindow::setHE);
+    connect(NRSlider, &QSlider::sliderMoved, this, &MainWindow::setNRValue);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -219,6 +224,7 @@ void MainWindow::setHE(){
     gl->setHistogramEqualizationEnabled(HECheck->isChecked());
 }
 
+//set histogram equalization
 void MainWindow::setHEValue(int value){
     HEValue -> setText(QString::number(value));
     QTableWidgetItem *item = featuresTable->item(3,1);
@@ -226,3 +232,10 @@ void MainWindow::setHEValue(int value){
     gl -> setHEValue(value/ 100.0f);
 }
 
+//set noise reduction
+void MainWindow::setNRValue(int value){
+    NRValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(4,1);
+    item->setText(QString::number(value));
+    gl -> setNoiseReduction(value/ 100.0f);
+}
