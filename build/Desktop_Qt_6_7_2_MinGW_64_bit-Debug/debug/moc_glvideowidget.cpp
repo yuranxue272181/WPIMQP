@@ -44,10 +44,9 @@ constexpr auto qt_meta_stringdata_CLASSGLVideoWidgetENDCLASS = QtMocHelpers::str
     "value",
     "setContrast",
     "setSharpness",
-    "setHistogramEqualizationEnabled",
-    "isEnable",
     "setHEValue",
     "setNoiseReduction",
+    "setGamma",
     "onTimerTimeout",
     "saveRecordingData"
 );
@@ -77,10 +76,10 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGLVideoWidgetENDCLASS[] = {
        5,    1,   72,    2, 0x0a,    4 /* Public */,
        6,    1,   75,    2, 0x0a,    6 /* Public */,
        7,    1,   78,    2, 0x0a,    8 /* Public */,
-       9,    1,   81,    2, 0x0a,   10 /* Public */,
-      10,    1,   84,    2, 0x0a,   12 /* Public */,
-      11,    0,   87,    2, 0x08,   14 /* Private */,
-      12,    0,   88,    2, 0x08,   15 /* Private */,
+       8,    1,   81,    2, 0x0a,   10 /* Public */,
+       9,    1,   84,    2, 0x0a,   12 /* Public */,
+      10,    0,   87,    2, 0x08,   14 /* Private */,
+      11,    0,   88,    2, 0x08,   15 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -89,7 +88,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGLVideoWidgetENDCLASS[] = {
     QMetaType::Void, QMetaType::Float,    4,
     QMetaType::Void, QMetaType::Float,    4,
     QMetaType::Void, QMetaType::Float,    4,
-    QMetaType::Void, QMetaType::Bool,    8,
+    QMetaType::Void, QMetaType::Float,    4,
     QMetaType::Void, QMetaType::Float,    4,
     QMetaType::Void, QMetaType::Float,    4,
     QMetaType::Void,
@@ -118,13 +117,13 @@ Q_CONSTINIT const QMetaObject GLVideoWidget::staticMetaObject = { {
         // method 'setSharpness'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<float, std::false_type>,
-        // method 'setHistogramEqualizationEnabled'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         // method 'setHEValue'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<float, std::false_type>,
         // method 'setNoiseReduction'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<float, std::false_type>,
+        // method 'setGamma'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<float, std::false_type>,
         // method 'onTimerTimeout'
@@ -145,9 +144,9 @@ void GLVideoWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 1: _t->setBrightness((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
         case 2: _t->setContrast((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
         case 3: _t->setSharpness((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
-        case 4: _t->setHistogramEqualizationEnabled((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
-        case 5: _t->setHEValue((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
-        case 6: _t->setNoiseReduction((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
+        case 4: _t->setHEValue((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
+        case 5: _t->setNoiseReduction((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
+        case 6: _t->setGamma((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
         case 7: _t->onTimerTimeout(); break;
         case 8: _t->saveRecordingData(); break;
         default: ;

@@ -41,6 +41,7 @@ private slots:
     void setSharpness(int value);
     void setHEValue(int value);
     void setNRValue(int value);
+    void setGammaValue(int value);
 
 private:
     Ui::MainWindow *ui;
@@ -64,12 +65,14 @@ private:
     QSlider *sharpnessSlider;
     QSlider *HESlider;
     QSlider *NRSlider;
+    QSlider *GammaSlider;
 
     QLabel *brightnessValue;
     QLabel *contrastValue;
     QLabel *sharpnessValue;
     QLabel *HEValue;
     QLabel *NRValue;
+    QLabel *GammaValue;
 
     QTableWidget *featuresTable;
 

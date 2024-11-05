@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     sharpnessSlider = ui-> SharpnessSlider;
     HESlider = ui->HESlider;
     NRSlider = ui->NRSlider;
+    GammaSlider = ui -> GammaSlider;
 
     //label
     brightnessValue = ui->brightness;
@@ -37,6 +38,8 @@ MainWindow::MainWindow(QWidget *parent)
     sharpnessValue = ui-> sharpness;
     HEValue = ui->HE;
     NRValue = ui->NR;
+    GammaValue = ui ->Gamma;
+    GammaValue->setText("1");
 
     //table
     featuresTable = ui->FeatureTable;
@@ -54,9 +57,8 @@ MainWindow::MainWindow(QWidget *parent)
     HESlider -> setEnabled(false);
     NRSlider ->setRange(0, 100);
     NRSlider ->setValue(0);
-
-    //initialize label
-    HEValue->setText("0");
+    GammaSlider -> setRange(1,30);
+    GammaSlider -> setValue(10);
 
     // set icons
     startBtn->setIcon(QIcon(":/icons/restart.png"));
@@ -93,6 +95,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(sharpnessSlider, &QSlider::sliderMoved, this, &MainWindow::setSharpness);
     connect(HESlider, &QSlider::sliderMoved, this, &MainWindow::setHEValue);
     connect(NRSlider, &QSlider::sliderMoved, this, &MainWindow::setNRValue);
+    connect(GammaSlider, &QSlider::sliderMoved, this, &MainWindow::setGammaValue);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -210,4 +213,12 @@ void MainWindow::setNRValue(int value){
     QTableWidgetItem *item = featuresTable->item(4,1);
     item->setText(QString::number(value));
     gl -> setNoiseReduction(value/ 100.0f);
+}
+
+//set Gamma
+void MainWindow::setGammaValue(int value){
+    GammaValue -> setText(QString::number(value/10.0f));
+    QTableWidgetItem *item = featuresTable->item(5,1);
+    item->setText(QString::number(value/10.0f));
+    gl -> setGamma(value/ 10.0f);
 }

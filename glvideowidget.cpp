@@ -68,6 +68,7 @@ static const char kFragmentShader[] = glsl(
     uniform float u_Contrast;
     uniform float u_Sharpness;
     uniform float u_NoiseReduction;
+    uniform float u_Gamma;
     void main()
     {
         vec2 texOffset = vec2(1.0 / 144.0, 1.0 / 176.0);
@@ -77,20 +78,6 @@ static const char kFragmentShader[] = glsl(
                                  texture2D(u_Texture1, v_TexCoords).r,
                                  texture2D(u_Texture2, v_TexCoords).r,
                                  1);
-
-        //Noise Reduction: Simple mean filter
-        // vec4 meanColor = vec4(0.0);
-        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, -texOffset.y)); // top-left
-        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, -texOffset.y));          // top-center
-        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, -texOffset.y));  // top-right
-        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, 0.0));          // center-left
-        // meanColor += texture2D(u_Texture0, v_TexCoords);                                    // center
-        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, 0.0));           // center-right
-        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(-texOffset.x, texOffset.y));  // bottom-left
-        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(0.0, texOffset.y));           // bottom-center
-        // meanColor += texture2D(u_Texture0, v_TexCoords + vec2(texOffset.x, texOffset.y));   // bottom-right
-        // meanColor /= 9.0;
-        // color = mix(color, meanColor, u_NoiseReduction);
 
         // Noise Reduction: Gaussian filter
         if(u_NoiseReduction != 0.0){
@@ -131,9 +118,17 @@ static const char kFragmentShader[] = glsl(
         }
 
         //brightness
-        color.rgb += u_Brightness;
+        if(u_Brightness != 0.0)
+            color.rgb += u_Brightness;
         //contrast
-        color.rgb = ((color.rgb - 0.5) * (1.0 + u_Contrast)) + 0.5;
+        if(u_Contrast != 0.0)
+            color.rgb = ((color.rgb - 0.5) * (1.0 + u_Contrast)) + 0.5;
+
+        // Gamma Correction 0.1-3.0
+        if(u_Gamma != 0.0)
+            color.rgb = pow(color.rgb, vec3(1.0 / u_Gamma));
+
+
         gl_FragColor = clamp(color, 0.0, 1.0);
 
     });
@@ -161,6 +156,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     , currentSharpnessValue(0.0f)
     , currentHEValue(0.0f)
     , currentNRValue(0.0f)
+    , currentGammaValue(1.0f)
     ,frameCount(0)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -373,9 +369,10 @@ void GLVideoWidget::setHEValue(float value){
     update();
 }
 
-//set HistogramEqualization Enabled
-void GLVideoWidget::setHistogramEqualizationEnabled(bool isEnable){
-    histogramEqualizationEnabled = isEnable;
+//set Gamma Correction
+void GLVideoWidget::setGamma(float value){
+    currentGammaValue = value;
+    update();
 }
 
 // Binds an OpenGL resource to the current OpenGL
@@ -522,6 +519,7 @@ void GLVideoWidget::paintGL()
     m_program->setUniformValue(u_contrast, currentContrastValue);
     m_program->setUniformValue(u_sharpness, currentSharpnessValue);
     m_program->setUniformValue(u_noiseReduction,currentNRValue);
+    m_program->setUniformValue(u_gamma, currentGammaValue);
     for (int i = 0; i < plane.size(); ++i) {
         m_program->setUniformValue(u_Texture[i], (GLint)i);
     }
@@ -604,9 +602,14 @@ void GLVideoWidget::initializeShader()
         qDebug() << "Uniform 'u_Sharpness' not found in shader.";
     }
     u_noiseReduction= m_program->uniformLocation("u_NoiseReduction");
-    if (u_sharpness == -1) {
+    if (u_noiseReduction == -1) {
         qDebug() << "Uniform 'u_NoiseReduction' not found in shader.";
     }
+    u_gamma = m_program->uniformLocation("u_Gamma");
+    if (u_gamma == -1) {
+        qDebug() << "Uniform 'u_Gamma' not found in shader.";
+    }
+
     u_MVP_matrix = m_program->uniformLocation("u_MVP_matrix");
     // fragment shader
     u_colorMatrix = m_program->uniformLocation("u_colorMatrix");

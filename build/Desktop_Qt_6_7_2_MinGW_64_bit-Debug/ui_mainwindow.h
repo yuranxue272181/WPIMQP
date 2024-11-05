@@ -87,6 +87,8 @@ public:
     QSlider *NRSlider;
     QLabel *NR;
     QWidget *page_7;
+    QSlider *GammaSlider;
+    QLabel *Gamma;
     QWidget *tab_3;
     QToolBox *toolBox_2;
     QWidget *page_5;
@@ -413,6 +415,14 @@ public:
         page_7 = new QWidget();
         page_7->setObjectName("page_7");
         page_7->setGeometry(QRect(0, 0, 181, 61));
+        GammaSlider = new QSlider(page_7);
+        GammaSlider->setObjectName("GammaSlider");
+        GammaSlider->setGeometry(QRect(0, 20, 151, 22));
+        GammaSlider->setOrientation(Qt::Orientation::Horizontal);
+        Gamma = new QLabel(page_7);
+        Gamma->setObjectName("Gamma");
+        Gamma->setGeometry(QRect(150, 20, 31, 21));
+        Gamma->setAlignment(Qt::AlignmentFlag::AlignCenter);
         toolBox->addItem(page_7, QString::fromUtf8("Gamma Correction"));
         tabWidget->addTab(tab, QString());
         tab_3 = new QWidget();
@@ -483,7 +493,7 @@ public:
 
         tabWidget_2->setCurrentIndex(0);
         tabWidget->setCurrentIndex(0);
-        toolBox->setCurrentIndex(3);
+        toolBox->setCurrentIndex(5);
         toolBox_2->setCurrentIndex(0);
 
 
@@ -572,7 +582,7 @@ public:
         QTableWidgetItem *___qtablewidgetitem18 = FeatureTable->item(5, 0);
         ___qtablewidgetitem18->setText(QCoreApplication::translate("MainWindow", "Gamma Correction", nullptr));
         QTableWidgetItem *___qtablewidgetitem19 = FeatureTable->item(5, 1);
-        ___qtablewidgetitem19->setText(QCoreApplication::translate("MainWindow", "OFF", nullptr));
+        ___qtablewidgetitem19->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
         FeatureTable->setSortingEnabled(__sortingEnabled1);
 
         rightDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
@@ -586,6 +596,7 @@ public:
         toolBox->setItemText(toolBox->indexOf(page_3), QCoreApplication::translate("MainWindow", "Histogram Equalization", nullptr));
         NR->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_4), QCoreApplication::translate("MainWindow", "Noise Reduction", nullptr));
+        Gamma->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_7), QCoreApplication::translate("MainWindow", "Gamma Correction", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "   Image Enhancement", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "50", nullptr));
