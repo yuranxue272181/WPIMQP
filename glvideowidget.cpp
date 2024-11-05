@@ -193,7 +193,7 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     frameTimer = new QTimer(this);
     qDebug() << "Timer setted.";
     connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextFrame);
-    frameTimer->start(1000/48); // 45FPS
+    frameTimer->start(1000/1); // 30FPS
 }
 
 //Get the data for each frame and render it

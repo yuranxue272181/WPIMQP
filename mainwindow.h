@@ -82,7 +82,7 @@ private:
 
 
 signals:
-    // void glInitialized();
+         // void glInitialized();
 
 
 

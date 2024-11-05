@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "glvideowidget.h"
+#include "FPGAInterface.h"
 
 //ui
 #include <QVBoxLayout>
@@ -135,7 +136,20 @@ void MainWindow::renderVideo(){
     int height = 144;
     QFile f(":/akiyo_qcif.yuv");
     f.open(QIODevice::ReadOnly);
-    QByteArray data(f.readAll());
+    //QByteArray data(f.readAll());
+    FPGAInterface fpgaInterface;
+    std::vector<std::string> inputFiles = {
+        ":/checkerboard_176x144-0.bin",
+        ":/checkerboard_176x144-1.bin",
+        ":/checkerboard_176x144-2.bin",
+        ":/checkerboard_176x144-3.bin",
+        ":/checkerboard_176x144-4.bin",
+        ":/checkerboard_176x144-5.bin",
+        ":/checkerboard_176x144-6.bin",
+        ":/checkerboard_176x144-7.bin",
+        ":/checkerboard_176x144-8.bin"
+    };
+    QByteArray data = fpgaInterface.convertMultipleGrayscaleBinsToYUV(inputFiles, width, height);
     //trans the video to only white, black ,and grey
     int frameSize = (width * height) + (width / 2 * height / 2) * 2;
     int frameCount = data.size() / frameSize;
