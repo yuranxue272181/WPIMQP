@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     recordBtn = ui->recordButton;
     zoomInBtn = ui->zoomInButton;
     zoomOutBtn = ui->zoomOutButton;
+    resetBtn = ui-> resetButton;
     // dock widget
     leftDk = ui-> leftDock;
     rightDk = ui -> rightDock;
@@ -90,6 +91,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(zoomOutBtn,&QToolButton::clicked, this, &MainWindow::zoomOut);
     connect(shootBtn, &QToolButton::clicked, gl, &GLVideoWidget::saveYUVImageDataToFile);
     connect(recordBtn,&QToolButton::clicked, this, &MainWindow::recordingStatu);
+    connect(resetBtn, &QPushButton::clicked,this,&MainWindow::reset);
     connect(brightnessSlider, &QSlider::sliderMoved, this, &MainWindow::setBrightness);
     connect(contrastSlider, &QSlider::sliderMoved, this, &MainWindow::setContrast);
     connect(sharpnessSlider, &QSlider::sliderMoved, this, &MainWindow::setSharpness);
@@ -221,4 +223,39 @@ void MainWindow::setGammaValue(int value){
     QTableWidgetItem *item = featuresTable->item(5,1);
     item->setText(QString::number(value/10.0f));
     gl -> setGamma(value/ 10.0f);
+}
+
+//reset to all image enhancement features to default
+void MainWindow::reset(){
+    // Reset sliders to their default values
+    brightnessSlider->setValue(0);  // Brightness default
+    contrastSlider->setValue(0);    // Contrast default
+    sharpnessSlider->setValue(0);   // Sharpness default
+    HESlider->setValue(0);          // Histogram Equalization default
+    NRSlider->setValue(0);          // Noise Reduction default
+    GammaSlider->setValue(10);      // Gamma default
+
+    // Update the labels to reflect the new values
+    brightnessValue->setText("0");
+    contrastValue->setText("0");
+    sharpnessValue->setText("0");
+    HEValue->setText("0");
+    NRValue->setText("0");
+    GammaValue->setText("1"); // Gamma value is 1.0 when slider is at 10
+
+    // Update the feature table to reflect the new values
+    featuresTable->item(0, 1)->setText("0");
+    featuresTable->item(1, 1)->setText("0");
+    featuresTable->item(2, 1)->setText("0");
+    featuresTable->item(3, 1)->setText("0");
+    featuresTable->item(4, 1)->setText("0");
+    featuresTable->item(5, 1)->setText("1.0"); // Gamma value is 1.0 when slider is at 10
+
+    //update to openGL
+    gl->setBrightness(0);
+    gl->setSharpness(0);
+    gl->setContrast(0);
+    gl->setHEValue(0);
+    gl->setNoiseReduction(0);
+    gl->setGamma(1);
 }

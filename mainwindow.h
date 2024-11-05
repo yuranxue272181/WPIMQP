@@ -42,6 +42,7 @@ private slots:
     void setHEValue(int value);
     void setNRValue(int value);
     void setGammaValue(int value);
+    void reset();
 
 private:
     Ui::MainWindow *ui;
@@ -54,6 +55,7 @@ private:
     QToolButton *recordBtn;
     QToolButton *zoomInBtn;
     QToolButton *zoomOutBtn;
+    QPushButton *resetBtn;
 
     QWidget *mainWidget;
     QWidget *videoWdt;
