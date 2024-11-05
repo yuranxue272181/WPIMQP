@@ -45,6 +45,7 @@ private slots:
     void reset();
 
 private:
+    QByteArray testData;
     Ui::MainWindow *ui;
     GLVideoWidget *gl;
 

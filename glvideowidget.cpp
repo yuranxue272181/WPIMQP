@@ -193,12 +193,12 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     frameTimer = new QTimer(this);
     qDebug() << "Timer setted.";
     connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextFrame);
-    frameTimer->start(1000/30); // 30FPS
+    frameTimer->start(1000/48); // 45FPS
 }
 
 //Get the data for each frame and render it
 void GLVideoWidget::processNextFrame() {
-    const int frameSize = width * height * 3;
+    int frameSize = (width * height) + (width / 2 * height / 2) * 2;
     if (currentFrameIndex * frameSize < videoData.size()) {
         frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
         setFrameData(frameData);
@@ -273,7 +273,6 @@ void GLVideoWidget::saveYUVImageDataToFile() {
         file.write(frameData);
         file.close();
         qDebug() << "Frame" << currentFrameIndex << "saved to" << filePath;
-        qDebug() << "Saved frame size:" << frameData.size()/width/height/3;
     } else {
         qDebug() << "Failed to save frame to" << filePath;
     }
