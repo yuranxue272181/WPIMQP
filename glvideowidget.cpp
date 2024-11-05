@@ -313,7 +313,7 @@ bool GLVideoWidget::pauseVideo(){
     if (frameTimer) {
         if (isPaused) {
             //resume
-            frameTimer->start(1000 / 30);
+            frameTimer->start(1000 / 48);
             isPaused = false;
             qDebug() << "Video resumed.";
         } else {
