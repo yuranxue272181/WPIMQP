@@ -60,6 +60,7 @@ private:
     float currentBrightnessValue;
     float currentContrastValue;
     float currentSharpnessValue;
+    float currentHEValue;
 
     bool histogramEqualizationEnabled;
     bool isPaused = false;
@@ -109,6 +110,7 @@ public slots:
     void setContrast(float value);
     void setSharpness(float value);
     void setHistogramEqualizationEnabled(bool isEnable);
+    void setHEValue(float value);
 
 private slots:
     void onTimerTimeout();

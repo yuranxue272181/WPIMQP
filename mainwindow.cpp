@@ -28,10 +28,13 @@ MainWindow::MainWindow(QWidget *parent)
     brightnessSlider = ui->BrightnessSlider;
     contrastSlider = ui-> ContrastSlider;
     sharpnessSlider = ui-> SharpnessSlider;
+    HESlider = ui->HESlider;
+
     //label
     brightnessValue = ui->brightness;
     contrastValue = ui-> contrast;
     sharpnessValue = ui-> sharpness;
+    HEValue = ui->HE;
 
     //table
     featuresTable = ui->FeatureTable;
@@ -46,6 +49,12 @@ MainWindow::MainWindow(QWidget *parent)
     contrastSlider ->setValue(0);
     sharpnessSlider ->setRange(0,100);
     sharpnessSlider ->setValue(0);
+    HESlider -> setRange(0,100);
+    HESlider -> setValue(100);
+    HESlider -> setEnabled(false);
+
+    //initialize label
+    HEValue->setText("100");
 
     //initialize checkBox
     HECheck->setEnabled(false);
@@ -67,8 +76,6 @@ MainWindow::MainWindow(QWidget *parent)
     zoomOutBtn->setIcon(QIcon(":/icons/zoomOut.png"));
     zoomOutBtn->setIconSize(QSize(30,30));
 
-
-
     // openGL
     gl = new GLVideoWidget(this);
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
@@ -85,6 +92,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(brightnessSlider, &QSlider::sliderMoved, this, &MainWindow::setBrightness);
     connect(contrastSlider, &QSlider::sliderMoved, this, &MainWindow::setContrast);
     connect(sharpnessSlider, &QSlider::sliderMoved, this, &MainWindow::setSharpness);
+    connect(HESlider, &QSlider::sliderMoved, this, &MainWindow::setHEValue);
     connect(HECheck, &QCheckBox::stateChanged, this, &MainWindow::setHE);
 
     // connect the video to ui
@@ -116,6 +124,8 @@ void MainWindow::renderVideo(){
     shootBtn->setEnabled(true);
     recordBtn->setEnabled(true);
     HECheck->setEnabled(true);
+    if(HECheck -> isChecked())
+        HESlider -> setEnabled(true);
 
     //open the YUV file
     //176x144
@@ -132,11 +142,14 @@ void MainWindow::pauseVideo(){
         playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
         recordBtn->setEnabled(false);
         HECheck->setEnabled(false);
+        HESlider -> setEnabled(false);
     }
     else{
         playPauseBtn->setIcon(QIcon(":/icons/play.png"));
         recordBtn->setEnabled(true);
         HECheck->setEnabled(true);
+        if(HECheck -> isChecked())
+            HESlider -> setEnabled(true);
     }
 }
 
@@ -149,6 +162,7 @@ void MainWindow::onVideoFinished(){
     gl->stopRecording();
     recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
     HECheck->setEnabled(false);
+    HESlider -> setEnabled(false);
 }
 
 // Zoom in the video
@@ -189,17 +203,24 @@ void MainWindow::setSharpness(int sharpness){
     gl->setSharpness(sharpness / 100.0f);
 }
 
+// HE ON and OFF
 void MainWindow::setHE(){
     if(HECheck->isChecked()){
         HECheck->setText("ON");
-        QTableWidgetItem *item = featuresTable->item(3,1);
-        item->setText("ON");
+        HESlider -> setEnabled(true);
     }else{
         HECheck->setText("OFF");
         QTableWidgetItem *item = featuresTable->item(3,1);
         item->setText("OFF");
+        HESlider -> setEnabled(false);
     }
     gl->setHistogramEqualizationEnabled(HECheck->isChecked());
 }
 
+void MainWindow::setHEValue(int value){
+    HEValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(3,1);
+    item->setText(QString::number(value));
+    gl -> setHEValue(value/ 100.0f);
+}
 

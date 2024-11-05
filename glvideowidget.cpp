@@ -114,6 +114,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     , currentBrightnessValue(0.0f)
     , currentContrastValue(0.0f)
     , currentSharpnessValue(0.0f)
+    , currentHEValue(1.0f)
     ,frameCount(0)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
@@ -312,6 +313,17 @@ void GLVideoWidget::setContrast(float value){
 void GLVideoWidget::setSharpness(float value){
     currentSharpnessValue = value;
     update();
+}
+
+//set histogram equalization strength
+void GLVideoWidget::setHEValue(float value){
+    currentHEValue = value;
+    update();
+}
+
+//set HistogramEqualization Enabled
+void GLVideoWidget::setHistogramEqualizationEnabled(bool isEnable){
+    histogramEqualizationEnabled = isEnable;
 }
 
 // Binds an OpenGL resource to the current OpenGL
@@ -580,11 +592,27 @@ void GLVideoWidget::computeHistogramEqualization(char* data){
 
     //update the Y_component data
     for (int i = 0; i < totalPixels; ++i) {
-        uchar pixelValue = static_cast<uchar>(data[i]);
-        data[i] = equalizationMap[pixelValue];
+        // uchar pixelValue = static_cast<uchar>(data[i]);
+        // data[i] = equalizationMap[pixelValue];
+        // // if (currentHEValue < 100) {
+        // //     data[i] = static_cast<uchar>(data[i] * currentHEValue);
+        // // }
+        //     float factor = currentHEValue / 100.0f; // 将 currentHEValue 转换为 0.0 到 1.0 的比例
+        //     data[i] = static_cast<uchar>(equalizedPixelValue * currentHEValue + originalPixelValue * (1.0f - factor));
+        // // } else {
+        // //     data[i] = equalizedPixelValue; // 完全应用均衡化
+        // // }
+
+        uchar originalPixelValue = static_cast<uchar>(data[i]);
+        uchar equalizedPixelValue = equalizationMap[originalPixelValue];
+
+        // 将原始像素值和均衡化像素值按 currentHEValue 进行线性混合
+        if (currentHEValue < 100) {
+            data[i] = static_cast<uchar>(equalizedPixelValue * currentHEValue + originalPixelValue * (1.0f - currentHEValue));
+        } else {
+            data[i] = equalizedPixelValue; // 完全应用均衡化
+        }
     }
+
 }
-//set HistogramEqualization Enabled
-void GLVideoWidget::setHistogramEqualizationEnabled(bool isEnable){
-    histogramEqualizationEnabled = isEnable;
-}
+

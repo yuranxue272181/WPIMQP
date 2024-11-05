@@ -732,6 +732,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
         </widget>
        </widget>
        <widget class="QWidget" name="page_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>181</width>
+          <height>61</height>
+         </rect>
+        </property>
         <attribute name="label">
          <string>Histogram Equalization</string>
         </attribute>
@@ -748,13 +756,58 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <string>OFF</string>
          </property>
         </widget>
+        <widget class="QSlider" name="HESlider">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>151</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Orientation::Horizontal</enum>
+         </property>
+        </widget>
+        <widget class="QLabel" name="HE">
+         <property name="geometry">
+          <rect>
+           <x>150</x>
+           <y>20</y>
+           <width>31</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>0</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
+         </property>
+        </widget>
        </widget>
        <widget class="QWidget" name="page_4">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>181</width>
+          <height>61</height>
+         </rect>
+        </property>
         <attribute name="label">
          <string>Noise Reduction</string>
         </attribute>
        </widget>
        <widget class="QWidget" name="page_7">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>181</width>
+          <height>61</height>
+         </rect>
+        </property>
         <attribute name="label">
          <string>Gamma Correction</string>
         </attribute>
