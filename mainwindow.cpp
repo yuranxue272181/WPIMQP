@@ -208,6 +208,8 @@ void MainWindow::setHE(){
     if(HECheck->isChecked()){
         HECheck->setText("ON");
         HESlider -> setEnabled(true);
+        QTableWidgetItem *item = featuresTable->item(3,1);
+        item->setText(QString::number(HESlider->value()));
     }else{
         HECheck->setText("OFF");
         QTableWidgetItem *item = featuresTable->item(3,1);
