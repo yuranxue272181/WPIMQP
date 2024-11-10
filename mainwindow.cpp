@@ -32,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
     HESlider = ui->HESlider;
     NRSlider = ui->NRSlider;
     GammaSlider = ui -> GammaSlider;
+    exposureTimeSlider = ui->exposureTimeSlider;
+    gainSlider = ui-> gainSlider;
+    dynamicRangeSlider = ui-> dynamicRangeSlider;
+    STNRSlider = ui-> STNRSlider;
 
     //label
     brightnessValue = ui->brightness;
@@ -41,6 +45,12 @@ MainWindow::MainWindow(QWidget *parent)
     NRValue = ui->NR;
     GammaValue = ui ->Gamma;
     GammaValue->setText("1");
+    exposureTimeValue = ui-> exposureTime;
+    gainValue = ui-> gain;
+    dynamicRangeValue = ui-> dynamicRange;
+    dynamicRangeValue->setText("60");
+    STNRValue = ui-> STNR;
+    STNRValue->setText("40");
 
     //table
     featuresTable = ui->FeatureTable;
@@ -60,6 +70,15 @@ MainWindow::MainWindow(QWidget *parent)
     NRSlider ->setValue(0);
     GammaSlider -> setRange(1,30);
     GammaSlider -> setValue(10);
+    exposureTimeSlider -> setRange(0,100);
+    exposureTimeSlider -> setValue(0);
+    gainSlider -> setRange(0,30);
+    gainSlider -> setValue(0);
+    dynamicRangeSlider -> setRange(60,120);
+    dynamicRangeSlider -> setValue(60);
+    STNRSlider -> setRange(30,70);
+    STNRSlider -> setValue(40);
+
 
     // set icons
     startBtn->setIcon(QIcon(":/icons/restart.png"));
@@ -98,6 +117,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(HESlider, &QSlider::sliderMoved, this, &MainWindow::setHEValue);
     connect(NRSlider, &QSlider::sliderMoved, this, &MainWindow::setNRValue);
     connect(GammaSlider, &QSlider::sliderMoved, this, &MainWindow::setGammaValue);
+    connect(exposureTimeSlider, &QSlider::sliderMoved, this, &MainWindow::setExposureTimeValue);
+    connect(gainSlider, &QSlider::sliderMoved, this, &MainWindow::setGainValue);
+    connect(dynamicRangeSlider, &QSlider::sliderMoved, this, &MainWindow::setDynamicRangeValue);
+    connect(STNRSlider, &QSlider::sliderMoved, this, &MainWindow::setSTNRValue);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -255,6 +278,7 @@ void MainWindow::reset(){
     NRValue->setText("0");
     GammaValue->setText("1"); // Gamma value is 1.0 when slider is at 10
 
+
     // Update the feature table to reflect the new values
     featuresTable->item(0, 1)->setText("0");
     featuresTable->item(1, 1)->setText("0");
@@ -271,3 +295,33 @@ void MainWindow::reset(){
     gl->setNoiseReduction(0);
     gl->setGamma(1);
 }
+
+//这里设置exposure time，值存储在value里面
+void MainWindow::setExposureTimeValue(int value){
+    exposureTimeValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(6,1);
+    item->setText(QString::number(value));
+    //在这里调用你的function
+}
+//这里设置gain，值存储在value里面
+void MainWindow::setGainValue(int value){
+    gainValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(7,1);
+    item->setText(QString::number(value));
+    //在这里调用你的function
+}
+//这里设置dynamic range，值存储在value里面
+void MainWindow::setDynamicRangeValue(int value){
+    dynamicRangeValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(8,1);
+    item->setText(QString::number(value));
+    //在这里调用你的function
+}
+
+void MainWindow::setSTNRValue(int value){
+    STNRValue-> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(9,1);
+    item->setText(QString::number(value));
+    //在这里调用你的function
+}
+

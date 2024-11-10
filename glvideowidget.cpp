@@ -208,7 +208,8 @@ void GLVideoWidget::processNextFrame() {
         delete frameTimer;
         frameTimer = nullptr;
         qDebug() << "All frames processed.";
-        emit videoFinished();
+        //emit videoFinished();
+        nextFrame(videoData);
     }
 }
 
