@@ -178,7 +178,7 @@ void MainWindow::pauseVideo(){
     if(gl->pauseVideo()){
         playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
         recordBtn->setEnabled(false);
-        HESlider -> setEnabled(false);
+        //HESlider -> setEnabled(false);
     }
     else{
         playPauseBtn->setIcon(QIcon(":/icons/play.png"));
@@ -242,6 +242,8 @@ void MainWindow::setHEValue(int value){
     QTableWidgetItem *item = featuresTable->item(3,1);
     item->setText(QString::number(value));
     gl -> setHEValue(value/ 100.0f);
+    if(gl->isPausedVideo())
+        gl -> refreshData();
 }
 
 //set noise reduction
