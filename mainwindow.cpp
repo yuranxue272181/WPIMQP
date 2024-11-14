@@ -298,28 +298,28 @@ void MainWindow::reset(){
     gl->setGamma(1);
 }
 
-//这里设置exposure time，值存储在value里面
+//hardware set exposure time
 void MainWindow::setExposureTimeValue(int value){
     exposureTimeValue -> setText(QString::number(value));
     QTableWidgetItem *item = featuresTable->item(6,1);
     item->setText(QString::number(value));
     //在这里调用你的function
 }
-//这里设置gain，值存储在value里面
+//hardware set gain
 void MainWindow::setGainValue(int value){
     gainValue -> setText(QString::number(value));
     QTableWidgetItem *item = featuresTable->item(7,1);
     item->setText(QString::number(value));
     //在这里调用你的function
 }
-//这里设置dynamic range，值存储在value里面
+//hardware set dynamic range
 void MainWindow::setDynamicRangeValue(int value){
     dynamicRangeValue -> setText(QString::number(value));
     QTableWidgetItem *item = featuresTable->item(8,1);
     item->setText(QString::number(value));
     //在这里调用你的function
 }
-
+//hardware set signal to noise ratio
 void MainWindow::setSTNRValue(int value){
     STNRValue-> setText(QString::number(value));
     QTableWidgetItem *item = featuresTable->item(9,1);
