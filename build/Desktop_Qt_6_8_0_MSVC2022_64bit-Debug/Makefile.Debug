@@ -1972,12 +1972,7 @@ debug\main.obj: ..\..\main.cpp ..\..\mainwindow.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qwineventnotifier.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qxmlstream.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtCore\qxpfunctional.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtGui\QImage \
-		..\..\fpgainterface.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QDebug \
-		..\..\..\..\2\WPIMQP\ezusb\include\CyAPI.h \
-		..\..\..\..\2\WPIMQP\ezusb\include\cyusb30_def.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QFile
+		C:\Qt\6.8.0\msvc2022_64\include\QtGui\QImage
 
 debug\mainwindow.obj: ..\..\mainwindow.cpp ..\..\mainwindow.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QMainWindow \
@@ -2470,12 +2465,7 @@ debug\mainwindow.obj: ..\..\mainwindow.cpp ..\..\mainwindow.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtGui\QOpenGLContext \
 		C:\Qt\6.8.0\msvc2022_64\include\QtGui\QImage \
 		C:\Qt\6.8.0\msvc2022_64\include\QtOpenGL\qtopenglversion.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtOpenGL\QOpenGLShaderProgram \
-		..\..\FPGAInterface.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QDebug \
-		..\..\..\..\2\WPIMQP\ezusb\include\CyAPI.h \
-		..\..\..\..\2\WPIMQP\ezusb\include\cyusb30_def.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtCore\QFile
+		C:\Qt\6.8.0\msvc2022_64\include\QtOpenGL\QOpenGLShaderProgram
 
 debug\qrc_resources.obj: debug\qrc_resources.cpp 
 
