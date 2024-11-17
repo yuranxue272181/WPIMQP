@@ -2227,8 +2227,6 @@ debug\mainwindow.obj: ..\..\mainwindow.cpp ..\..\mainwindow.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qmenu.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QMenuBar \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qmenubar.h \
-		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QScrollBar \
-		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qscrollbar.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QSplitter \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\qsplitter.h \
 		C:\Qt\6.8.0\msvc2022_64\include\QtWidgets\QTabWidget \
