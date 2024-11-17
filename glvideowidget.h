@@ -21,7 +21,7 @@ public:
      * \param strides strides of each plane. If null, it's equals to {w, w/2, w/2}.
      */
     void setYUV420pParameters(int w, int h, int* strides = NULL);
-    void setFrameData(const QByteArray& data);
+
     void nextFrame(const QByteArray &data);
 
     // QImage
@@ -40,6 +40,8 @@ public:
     void startRecording();
     void stopRecording();
     bool toggleRecording();
+    void refreshData();
+    bool isPausedVideo();
 
 
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
@@ -102,6 +104,7 @@ private:
     QMatrix4x4 m_mat;
 
     void processNextFrame();
+    void setFrameData(const QByteArray& data);
     void computeHistogramEqualization(char* yuvData);
 
 signals:

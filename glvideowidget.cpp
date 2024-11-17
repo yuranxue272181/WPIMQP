@@ -73,11 +73,11 @@ static const char kFragmentShader[] = glsl(
     {
         vec2 texOffset = vec2(1.0 / 176.0, 1.0 / 144.0);
         vec4 color = u_colorMatrix
-                             * vec4(
-                                 texture2D(u_Texture0, v_TexCoords).r,
-                                 texture2D(u_Texture1, v_TexCoords).r,
-                                 texture2D(u_Texture2, v_TexCoords).r,
-                                 1);
+                     * vec4(
+                         texture2D(u_Texture0, v_TexCoords).r,
+                         texture2D(u_Texture1, v_TexCoords).r,
+                         texture2D(u_Texture2, v_TexCoords).r,
+                         1);
 
         // Noise Reduction: Gaussian filter
         if(u_NoiseReduction != 0.0){
@@ -169,18 +169,24 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
     Q_UNUSED(lock);
     upload_tex = true;
     m_data = data;
+    m_data.detach();
     plane[0].data = (char*)m_data.constData();
 
     //debug
     //qDebug() << "Received frame data size:" << m_data.size();
 
+    //histogram equalization
+    if (currentHEValue != 0.0){
+        computeHistogramEqualization(plane[0].data);
+        //qDebug() << "refresh"<< QDateTime::currentDateTime();
+    }
+
+    //qDebug() << "Pointer address11111:" << static_cast<const void*>(plane[0].data);
+
     if (plane.size() > 1) {
         plane[1].data = plane[0].data + plane[0].stride*height;
         plane[2].data = plane[1].data + plane[1].stride*height/2;
     }
-
-    computeHistogramEqualization(plane[0].data);
-
     update();
 }
 
@@ -193,7 +199,7 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     frameTimer = new QTimer(this);
     qDebug() << "Timer setted.";
     connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextFrame);
-    frameTimer->start(1000/1); // 30FPS
+    frameTimer->start(1000/48); // 45FPS
 }
 
 //Get the data for each frame and render it
@@ -208,7 +214,8 @@ void GLVideoWidget::processNextFrame() {
         delete frameTimer;
         frameTimer = nullptr;
         qDebug() << "All frames processed.";
-        emit videoFinished();
+        //emit videoFinished();
+        nextFrame(videoData);
     }
 }
 
@@ -221,6 +228,7 @@ bool GLVideoWidget::toggleRecording() {
     }
     return isRecording;
 }
+
 
 void GLVideoWidget::saveRecordingData(){
     recordingData.append(frameData);
@@ -283,8 +291,8 @@ void GLVideoWidget::saveYUVVideoDataToFile() {
     recordingData.clear();
     qDebug() << "Recording started.";
     filePath = QFileDialog::getSaveFileName(this, tr("Save YUV File of Video"),
-                                                    QString(),
-                                                    tr("YUV Files (*.yuv);;All Files (*)"));
+                                            QString(),
+                                            tr("YUV Files (*.yuv);;All Files (*)"));
     if (filePath.isEmpty()) {
         qDebug() << "No file selected.";
         return;
@@ -323,6 +331,10 @@ bool GLVideoWidget::pauseVideo(){
             qDebug() << "Video paused.";
         }
     }
+    return isPaused;
+}
+
+bool GLVideoWidget::isPausedVideo(){
     return isPaused;
 }
 
@@ -498,10 +510,6 @@ void GLVideoWidget::paintGL()
     }
     //qDebug() << "Rendering frame with width:" << width << "height:" << height;
 
-    //histogram equalization
-    if (currentHEValue != 0.0)
-        computeHistogramEqualization(plane[0].data);
-
 
     if (update_res || !tex[0]) {
         initializeShader();
@@ -628,7 +636,12 @@ void GLVideoWidget::computeHistogramEqualization(char* data){
     }
     //calculate CDF
     int cdf[L] = {0};
-    cdf[0] = histogram[0];
+    for (int i = 0; i < L; ++i) {
+        if (histogram[i] != 0) {
+            cdf[0] = histogram[i];
+            break;
+        }
+    }
     for (int i = 1; i < L; ++i) {
         cdf[i] = cdf[i - 1] + histogram[i];
     }
@@ -644,6 +657,11 @@ void GLVideoWidget::computeHistogramEqualization(char* data){
         uchar equalizedPixelValue = equalizationMap[originalPixelValue];
         data[i] = static_cast<uchar>(equalizedPixelValue * currentHEValue + originalPixelValue * (1.0f - currentHEValue));
     }
+    //qDebug() << "Data modified"<< QDateTime::currentDateTime();
+}
 
+//refresh the data with histogram equalization when the video is paused
+void GLVideoWidget::refreshData(){
+    setFrameData(frameData);
 }
 

@@ -43,6 +43,10 @@ private slots:
     void setNRValue(int value);
     void setGammaValue(int value);
     void reset();
+    void setExposureTimeValue(int value);
+    void setGainValue(int value);
+    void setDynamicRangeValue(int value);
+    void setSTNRValue(int value);
 
 private:
     QByteArray testData;
@@ -69,6 +73,10 @@ private:
     QSlider *HESlider;
     QSlider *NRSlider;
     QSlider *GammaSlider;
+    QSlider *exposureTimeSlider;
+    QSlider *gainSlider;
+    QSlider *dynamicRangeSlider;
+    QSlider *STNRSlider;
 
     QLabel *brightnessValue;
     QLabel *contrastValue;
@@ -76,6 +84,10 @@ private:
     QLabel *HEValue;
     QLabel *NRValue;
     QLabel *GammaValue;
+    QLabel *exposureTimeValue;
+    QLabel *gainValue;
+    QLabel *dynamicRangeValue;
+    QLabel *STNRValue;
 
     QTableWidget *featuresTable;
 

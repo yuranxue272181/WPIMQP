@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "glvideowidget.h"
-#include "FPGAInterface.h"
 
 //ui
 #include <QVBoxLayout>
@@ -33,6 +32,10 @@ MainWindow::MainWindow(QWidget *parent)
     HESlider = ui->HESlider;
     NRSlider = ui->NRSlider;
     GammaSlider = ui -> GammaSlider;
+    exposureTimeSlider = ui->exposureTimeSlider;
+    gainSlider = ui-> gainSlider;
+    dynamicRangeSlider = ui-> dynamicRangeSlider;
+    STNRSlider = ui-> STNRSlider;
 
     //label
     brightnessValue = ui->brightness;
@@ -42,6 +45,12 @@ MainWindow::MainWindow(QWidget *parent)
     NRValue = ui->NR;
     GammaValue = ui ->Gamma;
     GammaValue->setText("1");
+    exposureTimeValue = ui-> exposureTime;
+    gainValue = ui-> gain;
+    dynamicRangeValue = ui-> dynamicRange;
+    dynamicRangeValue->setText("60");
+    STNRValue = ui-> STNR;
+    STNRValue->setText("40");
 
     //table
     featuresTable = ui->FeatureTable;
@@ -61,6 +70,15 @@ MainWindow::MainWindow(QWidget *parent)
     NRSlider ->setValue(0);
     GammaSlider -> setRange(1,30);
     GammaSlider -> setValue(10);
+    exposureTimeSlider -> setRange(0,100);
+    exposureTimeSlider -> setValue(0);
+    gainSlider -> setRange(0,30);
+    gainSlider -> setValue(0);
+    dynamicRangeSlider -> setRange(60,120);
+    dynamicRangeSlider -> setValue(60);
+    STNRSlider -> setRange(30,70);
+    STNRSlider -> setValue(40);
+
 
     // set icons
     startBtn->setIcon(QIcon(":/icons/restart.png"));
@@ -99,6 +117,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(HESlider, &QSlider::sliderMoved, this, &MainWindow::setHEValue);
     connect(NRSlider, &QSlider::sliderMoved, this, &MainWindow::setNRValue);
     connect(GammaSlider, &QSlider::sliderMoved, this, &MainWindow::setGammaValue);
+    connect(exposureTimeSlider, &QSlider::sliderMoved, this, &MainWindow::setExposureTimeValue);
+    connect(gainSlider, &QSlider::sliderMoved, this, &MainWindow::setGainValue);
+    connect(dynamicRangeSlider, &QSlider::sliderMoved, this, &MainWindow::setDynamicRangeValue);
+    connect(STNRSlider, &QSlider::sliderMoved, this, &MainWindow::setSTNRValue);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -132,24 +154,43 @@ void MainWindow::renderVideo(){
 
     //open the YUV file
     //176x144
+
+    // int width=176;
+    // int height = 144;
+    // QFile f(":/akiyo_qcif.yuv");
+    // f.open(QIODevice::ReadOnly);
+    // //QByteArray data(f.readAll());
+    // FPGAInterface fpgaInterface;
+    // std::vector<std::string> inputFiles = {
+    //     ":/checkerboard_176x144-0.bin",
+    //     ":/checkerboard_176x144-1.bin",
+    //     ":/checkerboard_176x144-2.bin",
+    //     ":/checkerboard_176x144-3.bin",
+    //     ":/checkerboard_176x144-4.bin",
+    //     ":/checkerboard_176x144-5.bin",
+    //     ":/checkerboard_176x144-6.bin",
+    //     ":/checkerboard_176x144-7.bin",
+    //     ":/checkerboard_176x144-8.bin"
+    // };
+    // QByteArray data = fpgaInterface.convertMultipleGrayscaleBinsToYUV(inputFiles, width, height);
+    // //trans the video to only white, black ,and grey
+    // int frameSize = (width * height) + (width / 2 * height / 2) * 2;
+    // int frameCount = data.size() / frameSize;
+    // for (int frame = 0; frame < frameCount; ++frame) {
+    //     int frameOffset = frame * (width * height + (width / 2) * (height / 2) * 2);
+    //     for (int j = 0; j < (width / 2) * (height / 2); ++j) {
+    //         data[frameOffset + width * height + j] = -128; // U
+    //         data[frameOffset + width * height + (width / 2) * (height / 2) + j] = -128; // V
+    //     }
+    // }
+    // qDebug("data size: %lld", data.size());
+    // gl->nextFrame(data);
+
     int width=176;
     int height = 144;
     QFile f(":/akiyo_qcif.yuv");
     f.open(QIODevice::ReadOnly);
-    //QByteArray data(f.readAll());
-    FPGAInterface fpgaInterface;
-    std::vector<std::string> inputFiles = {
-        ":/checkerboard_176x144-0.bin",
-        ":/checkerboard_176x144-1.bin",
-        ":/checkerboard_176x144-2.bin",
-        ":/checkerboard_176x144-3.bin",
-        ":/checkerboard_176x144-4.bin",
-        ":/checkerboard_176x144-5.bin",
-        ":/checkerboard_176x144-6.bin",
-        ":/checkerboard_176x144-7.bin",
-        ":/checkerboard_176x144-8.bin"
-    };
-    QByteArray data = fpgaInterface.convertMultipleGrayscaleBinsToYUV(inputFiles, width, height);
+    QByteArray data(f.readAll());
     //trans the video to only white, black ,and grey
     int frameSize = (width * height) + (width / 2 * height / 2) * 2;
     int frameCount = data.size() / frameSize;
@@ -169,7 +210,7 @@ void MainWindow::pauseVideo(){
     if(gl->pauseVideo()){
         playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
         recordBtn->setEnabled(false);
-        HESlider -> setEnabled(false);
+        //HESlider -> setEnabled(false);
     }
     else{
         playPauseBtn->setIcon(QIcon(":/icons/play.png"));
@@ -233,6 +274,8 @@ void MainWindow::setHEValue(int value){
     QTableWidgetItem *item = featuresTable->item(3,1);
     item->setText(QString::number(value));
     gl -> setHEValue(value/ 100.0f);
+    if(gl->isPausedVideo())
+        gl -> refreshData();
 }
 
 //set noise reduction
@@ -269,6 +312,7 @@ void MainWindow::reset(){
     NRValue->setText("0");
     GammaValue->setText("1"); // Gamma value is 1.0 when slider is at 10
 
+
     // Update the feature table to reflect the new values
     featuresTable->item(0, 1)->setText("0");
     featuresTable->item(1, 1)->setText("0");
@@ -285,3 +329,33 @@ void MainWindow::reset(){
     gl->setNoiseReduction(0);
     gl->setGamma(1);
 }
+
+//hardware set exposure time
+void MainWindow::setExposureTimeValue(int value){
+    exposureTimeValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(6,1);
+    item->setText(QString::number(value));
+    //在这里调用你的function
+}
+//hardware set gain
+void MainWindow::setGainValue(int value){
+    gainValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(7,1);
+    item->setText(QString::number(value));
+    //在这里调用你的function
+}
+//hardware set dynamic range
+void MainWindow::setDynamicRangeValue(int value){
+    dynamicRangeValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(8,1);
+    item->setText(QString::number(value));
+    //在这里调用你的function
+}
+//hardware set signal to noise ratio
+void MainWindow::setSTNRValue(int value){
+    STNRValue-> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(9,1);
+    item->setText(QString::number(value));
+    //在这里调用你的function
+}
+

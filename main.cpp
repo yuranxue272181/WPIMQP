@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QtCore>
 #include <QtGui/QImage>
-#include "fpgainterface.h"
 #define YUV_TEST 1
 int main(int argc, char *argv[])
 {
@@ -30,9 +29,6 @@ int main(int argc, char *argv[])
     //     glw.setImage(img);
     // }
     // glw.show();
-
-    FPGAInterface fpgaInterface;
-    fpgaInterface.refreshDeviceList();
 
     //with ui
     MainWindow mainWindow;
