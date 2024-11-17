@@ -296,6 +296,8 @@ void MainWindow::reset(){
     gl->setHEValue(0);
     gl->setNoiseReduction(0);
     gl->setGamma(1);
+
+    gl -> refreshData();
 }
 
 //hardware set exposure time
