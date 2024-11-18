@@ -97,6 +97,8 @@ private:
     QTableWidget *coordTable;
     QTableWidget *analysisTable;
 
+    float zoomFactor;
+
 
 signals:
     // void glInitialized();

@@ -156,8 +156,11 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     ,frameCount(0)
     ,selectionStart(-1, -1)
     ,selectionEnd(-1, -1)
+    ,adjustedStart(-1,-1)
+    ,adjustedEnd(-1,-1)
     ,selecting(false)
     ,trackingEnabled(false)
+    ,zoomFactor(1.0f)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
@@ -203,7 +206,7 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     frameTimer = new QTimer(this);
     qDebug() << "Timer setted.";
     connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextFrame);
-    frameTimer->start(1000/48); // 45FPS
+    frameTimer->start(1000/48); // 48FPS
 }
 
 //Get the data for each frame and render it
@@ -213,6 +216,10 @@ void GLVideoWidget::processNextFrame() {
         frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
         setFrameData(frameData);
         currentFrameIndex++;
+        if(trackingEnabled){
+            processSelection();
+            imageCoordinates();
+        }
     } else {
         frameTimer->stop();
         delete frameTimer;
@@ -543,14 +550,16 @@ void GLVideoWidget::paintGL()
     for (int i = 0; attr[i][0]; ++i) {
         m_program->disableAttributeArray(i);
     }
+    //draw ROI rectangle
     if (trackingEnabled) {
         QPainter painter(this);
         painter.setRenderHint(QPainter::Antialiasing);
         // Calculate the coordinates of the rectangle
-        int x = std::min(selectionStart.x(), selectionEnd.x());
-        int y = std::min(selectionStart.y(), selectionEnd.y());
-        int width = std::abs(selectionEnd.x() - selectionStart.x());
-        int height = std::abs(selectionEnd.y() - selectionStart.y());
+        int x = std::min(adjustedStart.x(), adjustedEnd.x());
+        int y = std::min(adjustedStart.y(), adjustedEnd.y());
+        int width = std::abs(adjustedEnd.x() - adjustedStart.x());
+        int height = std::abs(adjustedEnd.y() - adjustedStart.y());
+
         // set color
         painter.setBrush(QBrush(Qt::NoBrush));
         painter.setPen(QPen(Qt::red));
@@ -694,6 +703,7 @@ void GLVideoWidget::mousePressEvent(QMouseEvent *event) {
     }
     if (event->button() == Qt::LeftButton) {
         selectionStart = event->pos(); // start point
+        adjustedStart = selectionStart;
         selecting = true;
     }
 }
@@ -703,6 +713,7 @@ void GLVideoWidget::mouseMoveEvent(QMouseEvent *event) {
         return;
     }
     selectionEnd = event->pos();
+    adjustedEnd = selectionEnd;
     update();
 }
 void GLVideoWidget::mouseReleaseEvent(QMouseEvent *event) {
@@ -711,6 +722,7 @@ void GLVideoWidget::mouseReleaseEvent(QMouseEvent *event) {
     }
     if (event->button() == Qt::LeftButton) {
         selectionEnd = event->pos();
+        adjustedEnd = selectionEnd;
         selecting = false;
         processSelection();
         imageCoordinates();
@@ -725,10 +737,10 @@ void GLVideoWidget::setTrackingEnabled(bool enabled) {
 }
 
 //convert map coordinates to image coordinates
-QPointF GLVideoWidget::mapToImageCoordinates(const QPoint &point) {
+QPoint GLVideoWidget::mapToImageCoordinates(const QPoint &point) {
     float xRatio = static_cast<float>(176) / this->width();
     float yRatio = static_cast<float>(144) / this->height();
-    QPointF newPoint = QPointF(point.x() * xRatio, point.y() * yRatio);
+    QPoint newPoint = QPoint(point.x() * xRatio, point.y() * yRatio);
     if (newPoint.x() < 0.0) newPoint.setX(0.0);
     else if (newPoint.x() > videoWidth-1) newPoint.setX(videoWidth-1);
     if (newPoint.y() < 0.0) newPoint.setY(0.0);
@@ -738,14 +750,16 @@ QPointF GLVideoWidget::mapToImageCoordinates(const QPoint &point) {
 
 //emit image coordinates
 void GLVideoWidget::imageCoordinates(){
-    QPointF start = mapToImageCoordinates(selectionStart);
-    QPointF end = mapToImageCoordinates(selectionEnd);
+    QPointF start = mapToImageCoordinates(adjustedStart);
+    QPointF end = mapToImageCoordinates(adjustedEnd);
     emit selectionCompleted(start, end);
 }
 
+//send the grayScale value of the ROI to the ui
 void GLVideoWidget::processSelection() {
-    QPointF start = mapToImageCoordinates(selectionStart);
-    QPointF end = mapToImageCoordinates(selectionEnd);
+    QPointF start = mapToImageCoordinates(adjustedStart);
+    QPointF end = mapToImageCoordinates(adjustedEnd);
+
     int xStart = start.x();
     int yStart = start.y();
     int xEnd = end.x();
@@ -770,4 +784,12 @@ void GLVideoWidget::processSelection() {
         }
     }
     emit updateGrayValues(grayValues);
+}
+//zoom in and zoom out
+void GLVideoWidget::setZoomFactor(float factor){
+    zoomFactor = factor;
+    qDebug()<<zoomFactor;
+    adjustedStart = QPoint(selectionStart.x() * zoomFactor,selectionStart.y() * zoomFactor);
+    adjustedEnd = QPoint(selectionEnd.x() * zoomFactor,selectionEnd.y() * zoomFactor);
+    update();
 }

@@ -44,6 +44,8 @@ public:
     bool isPausedVideo();
     void setTrackingEnabled(bool enabled);
     void imageCoordinates();
+    void processSelection();
+    void setZoomFactor(float zoomFactor);
 
 
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
@@ -90,8 +92,11 @@ private:
     int frameCount;
     QPoint selectionStart;
     QPoint selectionEnd;
+    QPoint adjustedStart;
+    QPoint adjustedEnd;
     bool selecting;
     bool trackingEnabled;
+    float zoomFactor;
 
     typedef struct {
         char* data;
@@ -115,8 +120,8 @@ private:
     void processNextFrame();
     void setFrameData(const QByteArray& data);
     void computeHistogramEqualization(char* yuvData);
-    QPointF mapToImageCoordinates(const QPoint &point);
-    void processSelection();
+    QPoint mapToImageCoordinates(const QPoint &point);
+
 
 signals:
     void videoFinished();
