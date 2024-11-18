@@ -116,10 +116,12 @@ private:
     void setFrameData(const QByteArray& data);
     void computeHistogramEqualization(char* yuvData);
     QPointF mapToImageCoordinates(const QPoint &point);
+    void processSelection();
 
 signals:
     void videoFinished();
     void selectionCompleted(const QPointF &start, const QPointF &end);
+    void updateGrayValues(QVector<int> &grayValues);
 
 public slots:
     void setBrightness(float value);

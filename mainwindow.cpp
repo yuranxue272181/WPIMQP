@@ -56,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     //table
     featuresTable = ui->FeatureTable;
     coordTable = ui->coordinatesTable;
+    analysisTable = ui->analysisTable;
 
     //initialize slider and button
     brightnessSlider ->setRange(-100, 100);
@@ -126,6 +127,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(STNRSlider, &QSlider::sliderMoved, this, &MainWindow::setSTNRValue);
     connect(grabBtn,&QPushButton::clicked,this,&MainWindow::setTrackingEnabled);
     connect(gl, &GLVideoWidget::selectionCompleted, this, &MainWindow::onSelectionCompleted);
+    connect(gl, &GLVideoWidget::updateGrayValues, this, &MainWindow::updateAnalysis);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -361,6 +363,32 @@ void MainWindow::onSelectionCompleted(const QPointF &start, const QPointF &end) 
     x4->setText(QString::number(end.x()));
     y4->setText(QString::number(end.y()));
 }
+
+//update data analysis to the table
+void MainWindow::updateAnalysis(QVector<int> &grayValues){
+    //mean
+    float mean = 0.0f;
+    if (grayValues.size() > 0) {
+    for(int index = 0; index<grayValues.size(); index++){
+        mean+=grayValues[index];
+    }
+    mean = mean/grayValues.size();
+    }
+    QTableWidgetItem *meanItem = analysisTable -> item(0,1);
+    meanItem->setText(QString::number(mean));
+
+    //standard deviation
+    float variance = 0.0f;
+    for (int index = 0; index < grayValues.size(); index++) {
+        variance += (grayValues[index] - mean) * (grayValues[index] - mean);
+    }
+    variance = variance / grayValues.size();
+    float standardDeviation = sqrt(variance);
+
+    QTableWidgetItem *stdDevItem = analysisTable->item(1, 1);
+    stdDevItem->setText(QString::number(standardDeviation));
+}
+
 
 
 

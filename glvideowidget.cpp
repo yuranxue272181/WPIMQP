@@ -712,7 +712,7 @@ void GLVideoWidget::mouseReleaseEvent(QMouseEvent *event) {
     if (event->button() == Qt::LeftButton) {
         selectionEnd = event->pos();
         selecting = false;
-        //processSelection();
+        processSelection();
         imageCoordinates();
         update();
     }
@@ -728,23 +728,46 @@ void GLVideoWidget::setTrackingEnabled(bool enabled) {
 QPointF GLVideoWidget::mapToImageCoordinates(const QPoint &point) {
     float xRatio = static_cast<float>(176) / this->width();
     float yRatio = static_cast<float>(144) / this->height();
-    return QPointF(point.x() * xRatio, point.y() * yRatio);
+    QPointF newPoint = QPointF(point.x() * xRatio, point.y() * yRatio);
+    if (newPoint.x() < 0.0) newPoint.setX(0.0);
+    else if (newPoint.x() > videoWidth-1) newPoint.setX(videoWidth-1);
+    if (newPoint.y() < 0.0) newPoint.setY(0.0);
+    else if (newPoint.y() > videoHeight-1) newPoint.setY(videoHeight-1);
+    return newPoint;
 }
 
 //emit image coordinates
 void GLVideoWidget::imageCoordinates(){
     QPointF start = mapToImageCoordinates(selectionStart);
     QPointF end = mapToImageCoordinates(selectionEnd);
-    if (start.x() < 0.0) start.setX(0.0);
-    else if (start.x() > videoWidth) start.setX(videoWidth);
-
-    if (start.y() < 0.0) start.setY(0.0);
-    else if (start.y() > videoHeight) start.setY(videoHeight);
-
-    if (end.x() < 0.0) end.setX(0.0);
-    else if (end.x() > videoWidth) end.setX(videoWidth);
-
-    if (end.y() < 0.0) end.setY(0.0);
-    else if (end.y() > videoHeight) end.setY(videoHeight);
     emit selectionCompleted(start, end);
+}
+
+void GLVideoWidget::processSelection() {
+    QPointF start = mapToImageCoordinates(selectionStart);
+    QPointF end = mapToImageCoordinates(selectionEnd);
+    int xStart = start.x();
+    int yStart = start.y();
+    int xEnd = end.x();
+    int yEnd = end.y();
+    if(start.x() > end.x()){
+        xStart = end.x();
+        xEnd = start.x();
+    }
+    if(start.y()>end.y()){
+        yStart = end.y();
+        yEnd = start.y();
+    }
+
+    uchar *yPlane = reinterpret_cast<uchar*>(frameData.data());
+    QVector<int> grayValues;
+    for (int y = yStart; y <= yEnd; ++y) {
+        for (int x = xStart; x <= xEnd; ++x) {
+            int index = y * videoWidth + x;
+            //qDebug() <<"selected data"<< yPlane[index];
+            uchar grayValue = yPlane[index];
+            grayValues.append(static_cast<int>(grayValue));
+        }
+    }
+    emit updateGrayValues(grayValues);
 }
