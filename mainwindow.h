@@ -47,6 +47,7 @@ private slots:
     void setGainValue(int value);
     void setDynamicRangeValue(int value);
     void setSTNRValue(int value);
+    void setTrackingEnabled();
 
 private:
     QByteArray testData;
@@ -61,6 +62,7 @@ private:
     QToolButton *zoomInBtn;
     QToolButton *zoomOutBtn;
     QPushButton *resetBtn;
+    QPushButton *grabBtn;
 
     QWidget *mainWidget;
     QWidget *videoWdt;

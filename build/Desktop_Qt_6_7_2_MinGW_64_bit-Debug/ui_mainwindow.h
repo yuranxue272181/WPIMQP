@@ -21,11 +21,9 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
-#include <QtWidgets/QSplitter>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextBrowser>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBox>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
@@ -48,9 +46,6 @@ public:
     QToolButton *zoomOutButton;
     QWidget *layoutWidget1;
     QVBoxLayout *verticalLayout;
-    QSplitter *splitter;
-    QLabel *label_5;
-    QLabel *label_6;
     QTabWidget *tabWidget_2;
     QWidget *tab_5;
     QTextBrowser *textBrowser;
@@ -106,14 +101,10 @@ public:
     QSlider *STNRSlider;
     QLabel *STNR;
     QWidget *tab_2;
-    QTextEdit *textEdit;
+    QPushButton *grabButton;
     QWidget *widget;
+    QLabel *label;
     QLabel *label_2;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QLabel *label_4;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_4;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -190,22 +181,10 @@ public:
 
         layoutWidget1 = new QWidget(centralwidget);
         layoutWidget1->setObjectName("layoutWidget1");
-        layoutWidget1->setGeometry(QRect(10, 350, 351, 164));
+        layoutWidget1->setGeometry(QRect(10, 333, 351, 181));
         verticalLayout = new QVBoxLayout(layoutWidget1);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        splitter = new QSplitter(layoutWidget1);
-        splitter->setObjectName("splitter");
-        splitter->setOrientation(Qt::Orientation::Horizontal);
-        label_5 = new QLabel(splitter);
-        label_5->setObjectName("label_5");
-        splitter->addWidget(label_5);
-        label_6 = new QLabel(splitter);
-        label_6->setObjectName("label_6");
-        splitter->addWidget(label_6);
-
-        verticalLayout->addWidget(splitter);
-
         tabWidget_2 = new QTabWidget(layoutWidget1);
         tabWidget_2->setObjectName("tabWidget_2");
         tabWidget_2->setMinimumSize(QSize(0, 140));
@@ -214,7 +193,7 @@ public:
         tab_5->setObjectName("tab_5");
         textBrowser = new QTextBrowser(tab_5);
         textBrowser->setObjectName("textBrowser");
-        textBrowser->setGeometry(QRect(10, 0, 321, 101));
+        textBrowser->setGeometry(QRect(10, 0, 321, 141));
         textBrowser->setMinimumSize(QSize(321, 101));
         tabWidget_2->addTab(tab_5, QString());
         tab_4 = new QWidget();
@@ -228,8 +207,8 @@ public:
         tableWidget_2->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
         tableWidget_2->setHorizontalHeaderItem(2, __qtablewidgetitem2);
-        if (tableWidget_2->rowCount() < 1)
-            tableWidget_2->setRowCount(1);
+        if (tableWidget_2->rowCount() < 4)
+            tableWidget_2->setRowCount(4);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
         __qtablewidgetitem3->setTextAlignment(Qt::AlignCenter);
         tableWidget_2->setItem(0, 0, __qtablewidgetitem3);
@@ -239,8 +218,35 @@ public:
         QTableWidgetItem *__qtablewidgetitem5 = new QTableWidgetItem();
         __qtablewidgetitem5->setTextAlignment(Qt::AlignCenter);
         tableWidget_2->setItem(0, 2, __qtablewidgetitem5);
+        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
+        __qtablewidgetitem6->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(1, 0, __qtablewidgetitem6);
+        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
+        __qtablewidgetitem7->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(1, 1, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
+        __qtablewidgetitem8->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(1, 2, __qtablewidgetitem8);
+        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
+        __qtablewidgetitem9->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(2, 0, __qtablewidgetitem9);
+        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
+        __qtablewidgetitem10->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(2, 1, __qtablewidgetitem10);
+        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
+        __qtablewidgetitem11->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(2, 2, __qtablewidgetitem11);
+        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
+        __qtablewidgetitem12->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(3, 0, __qtablewidgetitem12);
+        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
+        __qtablewidgetitem13->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(3, 1, __qtablewidgetitem13);
+        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
+        __qtablewidgetitem14->setTextAlignment(Qt::AlignCenter);
+        tableWidget_2->setItem(3, 2, __qtablewidgetitem14);
         tableWidget_2->setObjectName("tableWidget_2");
-        tableWidget_2->setGeometry(QRect(0, 0, 311, 101));
+        tableWidget_2->setGeometry(QRect(10, 0, 311, 151));
         tableWidget_2->horizontalHeader()->setVisible(true);
         tableWidget_2->horizontalHeader()->setCascadingSectionResizes(false);
         tableWidget_2->horizontalHeader()->setHighlightSections(false);
@@ -281,75 +287,75 @@ public:
         FeatureTable = new QTableWidget(dockWidgetContents_7);
         if (FeatureTable->columnCount() < 2)
             FeatureTable->setColumnCount(2);
-        QTableWidgetItem *__qtablewidgetitem6 = new QTableWidgetItem();
-        FeatureTable->setHorizontalHeaderItem(0, __qtablewidgetitem6);
-        QTableWidgetItem *__qtablewidgetitem7 = new QTableWidgetItem();
-        FeatureTable->setHorizontalHeaderItem(1, __qtablewidgetitem7);
+        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
+        FeatureTable->setHorizontalHeaderItem(0, __qtablewidgetitem15);
+        QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
+        FeatureTable->setHorizontalHeaderItem(1, __qtablewidgetitem16);
         if (FeatureTable->rowCount() < 10)
             FeatureTable->setRowCount(10);
-        QTableWidgetItem *__qtablewidgetitem8 = new QTableWidgetItem();
-        __qtablewidgetitem8->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(0, 0, __qtablewidgetitem8);
-        QTableWidgetItem *__qtablewidgetitem9 = new QTableWidgetItem();
-        __qtablewidgetitem9->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(0, 1, __qtablewidgetitem9);
-        QTableWidgetItem *__qtablewidgetitem10 = new QTableWidgetItem();
-        __qtablewidgetitem10->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(1, 0, __qtablewidgetitem10);
-        QTableWidgetItem *__qtablewidgetitem11 = new QTableWidgetItem();
-        __qtablewidgetitem11->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(1, 1, __qtablewidgetitem11);
-        QTableWidgetItem *__qtablewidgetitem12 = new QTableWidgetItem();
-        __qtablewidgetitem12->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(2, 0, __qtablewidgetitem12);
-        QTableWidgetItem *__qtablewidgetitem13 = new QTableWidgetItem();
-        __qtablewidgetitem13->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(2, 1, __qtablewidgetitem13);
-        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
-        __qtablewidgetitem14->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(3, 0, __qtablewidgetitem14);
-        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
-        __qtablewidgetitem15->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(3, 1, __qtablewidgetitem15);
-        QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
-        __qtablewidgetitem16->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(4, 0, __qtablewidgetitem16);
         QTableWidgetItem *__qtablewidgetitem17 = new QTableWidgetItem();
         __qtablewidgetitem17->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(4, 1, __qtablewidgetitem17);
+        FeatureTable->setItem(0, 0, __qtablewidgetitem17);
         QTableWidgetItem *__qtablewidgetitem18 = new QTableWidgetItem();
         __qtablewidgetitem18->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(5, 0, __qtablewidgetitem18);
+        FeatureTable->setItem(0, 1, __qtablewidgetitem18);
         QTableWidgetItem *__qtablewidgetitem19 = new QTableWidgetItem();
         __qtablewidgetitem19->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(5, 1, __qtablewidgetitem19);
+        FeatureTable->setItem(1, 0, __qtablewidgetitem19);
         QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
         __qtablewidgetitem20->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(6, 0, __qtablewidgetitem20);
+        FeatureTable->setItem(1, 1, __qtablewidgetitem20);
         QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
         __qtablewidgetitem21->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(6, 1, __qtablewidgetitem21);
+        FeatureTable->setItem(2, 0, __qtablewidgetitem21);
         QTableWidgetItem *__qtablewidgetitem22 = new QTableWidgetItem();
         __qtablewidgetitem22->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(7, 0, __qtablewidgetitem22);
+        FeatureTable->setItem(2, 1, __qtablewidgetitem22);
         QTableWidgetItem *__qtablewidgetitem23 = new QTableWidgetItem();
         __qtablewidgetitem23->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(7, 1, __qtablewidgetitem23);
+        FeatureTable->setItem(3, 0, __qtablewidgetitem23);
         QTableWidgetItem *__qtablewidgetitem24 = new QTableWidgetItem();
         __qtablewidgetitem24->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(8, 0, __qtablewidgetitem24);
+        FeatureTable->setItem(3, 1, __qtablewidgetitem24);
         QTableWidgetItem *__qtablewidgetitem25 = new QTableWidgetItem();
         __qtablewidgetitem25->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(8, 1, __qtablewidgetitem25);
-        QFont font1;
-        font1.setKerning(true);
+        FeatureTable->setItem(4, 0, __qtablewidgetitem25);
         QTableWidgetItem *__qtablewidgetitem26 = new QTableWidgetItem();
         __qtablewidgetitem26->setTextAlignment(Qt::AlignCenter);
-        __qtablewidgetitem26->setFont(font1);
-        FeatureTable->setItem(9, 0, __qtablewidgetitem26);
+        FeatureTable->setItem(4, 1, __qtablewidgetitem26);
         QTableWidgetItem *__qtablewidgetitem27 = new QTableWidgetItem();
         __qtablewidgetitem27->setTextAlignment(Qt::AlignCenter);
-        FeatureTable->setItem(9, 1, __qtablewidgetitem27);
+        FeatureTable->setItem(5, 0, __qtablewidgetitem27);
+        QTableWidgetItem *__qtablewidgetitem28 = new QTableWidgetItem();
+        __qtablewidgetitem28->setTextAlignment(Qt::AlignCenter);
+        FeatureTable->setItem(5, 1, __qtablewidgetitem28);
+        QTableWidgetItem *__qtablewidgetitem29 = new QTableWidgetItem();
+        __qtablewidgetitem29->setTextAlignment(Qt::AlignCenter);
+        FeatureTable->setItem(6, 0, __qtablewidgetitem29);
+        QTableWidgetItem *__qtablewidgetitem30 = new QTableWidgetItem();
+        __qtablewidgetitem30->setTextAlignment(Qt::AlignCenter);
+        FeatureTable->setItem(6, 1, __qtablewidgetitem30);
+        QTableWidgetItem *__qtablewidgetitem31 = new QTableWidgetItem();
+        __qtablewidgetitem31->setTextAlignment(Qt::AlignCenter);
+        FeatureTable->setItem(7, 0, __qtablewidgetitem31);
+        QTableWidgetItem *__qtablewidgetitem32 = new QTableWidgetItem();
+        __qtablewidgetitem32->setTextAlignment(Qt::AlignCenter);
+        FeatureTable->setItem(7, 1, __qtablewidgetitem32);
+        QTableWidgetItem *__qtablewidgetitem33 = new QTableWidgetItem();
+        __qtablewidgetitem33->setTextAlignment(Qt::AlignCenter);
+        FeatureTable->setItem(8, 0, __qtablewidgetitem33);
+        QTableWidgetItem *__qtablewidgetitem34 = new QTableWidgetItem();
+        __qtablewidgetitem34->setTextAlignment(Qt::AlignCenter);
+        FeatureTable->setItem(8, 1, __qtablewidgetitem34);
+        QFont font1;
+        font1.setKerning(true);
+        QTableWidgetItem *__qtablewidgetitem35 = new QTableWidgetItem();
+        __qtablewidgetitem35->setTextAlignment(Qt::AlignCenter);
+        __qtablewidgetitem35->setFont(font1);
+        FeatureTable->setItem(9, 0, __qtablewidgetitem35);
+        QTableWidgetItem *__qtablewidgetitem36 = new QTableWidgetItem();
+        __qtablewidgetitem36->setTextAlignment(Qt::AlignCenter);
+        FeatureTable->setItem(9, 1, __qtablewidgetitem36);
         FeatureTable->setObjectName("FeatureTable");
         FeatureTable->setGeometry(QRect(0, 0, 201, 511));
         QSizePolicy sizePolicy3(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
@@ -387,7 +393,7 @@ public:
         toolBox->setStyleSheet(QString::fromUtf8(""));
         page = new QWidget();
         page->setObjectName("page");
-        page->setGeometry(QRect(0, 0, 181, 51));
+        page->setGeometry(QRect(0, 0, 100, 30));
         BrightnessSlider = new QSlider(page);
         BrightnessSlider->setObjectName("BrightnessSlider");
         BrightnessSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -399,7 +405,7 @@ public:
         toolBox->addItem(page, QString::fromUtf8("Brightness"));
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
-        page_2->setGeometry(QRect(0, 0, 181, 51));
+        page_2->setGeometry(QRect(0, 0, 100, 30));
         ContrastSlider = new QSlider(page_2);
         ContrastSlider->setObjectName("ContrastSlider");
         ContrastSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -411,7 +417,7 @@ public:
         toolBox->addItem(page_2, QString::fromUtf8("Contrast"));
         Sharpeness = new QWidget();
         Sharpeness->setObjectName("Sharpeness");
-        Sharpeness->setGeometry(QRect(0, 0, 181, 51));
+        Sharpeness->setGeometry(QRect(0, 0, 100, 30));
         SharpnessSlider = new QSlider(Sharpeness);
         SharpnessSlider->setObjectName("SharpnessSlider");
         SharpnessSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -423,7 +429,7 @@ public:
         toolBox->addItem(Sharpeness, QString::fromUtf8("Sharpeness"));
         page_3 = new QWidget();
         page_3->setObjectName("page_3");
-        page_3->setGeometry(QRect(0, 0, 181, 51));
+        page_3->setGeometry(QRect(0, 0, 100, 30));
         HESlider = new QSlider(page_3);
         HESlider->setObjectName("HESlider");
         HESlider->setGeometry(QRect(0, 20, 151, 22));
@@ -435,7 +441,7 @@ public:
         toolBox->addItem(page_3, QString::fromUtf8("Histogram Equalization"));
         page_4 = new QWidget();
         page_4->setObjectName("page_4");
-        page_4->setGeometry(QRect(0, 0, 181, 51));
+        page_4->setGeometry(QRect(0, 0, 100, 30));
         NRSlider = new QSlider(page_4);
         NRSlider->setObjectName("NRSlider");
         NRSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -459,7 +465,7 @@ public:
         toolBox->addItem(page_7, QString::fromUtf8("Gamma Correction"));
         page_8 = new QWidget();
         page_8->setObjectName("page_8");
-        page_8->setGeometry(QRect(0, 0, 181, 51));
+        page_8->setGeometry(QRect(0, 0, 100, 30));
         resetButton = new QPushButton(page_8);
         resetButton->setObjectName("resetButton");
         resetButton->setGeometry(QRect(20, 0, 75, 24));
@@ -473,7 +479,7 @@ public:
         toolBox_2->setStyleSheet(QString::fromUtf8(""));
         page_5 = new QWidget();
         page_5->setObjectName("page_5");
-        page_5->setGeometry(QRect(0, 0, 181, 141));
+        page_5->setGeometry(QRect(0, 0, 100, 30));
         exposureTimeSlider = new QSlider(page_5);
         exposureTimeSlider->setObjectName("exposureTimeSlider");
         exposureTimeSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -485,7 +491,7 @@ public:
         toolBox_2->addItem(page_5, QString::fromUtf8("Exposure Time"));
         page_6 = new QWidget();
         page_6->setObjectName("page_6");
-        page_6->setGeometry(QRect(0, 0, 181, 141));
+        page_6->setGeometry(QRect(0, 0, 100, 30));
         gainSlider = new QSlider(page_6);
         gainSlider->setObjectName("gainSlider");
         gainSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -497,7 +503,7 @@ public:
         toolBox_2->addItem(page_6, QString::fromUtf8("Gain"));
         Sharpen_2 = new QWidget();
         Sharpen_2->setObjectName("Sharpen_2");
-        Sharpen_2->setGeometry(QRect(0, 0, 181, 141));
+        Sharpen_2->setGeometry(QRect(0, 0, 100, 30));
         dynamicRangeSlider = new QSlider(Sharpen_2);
         dynamicRangeSlider->setObjectName("dynamicRangeSlider");
         dynamicRangeSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -522,31 +528,19 @@ public:
         tabWidget->addTab(tab_3, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName("tab_2");
-        textEdit = new QTextEdit(tab_2);
-        textEdit->setObjectName("textEdit");
-        textEdit->setGeometry(QRect(30, 30, 104, 61));
+        grabButton = new QPushButton(tab_2);
+        grabButton->setObjectName("grabButton");
+        grabButton->setGeometry(QRect(30, 10, 131, 24));
         tabWidget->addTab(tab_2, QString());
         widget = new QWidget(dockWidgetContents_8);
         widget->setObjectName("widget");
         widget->setGeometry(QRect(0, 350, 211, 121));
+        label = new QLabel(widget);
+        label->setObjectName("label");
+        label->setGeometry(QRect(20, 20, 49, 16));
         label_2 = new QLabel(widget);
         label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(130, 10, 51, 20));
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(120, 30, 75, 31));
-        pushButton_2 = new QPushButton(widget);
-        pushButton_2->setObjectName("pushButton_2");
-        pushButton_2->setGeometry(QRect(120, 60, 75, 31));
-        label_4 = new QLabel(widget);
-        label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(10, 10, 111, 20));
-        pushButton_3 = new QPushButton(widget);
-        pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(20, 40, 75, 23));
-        pushButton_4 = new QPushButton(widget);
-        pushButton_4->setObjectName("pushButton_4");
-        pushButton_4->setGeometry(QRect(20, 60, 75, 23));
+        label_2->setGeometry(QRect(20, 50, 49, 16));
         rightDock->setWidget(dockWidgetContents_8);
         MainWindow->addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, rightDock);
         rightDock->raise();
@@ -560,8 +554,8 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget_2->setCurrentIndex(0);
-        tabWidget->setCurrentIndex(0);
+        tabWidget_2->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
         toolBox->setCurrentIndex(5);
         toolBox_2->setCurrentIndex(3);
 
@@ -578,8 +572,6 @@ public:
         recordButton->setText(QString());
         zoomInButton->setText(QString());
         zoomOutButton->setText(QString());
-        label_5->setText(QCoreApplication::translate("MainWindow", "176X144", nullptr));
-        label_6->setText(QCoreApplication::translate("MainWindow", "FPS: 30", nullptr));
         textBrowser->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -608,9 +600,27 @@ public:
         QTableWidgetItem *___qtablewidgetitem3 = tableWidget_2->item(0, 0);
         ___qtablewidgetitem3->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
         QTableWidgetItem *___qtablewidgetitem4 = tableWidget_2->item(0, 1);
-        ___qtablewidgetitem4->setText(QCoreApplication::translate("MainWindow", "1200", nullptr));
+        ___qtablewidgetitem4->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         QTableWidgetItem *___qtablewidgetitem5 = tableWidget_2->item(0, 2);
-        ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindow", "1100", nullptr));
+        ___qtablewidgetitem5->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem6 = tableWidget_2->item(1, 0);
+        ___qtablewidgetitem6->setText(QCoreApplication::translate("MainWindow", "2", nullptr));
+        QTableWidgetItem *___qtablewidgetitem7 = tableWidget_2->item(1, 1);
+        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem8 = tableWidget_2->item(1, 2);
+        ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem9 = tableWidget_2->item(2, 0);
+        ___qtablewidgetitem9->setText(QCoreApplication::translate("MainWindow", "3", nullptr));
+        QTableWidgetItem *___qtablewidgetitem10 = tableWidget_2->item(2, 1);
+        ___qtablewidgetitem10->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem11 = tableWidget_2->item(2, 2);
+        ___qtablewidgetitem11->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem12 = tableWidget_2->item(3, 0);
+        ___qtablewidgetitem12->setText(QCoreApplication::translate("MainWindow", "4", nullptr));
+        QTableWidgetItem *___qtablewidgetitem13 = tableWidget_2->item(3, 1);
+        ___qtablewidgetitem13->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem14 = tableWidget_2->item(3, 2);
+        ___qtablewidgetitem14->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         tableWidget_2->setSortingEnabled(__sortingEnabled);
 
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_4), QCoreApplication::translate("MainWindow", "Grab Coordinates", nullptr));
@@ -621,53 +631,53 @@ public:
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
         menuView->setTitle(QCoreApplication::translate("MainWindow", "View", nullptr));
         leftDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Feature Properties", nullptr));
-        QTableWidgetItem *___qtablewidgetitem6 = FeatureTable->horizontalHeaderItem(0);
-        ___qtablewidgetitem6->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
-        QTableWidgetItem *___qtablewidgetitem7 = FeatureTable->horizontalHeaderItem(1);
-        ___qtablewidgetitem7->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
+        QTableWidgetItem *___qtablewidgetitem15 = FeatureTable->horizontalHeaderItem(0);
+        ___qtablewidgetitem15->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
+        QTableWidgetItem *___qtablewidgetitem16 = FeatureTable->horizontalHeaderItem(1);
+        ___qtablewidgetitem16->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
 
         const bool __sortingEnabled1 = FeatureTable->isSortingEnabled();
         FeatureTable->setSortingEnabled(false);
-        QTableWidgetItem *___qtablewidgetitem8 = FeatureTable->item(0, 0);
-        ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "Brightness", nullptr));
-        QTableWidgetItem *___qtablewidgetitem9 = FeatureTable->item(0, 1);
-        ___qtablewidgetitem9->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        QTableWidgetItem *___qtablewidgetitem10 = FeatureTable->item(1, 0);
-        ___qtablewidgetitem10->setText(QCoreApplication::translate("MainWindow", "Contrast", nullptr));
-        QTableWidgetItem *___qtablewidgetitem11 = FeatureTable->item(1, 1);
-        ___qtablewidgetitem11->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        QTableWidgetItem *___qtablewidgetitem12 = FeatureTable->item(2, 0);
-        ___qtablewidgetitem12->setText(QCoreApplication::translate("MainWindow", "Sharpness", nullptr));
-        QTableWidgetItem *___qtablewidgetitem13 = FeatureTable->item(2, 1);
-        ___qtablewidgetitem13->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        QTableWidgetItem *___qtablewidgetitem14 = FeatureTable->item(3, 0);
-        ___qtablewidgetitem14->setText(QCoreApplication::translate("MainWindow", "HIstogram Equalization", nullptr));
-        QTableWidgetItem *___qtablewidgetitem15 = FeatureTable->item(3, 1);
-        ___qtablewidgetitem15->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        QTableWidgetItem *___qtablewidgetitem16 = FeatureTable->item(4, 0);
-        ___qtablewidgetitem16->setText(QCoreApplication::translate("MainWindow", "Noise Reduction", nullptr));
-        QTableWidgetItem *___qtablewidgetitem17 = FeatureTable->item(4, 1);
-        ___qtablewidgetitem17->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        QTableWidgetItem *___qtablewidgetitem18 = FeatureTable->item(5, 0);
-        ___qtablewidgetitem18->setText(QCoreApplication::translate("MainWindow", "Gamma Correction", nullptr));
-        QTableWidgetItem *___qtablewidgetitem19 = FeatureTable->item(5, 1);
-        ___qtablewidgetitem19->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
-        QTableWidgetItem *___qtablewidgetitem20 = FeatureTable->item(6, 0);
-        ___qtablewidgetitem20->setText(QCoreApplication::translate("MainWindow", "Exposure Time", nullptr));
-        QTableWidgetItem *___qtablewidgetitem21 = FeatureTable->item(6, 1);
-        ___qtablewidgetitem21->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        QTableWidgetItem *___qtablewidgetitem22 = FeatureTable->item(7, 0);
-        ___qtablewidgetitem22->setText(QCoreApplication::translate("MainWindow", "Gain", nullptr));
-        QTableWidgetItem *___qtablewidgetitem23 = FeatureTable->item(7, 1);
-        ___qtablewidgetitem23->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        QTableWidgetItem *___qtablewidgetitem24 = FeatureTable->item(8, 0);
-        ___qtablewidgetitem24->setText(QCoreApplication::translate("MainWindow", "Dynamic Range", nullptr));
-        QTableWidgetItem *___qtablewidgetitem25 = FeatureTable->item(8, 1);
-        ___qtablewidgetitem25->setText(QCoreApplication::translate("MainWindow", "60", nullptr));
-        QTableWidgetItem *___qtablewidgetitem26 = FeatureTable->item(9, 0);
-        ___qtablewidgetitem26->setText(QCoreApplication::translate("MainWindow", "Signal-to-Noise Ratio", nullptr));
-        QTableWidgetItem *___qtablewidgetitem27 = FeatureTable->item(9, 1);
-        ___qtablewidgetitem27->setText(QCoreApplication::translate("MainWindow", "40", nullptr));
+        QTableWidgetItem *___qtablewidgetitem17 = FeatureTable->item(0, 0);
+        ___qtablewidgetitem17->setText(QCoreApplication::translate("MainWindow", "Brightness", nullptr));
+        QTableWidgetItem *___qtablewidgetitem18 = FeatureTable->item(0, 1);
+        ___qtablewidgetitem18->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem19 = FeatureTable->item(1, 0);
+        ___qtablewidgetitem19->setText(QCoreApplication::translate("MainWindow", "Contrast", nullptr));
+        QTableWidgetItem *___qtablewidgetitem20 = FeatureTable->item(1, 1);
+        ___qtablewidgetitem20->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem21 = FeatureTable->item(2, 0);
+        ___qtablewidgetitem21->setText(QCoreApplication::translate("MainWindow", "Sharpness", nullptr));
+        QTableWidgetItem *___qtablewidgetitem22 = FeatureTable->item(2, 1);
+        ___qtablewidgetitem22->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem23 = FeatureTable->item(3, 0);
+        ___qtablewidgetitem23->setText(QCoreApplication::translate("MainWindow", "HIstogram Equalization", nullptr));
+        QTableWidgetItem *___qtablewidgetitem24 = FeatureTable->item(3, 1);
+        ___qtablewidgetitem24->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem25 = FeatureTable->item(4, 0);
+        ___qtablewidgetitem25->setText(QCoreApplication::translate("MainWindow", "Noise Reduction", nullptr));
+        QTableWidgetItem *___qtablewidgetitem26 = FeatureTable->item(4, 1);
+        ___qtablewidgetitem26->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem27 = FeatureTable->item(5, 0);
+        ___qtablewidgetitem27->setText(QCoreApplication::translate("MainWindow", "Gamma Correction", nullptr));
+        QTableWidgetItem *___qtablewidgetitem28 = FeatureTable->item(5, 1);
+        ___qtablewidgetitem28->setText(QCoreApplication::translate("MainWindow", "1", nullptr));
+        QTableWidgetItem *___qtablewidgetitem29 = FeatureTable->item(6, 0);
+        ___qtablewidgetitem29->setText(QCoreApplication::translate("MainWindow", "Exposure Time", nullptr));
+        QTableWidgetItem *___qtablewidgetitem30 = FeatureTable->item(6, 1);
+        ___qtablewidgetitem30->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem31 = FeatureTable->item(7, 0);
+        ___qtablewidgetitem31->setText(QCoreApplication::translate("MainWindow", "Gain", nullptr));
+        QTableWidgetItem *___qtablewidgetitem32 = FeatureTable->item(7, 1);
+        ___qtablewidgetitem32->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        QTableWidgetItem *___qtablewidgetitem33 = FeatureTable->item(8, 0);
+        ___qtablewidgetitem33->setText(QCoreApplication::translate("MainWindow", "Dynamic Range", nullptr));
+        QTableWidgetItem *___qtablewidgetitem34 = FeatureTable->item(8, 1);
+        ___qtablewidgetitem34->setText(QCoreApplication::translate("MainWindow", "60", nullptr));
+        QTableWidgetItem *___qtablewidgetitem35 = FeatureTable->item(9, 0);
+        ___qtablewidgetitem35->setText(QCoreApplication::translate("MainWindow", "Signal-to-Noise Ratio", nullptr));
+        QTableWidgetItem *___qtablewidgetitem36 = FeatureTable->item(9, 1);
+        ___qtablewidgetitem36->setText(QCoreApplication::translate("MainWindow", "40", nullptr));
         FeatureTable->setSortingEnabled(__sortingEnabled1);
 
         rightDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
@@ -695,24 +705,10 @@ public:
         STNR->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox_2->setItemText(toolBox_2->indexOf(page_9), QCoreApplication::translate("MainWindow", "Signal-to-Noise Ratio", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Control Component", nullptr));
-        textEdit->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><meta charset=\"utf-8\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"hr { height: 1px; border-width: 0; }\n"
-"li.unchecked::marker { content: \"\\2610\"; }\n"
-"li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI';\"><br /></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:'Microsoft YaHei UI'; font-weight:700;\">Input</span></p>\n"
-"<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0p"
-                        "x; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:'Microsoft YaHei UI'; font-weight:700;\"><br /></p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "Feature3 ", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "Device ", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Connnect", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWindow", "Disconnect", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "   Coordinates", nullptr));
-        pushButton_3->setText(QCoreApplication::translate("MainWindow", "test", nullptr));
-        pushButton_4->setText(QCoreApplication::translate("MainWindow", "test", nullptr));
+        grabButton->setText(QCoreApplication::translate("MainWindow", "Grab Coordinates", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "ROI Grayscale Analysis ", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "176x144", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "30fps", nullptr));
     } // retranslateUi
 
 };

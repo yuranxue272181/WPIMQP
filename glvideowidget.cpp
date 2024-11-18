@@ -157,7 +157,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     ,selectionStart(-1, -1)
     ,selectionEnd(-1, -1)
     ,selecting(false)
-    ,trackingEnabled(true) //test, remember to reset to false
+    ,trackingEnabled(false)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
@@ -720,4 +720,5 @@ void GLVideoWidget::mouseReleaseEvent(QMouseEvent *event) {
 
 void GLVideoWidget::setTrackingEnabled(bool enabled) {
     trackingEnabled = enabled;
+    update();
 }

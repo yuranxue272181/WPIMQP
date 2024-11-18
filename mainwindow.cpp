@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     zoomInBtn = ui->zoomInButton;
     zoomOutBtn = ui->zoomOutButton;
     resetBtn = ui-> resetButton;
+    grabBtn = ui-> grabButton;
     // dock widget
     leftDk = ui-> leftDock;
     rightDk = ui -> rightDock;
@@ -55,8 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     //table
     featuresTable = ui->FeatureTable;
 
-
-    //initialize slider
+    //initialize
     brightnessSlider ->setRange(-100, 100);
     brightnessSlider ->setValue(0);
     contrastSlider ->setRange(-100, 100);
@@ -78,6 +78,7 @@ MainWindow::MainWindow(QWidget *parent)
     dynamicRangeSlider -> setValue(60);
     STNRSlider -> setRange(30,70);
     STNRSlider -> setValue(40);
+    grabBtn -> setCheckable(true);
 
 
     // set icons
@@ -121,6 +122,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(gainSlider, &QSlider::sliderMoved, this, &MainWindow::setGainValue);
     connect(dynamicRangeSlider, &QSlider::sliderMoved, this, &MainWindow::setDynamicRangeValue);
     connect(STNRSlider, &QSlider::sliderMoved, this, &MainWindow::setSTNRValue);
+    connect(grabBtn,&QPushButton::clicked,this,&MainWindow::setTrackingEnabled);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -327,5 +329,9 @@ void MainWindow::setSTNRValue(int value){
     QTableWidgetItem *item = featuresTable->item(9,1);
     item->setText(QString::number(value));
     //在这里调用你的function
+}
+
+void MainWindow::setTrackingEnabled(){
+    gl -> setTrackingEnabled(grabBtn->isChecked());
 }
 
