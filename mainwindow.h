@@ -10,7 +10,6 @@
 #include <QSlider>
 #include <QLabel>
 #include <QTableWidget>
-#include <algorithm>
 
 
 QT_BEGIN_NAMESPACE
