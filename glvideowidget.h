@@ -42,6 +42,7 @@ public:
     bool toggleRecording();
     void refreshData();
     bool isPausedVideo();
+    void setTrackingEnabled(bool enabled);
 
 
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
@@ -50,9 +51,12 @@ protected:
     void bindPlane(int p);
     void initializeShader();
     void initTextures();
-    virtual void initializeGL();
-    virtual void paintGL();
-    virtual void resizeGL(int w, int h);
+    virtual void initializeGL() override;
+    virtual void paintGL() override;
+    virtual void resizeGL(int w, int h) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private:
     //basic effects
@@ -83,6 +87,10 @@ private:
     QByteArray recordingData;
     QString filePath;
     int frameCount;
+    QPoint selectionStart;
+    QPoint selectionEnd;
+    bool selecting;
+    bool trackingEnabled;
 
     typedef struct {
         char* data;

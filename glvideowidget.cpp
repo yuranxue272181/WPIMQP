@@ -154,6 +154,10 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     , currentNRValue(0.0f)
     , currentGammaValue(1.0f)
     ,frameCount(0)
+    ,selectionStart(-1, -1)
+    ,selectionEnd(-1, -1)
+    ,selecting(false)
+    ,trackingEnabled(true) //test, remember to reset to false
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
@@ -539,12 +543,29 @@ void GLVideoWidget::paintGL()
     for (int i = 0; attr[i][0]; ++i) {
         m_program->disableAttributeArray(i);
     }
+    if (trackingEnabled) {
+        QPainter painter(this);
+        painter.setRenderHint(QPainter::Antialiasing);
+        // Calculate the coordinates of the rectangle
+        int x = std::min(selectionStart.x(), selectionEnd.x());
+        int y = std::min(selectionStart.y(), selectionEnd.y());
+        int width = std::abs(selectionEnd.x() - selectionStart.x());
+        int height = std::abs(selectionEnd.y() - selectionStart.y());
+        // set color
+        painter.setBrush(QBrush(Qt::NoBrush));
+        painter.setPen(QPen(Qt::red));
+        // draw
+        painter.drawRect(x, y, width, height);
+        painter.end();
+    }
 }
 
 // initialize openGL
 void GLVideoWidget::initializeGL()
 {
     initializeOpenGLFunctions();
+    //opengl version
+    //qDebug() << "OpenGL Version:" << (const char*)glGetString(GL_VERSION);
 }
 
 // resize openGL
@@ -665,3 +686,38 @@ void GLVideoWidget::refreshData(){
     setFrameData(frameData);
 }
 
+//mouse event
+//choosing line
+void GLVideoWidget::mousePressEvent(QMouseEvent *event) {
+    if (!trackingEnabled) {
+        return;
+    }
+    if (event->button() == Qt::LeftButton) {
+        selectionStart = event->pos(); // start point
+        selecting = true;
+    }
+}
+
+void GLVideoWidget::mouseMoveEvent(QMouseEvent *event) {
+    if (!trackingEnabled) {
+        return;
+    }
+    selectionEnd = event->pos();
+    update();
+}
+void GLVideoWidget::mouseReleaseEvent(QMouseEvent *event) {
+    if (!trackingEnabled || !selecting) {
+        return;
+    }
+
+    if (event->button() == Qt::LeftButton) {
+        selectionEnd = event->pos();
+        selecting = false;
+        //processSelection();
+        update();
+    }
+}
+
+void GLVideoWidget::setTrackingEnabled(bool enabled) {
+    trackingEnabled = enabled;
+}
