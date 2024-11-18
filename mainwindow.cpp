@@ -55,8 +55,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     //table
     featuresTable = ui->FeatureTable;
+    coordTable = ui->coordinatesTable;
 
-    //initialize
+    //initialize slider and button
     brightnessSlider ->setRange(-100, 100);
     brightnessSlider ->setValue(0);
     contrastSlider ->setRange(-100, 100);
@@ -79,9 +80,10 @@ MainWindow::MainWindow(QWidget *parent)
     STNRSlider -> setRange(30,70);
     STNRSlider -> setValue(40);
     grabBtn -> setCheckable(true);
+    grabBtn -> setEnabled(false);
 
 
-    // set icons
+    // initialize icons
     startBtn->setIcon(QIcon(":/icons/restart.png"));
     startBtn->setIconSize(QSize(30,30));
     playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
@@ -123,6 +125,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(dynamicRangeSlider, &QSlider::sliderMoved, this, &MainWindow::setDynamicRangeValue);
     connect(STNRSlider, &QSlider::sliderMoved, this, &MainWindow::setSTNRValue);
     connect(grabBtn,&QPushButton::clicked,this,&MainWindow::setTrackingEnabled);
+    connect(gl, &GLVideoWidget::selectionCompleted, this, &MainWindow::onSelectionCompleted);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -153,6 +156,7 @@ void MainWindow::renderVideo(){
     shootBtn->setEnabled(true);
     recordBtn->setEnabled(true);
     HESlider -> setEnabled(true);
+    grabBtn -> setEnabled(true);
 
     //open the YUV file
     //176x144
@@ -203,11 +207,15 @@ void MainWindow::onVideoFinished(){
 // Zoom in the video
 void MainWindow::zoomIn(){
     videoWdt->resize(videoWdt->width() * 1.1, videoWdt->height() * 1.1);
+    if(grabBtn->isChecked())
+        gl-> imageCoordinates();
 }
 
-// Zoom in the video
+// Zoom out the video
 void MainWindow::zoomOut(){
     videoWdt->resize(videoWdt->width() * 0.9, videoWdt->height() * 0.9);
+    if(grabBtn->isChecked())
+        gl-> imageCoordinates();
 }
 
 // Start recording or stop recording, reset the UI
@@ -334,4 +342,26 @@ void MainWindow::setSTNRValue(int value){
 void MainWindow::setTrackingEnabled(){
     gl -> setTrackingEnabled(grabBtn->isChecked());
 }
+
+void MainWindow::onSelectionCompleted(const QPointF &start, const QPointF &end) {
+
+    QTableWidgetItem *x1 = coordTable->item(0,0);
+    QTableWidgetItem *y1 = coordTable->item(0,1);
+    x1->setText(QString::number(start.x()));
+    y1->setText(QString::number(start.y()));
+    QTableWidgetItem *x2 = coordTable->item(1,0);
+    QTableWidgetItem *y2 = coordTable->item(1,1);
+    x2->setText(QString::number(end.x()));
+    y2->setText(QString::number(start.y()));
+    QTableWidgetItem *x3 = coordTable->item(2,0);
+    QTableWidgetItem *y3 = coordTable->item(2,1);
+    x3->setText(QString::number(start.x()));
+    y3->setText(QString::number(end.y()));
+    QTableWidgetItem *x4 = coordTable->item(3,0);
+    QTableWidgetItem *y4 = coordTable->item(3,1);
+    x4->setText(QString::number(end.x()));
+    y4->setText(QString::number(end.y()));
+}
+
+
 
