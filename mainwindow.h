@@ -10,7 +10,6 @@
 #include <QSlider>
 #include <QLabel>
 #include <QTableWidget>
-#include <algorithm>
 
 
 QT_BEGIN_NAMESPACE
@@ -99,10 +98,6 @@ private:
 
 signals:
     // void glInitialized();
-
-
-
-
 
 
 
