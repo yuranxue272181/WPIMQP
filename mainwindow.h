@@ -10,6 +10,7 @@
 #include <QSlider>
 #include <QLabel>
 #include <QTableWidget>
+#include <algorithm>
 
 
 QT_BEGIN_NAMESPACE
@@ -48,6 +49,7 @@ private slots:
     void setDynamicRangeValue(int value);
     void setSTNRValue(int value);
     void setTrackingEnabled();
+    void onSelectionCompleted(const QPointF &start, const QPointF &end);
 
 private:
     QByteArray testData;
@@ -92,11 +94,13 @@ private:
     QLabel *STNRValue;
 
     QTableWidget *featuresTable;
-
+    QTableWidget *coordTable;
 
 
 signals:
     // void glInitialized();
+
+
 
 
 

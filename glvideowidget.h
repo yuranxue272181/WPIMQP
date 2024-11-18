@@ -43,6 +43,7 @@ public:
     void refreshData();
     bool isPausedVideo();
     void setTrackingEnabled(bool enabled);
+    void imageCoordinates();
 
 
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
@@ -75,8 +76,8 @@ private:
     bool isRecording = false;
     bool update_res;
     bool upload_tex;
-    int width;
-    int height;
+    int videoWidth;
+    int videoHeight;
     //char *pitch[3];
     QByteArray m_data;
     QImage m_image;
@@ -114,9 +115,11 @@ private:
     void processNextFrame();
     void setFrameData(const QByteArray& data);
     void computeHistogramEqualization(char* yuvData);
+    QPointF mapToImageCoordinates(const QPoint &point);
 
 signals:
     void videoFinished();
+    void selectionCompleted(const QPointF &start, const QPointF &end);
 
 public slots:
     void setBrightness(float value);

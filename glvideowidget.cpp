@@ -188,8 +188,8 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
     //qDebug() << "Pointer address11111:" << static_cast<const void*>(plane[0].data);
 
     if (plane.size() > 1) {
-        plane[1].data = plane[0].data + plane[0].stride*height;
-        plane[2].data = plane[1].data + plane[1].stride*height/2;
+        plane[1].data = plane[0].data + plane[0].stride*videoHeight;
+        plane[2].data = plane[1].data + plane[1].stride*videoHeight/2;
     }
     update();
 }
@@ -208,7 +208,7 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
 
 //Get the data for each frame and render it
 void GLVideoWidget::processNextFrame() {
-    int frameSize = (width * height) + (width / 2 * height / 2) * 2;
+    int frameSize = (videoWidth * videoHeight) + (videoWidth / 2 * videoHeight / 2) * 2;
     if (currentFrameIndex * frameSize < videoData.size()) {
         frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
         setFrameData(frameData);
@@ -440,8 +440,8 @@ void GLVideoWidget::setYUV420pParameters(int w, int h, int *strides)
     update_res = true;
     m_data.clear();
     m_image = QImage();
-    width = w;
-    height = h;
+    videoWidth = w;
+    videoHeight = h;
     plane.resize(3);
     Plane &p = plane[0];
     p.data = 0;
@@ -475,8 +475,8 @@ void GLVideoWidget::setQImageParameters(QImage::Format fmt, int w, int h, int st
     update_res = true;
     m_data.clear();
     m_image = QImage();
-    width = w;
-    height = h;
+    videoWidth = w;
+    videoHeight = h;
     plane.resize(1);
     Plane &p = plane[0];
     p.data = 0;
@@ -512,7 +512,7 @@ void GLVideoWidget::paintGL()
         qDebug() << "No frame data to render!";
         return;
     }
-    //qDebug() << "Rendering frame with width:" << width << "height:" << height;
+    //qDebug() << "Rendering frame with width:" << videoWidth << "height:" << videoHeight;
 
 
     if (update_res || !tex[0]) {
@@ -648,7 +648,7 @@ void GLVideoWidget::initializeShader()
 void GLVideoWidget::computeHistogramEqualization(char* data){
     const int L = 256; //gray scale
     int histogram[L] = {0};
-    int totalPixels = width * height;
+    int totalPixels = videoWidth * videoHeight;
 
     //calculate the histogram
     for (int i = 0; i < totalPixels; ++i) {
@@ -709,16 +709,42 @@ void GLVideoWidget::mouseReleaseEvent(QMouseEvent *event) {
     if (!trackingEnabled || !selecting) {
         return;
     }
-
     if (event->button() == Qt::LeftButton) {
         selectionEnd = event->pos();
         selecting = false;
         //processSelection();
+        imageCoordinates();
         update();
     }
 }
 
+//set tracking enabled
 void GLVideoWidget::setTrackingEnabled(bool enabled) {
     trackingEnabled = enabled;
     update();
+}
+
+//convert map coordinates to image coordinates
+QPointF GLVideoWidget::mapToImageCoordinates(const QPoint &point) {
+    float xRatio = static_cast<float>(176) / this->width();
+    float yRatio = static_cast<float>(144) / this->height();
+    return QPointF(point.x() * xRatio, point.y() * yRatio);
+}
+
+//emit image coordinates
+void GLVideoWidget::imageCoordinates(){
+    QPointF start = mapToImageCoordinates(selectionStart);
+    QPointF end = mapToImageCoordinates(selectionEnd);
+    if (start.x() < 0.0) start.setX(0.0);
+    else if (start.x() > videoWidth) start.setX(videoWidth);
+
+    if (start.y() < 0.0) start.setY(0.0);
+    else if (start.y() > videoHeight) start.setY(videoHeight);
+
+    if (end.x() < 0.0) end.setX(0.0);
+    else if (end.x() > videoWidth) end.setX(videoWidth);
+
+    if (end.y() < 0.0) end.setY(0.0);
+    else if (end.y() > videoHeight) end.setY(videoHeight);
+    emit selectionCompleted(start, end);
 }
