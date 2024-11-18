@@ -344,7 +344,6 @@ void MainWindow::setTrackingEnabled(){
 }
 
 void MainWindow::onSelectionCompleted(const QPointF &start, const QPointF &end) {
-
     QTableWidgetItem *x1 = coordTable->item(0,0);
     QTableWidgetItem *y1 = coordTable->item(0,1);
     x1->setText(QString::number(start.x()));
