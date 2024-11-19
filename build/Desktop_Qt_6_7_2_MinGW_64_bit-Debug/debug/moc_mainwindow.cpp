@@ -62,8 +62,10 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
     "start",
     "end",
     "updateAnalysis",
-    "QList<int>&",
-    "grayValues"
+    "std::shared_ptr<QList<int>>",
+    "grayValues",
+    "selectedWidth",
+    "selectedHeight"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -103,7 +105,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       19,    1,  168,    2, 0x08,   26 /* Private */,
       20,    0,  171,    2, 0x08,   28 /* Private */,
       21,    2,  172,    2, 0x08,   29 /* Private */,
-      24,    1,  177,    2, 0x08,   32 /* Private */,
+      24,    3,  177,    2, 0x08,   32 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -125,7 +127,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QPointF, QMetaType::QPointF,   22,   23,
-    QMetaType::Void, 0x80000000 | 25,   26,
+    QMetaType::Void, 0x80000000 | 25, QMetaType::Int, QMetaType::Int,   26,   27,   28,
 
        0        // eod
 };
@@ -191,7 +193,9 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<const QPointF &, std::false_type>,
         // method 'updateAnalysis'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        QtPrivate::TypeAndForceComplete<QVector<int> &, std::false_type>
+        QtPrivate::TypeAndForceComplete<std::shared_ptr<QVector<int>>, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>
     >,
     nullptr
 } };
@@ -221,7 +225,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 16: _t->setSTNRValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         case 17: _t->setTrackingEnabled(); break;
         case 18: _t->onSelectionCompleted((*reinterpret_cast< std::add_pointer_t<QPointF>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QPointF>>(_a[2]))); break;
-        case 19: _t->updateAnalysis((*reinterpret_cast< std::add_pointer_t<QList<int>&>>(_a[1]))); break;
+        case 19: _t->updateAnalysis((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<QList<int>>>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
         default: ;
         }
     }
