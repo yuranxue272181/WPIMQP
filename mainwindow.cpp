@@ -375,36 +375,51 @@ void MainWindow::onSelectionCompleted(const QPointF &start, const QPointF &end) 
 }
 
 //update data analysis to the table
-void MainWindow::updateAnalysis(QVector<int> &grayValues){
-    float mean = 0.0f;
-    if (grayValues.size() > 0) {
+void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int selectedWidth, int selectedHeight){
+    if (!grayValues || grayValues->isEmpty()) {
+        qWarning() << "Received null or empty grayValues!";
+        return;
+    }
     //mean
-    for(int index = 0; index<grayValues.size(); index++){
-        mean+=grayValues[index];
-    }
-    mean = mean/grayValues.size();
-    }
+    float mean = meanCal(grayValues);
     QTableWidgetItem *meanItem = analysisTable -> item(2,1);
     meanItem->setText(QString::number(mean));
 
     //min & max
-    float minValue = *std::min_element(grayValues.begin(), grayValues.end());
-    float maxValue = *std::max_element(grayValues.begin(), grayValues.end());
+    float minValue = *std::min_element(grayValues->begin(), grayValues->end());
+    float maxValue = *std::max_element(grayValues->begin(), grayValues->end());
     QTableWidgetItem *minItem = analysisTable -> item(0,1);
     minItem->setText(QString::number(minValue));
     QTableWidgetItem *maxItem = analysisTable -> item(1,1);
     maxItem->setText(QString::number(maxValue));
 
     //standard deviation
-    float variance = 0.0f;
-    for (int index = 0; index < grayValues.size(); index++) {
-        variance += (grayValues[index] - mean) * (grayValues[index] - mean);
-    }
-    variance = variance / grayValues.size();
-    float standardDeviation = sqrt(variance);
-
+    float standardDeviation = standardDeviationCal(grayValues,mean);
     QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
     stdDevItem->setText(QString::number(standardDeviation));
+
+    //
+
+}
+
+float MainWindow::meanCal(std::shared_ptr<QVector<int>> grayValues){
+    //mean
+    float mean = 0.0f;
+    for (int value : *grayValues) {
+        mean += value;
+    }
+    mean /= grayValues->size();
+    return mean;
+}
+
+float MainWindow::standardDeviationCal(std::shared_ptr<QVector<int>> grayValues, float mean){
+    float variance = 0.0f;
+    for (int value : *grayValues) {
+        variance += (value - mean) * (value - mean);
+    }
+    variance /= grayValues->size();
+    float standardDeviation = sqrt(variance);
+    return standardDeviation;
 }
 
 

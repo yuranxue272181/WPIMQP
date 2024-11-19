@@ -126,7 +126,7 @@ private:
 signals:
     void videoFinished();
     void selectionCompleted(const QPointF &start, const QPointF &end);
-    void updateGrayValues(QVector<int> &grayValues);
+    void updateGrayValues(std::shared_ptr<QVector<int>> grayValues, int selectedWidth, int selectedHeight);
 
 public slots:
     void setBrightness(float value);

@@ -772,6 +772,8 @@ void GLVideoWidget::processSelection() {
         yStart = end.y();
         yEnd = start.y();
     }
+    int selectedWidth = xEnd - xStart + 1;
+    int selectedHeight = yEnd - yStart + 1;
 
     uchar *yPlane = reinterpret_cast<uchar*>(frameData.data());
     QVector<int> grayValues;
@@ -783,7 +785,7 @@ void GLVideoWidget::processSelection() {
             grayValues.append(static_cast<int>(grayValue));
         }
     }
-    emit updateGrayValues(grayValues);
+    emit updateGrayValues(std::make_shared<QVector<int>> (grayValues), selectedWidth, selectedHeight);
 }
 //set zoom factor (zoom in and zoom out)
 void GLVideoWidget::setZoomFactor(float factor){

@@ -49,7 +49,7 @@ private slots:
     void setSTNRValue(int value);
     void setTrackingEnabled();
     void onSelectionCompleted(const QPointF &start, const QPointF &end);
-    void updateAnalysis(QVector<int> &grayValues);
+    void updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int selectedWidth, int selectedHeight);
 
 private:
     QByteArray testData;
@@ -104,10 +104,9 @@ signals:
     // void glInitialized();
 
 
-
-
-
-
+private:
+    float meanCal(std::shared_ptr<QVector<int>> grayValues);
+    float standardDeviationCal(std::shared_ptr<QVector<int>> grayValues, float mean);
 
 };
 #endif // MAINWINDOW_H
