@@ -785,7 +785,7 @@ void GLVideoWidget::processSelection() {
     }
     emit updateGrayValues(grayValues);
 }
-//zoom in and zoom out
+//set zoom factor (zoom in and zoom out)
 void GLVideoWidget::setZoomFactor(float factor){
     zoomFactor = factor;
     qDebug()<<zoomFactor;

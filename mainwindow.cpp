@@ -376,16 +376,24 @@ void MainWindow::onSelectionCompleted(const QPointF &start, const QPointF &end) 
 
 //update data analysis to the table
 void MainWindow::updateAnalysis(QVector<int> &grayValues){
-    //mean
     float mean = 0.0f;
     if (grayValues.size() > 0) {
+    //mean
     for(int index = 0; index<grayValues.size(); index++){
         mean+=grayValues[index];
     }
     mean = mean/grayValues.size();
     }
-    QTableWidgetItem *meanItem = analysisTable -> item(0,1);
+    QTableWidgetItem *meanItem = analysisTable -> item(2,1);
     meanItem->setText(QString::number(mean));
+
+    //min & max
+    float minValue = *std::min_element(grayValues.begin(), grayValues.end());
+    float maxValue = *std::max_element(grayValues.begin(), grayValues.end());
+    QTableWidgetItem *minItem = analysisTable -> item(0,1);
+    minItem->setText(QString::number(minValue));
+    QTableWidgetItem *maxItem = analysisTable -> item(1,1);
+    maxItem->setText(QString::number(maxValue));
 
     //standard deviation
     float variance = 0.0f;
@@ -395,7 +403,7 @@ void MainWindow::updateAnalysis(QVector<int> &grayValues){
     variance = variance / grayValues.size();
     float standardDeviation = sqrt(variance);
 
-    QTableWidgetItem *stdDevItem = analysisTable->item(1, 1);
+    QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
     stdDevItem->setText(QString::number(standardDeviation));
 }
 
