@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    zoomFactor = 1.0f;
+
     // ui connection
     // button
     startBtn = ui->startButton;
@@ -56,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent)
     //table
     featuresTable = ui->FeatureTable;
     coordTable = ui->coordinatesTable;
+    analysisTable = ui->analysisTable;
 
     //initialize slider and button
     brightnessSlider ->setRange(-100, 100);
@@ -126,6 +129,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(STNRSlider, &QSlider::sliderMoved, this, &MainWindow::setSTNRValue);
     connect(grabBtn,&QPushButton::clicked,this,&MainWindow::setTrackingEnabled);
     connect(gl, &GLVideoWidget::selectionCompleted, this, &MainWindow::onSelectionCompleted);
+    connect(gl, &GLVideoWidget::updateGrayValues, this, &MainWindow::updateAnalysis);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -206,16 +210,24 @@ void MainWindow::onVideoFinished(){
 
 // Zoom in the video
 void MainWindow::zoomIn(){
-    videoWdt->resize(videoWdt->width() * 1.1, videoWdt->height() * 1.1);
-    if(grabBtn->isChecked())
-        gl-> imageCoordinates();
+    if(zoomFactor<qPow(1.05, 6))
+    zoomFactor *= 1.05;
+    videoWdt->resize(352*zoomFactor, 288*zoomFactor);
+    if(grabBtn->isChecked()){
+        gl->setZoomFactor(zoomFactor);
+    }
 }
 
 // Zoom out the video
 void MainWindow::zoomOut(){
-    videoWdt->resize(videoWdt->width() * 0.9, videoWdt->height() * 0.9);
-    if(grabBtn->isChecked())
-        gl-> imageCoordinates();
+    if(zoomFactor>1)
+        zoomFactor *= 0.95;
+    if(zoomFactor<1)
+        zoomFactor =1;
+    videoWdt->resize(352*zoomFactor, 288*zoomFactor);
+    if(grabBtn->isChecked()){
+        gl->setZoomFactor(zoomFactor);
+    }
 }
 
 // Start recording or stop recording, reset the UI
@@ -315,28 +327,28 @@ void MainWindow::setExposureTimeValue(int value){
     exposureTimeValue -> setText(QString::number(value));
     QTableWidgetItem *item = featuresTable->item(6,1);
     item->setText(QString::number(value));
-    //在这里调用你的function
+
 }
 //hardware set gain
 void MainWindow::setGainValue(int value){
     gainValue -> setText(QString::number(value));
     QTableWidgetItem *item = featuresTable->item(7,1);
     item->setText(QString::number(value));
-    //在这里调用你的function
+
 }
 //hardware set dynamic range
 void MainWindow::setDynamicRangeValue(int value){
     dynamicRangeValue -> setText(QString::number(value));
     QTableWidgetItem *item = featuresTable->item(8,1);
     item->setText(QString::number(value));
-    //在这里调用你的function
+
 }
 //hardware set signal to noise ratio
 void MainWindow::setSTNRValue(int value){
     STNRValue-> setText(QString::number(value));
     QTableWidgetItem *item = featuresTable->item(9,1);
     item->setText(QString::number(value));
-    //在这里调用你的function
+
 }
 
 void MainWindow::setTrackingEnabled(){
@@ -361,6 +373,40 @@ void MainWindow::onSelectionCompleted(const QPointF &start, const QPointF &end) 
     x4->setText(QString::number(end.x()));
     y4->setText(QString::number(end.y()));
 }
+
+//update data analysis to the table
+void MainWindow::updateAnalysis(QVector<int> &grayValues){
+    float mean = 0.0f;
+    if (grayValues.size() > 0) {
+    //mean
+    for(int index = 0; index<grayValues.size(); index++){
+        mean+=grayValues[index];
+    }
+    mean = mean/grayValues.size();
+    }
+    QTableWidgetItem *meanItem = analysisTable -> item(2,1);
+    meanItem->setText(QString::number(mean));
+
+    //min & max
+    float minValue = *std::min_element(grayValues.begin(), grayValues.end());
+    float maxValue = *std::max_element(grayValues.begin(), grayValues.end());
+    QTableWidgetItem *minItem = analysisTable -> item(0,1);
+    minItem->setText(QString::number(minValue));
+    QTableWidgetItem *maxItem = analysisTable -> item(1,1);
+    maxItem->setText(QString::number(maxValue));
+
+    //standard deviation
+    float variance = 0.0f;
+    for (int index = 0; index < grayValues.size(); index++) {
+        variance += (grayValues[index] - mean) * (grayValues[index] - mean);
+    }
+    variance = variance / grayValues.size();
+    float standardDeviation = sqrt(variance);
+
+    QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
+    stdDevItem->setText(QString::number(standardDeviation));
+}
+
 
 
 

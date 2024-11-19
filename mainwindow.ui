@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>554</height>
+    <height>582</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -176,7 +176,7 @@
       <x>20</x>
       <y>350</y>
       <width>349</width>
-      <height>161</height>
+      <height>191</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -195,18 +195,90 @@
      <attribute name="title">
       <string>ROI Grayscale Analysis</string>
      </attribute>
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QTableWidget" name="analysisTable">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
         <width>311</width>
-        <height>111</height>
+        <height>161</height>
        </rect>
       </property>
       <property name="editTriggers">
        <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
       </property>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column>
+       <property name="text">
+        <string>Analysis</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Value</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>Min</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="0" column="1">
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="1" column="0">
+       <property name="text">
+        <string>Max</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="1" column="1">
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="2" column="0">
+       <property name="text">
+        <string>Average</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="2" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="3" column="0">
+       <property name="text">
+        <string>Standard Deviation</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="3" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_5">
@@ -219,7 +291,7 @@
         <x>0</x>
         <y>0</y>
         <width>321</width>
-        <height>141</height>
+        <height>191</height>
        </rect>
       </property>
       <property name="minimumSize">
@@ -604,7 +676,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
        <x>10</x>
        <y>0</y>
        <width>201</width>
-       <height>301</height>
+       <height>311</height>
       </rect>
      </property>
      <property name="layoutDirection">
@@ -626,14 +698,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <x>10</x>
          <y>10</y>
          <width>181</width>
-         <height>261</height>
+         <height>271</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true"/>
        </property>
        <property name="currentIndex">
-        <number>5</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="page">
         <property name="geometry">
@@ -641,7 +713,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>51</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -683,7 +755,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>51</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -725,7 +797,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>51</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -767,7 +839,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>51</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -809,7 +881,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>51</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -851,7 +923,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>51</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -893,7 +965,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>51</height>
+          <height>61</height>
          </rect>
         </property>
         <attribute name="label">
@@ -925,7 +997,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <x>10</x>
          <y>14</y>
          <width>181</width>
-         <height>261</height>
+         <height>271</height>
         </rect>
        </property>
        <property name="styleSheet">
@@ -1023,8 +1095,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>100</width>
-          <height>30</height>
+          <width>181</width>
+          <height>241</height>
          </rect>
         </property>
         <attribute name="label">
@@ -1066,7 +1138,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
           <x>0</x>
           <y>0</y>
           <width>181</width>
-          <height>141</height>
+          <height>151</height>
          </rect>
         </property>
         <attribute name="label">
@@ -1109,7 +1181,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>300</y>
+       <y>320</y>
        <width>211</width>
        <height>201</height>
       </rect>

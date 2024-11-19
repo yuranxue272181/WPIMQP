@@ -49,6 +49,7 @@ private slots:
     void setSTNRValue(int value);
     void setTrackingEnabled();
     void onSelectionCompleted(const QPointF &start, const QPointF &end);
+    void updateAnalysis(QVector<int> &grayValues);
 
 private:
     QByteArray testData;
@@ -94,10 +95,17 @@ private:
 
     QTableWidget *featuresTable;
     QTableWidget *coordTable;
+    QTableWidget *analysisTable;
+
+    float zoomFactor;
 
 
 signals:
     // void glInitialized();
+
+
+
+
 
 
 
