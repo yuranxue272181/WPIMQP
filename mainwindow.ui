@@ -211,6 +211,9 @@
       <row/>
       <row/>
       <row/>
+      <row/>
+      <row/>
+      <row/>
       <column>
        <property name="text">
         <string>Analysis</string>
@@ -272,6 +275,54 @@
        </property>
       </item>
       <item row="3" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="4" column="0">
+       <property name="text">
+        <string>Row Noise</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="4" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="5" column="0">
+       <property name="text">
+        <string>Column Noise</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="5" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="6" column="0">
+       <property name="text">
+        <string>Pixel Noise</string>
+       </property>
+       <property name="textAlignment">
+        <set>AlignCenter</set>
+       </property>
+      </item>
+      <item row="6" column="1">
        <property name="text">
         <string/>
        </property>
@@ -712,8 +763,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>181</width>
-          <height>61</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="label">
@@ -796,8 +847,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>181</width>
-          <height>61</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="label">
@@ -838,8 +889,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>181</width>
-          <height>61</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="label">
@@ -880,8 +931,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>181</width>
-          <height>61</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="label">
@@ -922,8 +973,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>181</width>
-          <height>61</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="label">
@@ -964,8 +1015,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>181</width>
-          <height>61</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="label">
@@ -1095,8 +1146,8 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>181</width>
-          <height>241</height>
+          <width>100</width>
+          <height>30</height>
          </rect>
         </property>
         <attribute name="label">

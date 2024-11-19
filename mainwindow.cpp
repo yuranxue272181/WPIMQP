@@ -398,10 +398,19 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
     QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
     stdDevItem->setText(QString::number(standardDeviation));
 
-    //
+    //row noise
+    float rowNoise = calculateAllRowNoise(grayValues, selectedHeight, selectedWidth);
+    //qDebug()<<"row noise"<<rowNoise;
+    QTableWidgetItem *rowItem = analysisTable->item(4, 1);
+    rowItem->setText(QString::number(rowNoise));
 
+    //column noise
+    float columnNoise = calculateAllColumnNoise(grayValues, selectedHeight, selectedWidth);
+    //qDebug()<<"column noise"<<columnNoise;
+    QTableWidgetItem *columnItem = analysisTable->item(5, 1);
+    columnItem->setText(QString::number(columnNoise));
 }
-
+//calculate mean of ROI
 float MainWindow::meanCal(std::shared_ptr<QVector<int>> grayValues){
     //mean
     float mean = 0.0f;
@@ -412,15 +421,90 @@ float MainWindow::meanCal(std::shared_ptr<QVector<int>> grayValues){
     return mean;
 }
 
+//calculate standard deviation of ROI
 float MainWindow::standardDeviationCal(std::shared_ptr<QVector<int>> grayValues, float mean){
     float variance = 0.0f;
     for (int value : *grayValues) {
-        variance += (value - mean) * (value - mean);
+        variance += std::pow(value - mean, 2);
     }
     variance /= grayValues->size();
-    float standardDeviation = sqrt(variance);
-    return standardDeviation;
+    return std::sqrt(variance);
 }
+
+//calculate row noise for one row
+float MainWindow::calculateRowNoise(std::shared_ptr<QVector<int>> grayValues, int rowIndex, int selectedWidth) {
+    float mean = 0.0f;
+    int rowStartIndex = rowIndex * selectedWidth;
+    int rowEndIndex = rowStartIndex + selectedWidth;
+
+    for (int i = rowStartIndex; i < rowEndIndex; ++i) {
+        mean += (*grayValues)[i];
+    }
+    mean /= selectedWidth;
+
+    float variance = 0.0f;
+    for (int i = rowStartIndex; i < rowEndIndex; ++i) {
+        variance += std::pow((*grayValues)[i] - mean, 2);
+    }
+    variance /= selectedWidth;
+    return std::sqrt(variance);
+}
+
+//calculate all row noise
+float MainWindow::calculateAllRowNoise(std::shared_ptr<QVector<int>> grayValues, int selectedHeight, int selectedWidth) {
+    if(selectedHeight == 1)
+        return 0;
+    QVector<float> rowNoiseValues;
+    float mean = 0.0f;
+    for (int row = 0; row < selectedHeight; ++row) {
+        float rowNoise = calculateRowNoise(grayValues, row, selectedWidth);
+        rowNoiseValues.append(rowNoise);
+        mean+=rowNoise;
+    }
+    mean /= rowNoiseValues.size();
+    float rowNoiseVariance = 0.0f;
+    for (float noise : rowNoiseValues) {
+        rowNoiseVariance += std::pow(noise - mean, 2);
+    }
+    rowNoiseVariance /= rowNoiseValues.size();
+    return std::sqrt(rowNoiseVariance);
+}
+//calculate column noise of one column
+float MainWindow::calculateColumnNoise(std::shared_ptr<QVector<int>> grayValues, int columnIndex, int selectedHeight, int selectedWidth){
+    float mean = 0.0f;
+    for (int row = 0; row < selectedHeight; ++row) {
+        mean += (*grayValues)[row * selectedWidth + columnIndex];
+    }
+    mean /= selectedHeight;
+    float variance = 0.0f;
+    for (int row = 0; row < selectedHeight; ++row) {
+        variance += std::pow((*grayValues)[row * selectedWidth + columnIndex] - mean, 2);
+    }
+    variance /= selectedHeight;
+    return std::sqrt(variance);
+}
+
+//calculate all column noise
+float MainWindow::calculateAllColumnNoise(std::shared_ptr<QVector<int>> grayValues, int selectedHeight, int selectedWidth) {
+    if (selectedWidth == 1)
+        return 0;
+    QVector<float> columnNoiseValues;
+    float mean = 0.0f;
+    for (int col = 0; col < selectedWidth; ++col) {
+        float columnNoise = calculateColumnNoise(grayValues, col, selectedHeight, selectedWidth);
+        columnNoiseValues.append(columnNoise);
+        mean += columnNoise;
+    }
+    mean /= columnNoiseValues.size();
+    float columnNoiseVariance = 0.0f;
+    for (float noise : columnNoiseValues) {
+        columnNoiseVariance += std::pow(noise - mean, 2);
+    }
+
+    columnNoiseVariance /= columnNoiseValues.size();
+    return std::sqrt(columnNoiseVariance);
+}
+
 
 
 
