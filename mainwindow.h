@@ -106,7 +106,7 @@ signals:
 
 private:
     float meanCal(std::shared_ptr<QVector<int>> grayValues);
-    float standardDeviationCal(std::shared_ptr<QVector<int>> grayValues, float mean);
+
 
 };
 #endif // MAINWINDOW_H
