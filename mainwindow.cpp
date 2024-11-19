@@ -393,10 +393,10 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
     QTableWidgetItem *maxItem = analysisTable -> item(1,1);
     maxItem->setText(QString::number(maxValue));
 
-    //standard deviation
-    float standardDeviation = standardDeviationCal(grayValues,mean);
+    //pixel Noise (standard deviation)
+    float pixelNoise = pixelNoiseCal(grayValues,mean);
     QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
-    stdDevItem->setText(QString::number(standardDeviation));
+    stdDevItem->setText(QString::number(pixelNoise));
 
     //row noise
     float rowNoise = calculateAllRowNoise(grayValues, selectedHeight, selectedWidth);
@@ -422,7 +422,7 @@ float MainWindow::meanCal(std::shared_ptr<QVector<int>> grayValues){
 }
 
 //calculate standard deviation of ROI
-float MainWindow::standardDeviationCal(std::shared_ptr<QVector<int>> grayValues, float mean){
+float MainWindow::pixelNoiseCal(std::shared_ptr<QVector<int>> grayValues, float mean){
     float variance = 0.0f;
     for (int value : *grayValues) {
         variance += std::pow(value - mean, 2);
