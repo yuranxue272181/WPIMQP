@@ -215,3 +215,80 @@ QByteArray FPGAInterface::convertMultipleGrayscaleBinsToYUV(const std::vector<st
 
     return combinedYuvData; // Return the combined YUV data
 }
+
+bool FPGAInterface::setExposureTimeFX3(CCyUSBDevice *usbDevice, int exposureTime) {
+    if (!usbDevice || !usbDevice->IsOpen()) {
+        fprintf(stderr, "FX3 device not connected or not open.\n");
+        return false;
+    }
+
+    // Find the Bulk OUT endpoint (Address: 0x01)
+    CCyBulkEndPoint *bulkOut = (CCyBulkEndPoint *)usbDevice->EndPointOf(0x01);
+    if (!bulkOut) {
+        fprintf(stderr, "Bulk OUT endpoint (0x01) not found.\n");
+        return false;
+    }
+
+    // Prepare exposure time data (4 bytes)
+    unsigned char data[4];
+    data[0] = (exposureTime >> 24) & 0xFF;
+    data[1] = (exposureTime >> 16) & 0xFF;
+    data[2] = (exposureTime >> 8) & 0xFF;
+    data[3] = exposureTime & 0xFF;
+
+    long bytesTransferred = sizeof(data);
+
+    // Send data to FX3
+    if (!bulkOut->XferData(data, bytesTransferred) || bytesTransferred != sizeof(data)) {
+        fprintf(stderr, "Failed to send exposure time to FX3. Bytes transferred: %ld\n", bytesTransferred);
+        return false;
+    }
+
+    printf("Exposure time set to FX3: %d\n", exposureTime);
+    fflush(stdout);
+
+    return true;
+}
+
+bool FPGAInterface::readBackExposureTimeFX3(CCyUSBDevice *usbDevice, int *readExposureTime) {
+    if (!usbDevice || !usbDevice->IsOpen()) {
+        fprintf(stderr, "FX3 device not connected or not open.\n");
+        return false;
+    }
+
+    // Find the Bulk IN endpoint (0x81)
+    CCyBulkEndPoint *bulkIn = (CCyBulkEndPoint *)usbDevice->EndPointOf(0x81);
+    if (!bulkIn) {
+        fprintf(stderr, "Bulk IN endpoint (0x81) not found.\n");
+        return false;
+    }
+
+    bulkIn->Reset();  // Reset Bulk IN endpoint before reading
+
+    unsigned char data[4] = {0};
+    long bytesTransferred = sizeof(data);
+    int maxRetries = 10;
+    bool success = false;
+
+    // Introduce a delay before polling to give FX3 firmware time to respond
+    std::this_thread::sleep_for(std::chrono::milliseconds(50)); // Delay to ensure firmware processes the OUT request
+
+    for (int i = 0; i < maxRetries; ++i) {
+        if (bulkIn->XferData(data, bytesTransferred)) {
+            success = true;
+            break;
+        }
+        fprintf(stderr, "Polling attempt %d: bytesTransferred=%ld\n", i + 1, bytesTransferred);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10)); // Wait before retrying
+    }
+
+    if (!success) {
+        fprintf(stderr, "Failed to read data from FX3. Endpoint: 0x81\n");
+        return false;
+    }
+
+    // Convert received data to an integer
+    *readExposureTime = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3];
+    fprintf(stdout, "Read exposure time from FX3: %d\n", *readExposureTime);
+    return true;
+}

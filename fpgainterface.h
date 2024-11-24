@@ -5,7 +5,6 @@
 #include <QObject>
 #include <QDebug>
 #include "CyAPI.h"
-#include <thread>
 #include <condition_variable>
 #include <vector>
 #include <atomic>
@@ -27,6 +26,10 @@ public:
     // bool convertGrayscaleToYUV(const std::string& inputFilePath, QByteArray& yuvData, int width, int height);
     // Function to convert multiple .bin files to YUV and store results in a single QByteArray
     QByteArray convertMultipleGrayscaleBinsToYUV(const std::vector<std::string>& inputFiles, int width, int height);
+    // Set exposure time on FX3
+    bool setExposureTimeFX3(CCyUSBDevice *usbDevice, int exposureTime);
+    // Read back exposure time from FX3
+    bool readBackExposureTimeFX3(CCyUSBDevice *usbDevice, int *readExposureTime);
 
 signals:
     void deviceAttached();   // Signal emitted when a device is attached
