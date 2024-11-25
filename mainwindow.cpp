@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "glvideowidget.h"
+#include "analysis.h"
 
 //ui
 #include <QVBoxLayout>
@@ -13,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     zoomFactor = 1.0f;
 
+
     // ui connection
     // button
     startBtn = ui->startButton;
@@ -23,9 +25,6 @@ MainWindow::MainWindow(QWidget *parent)
     zoomOutBtn = ui->zoomOutButton;
     resetBtn = ui-> resetButton;
     grabBtn = ui-> grabButton;
-    // dock widget
-    leftDk = ui-> leftDock;
-    rightDk = ui -> rightDock;
     // widget
     videoWdt = ui->videoWidget;
     //slider
@@ -108,6 +107,9 @@ MainWindow::MainWindow(QWidget *parent)
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
     gl-> setYUV420pParameters(176, 144); //call once, frame size
 
+    //analysis
+    analysis = new Analysis();
+
     // Connect the signal to the slot
     connect(startBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
     connect(playPauseBtn, &QToolButton::clicked, this, &MainWindow::pauseVideo);
@@ -149,6 +151,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete gl;
+    delete analysis;
 }
 
 // Render the video by OpenGL, display on the videoWidget, and reset UI
@@ -380,32 +384,30 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
         qWarning() << "Received null or empty grayValues!";
         return;
     }
-    //mean
-    float mean = meanCal(grayValues);
-    QTableWidgetItem *meanItem = analysisTable -> item(2,1);
+    float mean = analysis->meanCal(grayValues);
+    QTableWidgetItem *meanItem = analysisTable->item(2, 1);
     meanItem->setText(QString::number(mean));
 
-    //min & max
     float minValue = *std::min_element(grayValues->begin(), grayValues->end());
     float maxValue = *std::max_element(grayValues->begin(), grayValues->end());
-    QTableWidgetItem *minItem = analysisTable -> item(0,1);
+    QTableWidgetItem *minItem = analysisTable->item(0, 1);
     minItem->setText(QString::number(minValue));
-    QTableWidgetItem *maxItem = analysisTable -> item(1,1);
+    QTableWidgetItem *maxItem = analysisTable->item(1, 1);
     maxItem->setText(QString::number(maxValue));
 
+    float pixelNoise = analysis->pixelNoiseCal(grayValues, mean);
+    QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
+    stdDevItem->setText(QString::number(pixelNoise));
+
+    float rowNoise = analysis->calculateAllRowNoise(grayValues, selectedHeight, selectedWidth);
+    QTableWidgetItem *rowItem = analysisTable->item(4, 1);
+    rowItem->setText(QString::number(rowNoise));
+
+    float columnNoise = analysis->calculateAllColumnNoise(grayValues, selectedHeight, selectedWidth);
+    QTableWidgetItem *columnItem = analysisTable->item(5, 1);
+    columnItem->setText(QString::number(columnNoise));
 
 }
-
-float MainWindow::meanCal(std::shared_ptr<QVector<int>> grayValues){
-    //mean
-    float mean = 0.0f;
-    for (int value : *grayValues) {
-        mean += value;
-    }
-    mean /= grayValues->size();
-    return mean;
-}
-
 
 
 
