@@ -64,7 +64,11 @@ private:
     Ui::MainWindow *ui;
     GLVideoWidget *gl;
     Analysis *analysis;
+
     std::shared_ptr<QVector<int>> selectedRegion;
+    float zoomFactor;
+    int selectedH;
+    int selectedW;
 
     //ui
     QToolButton *startBtn;
@@ -113,8 +117,6 @@ private:
     QCheckBox *rowChecker;
     QCheckBox *columnChecker;
     QCheckBox *pixelChecker;
-
-    float zoomFactor;
 
 
 signals:

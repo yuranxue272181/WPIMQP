@@ -13,7 +13,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     zoomFactor = 1.0f;
-
+    selectedH = 0;
+    selectedW = 0;
+    selectedRegion = nullptr;
 
     // ui
     // button
@@ -157,6 +159,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(gl, &GLVideoWidget::updateGrayValues, this, &MainWindow::updateAnalysis);
     connect(minChecker, &QCheckBox::stateChanged, this, &MainWindow::minCheck);
     connect(maxChecker, &QCheckBox::stateChanged, this, &MainWindow::maxCheck);
+    connect(averageChecker, &QCheckBox::stateChanged, this, &MainWindow::avegCheck);
+    connect(pixelChecker, &QCheckBox::stateChanged, this, &MainWindow::pixelCheck);
+    connect(rowChecker, &QCheckBox::stateChanged, this, &MainWindow::rowCheck);
+    connect(columnChecker, &QCheckBox::stateChanged, this, &MainWindow::columnCheck);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -402,6 +408,8 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
         return;
     }
     selectedRegion = grayValues;
+    selectedH = selectedHeight;
+    selectedW = selectedWidth;
 
     //min
     if(minChecker-> isChecked())
@@ -411,39 +419,39 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
     if(maxChecker-> isChecked())
         maxCheck();
 
-    // //maxValue
-    // if(maxChecker-> isChecked()){
-    // float maxValue = *std::max_element(grayValues->begin(), grayValues->end());
-    // QTableWidgetItem *maxItem = analysisTable->item(1, 1);
-    // maxItem->setText(QString::number(maxValue));
-    // }
-    // //mean
-    // if(averageChecker -> isChecked()){
-    //     float mean = analysis->meanCal(grayValues);
-    //     QTableWidgetItem *meanItem = analysisTable->item(2, 1);
-    //     meanItem->setText(QString::number(mean));
-    // }
+    //mean
+    if(averageChecker -> isChecked())
+        avegCheck();
+
+    //pixel noise
+    if(pixelChecker-> isChecked())
+        pixelCheck();
+
+    //row noise
+    if(rowChecker -> isChecked())
+        rowCheck();
+
+    //column noise
+    if(columnChecker -> isChecked())
+        columnCheck();
+
+
+    //___________________________________________
     // //pixel noise
-    // if(pixelChecker-> isChecked()){
-    // float mean = analysis->meanCal(grayValues);
-    // float pixelNoise = analysis->pixelNoiseCal(grayValues, mean);
-    // QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
-    // stdDevItem->setText(QString::number(pixelNoise));
-    // }
-    // //row noise
-    // if(rowChecker -> isChecked()){
-    // float rowNoise = analysis->calculateAllRowNoise(grayValues, selectedHeight, selectedWidth);
-    // QTableWidgetItem *rowItem = analysisTable->item(4, 1);
-    // rowItem->setText(QString::number(rowNoise));
-    // }
-    // //column noise
-    // if(columnChecker -> isChecked()){
-    // float columnNoise = analysis->calculateAllColumnNoise(grayValues, selectedHeight, selectedWidth);
-    // QTableWidgetItem *columnItem = analysisTable->item(5, 1);
-    // columnItem->setText(QString::number(columnNoise));
-    // }
+    if(pixelChecker-> isChecked()){
+
+    }
+    //row noise
+    if(rowChecker -> isChecked()){
+
+    }
+    //column noise
+    if(columnChecker -> isChecked()){
+
+    }
 }
 
+//update the minimum
 void MainWindow::minCheck(){
     if(!grabBtn -> isChecked())
         return;
@@ -456,6 +464,7 @@ void MainWindow::minCheck(){
     minItem->setText(QString::number(minValue));
 }
 
+//update the maximum
 void MainWindow::maxCheck(){
     if(!grabBtn -> isChecked())
         return;
@@ -468,13 +477,57 @@ void MainWindow::maxCheck(){
     maxItem->setText(QString::number(maxValue));
 }
 
+//update the average(mean)
 void MainWindow::avegCheck(){
+    if(!grabBtn -> isChecked())
+        return;
+    QTableWidgetItem *meanItem = analysisTable->item(2, 1);
+    if(!averageChecker-> isChecked()){
+        meanItem->setText(" ");
+        return;
+    }
+    float mean = analysis->meanCal(selectedRegion);
+    meanItem->setText(QString::number(mean));
 }
+
+//update the pixel noise
 void MainWindow::pixelCheck(){
+    if(!grabBtn -> isChecked())
+        return;
+    QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
+    if(!pixelChecker-> isChecked()){
+        stdDevItem->setText(" ");
+        return;
+    }
+    float mean = analysis->meanCal(selectedRegion);
+    float pixelNoise = analysis->pixelNoiseCal(selectedRegion, mean);
+    stdDevItem->setText(QString::number(pixelNoise));
 }
+
+//update the row noise
 void MainWindow::rowCheck(){
+    if(!grabBtn -> isChecked())
+        return;
+    QTableWidgetItem *rowItem = analysisTable->item(4, 1);
+    if(!rowChecker-> isChecked()){
+        rowItem->setText(" ");
+        return;
+    }
+    float rowNoise = analysis->calculateAllRowNoise(selectedRegion, selectedH, selectedW);
+    rowItem->setText(QString::number(rowNoise));
 }
+
+//update the column noise
 void MainWindow::columnCheck(){
+    if(!grabBtn -> isChecked())
+        return;
+    QTableWidgetItem *columnItem = analysisTable->item(5, 1);
+    if(!columnChecker-> isChecked()){
+        columnItem->setText(" ");
+        return;
+    }
+    float columnNoise = analysis->calculateAllColumnNoise(selectedRegion, selectedH, selectedW);
+    columnItem->setText(QString::number(columnNoise));
 }
 
 
