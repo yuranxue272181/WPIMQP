@@ -10,6 +10,7 @@
 #include <QSlider>
 #include <QLabel>
 #include <QTableWidget>
+#include <QCheckBox>
 
 
 QT_BEGIN_NAMESPACE
@@ -51,12 +52,19 @@ private slots:
     void setTrackingEnabled();
     void onSelectionCompleted(const QPointF &start, const QPointF &end);
     void updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int selectedWidth, int selectedHeight);
+    void minCheck();
+    void maxCheck();
+    void avegCheck();
+    void pixelCheck();
+    void rowCheck();
+    void columnCheck();
 
 private:
     QByteArray testData;
     Ui::MainWindow *ui;
     GLVideoWidget *gl;
     Analysis *analysis;
+    std::shared_ptr<QVector<int>> selectedRegion;
 
     //ui
     QToolButton *startBtn;
@@ -98,6 +106,13 @@ private:
     QTableWidget *featuresTable;
     QTableWidget *coordTable;
     QTableWidget *analysisTable;
+
+    QCheckBox *minChecker;
+    QCheckBox *maxChecker;
+    QCheckBox *averageChecker;
+    QCheckBox *rowChecker;
+    QCheckBox *columnChecker;
+    QCheckBox *pixelChecker;
 
     float zoomFactor;
 

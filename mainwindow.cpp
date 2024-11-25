@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     zoomFactor = 1.0f;
 
 
-    // ui connection
+    // ui
     // button
     startBtn = ui->startButton;
     playPauseBtn = ui->playPauseButton;
@@ -54,10 +54,33 @@ MainWindow::MainWindow(QWidget *parent)
     STNRValue = ui-> STNR;
     STNRValue->setText("40");
 
+    //checkBox
+    minChecker = new QCheckBox("Minimum");
+    //minChecker->setStyleSheet("QCheckBox { margin-left: auto; margin-right: auto; }");
+    maxChecker= new QCheckBox("Maximum");
+    averageChecker= new QCheckBox("Average");
+    rowChecker= new QCheckBox("Row Noise");
+    columnChecker= new QCheckBox("Column Noise");
+    pixelChecker= new QCheckBox("Pixel Noise");
+
+
+
     //table
     featuresTable = ui->FeatureTable;
     coordTable = ui->coordinatesTable;
+    QStringList rowHeaders;
+    rowHeaders << "x1" << "x2";
+    coordTable->setVerticalHeaderLabels(rowHeaders);
     analysisTable = ui->analysisTable;
+    analysisTable->setCellWidget(0, 0, minChecker);
+    analysisTable->setCellWidget(1, 0, maxChecker);
+    analysisTable->setCellWidget(2, 0, averageChecker);
+    analysisTable->setCellWidget(3, 0, pixelChecker);
+    analysisTable->setCellWidget(4, 0, rowChecker);
+    analysisTable->setCellWidget(5, 0, columnChecker);
+
+
+
 
     //initialize slider and button
     brightnessSlider ->setRange(-100, 100);
@@ -132,6 +155,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(grabBtn,&QPushButton::clicked,this,&MainWindow::setTrackingEnabled);
     connect(gl, &GLVideoWidget::selectionCompleted, this, &MainWindow::onSelectionCompleted);
     connect(gl, &GLVideoWidget::updateGrayValues, this, &MainWindow::updateAnalysis);
+    connect(minChecker, &QCheckBox::stateChanged, this, &MainWindow::minCheck);
+    connect(maxChecker, &QCheckBox::stateChanged, this, &MainWindow::maxCheck);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -360,22 +385,14 @@ void MainWindow::setTrackingEnabled(){
 }
 
 void MainWindow::onSelectionCompleted(const QPointF &start, const QPointF &end) {
-    QTableWidgetItem *x1 = coordTable->item(0,0);
-    QTableWidgetItem *y1 = coordTable->item(0,1);
-    x1->setText(QString::number(start.x()));
-    y1->setText(QString::number(start.y()));
-    QTableWidgetItem *x2 = coordTable->item(1,0);
-    QTableWidgetItem *y2 = coordTable->item(1,1);
-    x2->setText(QString::number(end.x()));
-    y2->setText(QString::number(start.y()));
-    QTableWidgetItem *x3 = coordTable->item(2,0);
-    QTableWidgetItem *y3 = coordTable->item(2,1);
-    x3->setText(QString::number(start.x()));
-    y3->setText(QString::number(end.y()));
-    QTableWidgetItem *x4 = coordTable->item(3,0);
-    QTableWidgetItem *y4 = coordTable->item(3,1);
-    x4->setText(QString::number(end.x()));
-    y4->setText(QString::number(end.y()));
+    QTableWidgetItem *xy1 = coordTable->item(0,0);
+    QTableWidgetItem *xy2 = coordTable->item(1,0);
+    QTableWidgetItem *xy3 = coordTable->item(0,1);
+    QTableWidgetItem *xy4 = coordTable->item(1,1);
+    xy1->setText(QString("(%1, %2)").arg(start.x()).arg(start.y()));
+    xy2->setText(QString("(%1, %2)").arg(end.x()).arg(start.y()));
+    xy3->setText(QString("(%1, %2)").arg(start.x()).arg(end.y()));
+    xy4->setText(QString("(%1, %2)").arg(end.x()).arg(end.y()));
 }
 
 //update data analysis to the table
@@ -384,31 +401,81 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
         qWarning() << "Received null or empty grayValues!";
         return;
     }
-    float mean = analysis->meanCal(grayValues);
-    QTableWidgetItem *meanItem = analysisTable->item(2, 1);
-    meanItem->setText(QString::number(mean));
+    selectedRegion = grayValues;
 
-    float minValue = *std::min_element(grayValues->begin(), grayValues->end());
-    float maxValue = *std::max_element(grayValues->begin(), grayValues->end());
-    QTableWidgetItem *minItem = analysisTable->item(0, 1);
-    minItem->setText(QString::number(minValue));
-    QTableWidgetItem *maxItem = analysisTable->item(1, 1);
-    maxItem->setText(QString::number(maxValue));
+    //min
+    if(minChecker-> isChecked())
+        minCheck();
 
-    float pixelNoise = analysis->pixelNoiseCal(grayValues, mean);
-    QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
-    stdDevItem->setText(QString::number(pixelNoise));
+    //max
+    if(maxChecker-> isChecked())
+        maxCheck();
 
-    float rowNoise = analysis->calculateAllRowNoise(grayValues, selectedHeight, selectedWidth);
-    QTableWidgetItem *rowItem = analysisTable->item(4, 1);
-    rowItem->setText(QString::number(rowNoise));
-
-    float columnNoise = analysis->calculateAllColumnNoise(grayValues, selectedHeight, selectedWidth);
-    QTableWidgetItem *columnItem = analysisTable->item(5, 1);
-    columnItem->setText(QString::number(columnNoise));
-
+    // //maxValue
+    // if(maxChecker-> isChecked()){
+    // float maxValue = *std::max_element(grayValues->begin(), grayValues->end());
+    // QTableWidgetItem *maxItem = analysisTable->item(1, 1);
+    // maxItem->setText(QString::number(maxValue));
+    // }
+    // //mean
+    // if(averageChecker -> isChecked()){
+    //     float mean = analysis->meanCal(grayValues);
+    //     QTableWidgetItem *meanItem = analysisTable->item(2, 1);
+    //     meanItem->setText(QString::number(mean));
+    // }
+    // //pixel noise
+    // if(pixelChecker-> isChecked()){
+    // float mean = analysis->meanCal(grayValues);
+    // float pixelNoise = analysis->pixelNoiseCal(grayValues, mean);
+    // QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
+    // stdDevItem->setText(QString::number(pixelNoise));
+    // }
+    // //row noise
+    // if(rowChecker -> isChecked()){
+    // float rowNoise = analysis->calculateAllRowNoise(grayValues, selectedHeight, selectedWidth);
+    // QTableWidgetItem *rowItem = analysisTable->item(4, 1);
+    // rowItem->setText(QString::number(rowNoise));
+    // }
+    // //column noise
+    // if(columnChecker -> isChecked()){
+    // float columnNoise = analysis->calculateAllColumnNoise(grayValues, selectedHeight, selectedWidth);
+    // QTableWidgetItem *columnItem = analysisTable->item(5, 1);
+    // columnItem->setText(QString::number(columnNoise));
+    // }
 }
 
+void MainWindow::minCheck(){
+    if(!grabBtn -> isChecked())
+        return;
+    QTableWidgetItem *minItem = analysisTable->item(0, 1);
+    if(!minChecker-> isChecked()){
+        minItem->setText(" ");
+        return;
+    }
+    float minValue = *std::min_element(selectedRegion->begin(), selectedRegion->end());
+    minItem->setText(QString::number(minValue));
+}
+
+void MainWindow::maxCheck(){
+    if(!grabBtn -> isChecked())
+        return;
+    QTableWidgetItem *maxItem = analysisTable->item(1, 1);
+    if(!maxChecker-> isChecked()){
+        maxItem->setText(" ");
+        return;
+    }
+    float maxValue = *std::max_element(selectedRegion->begin(), selectedRegion->end());
+    maxItem->setText(QString::number(maxValue));
+}
+
+void MainWindow::avegCheck(){
+}
+void MainWindow::pixelCheck(){
+}
+void MainWindow::rowCheck(){
+}
+void MainWindow::columnCheck(){
+}
 
 
 
