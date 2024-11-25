@@ -1960,13 +1960,6 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QMenuBar \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qmenubar.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QTabWidget \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QTextBrowser \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtextbrowser.h \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtextedit.h \
-		E:/Qt/6.7.2/mingw_64/include/QtGui/qtextoption.h \
-		E:/Qt/6.7.2/mingw_64/include/QtGui/qtextcursor.h \
-		E:/Qt/6.7.2/mingw_64/include/QtGui/qtextformat.h \
-		E:/Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QToolBox \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtoolbox.h \
 		../../glvideowidget.h \
@@ -2106,6 +2099,10 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/qglyphrun.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/qrawfont.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/qfontdatabase.h \
+		E:/Qt/6.7.2/mingw_64/include/QtGui/qtextcursor.h \
+		E:/Qt/6.7.2/mingw_64/include/QtGui/qtextformat.h \
+		E:/Qt/6.7.2/mingw_64/include/QtGui/qpen.h \
+		E:/Qt/6.7.2/mingw_64/include/QtGui/qtextoption.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/qaccessible.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/qaccessible_base.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/qaccessiblebridge.h \

@@ -87,6 +87,9 @@ public:
     QTableWidget *analysisTable;
     QLabel *label_3;
     QLabel *label_4;
+    QLabel *label_5;
+    QLabel *label_6;
+    QLabel *label_7;
     QMenuBar *menuBar;
     QMenu *menuhe_p;
     QMenu *menuCollection;
@@ -170,10 +173,10 @@ public:
 
         label = new QLabel(centralwidget);
         label->setObjectName("label");
-        label->setGeometry(QRect(240, 330, 49, 16));
+        label->setGeometry(QRect(470, 340, 49, 16));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(310, 330, 49, 16));
+        label_2->setGeometry(QRect(540, 340, 49, 16));
         FeatureTable = new QTableWidget(centralwidget);
         if (FeatureTable->columnCount() < 2)
             FeatureTable->setColumnCount(2);
@@ -247,7 +250,7 @@ public:
         __qtablewidgetitem21->setTextAlignment(Qt::AlignCenter);
         FeatureTable->setItem(9, 1, __qtablewidgetitem21);
         FeatureTable->setObjectName("FeatureTable");
-        FeatureTable->setGeometry(QRect(0, 20, 201, 521));
+        FeatureTable->setGeometry(QRect(10, 20, 201, 521));
         QSizePolicy sizePolicy2(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
@@ -509,15 +512,25 @@ public:
         __qtablewidgetitem49->setTextAlignment(Qt::AlignCenter);
         analysisTable->setItem(6, 1, __qtablewidgetitem49);
         analysisTable->setObjectName("analysisTable");
-        analysisTable->setGeometry(QRect(210, 360, 391, 191));
+        analysisTable->setGeometry(QRect(220, 360, 391, 191));
         analysisTable->setEditTriggers(QAbstractItemView::EditTrigger::NoEditTriggers);
         analysisTable->verticalHeader()->setVisible(false);
         label_3 = new QLabel(centralwidget);
         label_3->setObjectName("label_3");
-        label_3->setGeometry(QRect(20, 0, 101, 16));
+        label_3->setGeometry(QRect(10, 0, 101, 16));
         label_4 = new QLabel(centralwidget);
         label_4->setObjectName("label_4");
         label_4->setGeometry(QRect(630, 10, 101, 16));
+        label_5 = new QLabel(centralwidget);
+        label_5->setObjectName("label_5");
+        label_5->setGeometry(QRect(230, 340, 41, 16));
+        label_6 = new QLabel(centralwidget);
+        label_6->setObjectName("label_6");
+        label_6->setGeometry(QRect(320, 340, 71, 16));
+        label_7 = new QLabel(centralwidget);
+        label_7->setObjectName("label_7");
+        label_7->setGeometry(QRect(390, 340, 31, 16));
+        label_7->setAlignment(Qt::AlignmentFlag::AlignCenter);
         MainWindow->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
@@ -688,8 +701,11 @@ public:
         ___qtablewidgetitem41->setText(QCoreApplication::translate("MainWindow", "Column Noise", nullptr));
         analysisTable->setSortingEnabled(__sortingEnabled2);
 
-        label_3->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
-        label_4->setText(QCoreApplication::translate("MainWindow", "Image", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Feature Properties", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "ROI ", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "Frame Num:", nullptr));
+        label_7->setText(QCoreApplication::translate("MainWindow", "10", nullptr));
         menuhe_p->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
         menuCollection->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
         menuEdit->setTitle(QCoreApplication::translate("MainWindow", "Edit", nullptr));

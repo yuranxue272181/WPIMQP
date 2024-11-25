@@ -173,8 +173,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>330</y>
+      <x>470</x>
+      <y>340</y>
       <width>49</width>
       <height>16</height>
      </rect>
@@ -186,8 +186,8 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>330</y>
+      <x>540</x>
+      <y>340</y>
       <width>49</width>
       <height>16</height>
      </rect>
@@ -199,7 +199,7 @@
    <widget class="QTableWidget" name="FeatureTable">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>20</y>
       <width>201</width>
       <height>521</height>
@@ -1045,7 +1045,7 @@
    <widget class="QTableWidget" name="analysisTable">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>220</x>
       <y>360</y>
       <width>391</width>
       <height>191</height>
@@ -1220,14 +1220,14 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>0</y>
       <width>101</width>
       <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Property</string>
+     <string>Feature Properties</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -1240,7 +1240,49 @@
      </rect>
     </property>
     <property name="text">
-     <string>Image</string>
+     <string>Image Processing</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>340</y>
+      <width>41</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ROI </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>340</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Frame Num:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>340</y>
+      <width>31</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>10</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
   </widget>
