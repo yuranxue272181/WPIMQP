@@ -683,13 +683,13 @@ public:
         const bool __sortingEnabled2 = coordinatesTable->isSortingEnabled();
         coordinatesTable->setSortingEnabled(false);
         QTableWidgetItem *___qtablewidgetitem34 = coordinatesTable->item(0, 0);
-        ___qtablewidgetitem34->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        ___qtablewidgetitem34->setText(QCoreApplication::translate("MainWindow", "- -", nullptr));
         QTableWidgetItem *___qtablewidgetitem35 = coordinatesTable->item(0, 1);
-        ___qtablewidgetitem35->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        ___qtablewidgetitem35->setText(QCoreApplication::translate("MainWindow", "- -", nullptr));
         QTableWidgetItem *___qtablewidgetitem36 = coordinatesTable->item(1, 0);
-        ___qtablewidgetitem36->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        ___qtablewidgetitem36->setText(QCoreApplication::translate("MainWindow", "- -", nullptr));
         QTableWidgetItem *___qtablewidgetitem37 = coordinatesTable->item(1, 1);
-        ___qtablewidgetitem37->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        ___qtablewidgetitem37->setText(QCoreApplication::translate("MainWindow", "- -", nullptr));
         coordinatesTable->setSortingEnabled(__sortingEnabled2);
 
         menuhe_p->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
