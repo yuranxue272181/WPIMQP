@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QDockWidget>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -50,18 +49,7 @@ public:
     QTextBrowser *textBrowser;
     QLabel *label;
     QLabel *label_2;
-    QMenuBar *menuBar;
-    QMenu *menuhe_p;
-    QMenu *menuCollection;
-    QMenu *menuEdit;
-    QMenu *menuRecord;
-    QMenu *menuHelp;
-    QMenu *menuView;
-    QDockWidget *leftDock;
-    QWidget *dockWidgetContents_7;
     QTableWidget *FeatureTable;
-    QDockWidget *rightDock;
-    QWidget *dockWidgetContents_8;
     QTabWidget *tabWidget;
     QWidget *tab;
     QToolBox *toolBox;
@@ -102,6 +90,13 @@ public:
     QWidget *widget;
     QPushButton *grabButton;
     QTableWidget *coordinatesTable;
+    QMenuBar *menuBar;
+    QMenu *menuhe_p;
+    QMenu *menuCollection;
+    QMenu *menuEdit;
+    QMenu *menuRecord;
+    QMenu *menuHelp;
+    QMenu *menuView;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -125,7 +120,7 @@ public:
         centralwidget->setFont(font);
         videoWidget = new QWidget(centralwidget);
         videoWidget->setObjectName("videoWidget");
-        videoWidget->setGeometry(QRect(11, 42, 352, 288));
+        videoWidget->setGeometry(QRect(210, 40, 352, 288));
         QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -136,7 +131,7 @@ public:
         videoWidget->setSizeIncrement(QSize(0, 0));
         layoutWidget = new QWidget(centralwidget);
         layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(1, 7, 371, 32));
+        layoutWidget->setGeometry(QRect(200, 5, 371, 32));
         horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -178,7 +173,7 @@ public:
 
         tabWidget_2 = new QTabWidget(centralwidget);
         tabWidget_2->setObjectName("tabWidget_2");
-        tabWidget_2->setGeometry(QRect(20, 350, 349, 191));
+        tabWidget_2->setGeometry(QRect(290, 360, 271, 191));
         tabWidget_2->setMinimumSize(QSize(0, 140));
         tabWidget_2->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
         tab_4 = new QWidget();
@@ -235,7 +230,7 @@ public:
         __qtablewidgetitem15->setTextAlignment(Qt::AlignCenter);
         analysisTable->setItem(6, 1, __qtablewidgetitem15);
         analysisTable->setObjectName("analysisTable");
-        analysisTable->setGeometry(QRect(0, 0, 311, 161));
+        analysisTable->setGeometry(QRect(0, 0, 271, 161));
         analysisTable->setEditTriggers(QAbstractItemView::EditTrigger::NoEditTriggers);
         tabWidget_2->addTab(tab_4, QString());
         tab_5 = new QWidget();
@@ -247,45 +242,11 @@ public:
         tabWidget_2->addTab(tab_5, QString());
         label = new QLabel(centralwidget);
         label->setObjectName("label");
-        label->setGeometry(QRect(30, 330, 49, 16));
+        label->setGeometry(QRect(410, 330, 49, 16));
         label_2 = new QLabel(centralwidget);
         label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(120, 330, 49, 16));
-        MainWindow->setCentralWidget(centralwidget);
-        tabWidget_2->raise();
-        videoWidget->raise();
-        layoutWidget->raise();
-        label->raise();
-        label_2->raise();
-        menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 800, 22));
-        menuhe_p = new QMenu(menuBar);
-        menuhe_p->setObjectName("menuhe_p");
-        menuCollection = new QMenu(menuBar);
-        menuCollection->setObjectName("menuCollection");
-        menuEdit = new QMenu(menuBar);
-        menuEdit->setObjectName("menuEdit");
-        menuRecord = new QMenu(menuBar);
-        menuRecord->setObjectName("menuRecord");
-        menuHelp = new QMenu(menuBar);
-        menuHelp->setObjectName("menuHelp");
-        menuView = new QMenu(menuBar);
-        menuView->setObjectName("menuView");
-        MainWindow->setMenuBar(menuBar);
-        leftDock = new QDockWidget(MainWindow);
-        leftDock->setObjectName("leftDock");
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(leftDock->sizePolicy().hasHeightForWidth());
-        leftDock->setSizePolicy(sizePolicy2);
-        leftDock->setMinimumSize(QSize(201, 40));
-        leftDock->setMaximumSize(QSize(201, 524287));
-        leftDock->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
-        dockWidgetContents_7 = new QWidget();
-        dockWidgetContents_7->setObjectName("dockWidgetContents_7");
-        FeatureTable = new QTableWidget(dockWidgetContents_7);
+        label_2->setGeometry(QRect(500, 330, 49, 16));
+        FeatureTable = new QTableWidget(centralwidget);
         if (FeatureTable->columnCount() < 2)
             FeatureTable->setColumnCount(2);
         QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
@@ -358,33 +319,19 @@ public:
         __qtablewidgetitem37->setTextAlignment(Qt::AlignCenter);
         FeatureTable->setItem(9, 1, __qtablewidgetitem37);
         FeatureTable->setObjectName("FeatureTable");
-        FeatureTable->setGeometry(QRect(0, 0, 201, 511));
-        QSizePolicy sizePolicy3(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(FeatureTable->sizePolicy().hasHeightForWidth());
-        FeatureTable->setSizePolicy(sizePolicy3);
+        FeatureTable->setGeometry(QRect(0, 0, 201, 341));
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(FeatureTable->sizePolicy().hasHeightForWidth());
+        FeatureTable->setSizePolicy(sizePolicy2);
         FeatureTable->setEditTriggers(QAbstractItemView::EditTrigger::NoEditTriggers);
         FeatureTable->horizontalHeader()->setHighlightSections(true);
         FeatureTable->verticalHeader()->setVisible(false);
         FeatureTable->verticalHeader()->setProperty("showSortIndicator", QVariant(false));
-        leftDock->setWidget(dockWidgetContents_7);
-        MainWindow->addDockWidget(Qt::DockWidgetArea::LeftDockWidgetArea, leftDock);
-        rightDock = new QDockWidget(MainWindow);
-        rightDock->setObjectName("rightDock");
-        QSizePolicy sizePolicy4(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Expanding);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(rightDock->sizePolicy().hasHeightForWidth());
-        rightDock->setSizePolicy(sizePolicy4);
-        rightDock->setMinimumSize(QSize(221, 40));
-        rightDock->setMaximumSize(QSize(221, 524287));
-        rightDock->setFeatures(QDockWidget::DockWidgetFeature::DockWidgetMovable);
-        dockWidgetContents_8 = new QWidget();
-        dockWidgetContents_8->setObjectName("dockWidgetContents_8");
-        tabWidget = new QTabWidget(dockWidgetContents_8);
+        tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName("tabWidget");
-        tabWidget->setGeometry(QRect(10, 0, 201, 311));
+        tabWidget->setGeometry(QRect(590, 10, 201, 311));
         tabWidget->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
         tabWidget->setStyleSheet(QString::fromUtf8(""));
         tab = new QWidget();
@@ -493,7 +440,7 @@ public:
         toolBox_2->addItem(page_5, QString::fromUtf8("Exposure Time"));
         page_6 = new QWidget();
         page_6->setObjectName("page_6");
-        page_6->setGeometry(QRect(0, 0, 100, 30));
+        page_6->setGeometry(QRect(0, 0, 181, 151));
         gainSlider = new QSlider(page_6);
         gainSlider->setObjectName("gainSlider");
         gainSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -526,15 +473,15 @@ public:
         STNR->setObjectName("STNR");
         STNR->setGeometry(QRect(150, 10, 31, 21));
         STNR->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        widget = new QWidget(page_9);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(30, 0, 211, 201));
         toolBox_2->addItem(page_9, QString::fromUtf8("Signal-to-Noise Ratio"));
         tabWidget->addTab(tab_3, QString());
-        widget = new QWidget(dockWidgetContents_8);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(0, 320, 211, 201));
-        grabButton = new QPushButton(widget);
+        grabButton = new QPushButton(centralwidget);
         grabButton->setObjectName("grabButton");
-        grabButton->setGeometry(QRect(40, 10, 131, 24));
-        coordinatesTable = new QTableWidget(widget);
+        grabButton->setGeometry(QRect(620, 350, 131, 24));
+        coordinatesTable = new QTableWidget(centralwidget);
         if (coordinatesTable->columnCount() < 2)
             coordinatesTable->setColumnCount(2);
         QTableWidgetItem *__qtablewidgetitem38 = new QTableWidgetItem();
@@ -568,15 +515,38 @@ public:
         __qtablewidgetitem47->setTextAlignment(Qt::AlignCenter);
         coordinatesTable->setItem(3, 1, __qtablewidgetitem47);
         coordinatesTable->setObjectName("coordinatesTable");
-        coordinatesTable->setGeometry(QRect(0, 40, 211, 151));
+        coordinatesTable->setGeometry(QRect(580, 380, 211, 151));
         coordinatesTable->setEditTriggers(QAbstractItemView::EditTrigger::DoubleClicked|QAbstractItemView::EditTrigger::EditKeyPressed);
         coordinatesTable->horizontalHeader()->setVisible(true);
         coordinatesTable->horizontalHeader()->setCascadingSectionResizes(false);
         coordinatesTable->horizontalHeader()->setHighlightSections(false);
         coordinatesTable->verticalHeader()->setVisible(false);
-        rightDock->setWidget(dockWidgetContents_8);
-        MainWindow->addDockWidget(Qt::DockWidgetArea::RightDockWidgetArea, rightDock);
-        rightDock->raise();
+        MainWindow->setCentralWidget(centralwidget);
+        tabWidget_2->raise();
+        videoWidget->raise();
+        layoutWidget->raise();
+        label->raise();
+        label_2->raise();
+        FeatureTable->raise();
+        tabWidget->raise();
+        grabButton->raise();
+        coordinatesTable->raise();
+        menuBar = new QMenuBar(MainWindow);
+        menuBar->setObjectName("menuBar");
+        menuBar->setGeometry(QRect(0, 0, 800, 22));
+        menuhe_p = new QMenu(menuBar);
+        menuhe_p->setObjectName("menuhe_p");
+        menuCollection = new QMenu(menuBar);
+        menuCollection->setObjectName("menuCollection");
+        menuEdit = new QMenu(menuBar);
+        menuEdit->setObjectName("menuEdit");
+        menuRecord = new QMenu(menuBar);
+        menuRecord->setObjectName("menuRecord");
+        menuHelp = new QMenu(menuBar);
+        menuHelp->setObjectName("menuHelp");
+        menuView = new QMenu(menuBar);
+        menuView->setObjectName("menuView");
+        MainWindow->setMenuBar(menuBar);
 
         menuBar->addAction(menuhe_p->menuAction());
         menuBar->addAction(menuCollection->menuAction());
@@ -590,7 +560,7 @@ public:
         tabWidget_2->setCurrentIndex(0);
         tabWidget->setCurrentIndex(1);
         toolBox->setCurrentIndex(1);
-        toolBox_2->setCurrentIndex(3);
+        toolBox_2->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -645,13 +615,6 @@ public:
         tabWidget_2->setTabText(tabWidget_2->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Device Connection", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "176x144", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "30fps", nullptr));
-        menuhe_p->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
-        menuCollection->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
-        menuEdit->setTitle(QCoreApplication::translate("MainWindow", "Edit", nullptr));
-        menuRecord->setTitle(QCoreApplication::translate("MainWindow", "Record", nullptr));
-        menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
-        menuView->setTitle(QCoreApplication::translate("MainWindow", "View", nullptr));
-        leftDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Feature Properties", nullptr));
         QTableWidgetItem *___qtablewidgetitem8 = FeatureTable->horizontalHeaderItem(0);
         ___qtablewidgetitem8->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
         QTableWidgetItem *___qtablewidgetitem9 = FeatureTable->horizontalHeaderItem(1);
@@ -701,7 +664,6 @@ public:
         ___qtablewidgetitem29->setText(QCoreApplication::translate("MainWindow", "40", nullptr));
         FeatureTable->setSortingEnabled(__sortingEnabled1);
 
-        rightDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
         brightness->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox->setItemText(toolBox->indexOf(page), QCoreApplication::translate("MainWindow", "Brightness", nullptr));
         contrast->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
@@ -752,6 +714,12 @@ public:
         ___qtablewidgetitem39->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         coordinatesTable->setSortingEnabled(__sortingEnabled2);
 
+        menuhe_p->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
+        menuCollection->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
+        menuEdit->setTitle(QCoreApplication::translate("MainWindow", "Edit", nullptr));
+        menuRecord->setTitle(QCoreApplication::translate("MainWindow", "Record", nullptr));
+        menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
+        menuView->setTitle(QCoreApplication::translate("MainWindow", "View", nullptr));
     } // retranslateUi
 
 };

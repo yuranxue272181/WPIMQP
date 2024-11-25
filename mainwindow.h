@@ -19,6 +19,7 @@ class MainWindow;
 QT_END_NAMESPACE
 
 class GLVideoWidget;
+class Analysis;
 
 
 class MainWindow : public QMainWindow
@@ -55,6 +56,7 @@ private:
     QByteArray testData;
     Ui::MainWindow *ui;
     GLVideoWidget *gl;
+    Analysis *analysis;
 
     //ui
     QToolButton *startBtn;

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "glvideowidget.h"
+#include "analysis.h"
 
 //ui
 #include <QVBoxLayout>
@@ -13,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     zoomFactor = 1.0f;
 
+
     // ui connection
     // button
     startBtn = ui->startButton;
@@ -23,9 +25,6 @@ MainWindow::MainWindow(QWidget *parent)
     zoomOutBtn = ui->zoomOutButton;
     resetBtn = ui-> resetButton;
     grabBtn = ui-> grabButton;
-    // dock widget
-    leftDk = ui-> leftDock;
-    rightDk = ui -> rightDock;
     // widget
     videoWdt = ui->videoWidget;
     //slider
@@ -108,6 +107,9 @@ MainWindow::MainWindow(QWidget *parent)
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
     gl-> setYUV420pParameters(176, 144); //call once, frame size
 
+    //analysis
+    analysis = new Analysis();
+
     // Connect the signal to the slot
     connect(startBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
     connect(playPauseBtn, &QToolButton::clicked, this, &MainWindow::pauseVideo);
@@ -149,6 +151,8 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete gl;
+    delete analysis;
 }
 
 // Render the video by OpenGL, display on the videoWidget, and reset UI
@@ -380,130 +384,152 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
         qWarning() << "Received null or empty grayValues!";
         return;
     }
-    //mean
-    float mean = meanCal(grayValues);
-    QTableWidgetItem *meanItem = analysisTable -> item(2,1);
+    float mean = analysis->meanCal(grayValues);
+    QTableWidgetItem *meanItem = analysisTable->item(2, 1);
     meanItem->setText(QString::number(mean));
 
-    //min & max
     float minValue = *std::min_element(grayValues->begin(), grayValues->end());
     float maxValue = *std::max_element(grayValues->begin(), grayValues->end());
-    QTableWidgetItem *minItem = analysisTable -> item(0,1);
+    QTableWidgetItem *minItem = analysisTable->item(0, 1);
     minItem->setText(QString::number(minValue));
-    QTableWidgetItem *maxItem = analysisTable -> item(1,1);
+    QTableWidgetItem *maxItem = analysisTable->item(1, 1);
     maxItem->setText(QString::number(maxValue));
 
-    //pixel Noise (standard deviation)
-    float pixelNoise = pixelNoiseCal(grayValues,mean);
+    float pixelNoise = analysis->pixelNoiseCal(grayValues, mean);
     QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
     stdDevItem->setText(QString::number(pixelNoise));
 
-    //row noise
-    float rowNoise = calculateAllRowNoise(grayValues, selectedHeight, selectedWidth);
-    //qDebug()<<"row noise"<<rowNoise;
+    float rowNoise = analysis->calculateAllRowNoise(grayValues, selectedHeight, selectedWidth);
     QTableWidgetItem *rowItem = analysisTable->item(4, 1);
     rowItem->setText(QString::number(rowNoise));
 
-    //column noise
-    float columnNoise = calculateAllColumnNoise(grayValues, selectedHeight, selectedWidth);
-    //qDebug()<<"column noise"<<columnNoise;
+    float columnNoise = analysis->calculateAllColumnNoise(grayValues, selectedHeight, selectedWidth);
     QTableWidgetItem *columnItem = analysisTable->item(5, 1);
     columnItem->setText(QString::number(columnNoise));
-}
-//calculate mean of ROI
-float MainWindow::meanCal(std::shared_ptr<QVector<int>> grayValues){
-    //mean
-    float mean = 0.0f;
-    for (int value : *grayValues) {
-        mean += value;
-    }
-    mean /= grayValues->size();
-    return mean;
-}
+    // //mean
+    // float mean = meanCal(grayValues);
+    // QTableWidgetItem *meanItem = analysisTable -> item(2,1);
+    // meanItem->setText(QString::number(mean));
 
-//calculate standard deviation of ROI
-float MainWindow::pixelNoiseCal(std::shared_ptr<QVector<int>> grayValues, float mean){
-    float variance = 0.0f;
-    for (int value : *grayValues) {
-        variance += std::pow(value - mean, 2);
-    }
-    variance /= grayValues->size();
-    return std::sqrt(variance);
+    // //min & max
+    // float minValue = *std::min_element(grayValues->begin(), grayValues->end());
+    // float maxValue = *std::max_element(grayValues->begin(), grayValues->end());
+    // QTableWidgetItem *minItem = analysisTable -> item(0,1);
+    // minItem->setText(QString::number(minValue));
+    // QTableWidgetItem *maxItem = analysisTable -> item(1,1);
+    // maxItem->setText(QString::number(maxValue));
+
+    // //pixel Noise (standard deviation)
+    // float pixelNoise = pixelNoiseCal(grayValues,mean);
+    // QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
+    // stdDevItem->setText(QString::number(pixelNoise));
+
+    // //row noise
+    // float rowNoise = calculateAllRowNoise(grayValues, selectedHeight, selectedWidth);
+    // //qDebug()<<"row noise"<<rowNoise;
+    // QTableWidgetItem *rowItem = analysisTable->item(4, 1);
+    // rowItem->setText(QString::number(rowNoise));
+
+    // //column noise
+    // float columnNoise = calculateAllColumnNoise(grayValues, selectedHeight, selectedWidth);
+    // //qDebug()<<"column noise"<<columnNoise;
+    // QTableWidgetItem *columnItem = analysisTable->item(5, 1);
+    // columnItem->setText(QString::number(columnNoise));
 }
+// //calculate mean of ROI
+// float MainWindow::meanCal(std::shared_ptr<QVector<int>> grayValues){
+//     //mean
+//     float mean = 0.0f;
+//     for (int value : *grayValues) {
+//         mean += value;
+//     }
+//     mean /= grayValues->size();
+//     return mean;
+// }
 
-//calculate row noise for one row
-float MainWindow::calculateRowNoise(std::shared_ptr<QVector<int>> grayValues, int rowIndex, int selectedWidth) {
-    float mean = 0.0f;
-    int rowStartIndex = rowIndex * selectedWidth;
-    int rowEndIndex = rowStartIndex + selectedWidth;
+// //calculate standard deviation of ROI
+// float MainWindow::pixelNoiseCal(std::shared_ptr<QVector<int>> grayValues, float mean){
+//     float variance = 0.0f;
+//     for (int value : *grayValues) {
+//         variance += std::pow(value - mean, 2);
+//     }
+//     variance /= grayValues->size();
+//     return std::sqrt(variance);
+// }
 
-    for (int i = rowStartIndex; i < rowEndIndex; ++i) {
-        mean += (*grayValues)[i];
-    }
-    mean /= selectedWidth;
+// //calculate row noise for one row
+// float MainWindow::calculateRowNoise(std::shared_ptr<QVector<int>> grayValues, int rowIndex, int selectedWidth) {
+//     float mean = 0.0f;
+//     int rowStartIndex = rowIndex * selectedWidth;
+//     int rowEndIndex = rowStartIndex + selectedWidth;
 
-    float variance = 0.0f;
-    for (int i = rowStartIndex; i < rowEndIndex; ++i) {
-        variance += std::pow((*grayValues)[i] - mean, 2);
-    }
-    variance /= selectedWidth;
-    return std::sqrt(variance);
-}
+//     for (int i = rowStartIndex; i < rowEndIndex; ++i) {
+//         mean += (*grayValues)[i];
+//     }
+//     mean /= selectedWidth;
 
-//calculate all row noise
-float MainWindow::calculateAllRowNoise(std::shared_ptr<QVector<int>> grayValues, int selectedHeight, int selectedWidth) {
-    if(selectedHeight == 1)
-        return 0;
-    QVector<float> rowNoiseValues;
-    float mean = 0.0f;
-    for (int row = 0; row < selectedHeight; ++row) {
-        float rowNoise = calculateRowNoise(grayValues, row, selectedWidth);
-        rowNoiseValues.append(rowNoise);
-        mean+=rowNoise;
-    }
-    mean /= rowNoiseValues.size();
-    float rowNoiseVariance = 0.0f;
-    for (float noise : rowNoiseValues) {
-        rowNoiseVariance += std::pow(noise - mean, 2);
-    }
-    rowNoiseVariance /= rowNoiseValues.size();
-    return std::sqrt(rowNoiseVariance);
-}
-//calculate column noise of one column
-float MainWindow::calculateColumnNoise(std::shared_ptr<QVector<int>> grayValues, int columnIndex, int selectedHeight, int selectedWidth){
-    float mean = 0.0f;
-    for (int row = 0; row < selectedHeight; ++row) {
-        mean += (*grayValues)[row * selectedWidth + columnIndex];
-    }
-    mean /= selectedHeight;
-    float variance = 0.0f;
-    for (int row = 0; row < selectedHeight; ++row) {
-        variance += std::pow((*grayValues)[row * selectedWidth + columnIndex] - mean, 2);
-    }
-    variance /= selectedHeight;
-    return std::sqrt(variance);
-}
+//     float variance = 0.0f;
+//     for (int i = rowStartIndex; i < rowEndIndex; ++i) {
+//         variance += std::pow((*grayValues)[i] - mean, 2);
+//     }
+//     variance /= selectedWidth;
+//     return std::sqrt(variance);
+// }
 
-//calculate all column noise
-float MainWindow::calculateAllColumnNoise(std::shared_ptr<QVector<int>> grayValues, int selectedHeight, int selectedWidth) {
-    if (selectedWidth == 1)
-        return 0;
-    QVector<float> columnNoiseValues;
-    float mean = 0.0f;
-    for (int col = 0; col < selectedWidth; ++col) {
-        float columnNoise = calculateColumnNoise(grayValues, col, selectedHeight, selectedWidth);
-        columnNoiseValues.append(columnNoise);
-        mean += columnNoise;
-    }
-    mean /= columnNoiseValues.size();
-    float columnNoiseVariance = 0.0f;
-    for (float noise : columnNoiseValues) {
-        columnNoiseVariance += std::pow(noise - mean, 2);
-    }
+// //calculate all row noise
+// float MainWindow::calculateAllRowNoise(std::shared_ptr<QVector<int>> grayValues, int selectedHeight, int selectedWidth) {
+//     if(selectedHeight == 1)
+//         return 0;
+//     QVector<float> rowNoiseValues;
+//     float mean = 0.0f;
+//     for (int row = 0; row < selectedHeight; ++row) {
+//         float rowNoise = calculateRowNoise(grayValues, row, selectedWidth);
+//         rowNoiseValues.append(rowNoise);
+//         mean+=rowNoise;
+//     }
+//     mean /= rowNoiseValues.size();
+//     float rowNoiseVariance = 0.0f;
+//     for (float noise : rowNoiseValues) {
+//         rowNoiseVariance += std::pow(noise - mean, 2);
+//     }
+//     rowNoiseVariance /= rowNoiseValues.size();
+//     return std::sqrt(rowNoiseVariance);
+// }
+// //calculate column noise of one column
+// float MainWindow::calculateColumnNoise(std::shared_ptr<QVector<int>> grayValues, int columnIndex, int selectedHeight, int selectedWidth){
+//     float mean = 0.0f;
+//     for (int row = 0; row < selectedHeight; ++row) {
+//         mean += (*grayValues)[row * selectedWidth + columnIndex];
+//     }
+//     mean /= selectedHeight;
+//     float variance = 0.0f;
+//     for (int row = 0; row < selectedHeight; ++row) {
+//         variance += std::pow((*grayValues)[row * selectedWidth + columnIndex] - mean, 2);
+//     }
+//     variance /= selectedHeight;
+//     return std::sqrt(variance);
+// }
 
-    columnNoiseVariance /= columnNoiseValues.size();
-    return std::sqrt(columnNoiseVariance);
-}
+// //calculate all column noise
+// float MainWindow::calculateAllColumnNoise(std::shared_ptr<QVector<int>> grayValues, int selectedHeight, int selectedWidth) {
+//     if (selectedWidth == 1)
+//         return 0;
+//     QVector<float> columnNoiseValues;
+//     float mean = 0.0f;
+//     for (int col = 0; col < selectedWidth; ++col) {
+//         float columnNoise = calculateColumnNoise(grayValues, col, selectedHeight, selectedWidth);
+//         columnNoiseValues.append(columnNoise);
+//         mean += columnNoise;
+//     }
+//     mean /= columnNoiseValues.size();
+//     float columnNoiseVariance = 0.0f;
+//     for (float noise : columnNoiseValues) {
+//         columnNoiseVariance += std::pow(noise - mean, 2);
+//     }
+
+//     columnNoiseVariance /= columnNoiseValues.size();
+//     return std::sqrt(columnNoiseVariance);
+// }
 
 
 
