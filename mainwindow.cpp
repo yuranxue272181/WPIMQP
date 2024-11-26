@@ -524,10 +524,12 @@ void MainWindow::maxCheck(){
     //frame max
     float maxValue = *std::max_element(selectedRegion->begin(), selectedRegion->end());
     maxItem->setText(QString::number(maxValue));
+
     //total max
     if(maxValue > totalMax)
         totalMax = maxValue;
     item->setText(QString::number(totalMax));
+
     //temporal max
     maxQ.enqueue(maxValue);
     if(maxQ.size()>queueSize)
@@ -548,19 +550,33 @@ void MainWindow::avegCheck(){
         return;
     QTableWidgetItem *meanItem = analysisTable->item(2, 1);
     QTableWidgetItem *totalMeanItem = analysisTable->item(2, 3);
+    QTableWidgetItem *tem = analysisTable->item(2, 2);
     if(!averageChecker-> isChecked()){
         meanItem->setText(" ");
         totalMeanItem->setText(" ");
+        tem->setText(" ");
         return;
     }
     //frame mean
     float mean = analysis->meanCal(selectedRegion);
     meanItem->setText(QString::number(mean));
+
     //total mean
     totalMeanSum += mean;
     totalMeanCounter += 1;
     float totalMean = totalMeanSum/totalMeanCounter;
     totalMeanItem->setText(QString::number(totalMean));
+
+    //temporal mean
+    avegQ.enqueue(mean);
+    if(avegQ.size()>queueSize)
+        avegQ.dequeue();
+    float sum = 0;
+    for (int i = 0; i < avegQ.size(); ++i) {
+        sum += avegQ.at(i);
+    }
+    float tempMean = sum / avegQ.size();
+    tem->setText(QString::number(tempMean));
 }
 
 //update the pixel noise
@@ -569,20 +585,35 @@ void MainWindow::pixelCheck(){
         return;
     QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
     QTableWidgetItem *item = analysisTable->item(3, 3);
+    QTableWidgetItem *tem = analysisTable->item(3, 2);
     if(!pixelChecker-> isChecked()){
         stdDevItem->setText(" ");
         item->setText(" ");
+        tem->setText(" ");
         return;
     }
+
     //frame pixel noise
     float mean = analysis->meanCal(selectedRegion);
     float pixelNoise = analysis->pixelNoiseCal(selectedRegion, mean);
     stdDevItem->setText(QString::number(pixelNoise));
+
     //total pixel noise
     totalPixelSum += pixelNoise;
     totalPixelCounter += 1;
     float totalPixel = totalPixelSum/totalPixelCounter;
     item->setText(QString::number(totalPixel));
+
+    //temporal pixel noise
+    pixQ.enqueue(pixelNoise);
+    if(pixQ.size()>queueSize)
+        pixQ.dequeue();
+    float sum = 0;
+    for (int i = 0; i < pixQ.size(); ++i) {
+        sum += pixQ.at(i);
+    }
+    float temp = sum / pixQ.size();
+    tem->setText(QString::number(temp));
 }
 
 //update the row noise
@@ -591,9 +622,11 @@ void MainWindow::rowCheck(){
         return;
     QTableWidgetItem *rowItem = analysisTable->item(4, 1);
     QTableWidgetItem *item = analysisTable->item(4, 3);
+    QTableWidgetItem *tem = analysisTable->item(4, 2);
     if(!rowChecker-> isChecked()){
         rowItem->setText(" ");
         item->setText(" ");
+        tem->setText(" ");
         return;
     }
     //frame row noise
@@ -604,6 +637,16 @@ void MainWindow::rowCheck(){
     totalRowCounter += 1;
     float totalRow = totalRowSum / totalRowCounter;
     item->setText(QString::number(totalRow));
+    //tempiral row noise
+    rowQ.enqueue(rowNoise);
+    if(rowQ.size()>queueSize)
+        rowQ.dequeue();
+    float sum = 0;
+    for (int i = 0; i < rowQ.size(); ++i) {
+        sum += rowQ.at(i);
+    }
+    float temp = sum / rowQ.size();
+    tem->setText(QString::number(temp));
 }
 
 //update the column noise
@@ -612,9 +655,11 @@ void MainWindow::columnCheck(){
         return;
     QTableWidgetItem *columnItem = analysisTable->item(5, 1);
     QTableWidgetItem *item = analysisTable->item(5, 3);
+    QTableWidgetItem *tem = analysisTable->item(5, 2);
     if(!columnChecker-> isChecked()){
         columnItem->setText(" ");
         item->setText(" ");
+        tem->setText(" ");
         return;
     }
     //frame column noise
@@ -625,6 +670,17 @@ void MainWindow::columnCheck(){
     totalColumnCounter += 1;
     float totalColumn = totalColumnSum/totalColumnCounter;
     item->setText(QString::number(totalColumn));
+
+    //temporal column noise
+    colQ.enqueue(columnNoise);
+    if(colQ.size()>queueSize)
+        colQ.dequeue();
+    float sum = 0;
+    for (int i = 0; i < colQ.size(); ++i) {
+        sum += colQ.at(i);
+    }
+    float temp = sum / colQ.size();
+    tem->setText(QString::number(temp));
 }
 
 //reset if re-select the interested region
