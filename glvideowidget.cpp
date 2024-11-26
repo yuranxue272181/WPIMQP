@@ -218,10 +218,6 @@ void GLVideoWidget::processNextFrame() {
         frameData = videoData.mid(currentFrameIndex * frameSize, frameSize);
         setFrameData(frameData);
         currentFrameIndex++;
-        if(trackingEnabled){
-            processSelection();
-            imageCoordinates();
-        }
     } else {
         frameTimer->stop();
         delete frameTimer;
@@ -244,7 +240,7 @@ bool GLVideoWidget::toggleRecording() {
 
 
 void GLVideoWidget::saveRecordingData(){
-    recordingData.append(frameData);
+    recordingData.append(reinterpret_cast<const char*>(grayData));
 }
 
 // start recording
@@ -278,20 +274,20 @@ void GLVideoWidget::onTimerTimeout(){
 
 // save the screenshoot
 void GLVideoWidget::saveYUVImageDataToFile() {
-    if (frameData.isEmpty()) {
+    if (grayData == nullptr) {
         qDebug() << "No frame data to save.";
         return;
     }
-    QString filePath = QFileDialog::getSaveFileName(this, tr("Save YUV File of Image"),
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Save Grayscale of Image"),
                                                     QString(),
-                                                    tr("YUV Files (*.yuv);;All Files (*)"));
+                                                    tr("bin Files (*.bin);;All Files (*)"));
     if (filePath.isEmpty()) {
         qDebug() << "No file selected.";
         return;
     }
     QFile file(filePath);
     if (file.open(QIODevice::WriteOnly)) {
-        file.write(frameData);
+        file.write(reinterpret_cast<const char*>(grayData));
         file.close();
         qDebug() << "Frame" << currentFrameIndex << "saved to" << filePath;
     } else {
@@ -303,9 +299,9 @@ void GLVideoWidget::saveYUVImageDataToFile() {
 void GLVideoWidget::saveYUVVideoDataToFile() {
     recordingData.clear();
     qDebug() << "Recording started.";
-    filePath = QFileDialog::getSaveFileName(this, tr("Save YUV File of Video"),
+    filePath = QFileDialog::getSaveFileName(this, tr("Save Grayscale of Video"),
                                                     QString(),
-                                                    tr("YUV Files (*.yuv);;All Files (*)"));
+                                                    tr("bin Files (*.bin);;All Files (*)"));
     if (filePath.isEmpty()) {
         qDebug() << "No file selected.";
         return;
@@ -569,6 +565,29 @@ void GLVideoWidget::paintGL()
         painter.drawRect(x, y, width, height);
         painter.end();
     }
+
+    //get the processed data // RGBA to grayscale
+    GLubyte* pixels = new GLubyte[videoWidth * videoHeight * 4];
+    glReadPixels(0, 0, videoWidth, videoHeight, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+    QByteArray processedData = QByteArray(reinterpret_cast<char*>(pixels), videoWidth * videoHeight * 4);
+
+    QByteArray grayscaleData;
+    grayscaleData.resize(videoWidth * videoHeight);
+    uchar* rgbaData = reinterpret_cast<uchar*>(processedData.data());
+    grayData = reinterpret_cast<uchar*>(grayscaleData.data());
+    for (int i = 0; i < videoWidth * videoHeight; ++i) {
+        uchar r = rgbaData[i * 4];
+        uchar g = rgbaData[i * 4 + 1];
+        uchar b = rgbaData[i * 4 + 2];
+        uchar gray = static_cast<uchar>(0.2989 * r + 0.5870 * g + 0.1140 * b);
+        grayData[i] = gray;
+    }
+
+    if(trackingEnabled){
+        processSelection();
+        imageCoordinates();
+    }
+
 }
 
 // initialize openGL
@@ -727,8 +746,6 @@ void GLVideoWidget::mouseReleaseEvent(QMouseEvent *event) {
         adjustedEnd = selectionEnd;
         selecting = false;
         emit mouseRelease();
-        imageCoordinates();
-        processSelection();
         update();
     }
 }
@@ -778,7 +795,8 @@ void GLVideoWidget::processSelection() {
     int selectedWidth = xEnd - xStart + 1;
     int selectedHeight = yEnd - yStart + 1;
 
-    uchar *yPlane = reinterpret_cast<uchar*>(frameData.data());
+
+    uchar *yPlane = reinterpret_cast<uchar*>(grayData);
     QVector<int> grayValues;
     for (int y = yStart; y <= yEnd; ++y) {
         for (int x = xStart; x <= xEnd; ++x) {

@@ -82,6 +82,7 @@ private:
     int videoHeight;
     //char *pitch[3];
     QByteArray m_data;
+    uchar* grayData;
     QImage m_image;
     QTimer *frameTimer;
     int currentFrameIndex = 0;

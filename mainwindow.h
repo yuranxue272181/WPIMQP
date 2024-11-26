@@ -12,6 +12,7 @@
 #include <QTableWidget>
 #include <QCheckBox>
 #include <QSpinBox>
+#include <QQueue>
 
 
 QT_BEGIN_NAMESPACE
@@ -60,13 +61,13 @@ private slots:
     void rowCheck();
     void columnCheck();
     void resetTotal();
+    void updateQueueSize(int value);
 
 private:
     QByteArray testData;
     Ui::MainWindow *ui;
     GLVideoWidget *gl;
     Analysis *analysis;
-
     std::shared_ptr<QVector<int>> selectedRegion;
     float zoomFactor;
     int selectedH;
@@ -81,6 +82,13 @@ private:
     int totalRowCounter;
     float totalColumnSum;
     int totalColumnCounter;
+    QQueue<int> minQ;
+    QQueue<int> maxQ;
+    QQueue<float> avegQ;
+    QQueue<float> rowQ;
+    QQueue<float> colQ;
+    QQueue<float> pixQ;
+    int queueSize;
 
 
     //ui
@@ -93,7 +101,7 @@ private:
     QPushButton *resetBtn;
     QPushButton *grabBtn;
 
-    QSpinBox *temporalFrame;
+    QSpinBox *spin;
 
     QWidget *mainWidget;
     QWidget *videoWdt;
