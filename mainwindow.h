@@ -75,6 +75,7 @@ private:
     float totalMeanSum;
     int totalMeanCounter;
 
+
     //ui
     QToolButton *startBtn;
     QToolButton *playPauseBtn;

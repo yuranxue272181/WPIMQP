@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     zoomFactor = 1.0f;
     selectedH = 0;
     selectedW = 0;
-    selectedRegion = nullptr;
+    selectedRegion = std::make_shared<QVector<int>>(1, 0);
     totalMin = 0;
     totalMax = 0;
     totalMeanSum = 0.0f;
