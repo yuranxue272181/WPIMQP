@@ -102,6 +102,8 @@ MainWindow::MainWindow(QWidget *parent)
     analysisTable->setCellWidget(3, 0, pixelChecker);
     analysisTable->setCellWidget(4, 0, rowChecker);
     analysisTable->setCellWidget(5, 0, columnChecker);
+    analysisTable->setEnabled(false);
+    analysisTable->setStyleSheet("QTableWidget { background-color: #f0f0f0; color: gray; }");
 
     //initialize slider and button
     brightnessSlider ->setRange(-100, 100);
@@ -408,6 +410,13 @@ void MainWindow::setSTNRValue(int value){
 
 void MainWindow::setTrackingEnabled(){
     gl -> setTrackingEnabled(grabBtn->isChecked());
+    if(grabBtn->isChecked()){
+        analysisTable->setEnabled(true);
+        analysisTable->setStyleSheet("QTableWidget { background-color: #ffffff; color: black; }");
+        return;
+    }
+    analysisTable->setEnabled(false);
+    analysisTable->setStyleSheet("QTableWidget { background-color: #f0f0f0; color: gray; }");
 }
 
 void MainWindow::onSelectionCompleted(const QPointF &start, const QPointF &end) {
