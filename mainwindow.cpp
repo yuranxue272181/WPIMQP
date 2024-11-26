@@ -492,12 +492,15 @@ void MainWindow::minCheck(){
     //total min
     if(minValue < totalMin)
         totalMin = minValue;
+    //qDebug() << "min" << minValue << "totalMIn" <<totalMin;
     item->setText(QString::number(totalMin));
 
     //temporal min
     minQ.enqueue(minValue);
-    if(minQ.size()>queueSize)
+    while(minQ.size()>queueSize)
         minQ.dequeue();
+    if (minQ.isEmpty())
+        return;
     int tempMin = 256;
     for (int i = 0; i < minQ.size(); ++i) {
         int current = minQ.at(i);
@@ -532,7 +535,7 @@ void MainWindow::maxCheck(){
 
     //temporal max
     maxQ.enqueue(maxValue);
-    if(maxQ.size()>queueSize)
+    while(maxQ.size()>queueSize)
         maxQ.dequeue();
     int tempMax = -1;
     for (int i = 0; i < maxQ.size(); ++i) {
@@ -569,7 +572,7 @@ void MainWindow::avegCheck(){
 
     //temporal mean
     avegQ.enqueue(mean);
-    if(avegQ.size()>queueSize)
+    while(avegQ.size()>queueSize)
         avegQ.dequeue();
     float sum = 0;
     for (int i = 0; i < avegQ.size(); ++i) {
@@ -606,7 +609,7 @@ void MainWindow::pixelCheck(){
 
     //temporal pixel noise
     pixQ.enqueue(pixelNoise);
-    if(pixQ.size()>queueSize)
+    while(pixQ.size()>queueSize)
         pixQ.dequeue();
     float sum = 0;
     for (int i = 0; i < pixQ.size(); ++i) {
@@ -639,7 +642,7 @@ void MainWindow::rowCheck(){
     item->setText(QString::number(totalRow));
     //tempiral row noise
     rowQ.enqueue(rowNoise);
-    if(rowQ.size()>queueSize)
+    while(rowQ.size()>queueSize)
         rowQ.dequeue();
     float sum = 0;
     for (int i = 0; i < rowQ.size(); ++i) {
@@ -673,7 +676,7 @@ void MainWindow::columnCheck(){
 
     //temporal column noise
     colQ.enqueue(columnNoise);
-    if(colQ.size()>queueSize)
+    while(colQ.size()>queueSize)
         colQ.dequeue();
     float sum = 0;
     for (int i = 0; i < colQ.size(); ++i) {

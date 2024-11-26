@@ -748,7 +748,6 @@ void GLVideoWidget::mouseReleaseEvent(QMouseEvent *event) {
         emit mouseRelease();
         imageCoordinates();
         processSelection();
-        update();
     }
 }
 
