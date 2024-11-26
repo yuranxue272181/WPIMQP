@@ -22,6 +22,12 @@ MainWindow::MainWindow(QWidget *parent)
     totalMax = -1;
     totalMeanSum = 0.0f;
     totalMeanCounter = 0;
+    totalPixelSum = 0.0f;
+    totalPixelCounter = 0;
+    totalRowCounter = 0;
+    totalRowSum = 0.0f;
+    totalColumnCounter = 0;
+    totalColumnSum = 0.0f;
 
     // ui
     // button
@@ -86,6 +92,28 @@ MainWindow::MainWindow(QWidget *parent)
     analysisTable->setCellWidget(3, 0, pixelChecker);
     analysisTable->setCellWidget(4, 0, rowChecker);
     analysisTable->setCellWidget(5, 0, columnChecker);
+
+    //___________________
+    // 创建 QLabel 作为说明文本
+    QSpinBox *spinBox = new QSpinBox();
+    spinBox->setMinimum(3);
+    spinBox->setMaximum(50);
+    spinBox->setValue(10);
+    QLabel *label = new QLabel("Temporal");
+
+    // 创建布局，将 QLabel 和 QSpinBox 垂直排列
+    QHBoxLayout *layout1 = new QHBoxLayout();
+    layout1->addWidget(label);  // 将说明文本添加到布局
+    layout1->addWidget(spinBox);  // 将 QSpinBox 添加到布局
+
+    // 创建 QWidget 容器来装载这个布局
+    QWidget *widget = new QWidget();
+    widget->setLayout(layout1);  // 设置布局
+
+    // 将 QWidget 添加到表格的第一个单元格中
+    analysisTable->setCellWidget(0, 2, widget);  // 将控件放置在表格的第1行第1列
+
+    //________________________________
 
 
     //initialize slider and button
@@ -167,7 +195,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(pixelChecker, &QCheckBox::stateChanged, this, &MainWindow::pixelCheck);
     connect(rowChecker, &QCheckBox::stateChanged, this, &MainWindow::rowCheck);
     connect(columnChecker, &QCheckBox::stateChanged, this, &MainWindow::columnCheck);
-    connect(gl, &GLVideoWidget::mouseRelease, this, &MainWindow::refreshTotalMean);
+    connect(gl, &GLVideoWidget::mouseRelease, this, &MainWindow::resetTotal);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -458,12 +486,11 @@ void MainWindow::minCheck(){
     //frame min
     float minValue = *std::min_element(selectedRegion->begin(), selectedRegion->end());
     minItem->setText(QString::number(minValue));
-    qDebug() << "total"<< totalMin << "min" << minValue;
     //total min
-    if(minValue < totalMin){
+    if(minValue < totalMin)
         totalMin = minValue;
-        item->setText(QString::number(totalMin));
-    }
+    item->setText(QString::number(totalMin));
+
 }
 
 //update the maximum
@@ -471,12 +498,19 @@ void MainWindow::maxCheck(){
     if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *maxItem = analysisTable->item(1, 1);
+    QTableWidgetItem *item = analysisTable->item(1, 3);
     if(!maxChecker-> isChecked()){
         maxItem->setText(" ");
+        item->setText(" ");
         return;
     }
+    //frame max
     float maxValue = *std::max_element(selectedRegion->begin(), selectedRegion->end());
     maxItem->setText(QString::number(maxValue));
+    //total max
+    if(maxValue > totalMax)
+        totalMax = maxValue;
+    item->setText(QString::number(totalMax));
 }
 
 //update the average(mean)
@@ -505,13 +539,21 @@ void MainWindow::pixelCheck(){
     if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
+    QTableWidgetItem *item = analysisTable->item(3, 3);
     if(!pixelChecker-> isChecked()){
         stdDevItem->setText(" ");
+        item->setText(" ");
         return;
     }
+    //frame pixel noise
     float mean = analysis->meanCal(selectedRegion);
     float pixelNoise = analysis->pixelNoiseCal(selectedRegion, mean);
     stdDevItem->setText(QString::number(pixelNoise));
+    //total pixel noise
+    totalPixelSum += pixelNoise;
+    totalPixelCounter += 1;
+    float totalPixel = totalPixelSum/totalPixelCounter;
+    item->setText(QString::number(totalPixel));
 }
 
 //update the row noise
@@ -519,12 +561,20 @@ void MainWindow::rowCheck(){
     if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *rowItem = analysisTable->item(4, 1);
+    QTableWidgetItem *item = analysisTable->item(4, 3);
     if(!rowChecker-> isChecked()){
         rowItem->setText(" ");
+        item->setText(" ");
         return;
     }
+    //frame row noise
     float rowNoise = analysis->calculateAllRowNoise(selectedRegion, selectedH, selectedW);
     rowItem->setText(QString::number(rowNoise));
+    //total row noise
+    totalRowSum += rowNoise;
+    totalRowCounter += 1;
+    float totalRow = totalRowSum / totalRowCounter;
+    item->setText(QString::number(totalRow));
 }
 
 //update the column noise
@@ -532,17 +582,34 @@ void MainWindow::columnCheck(){
     if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *columnItem = analysisTable->item(5, 1);
+    QTableWidgetItem *item = analysisTable->item(5, 3);
     if(!columnChecker-> isChecked()){
         columnItem->setText(" ");
+        item->setText(" ");
         return;
     }
+    //frame column noise
     float columnNoise = analysis->calculateAllColumnNoise(selectedRegion, selectedH, selectedW);
     columnItem->setText(QString::number(columnNoise));
+    //total column noise
+    totalColumnSum += columnNoise;
+    totalColumnCounter += 1;
+    float totalColumn = totalColumnSum/totalColumnCounter;
+    item->setText(QString::number(totalColumn));
 }
 
-void MainWindow::refreshTotalMean(){
+//reset if re-select the interested region
+void MainWindow::resetTotal(){
+    totalMin = 256;
+    totalMax = -1;
     totalMeanSum = 0;
     totalMeanCounter = 0;
+    totalPixelSum = 0.0f;
+    totalPixelCounter = 0;
+    totalRowCounter = 0;
+    totalRowSum = 0.0f;
+    totalColumnCounter = 0;
+    totalColumnSum = 0.0f;
 }
 
 

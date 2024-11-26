@@ -72,7 +72,7 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
     "pixelCheck",
     "rowCheck",
     "columnCheck",
-    "refreshTotalMean"
+    "resetTotal"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -229,7 +229,7 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'columnCheck'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'refreshTotalMean'
+        // method 'resetTotal'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -267,7 +267,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 23: _t->pixelCheck(); break;
         case 24: _t->rowCheck(); break;
         case 25: _t->columnCheck(); break;
-        case 26: _t->refreshTotalMean(); break;
+        case 26: _t->resetTotal(); break;
         default: ;
         }
     }

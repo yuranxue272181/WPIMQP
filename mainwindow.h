@@ -11,6 +11,8 @@
 #include <QLabel>
 #include <QTableWidget>
 #include <QCheckBox>
+#include <QComboBox>
+#include <QSpinBox>
 
 
 QT_BEGIN_NAMESPACE
@@ -58,7 +60,7 @@ private slots:
     void pixelCheck();
     void rowCheck();
     void columnCheck();
-    void refreshTotalMean();
+    void resetTotal();
 
 private:
     QByteArray testData;
@@ -74,6 +76,12 @@ private:
     int totalMax;
     float totalMeanSum;
     int totalMeanCounter;
+    float totalPixelSum;
+    int totalPixelCounter;
+    float totalRowSum;
+    int totalRowCounter;
+    float totalColumnSum;
+    int totalColumnCounter;
 
 
     //ui
