@@ -16,9 +16,10 @@ MainWindow::MainWindow(QWidget *parent)
     zoomFactor = 1.0f;
     selectedH = 0;
     selectedW = 0;
-    selectedRegion = std::make_shared<QVector<int>>(1, 0);
-    totalMin = 0;
-    totalMax = 0;
+    //selectedRegion = std::make_shared<QVector<int>>(1, 0);
+    selectedRegion = nullptr;
+    totalMin = 256;
+    totalMax = -1;
     totalMeanSum = 0.0f;
     totalMeanCounter = 0;
 
@@ -445,20 +446,29 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
 
 //update the minimum
 void MainWindow::minCheck(){
-    if(!grabBtn -> isChecked() && (!selectedRegion || selectedRegion->isEmpty()))
+    if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *minItem = analysisTable->item(0, 1);
+    QTableWidgetItem *item = analysisTable->item(0, 3);
     if(!minChecker-> isChecked()){
         minItem->setText(" ");
+        item->setText(" ");
         return;
     }
+    //frame min
     float minValue = *std::min_element(selectedRegion->begin(), selectedRegion->end());
     minItem->setText(QString::number(minValue));
+    qDebug() << "total"<< totalMin << "min" << minValue;
+    //total min
+    if(minValue < totalMin){
+        totalMin = minValue;
+        item->setText(QString::number(totalMin));
+    }
 }
 
 //update the maximum
 void MainWindow::maxCheck(){
-    if(!grabBtn -> isChecked())
+    if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *maxItem = analysisTable->item(1, 1);
     if(!maxChecker-> isChecked()){
@@ -471,18 +481,19 @@ void MainWindow::maxCheck(){
 
 //update the average(mean)
 void MainWindow::avegCheck(){
-    if(!grabBtn -> isChecked())
+    if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *meanItem = analysisTable->item(2, 1);
+    QTableWidgetItem *totalMeanItem = analysisTable->item(2, 3);
     if(!averageChecker-> isChecked()){
         meanItem->setText(" ");
+        totalMeanItem->setText(" ");
         return;
     }
     //frame mean
     float mean = analysis->meanCal(selectedRegion);
     meanItem->setText(QString::number(mean));
-
-    QTableWidgetItem *totalMeanItem = analysisTable->item(2, 3);
+    //total mean
     totalMeanSum += mean;
     totalMeanCounter += 1;
     float totalMean = totalMeanSum/totalMeanCounter;
@@ -491,7 +502,7 @@ void MainWindow::avegCheck(){
 
 //update the pixel noise
 void MainWindow::pixelCheck(){
-    if(!grabBtn -> isChecked())
+    if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *stdDevItem = analysisTable->item(3, 1);
     if(!pixelChecker-> isChecked()){
@@ -505,7 +516,7 @@ void MainWindow::pixelCheck(){
 
 //update the row noise
 void MainWindow::rowCheck(){
-    if(!grabBtn -> isChecked())
+    if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *rowItem = analysisTable->item(4, 1);
     if(!rowChecker-> isChecked()){
@@ -518,7 +529,7 @@ void MainWindow::rowCheck(){
 
 //update the column noise
 void MainWindow::columnCheck(){
-    if(!grabBtn -> isChecked())
+    if(!grabBtn -> isChecked() || selectedRegion == nullptr)
         return;
     QTableWidgetItem *columnItem = analysisTable->item(5, 1);
     if(!columnChecker-> isChecked()){
