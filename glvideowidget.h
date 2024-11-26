@@ -127,6 +127,7 @@ signals:
     void videoFinished();
     void selectionCompleted(const QPointF &start, const QPointF &end);
     void updateGrayValues(std::shared_ptr<QVector<int>> grayValues, int selectedWidth, int selectedHeight);
+    void mouseRelease();
 
 public slots:
     void setBrightness(float value);

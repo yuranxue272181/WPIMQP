@@ -12,10 +12,15 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //initialize
     zoomFactor = 1.0f;
     selectedH = 0;
     selectedW = 0;
     selectedRegion = nullptr;
+    totalMin = 0;
+    totalMax = 0;
+    totalMeanSum = 0.0f;
+    totalMeanCounter = 0;
 
     // ui
     // button
@@ -80,8 +85,6 @@ MainWindow::MainWindow(QWidget *parent)
     analysisTable->setCellWidget(3, 0, pixelChecker);
     analysisTable->setCellWidget(4, 0, rowChecker);
     analysisTable->setCellWidget(5, 0, columnChecker);
-
-
 
 
     //initialize slider and button
@@ -163,6 +166,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(pixelChecker, &QCheckBox::stateChanged, this, &MainWindow::pixelCheck);
     connect(rowChecker, &QCheckBox::stateChanged, this, &MainWindow::rowCheck);
     connect(columnChecker, &QCheckBox::stateChanged, this, &MainWindow::columnCheck);
+    connect(gl, &GLVideoWidget::mouseRelease, this, &MainWindow::refreshTotalMean);
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -436,19 +440,7 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
         columnCheck();
 
 
-    //___________________________________________
-    // //pixel noise
-    if(pixelChecker-> isChecked()){
 
-    }
-    //row noise
-    if(rowChecker -> isChecked()){
-
-    }
-    //column noise
-    if(columnChecker -> isChecked()){
-
-    }
 }
 
 //update the minimum
@@ -486,8 +478,15 @@ void MainWindow::avegCheck(){
         meanItem->setText(" ");
         return;
     }
+    //frame mean
     float mean = analysis->meanCal(selectedRegion);
     meanItem->setText(QString::number(mean));
+
+    QTableWidgetItem *totalMeanItem = analysisTable->item(2, 3);
+    totalMeanSum += mean;
+    totalMeanCounter += 1;
+    float totalMean = totalMeanSum/totalMeanCounter;
+    totalMeanItem->setText(QString::number(totalMean));
 }
 
 //update the pixel noise
@@ -528,6 +527,11 @@ void MainWindow::columnCheck(){
     }
     float columnNoise = analysis->calculateAllColumnNoise(selectedRegion, selectedH, selectedW);
     columnItem->setText(QString::number(columnNoise));
+}
+
+void MainWindow::refreshTotalMean(){
+    totalMeanSum = 0;
+    totalMeanCounter = 0;
 }
 
 

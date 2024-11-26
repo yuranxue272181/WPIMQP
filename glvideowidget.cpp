@@ -161,6 +161,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     ,selecting(false)
     ,trackingEnabled(false)
     ,zoomFactor(1.0f)
+    ,isPaused(true)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
@@ -202,6 +203,7 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
 void GLVideoWidget::nextFrame(const QByteArray &data) {
     videoData = data;
     currentFrameIndex = 0; // reset
+    isPaused = false;
     // set timer
     frameTimer = new QTimer(this);
     qDebug() << "Timer setted.";
@@ -724,8 +726,9 @@ void GLVideoWidget::mouseReleaseEvent(QMouseEvent *event) {
         selectionEnd = event->pos();
         adjustedEnd = selectionEnd;
         selecting = false;
-        processSelection();
+        emit mouseRelease();
         imageCoordinates();
+        processSelection();
         update();
     }
 }

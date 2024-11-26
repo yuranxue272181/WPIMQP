@@ -58,6 +58,7 @@ private slots:
     void pixelCheck();
     void rowCheck();
     void columnCheck();
+    void refreshTotalMean();
 
 private:
     QByteArray testData;
@@ -69,6 +70,10 @@ private:
     float zoomFactor;
     int selectedH;
     int selectedW;
+    int totalMin;
+    int totalMax;
+    float totalMeanSum;
+    int totalMeanCounter;
 
     //ui
     QToolButton *startBtn;
