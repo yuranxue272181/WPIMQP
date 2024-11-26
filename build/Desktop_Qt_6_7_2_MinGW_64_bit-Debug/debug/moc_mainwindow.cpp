@@ -71,7 +71,8 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
     "avegCheck",
     "pixelCheck",
     "rowCheck",
-    "columnCheck"
+    "columnCheck",
+    "resetTotal"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -84,7 +85,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      26,   14, // methods
+      27,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -92,32 +93,33 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  170,    2, 0x08,    1 /* Private */,
-       3,    0,  171,    2, 0x08,    2 /* Private */,
-       4,    0,  172,    2, 0x08,    3 /* Private */,
-       5,    0,  173,    2, 0x08,    4 /* Private */,
-       6,    0,  174,    2, 0x08,    5 /* Private */,
-       7,    0,  175,    2, 0x08,    6 /* Private */,
-       8,    1,  176,    2, 0x08,    7 /* Private */,
-      10,    1,  179,    2, 0x08,    9 /* Private */,
-      11,    1,  182,    2, 0x08,   11 /* Private */,
-      12,    1,  185,    2, 0x08,   13 /* Private */,
-      13,    1,  188,    2, 0x08,   15 /* Private */,
-      14,    1,  191,    2, 0x08,   17 /* Private */,
-      15,    0,  194,    2, 0x08,   19 /* Private */,
-      16,    1,  195,    2, 0x08,   20 /* Private */,
-      17,    1,  198,    2, 0x08,   22 /* Private */,
-      18,    1,  201,    2, 0x08,   24 /* Private */,
-      19,    1,  204,    2, 0x08,   26 /* Private */,
-      20,    0,  207,    2, 0x08,   28 /* Private */,
-      21,    2,  208,    2, 0x08,   29 /* Private */,
-      24,    3,  213,    2, 0x08,   32 /* Private */,
-      29,    0,  220,    2, 0x08,   36 /* Private */,
-      30,    0,  221,    2, 0x08,   37 /* Private */,
-      31,    0,  222,    2, 0x08,   38 /* Private */,
-      32,    0,  223,    2, 0x08,   39 /* Private */,
-      33,    0,  224,    2, 0x08,   40 /* Private */,
-      34,    0,  225,    2, 0x08,   41 /* Private */,
+       1,    0,  176,    2, 0x08,    1 /* Private */,
+       3,    0,  177,    2, 0x08,    2 /* Private */,
+       4,    0,  178,    2, 0x08,    3 /* Private */,
+       5,    0,  179,    2, 0x08,    4 /* Private */,
+       6,    0,  180,    2, 0x08,    5 /* Private */,
+       7,    0,  181,    2, 0x08,    6 /* Private */,
+       8,    1,  182,    2, 0x08,    7 /* Private */,
+      10,    1,  185,    2, 0x08,    9 /* Private */,
+      11,    1,  188,    2, 0x08,   11 /* Private */,
+      12,    1,  191,    2, 0x08,   13 /* Private */,
+      13,    1,  194,    2, 0x08,   15 /* Private */,
+      14,    1,  197,    2, 0x08,   17 /* Private */,
+      15,    0,  200,    2, 0x08,   19 /* Private */,
+      16,    1,  201,    2, 0x08,   20 /* Private */,
+      17,    1,  204,    2, 0x08,   22 /* Private */,
+      18,    1,  207,    2, 0x08,   24 /* Private */,
+      19,    1,  210,    2, 0x08,   26 /* Private */,
+      20,    0,  213,    2, 0x08,   28 /* Private */,
+      21,    2,  214,    2, 0x08,   29 /* Private */,
+      24,    3,  219,    2, 0x08,   32 /* Private */,
+      29,    0,  226,    2, 0x08,   36 /* Private */,
+      30,    0,  227,    2, 0x08,   37 /* Private */,
+      31,    0,  228,    2, 0x08,   38 /* Private */,
+      32,    0,  229,    2, 0x08,   39 /* Private */,
+      33,    0,  230,    2, 0x08,   40 /* Private */,
+      34,    0,  231,    2, 0x08,   41 /* Private */,
+      35,    0,  232,    2, 0x08,   42 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -140,6 +142,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void,
     QMetaType::Void, QMetaType::QPointF, QMetaType::QPointF,   22,   23,
     QMetaType::Void, 0x80000000 | 25, QMetaType::Int, QMetaType::Int,   26,   27,   28,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -225,6 +228,8 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'rowCheck'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'columnCheck'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'resetTotal'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -262,6 +267,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 23: _t->pixelCheck(); break;
         case 24: _t->rowCheck(); break;
         case 25: _t->columnCheck(); break;
+        case 26: _t->resetTotal(); break;
         default: ;
         }
     }
@@ -286,13 +292,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 26)
+        if (_id < 27)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 26;
+        _id -= 27;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 26)
+        if (_id < 27)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 26;
+        _id -= 27;
     }
     return _id;
 }

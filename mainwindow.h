@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <QTableWidget>
 #include <QCheckBox>
+#include <QSpinBox>
 
 
 QT_BEGIN_NAMESPACE
@@ -58,6 +59,7 @@ private slots:
     void pixelCheck();
     void rowCheck();
     void columnCheck();
+    void resetTotal();
 
 private:
     QByteArray testData;
@@ -69,6 +71,16 @@ private:
     float zoomFactor;
     int selectedH;
     int selectedW;
+    int totalMin;
+    int totalMax;
+    float totalMeanSum;
+    int totalMeanCounter;
+    float totalPixelSum;
+    int totalPixelCounter;
+    float totalRowSum;
+    int totalRowCounter;
+    float totalColumnSum;
+    int totalColumnCounter;
 
 
     //ui
@@ -81,8 +93,11 @@ private:
     QPushButton *resetBtn;
     QPushButton *grabBtn;
 
+    QSpinBox *temporalFrame;
+
     QWidget *mainWidget;
     QWidget *videoWdt;
+    QWidget *spinWdt;
     QDockWidget *leftDk;
     QDockWidget *rightDk;
 

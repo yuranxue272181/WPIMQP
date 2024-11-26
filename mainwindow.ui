@@ -170,32 +170,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>340</y>
-      <width>49</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>176x144</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>340</y>
-      <width>49</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>30fps</string>
-    </property>
-   </widget>
    <widget class="QTableWidget" name="FeatureTable">
     <property name="geometry">
      <rect>
@@ -940,6 +914,9 @@
     </property>
    </widget>
    <widget class="QTableWidget" name="analysisTable">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>220</x>
@@ -1020,6 +997,19 @@
       <set>AlignCenter</set>
      </property>
     </item>
+    <item row="0" column="2">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="0" column="3">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
     <item row="1" column="0">
      <property name="text">
       <string>Max</string>
@@ -1032,6 +1022,16 @@
      <property name="text">
       <string/>
      </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="1" column="2">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="1" column="3">
      <property name="textAlignment">
       <set>AlignCenter</set>
      </property>
@@ -1052,6 +1052,16 @@
       <set>AlignCenter</set>
      </property>
     </item>
+    <item row="2" column="2">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="2" column="3">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
     <item row="3" column="0">
      <property name="text">
       <string>Pixel Noise</string>
@@ -1068,6 +1078,16 @@
       <set>AlignCenter</set>
      </property>
     </item>
+    <item row="3" column="2">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="3" column="3">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
     <item row="4" column="0">
      <property name="text">
       <string>Row Noise</string>
@@ -1077,6 +1097,19 @@
      </property>
     </item>
     <item row="4" column="1">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="4" column="2">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="4" column="3">
      <property name="text">
       <string/>
      </property>
@@ -1100,6 +1133,16 @@
       <set>AlignCenter</set>
      </property>
     </item>
+    <item row="5" column="2">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="5" column="3">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
     <item row="6" column="0">
      <property name="text">
       <string/>
@@ -1112,6 +1155,16 @@
      <property name="text">
       <string/>
      </property>
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="6" column="2">
+     <property name="textAlignment">
+      <set>AlignCenter</set>
+     </property>
+    </item>
+    <item row="6" column="3">
      <property name="textAlignment">
       <set>AlignCenter</set>
      </property>
@@ -1159,30 +1212,17 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>370</x>
       <y>340</y>
-      <width>71</width>
-      <height>16</height>
+      <width>151</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Frame Num:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>340</y>
-      <width>31</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>10</string>
+     <string>Frames for temporal noise</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignmentFlag::AlignCenter</set>
+     <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
     </property>
    </widget>
    <widget class="QTableWidget" name="coordinatesTable">
@@ -1268,6 +1308,16 @@
       <set>AlignCenter</set>
      </property>
     </item>
+   </widget>
+   <widget class="QWidget" name="spin" native="true">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>320</y>
+      <width>81</width>
+      <height>51</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
