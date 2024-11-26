@@ -39,8 +39,18 @@ MainWindow::MainWindow(QWidget *parent)
     zoomOutBtn = ui->zoomOutButton;
     resetBtn = ui-> resetButton;
     grabBtn = ui-> grabButton;
+    //spinBox
+    temporalFrame = new QSpinBox();
+    temporalFrame->setMinimum(3);
+    temporalFrame->setMaximum(50);
+    temporalFrame->setValue(10);
     // widget
     videoWdt = ui->videoWidget;
+    spinWdt = ui->spin;
+    QVBoxLayout *layout1 = new QVBoxLayout(spinWdt);
+    layout1->addWidget(temporalFrame);
+    spinWdt->setLayout(layout1);
+
     //slider
     brightnessSlider = ui->BrightnessSlider;
     contrastSlider = ui-> ContrastSlider;
@@ -92,29 +102,6 @@ MainWindow::MainWindow(QWidget *parent)
     analysisTable->setCellWidget(3, 0, pixelChecker);
     analysisTable->setCellWidget(4, 0, rowChecker);
     analysisTable->setCellWidget(5, 0, columnChecker);
-
-    //___________________
-    // 创建 QLabel 作为说明文本
-    QSpinBox *spinBox = new QSpinBox();
-    spinBox->setMinimum(3);
-    spinBox->setMaximum(50);
-    spinBox->setValue(10);
-    QLabel *label = new QLabel("Temporal");
-
-    // 创建布局，将 QLabel 和 QSpinBox 垂直排列
-    QHBoxLayout *layout1 = new QHBoxLayout();
-    layout1->addWidget(label);  // 将说明文本添加到布局
-    layout1->addWidget(spinBox);  // 将 QSpinBox 添加到布局
-
-    // 创建 QWidget 容器来装载这个布局
-    QWidget *widget = new QWidget();
-    widget->setLayout(layout1);  // 设置布局
-
-    // 将 QWidget 添加到表格的第一个单元格中
-    analysisTable->setCellWidget(0, 2, widget);  // 将控件放置在表格的第1行第1列
-
-    //________________________________
-
 
     //initialize slider and button
     brightnessSlider ->setRange(-100, 100);

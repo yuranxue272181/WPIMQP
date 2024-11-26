@@ -41,8 +41,6 @@ public:
     QToolButton *recordButton;
     QToolButton *zoomInButton;
     QToolButton *zoomOutButton;
-    QLabel *label;
-    QLabel *label_2;
     QTableWidget *FeatureTable;
     QTabWidget *tabWidget;
     QWidget *tab;
@@ -88,8 +86,8 @@ public:
     QLabel *label_4;
     QLabel *label_5;
     QLabel *label_6;
-    QLabel *label_7;
     QTableWidget *coordinatesTable;
+    QWidget *spin;
     QMenuBar *menuBar;
     QMenu *menuhe_p;
     QMenu *menuCollection;
@@ -171,12 +169,6 @@ public:
 
         horizontalLayout->addWidget(zoomOutButton);
 
-        label = new QLabel(centralwidget);
-        label->setObjectName("label");
-        label->setGeometry(QRect(470, 340, 49, 16));
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName("label_2");
-        label_2->setGeometry(QRect(540, 340, 49, 16));
         FeatureTable = new QTableWidget(centralwidget);
         if (FeatureTable->columnCount() < 2)
             FeatureTable->setColumnCount(2);
@@ -530,11 +522,8 @@ public:
         label_5->setGeometry(QRect(230, 340, 41, 16));
         label_6 = new QLabel(centralwidget);
         label_6->setObjectName("label_6");
-        label_6->setGeometry(QRect(320, 340, 71, 16));
-        label_7 = new QLabel(centralwidget);
-        label_7->setObjectName("label_7");
-        label_7->setGeometry(QRect(390, 340, 31, 16));
-        label_7->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        label_6->setGeometry(QRect(370, 340, 151, 20));
+        label_6->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
         coordinatesTable = new QTableWidget(centralwidget);
         if (coordinatesTable->columnCount() < 2)
             coordinatesTable->setColumnCount(2);
@@ -568,6 +557,9 @@ public:
         coordinatesTable->horizontalHeader()->setHighlightSections(false);
         coordinatesTable->verticalHeader()->setVisible(true);
         coordinatesTable->verticalHeader()->setDefaultSectionSize(40);
+        spin = new QWidget(centralwidget);
+        spin->setObjectName("spin");
+        spin->setGeometry(QRect(510, 320, 81, 51));
         MainWindow->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
@@ -612,8 +604,6 @@ public:
         recordButton->setText(QString());
         zoomInButton->setText(QString());
         zoomOutButton->setText(QString());
-        label->setText(QCoreApplication::translate("MainWindow", "176x144", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "30fps", nullptr));
         QTableWidgetItem *___qtablewidgetitem = FeatureTable->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = FeatureTable->horizontalHeaderItem(1);
@@ -716,8 +706,7 @@ public:
         label_3->setText(QCoreApplication::translate("MainWindow", "Feature Properties", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "ROI ", nullptr));
-        label_6->setText(QCoreApplication::translate("MainWindow", "Frame Num:", nullptr));
-        label_7->setText(QCoreApplication::translate("MainWindow", "10", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "Frames for temporal noise", nullptr));
         QTableWidgetItem *___qtablewidgetitem32 = coordinatesTable->horizontalHeaderItem(0);
         ___qtablewidgetitem32->setText(QCoreApplication::translate("MainWindow", "y1", nullptr));
         QTableWidgetItem *___qtablewidgetitem33 = coordinatesTable->horizontalHeaderItem(1);

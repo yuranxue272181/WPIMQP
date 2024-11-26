@@ -11,7 +11,6 @@
 #include <QLabel>
 #include <QTableWidget>
 #include <QCheckBox>
-#include <QComboBox>
 #include <QSpinBox>
 
 
@@ -94,8 +93,11 @@ private:
     QPushButton *resetBtn;
     QPushButton *grabBtn;
 
+    QSpinBox *temporalFrame;
+
     QWidget *mainWidget;
     QWidget *videoWdt;
+    QWidget *spinWdt;
     QDockWidget *leftDk;
     QDockWidget *rightDk;
 

@@ -170,32 +170,6 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>470</x>
-      <y>340</y>
-      <width>49</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>176x144</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>340</y>
-      <width>49</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>30fps</string>
-    </property>
-   </widget>
    <widget class="QTableWidget" name="FeatureTable">
     <property name="geometry">
      <rect>
@@ -1238,30 +1212,17 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>370</x>
       <y>340</y>
-      <width>71</width>
-      <height>16</height>
+      <width>151</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Frame Num:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_7">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>340</y>
-      <width>31</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>10</string>
+     <string>Frames for temporal noise</string>
     </property>
     <property name="alignment">
-     <set>Qt::AlignmentFlag::AlignCenter</set>
+     <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
     </property>
    </widget>
    <widget class="QTableWidget" name="coordinatesTable">
@@ -1347,6 +1308,16 @@
       <set>AlignCenter</set>
      </property>
     </item>
+   </widget>
+   <widget class="QWidget" name="spin" native="true">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>320</y>
+      <width>81</width>
+      <height>51</height>
+     </rect>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
