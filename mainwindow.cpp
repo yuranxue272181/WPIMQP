@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     zoomFactor = 1.0f;
     selectedH = 0;
     selectedW = 0;
-    selectedRegion = nullptr;
+    selectedRegion = std::make_shared<QVector<int>>(1, 0);
 
     // ui
     // button
@@ -435,20 +435,6 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
     if(columnChecker -> isChecked())
         columnCheck();
 
-
-    //___________________________________________
-    // //pixel noise
-    if(pixelChecker-> isChecked()){
-
-    }
-    //row noise
-    if(rowChecker -> isChecked()){
-
-    }
-    //column noise
-    if(columnChecker -> isChecked()){
-
-    }
 }
 
 //update the minimum

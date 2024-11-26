@@ -70,6 +70,7 @@ private:
     int selectedH;
     int selectedW;
 
+
     //ui
     QToolButton *startBtn;
     QToolButton *playPauseBtn;

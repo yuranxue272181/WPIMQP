@@ -50,7 +50,7 @@ float Analysis::calculateRowNoise(std::shared_ptr<QVector<int>> grayValues, int 
 
 //calculate all row noise
 float Analysis::calculateAllRowNoise(std::shared_ptr<QVector<int>> grayValues, int selectedHeight, int selectedWidth) {
-    if(selectedHeight == 1)
+    if(selectedHeight <= 1)
         return 0;
     QVector<float> rowNoiseValues;
     float mean = 0.0f;
@@ -84,7 +84,7 @@ float Analysis::calculateColumnNoise(std::shared_ptr<QVector<int>> grayValues, i
 
 //calculate all column noise
 float Analysis::calculateAllColumnNoise(std::shared_ptr<QVector<int>> grayValues, int selectedHeight, int selectedWidth) {
-    if (selectedWidth == 1)
+    if (selectedWidth <= 1)
         return 0;
     QVector<float> columnNoiseValues;
     float mean = 0.0f;
