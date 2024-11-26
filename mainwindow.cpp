@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
     totalRowSum = 0.0f;
     totalColumnCounter = 0;
     totalColumnSum = 0.0f;
+    queueSize = 10;
 
     // ui
     // button
@@ -40,15 +41,15 @@ MainWindow::MainWindow(QWidget *parent)
     resetBtn = ui-> resetButton;
     grabBtn = ui-> grabButton;
     //spinBox
-    temporalFrame = new QSpinBox();
-    temporalFrame->setMinimum(3);
-    temporalFrame->setMaximum(50);
-    temporalFrame->setValue(10);
+    spin = new QSpinBox();
+    spin->setMinimum(3);
+    spin->setMaximum(50);
+    spin->setValue(10);
     // widget
     videoWdt = ui->videoWidget;
     spinWdt = ui->spin;
     QVBoxLayout *layout1 = new QVBoxLayout(spinWdt);
-    layout1->addWidget(temporalFrame);
+    layout1->addWidget(spin);
     spinWdt->setLayout(layout1);
 
     //slider
@@ -185,6 +186,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(rowChecker, &QCheckBox::stateChanged, this, &MainWindow::rowCheck);
     connect(columnChecker, &QCheckBox::stateChanged, this, &MainWindow::columnCheck);
     connect(gl, &GLVideoWidget::mouseRelease, this, &MainWindow::resetTotal);
+    connect(spin, &QSpinBox::valueChanged,this,&MainWindow::updateQueueSize);
+
+    //updateQueueSize
 
     // connect the video to ui
     // clear the old layout of videoWidget
@@ -474,19 +478,34 @@ void MainWindow::minCheck(){
         return;
     QTableWidgetItem *minItem = analysisTable->item(0, 1);
     QTableWidgetItem *item = analysisTable->item(0, 3);
+    QTableWidgetItem *tem = analysisTable->item(0, 2);
     if(!minChecker-> isChecked()){
         minItem->setText(" ");
         item->setText(" ");
+        tem->setText(" ");
         return;
     }
     //frame min
     float minValue = *std::min_element(selectedRegion->begin(), selectedRegion->end());
     minItem->setText(QString::number(minValue));
+
     //total min
     if(minValue < totalMin)
         totalMin = minValue;
     item->setText(QString::number(totalMin));
 
+    //temporal min
+    minQ.enqueue(minValue);
+    if(minQ.size()>queueSize)
+        minQ.dequeue();
+    int tempMin = 256;
+    for (int i = 0; i < minQ.size(); ++i) {
+        int current = minQ.at(i);
+        if (current < tempMin) {
+            tempMin = current;
+        }
+    }
+    tem->setText(QString::number(tempMin));
 }
 
 //update the maximum
@@ -495,9 +514,11 @@ void MainWindow::maxCheck(){
         return;
     QTableWidgetItem *maxItem = analysisTable->item(1, 1);
     QTableWidgetItem *item = analysisTable->item(1, 3);
+    QTableWidgetItem *tem = analysisTable->item(1, 2);
     if(!maxChecker-> isChecked()){
         maxItem->setText(" ");
         item->setText(" ");
+        tem->setText(" ");
         return;
     }
     //frame max
@@ -507,6 +528,18 @@ void MainWindow::maxCheck(){
     if(maxValue > totalMax)
         totalMax = maxValue;
     item->setText(QString::number(totalMax));
+    //temporal max
+    maxQ.enqueue(maxValue);
+    if(maxQ.size()>queueSize)
+        maxQ.dequeue();
+    int tempMax = -1;
+    for (int i = 0; i < maxQ.size(); ++i) {
+        int current = maxQ.at(i);
+        if (current > tempMax) {
+            tempMax = current;
+        }
+    }
+    tem->setText(QString::number(tempMax));
 }
 
 //update the average(mean)
@@ -606,6 +639,17 @@ void MainWindow::resetTotal(){
     totalRowSum = 0.0f;
     totalColumnCounter = 0;
     totalColumnSum = 0.0f;
+    minQ.clear();
+    maxQ.clear();
+    avegQ.clear();
+    rowQ.clear();
+    colQ.clear();
+    pixQ.clear();
+
+}
+
+void MainWindow::updateQueueSize(int value){
+    queueSize = value;
 }
 
 
