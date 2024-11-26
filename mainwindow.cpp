@@ -445,7 +445,7 @@ void MainWindow::updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int se
 
 //update the minimum
 void MainWindow::minCheck(){
-    if(!grabBtn -> isChecked())
+    if(!grabBtn -> isChecked() && (!selectedRegion || selectedRegion->isEmpty()))
         return;
     QTableWidgetItem *minItem = analysisTable->item(0, 1);
     if(!minChecker-> isChecked()){
