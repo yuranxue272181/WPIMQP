@@ -34,6 +34,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+public slots:
+    void setFrameRateFromBoard(int value);
+
+
 private slots:
     void renderVideo();
     void pauseVideo();
@@ -91,6 +96,7 @@ private:
     QQueue<float> colQ;
     QQueue<float> pixQ;
     int queueSize;
+    int frameRate;
 
 
     //ui

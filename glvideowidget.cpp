@@ -820,7 +820,7 @@ void GLVideoWidget::setZoomFactor(float factor){
 //set the frame rate
 void GLVideoWidget::setFrameRate(int value){
     frameRate = value;
-    if (frameTimer) {
+    if (frameTimer && !isPaused) {
         frameTimer->start(1000 / frameRate); // Update the timer interval
         qDebug() << "Frame rate updated to:" << frameRate << ", Timer interval set to:" << 1000 / frameRate << "ms";
     }

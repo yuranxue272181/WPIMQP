@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     totalColumnCounter = 0;
     totalColumnSum = 0.0f;
     queueSize = 10;
+    frameRate = 30;
 
     // ui
     // button
@@ -717,12 +718,31 @@ void MainWindow::updateQueueSize(int value){
     queueSize = value;
 }
 
-//update the frame rate
+//update the frame rate from the user inteface
 //Here's the interface to the board about frame rate, the frame rate is stored in <frameRate>, with number 30, or 60
 void MainWindow::setFrameRate(int index){
-    int frameRate = (frameRateCB->itemText(index)).toInt();
+    frameRate = (frameRateCB->itemText(index)).toInt();
     gl->setFrameRate(frameRate);
 
+}
+
+//update the frame rate from the board
+void MainWindow::setFrameRateFromBoard(int value){
+    switch (value) {
+        case 30:
+            frameRate = value;
+            frameRateCB->setCurrentText("30");
+            gl->setFrameRate(frameRate);
+            break;
+        case 60:
+            frameRate = value;
+            frameRateCB->setCurrentText("60");
+            gl->setFrameRate(frameRate);
+            break;
+        default:
+            qDebug()<<"Unsupported frame rate: "<<value;
+            break;
+    }
 }
 
 
