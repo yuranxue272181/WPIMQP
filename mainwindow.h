@@ -13,6 +13,7 @@
 #include <QCheckBox>
 #include <QSpinBox>
 #include <QQueue>
+#include <QComboBox>
 
 
 QT_BEGIN_NAMESPACE
@@ -62,6 +63,7 @@ private slots:
     void columnCheck();
     void resetTotal();
     void updateQueueSize(int value);
+    void setFrameRate(int value);
 
 private:
     QByteArray testData;
@@ -141,6 +143,8 @@ private:
     QCheckBox *rowChecker;
     QCheckBox *columnChecker;
     QCheckBox *pixelChecker;
+
+    QComboBox *frameRateCB;
 
 
 signals:

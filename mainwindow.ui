@@ -717,7 +717,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="page_5">
        <property name="geometry">
@@ -808,8 +808,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>181</width>
+         <height>151</height>
         </rect>
        </property>
        <attribute name="label">
@@ -850,8 +850,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>100</width>
-         <height>30</height>
+         <width>181</width>
+         <height>121</height>
         </rect>
        </property>
        <attribute name="label">
@@ -893,6 +893,21 @@
           <y>0</y>
           <width>211</width>
           <height>201</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_10">
+       <attribute name="label">
+        <string>Frame Rate</string>
+       </attribute>
+       <widget class="QComboBox" name="frameRateComboBox">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>10</y>
+          <width>69</width>
+          <height>22</height>
          </rect>
         </property>
        </widget>

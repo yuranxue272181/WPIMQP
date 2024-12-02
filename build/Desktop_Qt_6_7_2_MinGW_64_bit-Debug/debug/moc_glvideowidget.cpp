@@ -57,6 +57,7 @@ constexpr auto qt_meta_stringdata_CLASSGLVideoWidgetENDCLASS = QtMocHelpers::str
     "setHEValue",
     "setNoiseReduction",
     "setGamma",
+    "setFrameRate",
     "onTimerTimeout",
     "saveRecordingData"
 );
@@ -71,7 +72,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGLVideoWidgetENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -79,20 +80,21 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGLVideoWidgetENDCLASS[] = {
        4,       // signalCount
 
  // signals: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   86,    2, 0x06,    1 /* Public */,
-       3,    2,   87,    2, 0x06,    2 /* Public */,
-       6,    3,   92,    2, 0x06,    5 /* Public */,
-      11,    0,   99,    2, 0x06,    9 /* Public */,
+       1,    0,   92,    2, 0x06,    1 /* Public */,
+       3,    2,   93,    2, 0x06,    2 /* Public */,
+       6,    3,   98,    2, 0x06,    5 /* Public */,
+      11,    0,  105,    2, 0x06,    9 /* Public */,
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-      12,    1,  100,    2, 0x0a,   10 /* Public */,
-      14,    1,  103,    2, 0x0a,   12 /* Public */,
-      15,    1,  106,    2, 0x0a,   14 /* Public */,
-      16,    1,  109,    2, 0x0a,   16 /* Public */,
-      17,    1,  112,    2, 0x0a,   18 /* Public */,
-      18,    1,  115,    2, 0x0a,   20 /* Public */,
-      19,    0,  118,    2, 0x08,   22 /* Private */,
-      20,    0,  119,    2, 0x08,   23 /* Private */,
+      12,    1,  106,    2, 0x0a,   10 /* Public */,
+      14,    1,  109,    2, 0x0a,   12 /* Public */,
+      15,    1,  112,    2, 0x0a,   14 /* Public */,
+      16,    1,  115,    2, 0x0a,   16 /* Public */,
+      17,    1,  118,    2, 0x0a,   18 /* Public */,
+      18,    1,  121,    2, 0x0a,   20 /* Public */,
+      19,    1,  124,    2, 0x0a,   22 /* Public */,
+      20,    0,  127,    2, 0x08,   24 /* Private */,
+      21,    0,  128,    2, 0x08,   25 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
@@ -107,6 +109,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGLVideoWidgetENDCLASS[] = {
     QMetaType::Void, QMetaType::Float,   13,
     QMetaType::Void, QMetaType::Float,   13,
     QMetaType::Void, QMetaType::Float,   13,
+    QMetaType::Void, QMetaType::Int,   13,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -153,6 +156,9 @@ Q_CONSTINIT const QMetaObject GLVideoWidget::staticMetaObject = { {
         // method 'setGamma'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         QtPrivate::TypeAndForceComplete<float, std::false_type>,
+        // method 'setFrameRate'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'onTimerTimeout'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'saveRecordingData'
@@ -177,8 +183,9 @@ void GLVideoWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 7: _t->setHEValue((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
         case 8: _t->setNoiseReduction((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
         case 9: _t->setGamma((*reinterpret_cast< std::add_pointer_t<float>>(_a[1]))); break;
-        case 10: _t->onTimerTimeout(); break;
-        case 11: _t->saveRecordingData(); break;
+        case 10: _t->setFrameRate((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 11: _t->onTimerTimeout(); break;
+        case 12: _t->saveRecordingData(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -235,13 +242,13 @@ int GLVideoWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 13)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }

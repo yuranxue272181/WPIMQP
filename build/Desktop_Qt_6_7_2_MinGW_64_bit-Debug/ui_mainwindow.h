@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -80,6 +81,8 @@ public:
     QSlider *STNRSlider;
     QLabel *STNR;
     QWidget *widget;
+    QWidget *page_10;
+    QComboBox *frameRateComboBox;
     QPushButton *grabButton;
     QTableWidget *analysisTable;
     QLabel *label_3;
@@ -375,7 +378,7 @@ public:
         toolBox_2->addItem(page_6, QString::fromUtf8("Gain"));
         Sharpen_2 = new QWidget();
         Sharpen_2->setObjectName("Sharpen_2");
-        Sharpen_2->setGeometry(QRect(0, 0, 100, 30));
+        Sharpen_2->setGeometry(QRect(0, 0, 181, 151));
         dynamicRangeSlider = new QSlider(Sharpen_2);
         dynamicRangeSlider->setObjectName("dynamicRangeSlider");
         dynamicRangeSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -387,7 +390,7 @@ public:
         toolBox_2->addItem(Sharpen_2, QString::fromUtf8("Dynamic Range"));
         page_9 = new QWidget();
         page_9->setObjectName("page_9");
-        page_9->setGeometry(QRect(0, 0, 100, 30));
+        page_9->setGeometry(QRect(0, 0, 181, 121));
         STNRSlider = new QSlider(page_9);
         STNRSlider->setObjectName("STNRSlider");
         STNRSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -400,6 +403,12 @@ public:
         widget->setObjectName("widget");
         widget->setGeometry(QRect(30, 0, 211, 201));
         toolBox_2->addItem(page_9, QString::fromUtf8("Signal-to-Noise Ratio"));
+        page_10 = new QWidget();
+        page_10->setObjectName("page_10");
+        frameRateComboBox = new QComboBox(page_10);
+        frameRateComboBox->setObjectName("frameRateComboBox");
+        frameRateComboBox->setGeometry(QRect(40, 10, 69, 22));
+        toolBox_2->addItem(page_10, QString::fromUtf8("Frame Rate"));
         tabWidget->addTab(tab_3, QString());
         grabButton = new QPushButton(centralwidget);
         grabButton->setObjectName("grabButton");
@@ -589,7 +598,7 @@ public:
 
         tabWidget->setCurrentIndex(1);
         toolBox->setCurrentIndex(1);
-        toolBox_2->setCurrentIndex(1);
+        toolBox_2->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -676,6 +685,7 @@ public:
         toolBox_2->setItemText(toolBox_2->indexOf(Sharpen_2), QCoreApplication::translate("MainWindow", "Dynamic Range", nullptr));
         STNR->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         toolBox_2->setItemText(toolBox_2->indexOf(page_9), QCoreApplication::translate("MainWindow", "Signal-to-Noise Ratio", nullptr));
+        toolBox_2->setItemText(toolBox_2->indexOf(page_10), QCoreApplication::translate("MainWindow", "Frame Rate", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Control Component", nullptr));
         grabButton->setText(QCoreApplication::translate("MainWindow", "Grab Coordinates", nullptr));
         QTableWidgetItem *___qtablewidgetitem22 = analysisTable->horizontalHeaderItem(0);

@@ -88,6 +88,11 @@ MainWindow::MainWindow(QWidget *parent)
     columnChecker= new QCheckBox("Column Noise");
     pixelChecker= new QCheckBox("Pixel Noise");
 
+    //combo box
+    frameRateCB = ui->frameRateComboBox;
+    frameRateCB->addItem("30");
+    frameRateCB->addItem("60");
+    frameRateCB->setCurrentText("30");
 
 
     //table
@@ -187,6 +192,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(columnChecker, &QCheckBox::stateChanged, this, &MainWindow::columnCheck);
     connect(gl, &GLVideoWidget::mouseRelease, this, &MainWindow::resetTotal);
     connect(spin, &QSpinBox::valueChanged,this,&MainWindow::updateQueueSize);
+    connect(frameRateCB, &QComboBox::currentIndexChanged, this, &MainWindow::setFrameRate);
 
     //updateQueueSize
 
@@ -706,10 +712,19 @@ void MainWindow::resetTotal(){
     pixQ.clear();
 
 }
-
+//update the size of temporal noise
 void MainWindow::updateQueueSize(int value){
     queueSize = value;
 }
+
+//update the frame rate
+//Here's the interface to the board about frame rate, the frame rate is stored in <frameRate>, with number 30, or 60
+void MainWindow::setFrameRate(int index){
+    int frameRate = (frameRateCB->itemText(index)).toInt();
+    gl->setFrameRate(frameRate);
+
+}
+
 
 
 

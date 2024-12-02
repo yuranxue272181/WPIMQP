@@ -98,6 +98,7 @@ private:
     bool selecting;
     bool trackingEnabled;
     float zoomFactor;
+    int frameRate;
 
     typedef struct {
         char* data;
@@ -137,6 +138,7 @@ public slots:
     void setHEValue(float value);
     void setNoiseReduction(float value);
     void setGamma(float value);
+    void setFrameRate(int value);
 
 private slots:
     void onTimerTimeout();

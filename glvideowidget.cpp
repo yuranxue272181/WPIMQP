@@ -162,6 +162,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
     ,trackingEnabled(false)
     ,zoomFactor(1.0f)
     ,isPaused(true)
+    ,frameRate(30)
 {
     setAttribute(Qt::WA_OpaquePaintEvent);
     setAttribute(Qt::WA_NoSystemBackground);
@@ -208,7 +209,7 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     frameTimer = new QTimer(this);
     qDebug() << "Timer setted.";
     connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextFrame);
-    frameTimer->start(1000/48); // 48FPS
+    frameTimer->start(1000/frameRate);
 }
 
 //Get the data for each frame and render it
@@ -266,7 +267,7 @@ void GLVideoWidget::stopRecording(){
 // write data to the file every second
 void GLVideoWidget::onTimerTimeout(){
     frameCount++;
-    if (frameCount >= 30) {
+    if (frameCount >= frameRate) {
         writeYUVVideoDataToFile();
         frameCount = 0;
     }
@@ -330,7 +331,7 @@ bool GLVideoWidget::pauseVideo(){
     if (frameTimer) {
         if (isPaused) {
             //resume
-            frameTimer->start(1000 / 48);
+            frameTimer->start(1000 / frameRate);
             isPaused = false;
             qDebug() << "Video resumed.";
         } else {
@@ -815,4 +816,12 @@ void GLVideoWidget::setZoomFactor(float factor){
     adjustedStart = QPoint(selectionStart.x() * zoomFactor,selectionStart.y() * zoomFactor);
     adjustedEnd = QPoint(selectionEnd.x() * zoomFactor,selectionEnd.y() * zoomFactor);
     update();
+}
+//set the frame rate
+void GLVideoWidget::setFrameRate(int value){
+    frameRate = value;
+    if (frameTimer) {
+        frameTimer->start(1000 / frameRate); // Update the timer interval
+        qDebug() << "Frame rate updated to:" << frameRate << ", Timer interval set to:" << 1000 / frameRate << "ms";
+    }
 }
