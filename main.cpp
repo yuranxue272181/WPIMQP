@@ -39,19 +39,21 @@ int main(int argc, char *argv[])
 
     FPGAInterface fpga;
 
-    // Open the FX3 device
-    CCyUSBDevice usbDevice;
-    if (!usbDevice.IsOpen()) {
-        fprintf(stderr, "Failed to open FX3 device.\n");
-        return -1;
-    }
+    // // Open the FX3 device
+    // CCyUSBDevice usbDevice;
+    // if (!usbDevice.IsOpen()) {
+    //     fprintf(stderr, "Failed to open FX3 device.\n");
+    //     return -1;
+    // }
 
-    // Set exposure time
-    int exposureTime = 5000; // Example value in milliseconds
-    if (!fpga.setExposureTimeFX3(&usbDevice, exposureTime)) {
-        fprintf(stderr, "Failed to set exposure time.\n");
-        return -1;
-    }
+    // // Set exposure time
+    // int exposureTime = 5000; // Example value in milliseconds
+    // if (!fpga.setExposureTimeFX3(&usbDevice, exposureTime)) {
+    //     fprintf(stderr, "Failed to set exposure time.\n");
+    //     return -1;
+    // }
+
+    fpga.initializeDevice();
 
     // // Wait for the FX3 to process the data
     // Sleep(10); // Wait for 10 milliseconds
