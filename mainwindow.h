@@ -10,7 +10,7 @@
 #include <QSlider>
 #include <QLabel>
 #include <QTableWidget>
-
+#include "fpgainterface.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -49,6 +49,7 @@ private slots:
     void setSTNRValue(int value);
 
 private:
+    FPGAInterface fpga;
     QByteArray testData;
     Ui::MainWindow *ui;
     GLVideoWidget *gl;

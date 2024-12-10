@@ -17,6 +17,7 @@ FPGAInterface::FPGAInterface(QObject *parent)
 
     if (usbDevice->DeviceCount() > 0) {
         initializeDevice();
+        qDebug() << "Attached to: " << usbDevice->DeviceName;
     } else {
         qDebug() << "No Devices Attached";
     }
@@ -291,4 +292,67 @@ bool FPGAInterface::readBackExposureTimeFX3(CCyUSBDevice *usbDevice, int *readEx
     *readExposureTime = (data[0] << 24) | (data[1] << 16) | (data[2] << 8) | data[3];
     fprintf(stdout, "Read exposure time from FX3: %d\n", *readExposureTime);
     return true;
+}
+
+bool FPGAInterface::readImage(unsigned char *data) {
+    if (!usbDevice || !usbDevice->IsOpen()) {
+        fprintf(stderr, "FX3 device not connected or not open.\n");
+        return false;
+    }
+
+    unsigned char buf[26*1024] = { 0 }; // Header packet followed by 25 data packets. The last data packet is padded with 0s.
+    long len = sizeof(buf);
+
+    if (!usbDevice->BulkInEndPt) {
+        fprintf(stderr, "No Bulk In Endpoint Detected\n");
+        return false;
+    }
+
+    usbDevice->BulkInEndPt->XferData(buf, len);
+
+    std::memcpy(data, buf + 1024, 176*144);
+    return true;
+}
+
+QByteArray FPGAInterface::readImageAsYUV() {
+    const unsigned char width = 176, height = 144;
+
+    unsigned char data[width*height] = { 0 };
+    readImage(data);
+
+    // Calculate the size of the YUV data
+    size_t ySize = width * height;
+    size_t uSize = (width / 2) * (height / 2);
+    size_t vSize = (width / 2) * (height / 2);
+    size_t totalSize = ySize + uSize + vSize;
+
+    // Prepare a QByteArray for the current YUV data
+    QByteArray yuvData;
+    yuvData.resize(totalSize);
+
+    // Pointers for Y, U, and V data
+    uint8_t* yPlane = reinterpret_cast<uint8_t*>(yuvData.data());
+    uint8_t* uPlane = yPlane + ySize;
+    uint8_t* vPlane = uPlane + uSize;
+
+    // Process grayscale data to generate YUV data
+    for (int j = 0; j < height; j++) {
+        for (int i = 0; i < width; i++) {
+            // Read grayscale value
+            uint8_t grayscaleValue =data[j * width + i];
+
+            // Set Y value directly from the grayscale value
+            yPlane[j * width + i] = grayscaleValue;
+
+            // Set U and V to neutral values (128)
+            if (j % 2 == 0 && i % 2 == 0) { // Subsample for U and V
+                uPlane[(j / 2) * (width / 2) + (i / 2)] = 128; // U
+                vPlane[(j / 2) * (width / 2) + (i / 2)] = 128; // V
+            }
+        }
+    }
+
+
+    return yuvData;
+
 }

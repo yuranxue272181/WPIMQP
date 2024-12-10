@@ -190,6 +190,32 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
     update();
 }
 
+void GLVideoWidget::connectFPGADevice(FPGAInterface *fpga) {
+    this->fpga = fpga;
+}
+
+void GLVideoWidget::readVideoFromUSB() {
+    videoData = fpga->readImageAsYUV();
+    frameTimer = new QTimer(this);
+    connect(frameTimer, &QTimer::timeout, this, &GLVideoWidget::processNextVideoFrame);
+    frameTimer->start(1000/60); // 45FPS
+
+}
+
+
+//Get the data for each frame and render it
+void GLVideoWidget::processNextVideoFrame() {
+    setFrameData(videoData);
+
+    frameTimer->stop();
+    delete frameTimer;
+    frameTimer = nullptr;
+    qDebug() << "Frames processed.";
+    //emit videoFinished();
+    readVideoFromUSB();
+}
+
+
 
 // display video by switching frames (frame rate)
 void GLVideoWidget::nextFrame(const QByteArray &data) {

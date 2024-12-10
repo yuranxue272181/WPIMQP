@@ -3,7 +3,6 @@
 #include <QApplication>
 #include <QtCore>
 #include <QtGui/QImage>
-#include "fpgainterface.h"
 
 #define YUV_TEST 1
 int main(int argc, char *argv[])
@@ -37,8 +36,6 @@ int main(int argc, char *argv[])
     mainWindow.setWindowTitle("AySight");
     mainWindow.show();
 
-    FPGAInterface fpga;
-
     // // Open the FX3 device
     // CCyUSBDevice usbDevice;
     // if (!usbDevice.IsOpen()) {
@@ -53,10 +50,7 @@ int main(int argc, char *argv[])
     //     return -1;
     // }
 
-    fpga.initializeDevice();
-
     // // Wait for the FX3 to process the data
-    // Sleep(10); // Wait for 10 milliseconds
 
     // // Read back exposure time
     // int readExposureTime = 0;

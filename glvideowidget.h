@@ -5,6 +5,7 @@
 #include <QtGui/QImage>
 #include <QOpenGLWidget>
 #include <QOpenGLShaderProgram>
+#include "fpgainterface.h"
 
 class GLVideoWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
@@ -24,6 +25,8 @@ public:
 
     void nextFrame(const QByteArray &data);
 
+    void readVideoFromUSB();
+
     // QImage
     /*!
      * \brief setQImageParameters
@@ -42,6 +45,7 @@ public:
     bool toggleRecording();
     void refreshData();
     bool isPausedVideo();
+    void connectFPGADevice(FPGAInterface *fpga);
 
 
     // TODO: only init(w,h,strides) init(QImage::Format, w, h, strides)
@@ -83,6 +87,7 @@ private:
     QByteArray recordingData;
     QString filePath;
     int frameCount;
+    FPGAInterface *fpga;
 
     typedef struct {
         char* data;
@@ -104,6 +109,7 @@ private:
     QMatrix4x4 m_mat;
 
     void processNextFrame();
+    void processNextVideoFrame();
     void setFrameData(const QByteArray& data);
     void computeHistogramEqualization(char* yuvData);
 

@@ -30,6 +30,8 @@ public:
     bool setExposureTimeFX3(CCyUSBDevice *usbDevice, int exposureTime);
     // Read back exposure time from FX3
     bool readBackExposureTimeFX3(CCyUSBDevice *usbDevice, int *readExposureTime);
+    bool readImage(unsigned char *data);
+    QByteArray readImageAsYUV();
 
 signals:
     void deviceAttached();   // Signal emitted when a device is attached

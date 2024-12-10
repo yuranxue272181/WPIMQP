@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "glvideowidget.h"
+#include "fpgainterface.h"
 
 //ui
 #include <QVBoxLayout>
@@ -186,23 +187,30 @@ void MainWindow::renderVideo(){
     // qDebug("data size: %lld", data.size());
     // gl->nextFrame(data);
 
-    int width=176;
+    // int width=176;
+    // int height = 144;
+    // QFile f(":/akiyo_qcif.yuv");
+    // f.open(QIODevice::ReadOnly);
+    // QByteArray data(f.readAll());
+    // //trans the video to only white, black ,and grey
+    // int frameSize = (width * height) + (width / 2 * height / 2) * 2;
+    // int frameCount = data.size() / frameSize;
+    // for (int frame = 0; frame < frameCount; ++frame) {
+    //     int frameOffset = frame * (width * height + (width / 2) * (height / 2) * 2);
+    //     for (int j = 0; j < (width / 2) * (height / 2); ++j) {
+    //         data[frameOffset + width * height + j] = -128; // U
+    //         data[frameOffset + width * height + (width / 2) * (height / 2) + j] = -128; // V
+    //     }
+    // }
+    // qDebug("data size: %lld", data.size());
+    // gl->nextFrame(data);
+
+    int width = 176;
     int height = 144;
-    QFile f(":/akiyo_qcif.yuv");
-    f.open(QIODevice::ReadOnly);
-    QByteArray data(f.readAll());
-    //trans the video to only white, black ,and grey
-    int frameSize = (width * height) + (width / 2 * height / 2) * 2;
-    int frameCount = data.size() / frameSize;
-    for (int frame = 0; frame < frameCount; ++frame) {
-        int frameOffset = frame * (width * height + (width / 2) * (height / 2) * 2);
-        for (int j = 0; j < (width / 2) * (height / 2); ++j) {
-            data[frameOffset + width * height + j] = -128; // U
-            data[frameOffset + width * height + (width / 2) * (height / 2) + j] = -128; // V
-        }
-    }
-    qDebug("data size: %lld", data.size());
-    gl->nextFrame(data);
+
+    gl->connectFPGADevice(&fpga);
+    gl->readVideoFromUSB();
+
 }
 
 // Play or pause video, reset UI
