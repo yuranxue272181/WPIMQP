@@ -468,7 +468,7 @@
          <x>0</x>
          <y>0</y>
          <width>181</width>
-         <height>61</height>
+         <height>68</height>
         </rect>
        </property>
        <attribute name="label">
@@ -766,8 +766,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>181</width>
-         <height>151</height>
+         <width>100</width>
+         <height>30</height>
         </rect>
        </property>
        <attribute name="label">
@@ -808,8 +808,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>181</width>
-         <height>151</height>
+         <width>100</width>
+         <height>30</height>
         </rect>
        </property>
        <attribute name="label">
@@ -850,8 +850,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>181</width>
-         <height>121</height>
+         <width>100</width>
+         <height>30</height>
         </rect>
        </property>
        <attribute name="label">
@@ -898,6 +898,14 @@
        </widget>
       </widget>
       <widget class="QWidget" name="page_10">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>181</width>
+         <height>126</height>
+        </rect>
+       </property>
        <attribute name="label">
         <string>Frame Rate</string>
        </attribute>
@@ -1203,7 +1211,7 @@
      <rect>
       <x>630</x>
       <y>10</y>
-      <width>101</width>
+      <width>111</width>
       <height>16</height>
      </rect>
     </property>
@@ -1227,9 +1235,9 @@
    <widget class="QLabel" name="label_6">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>350</x>
       <y>340</y>
-      <width>151</width>
+      <width>171</width>
       <height>20</height>
      </rect>
     </property>
@@ -1341,15 +1349,15 @@
      <x>0</x>
      <y>0</y>
      <width>848</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuhe_p">
+   <widget class="QMenu" name="menuProject">
     <property name="title">
      <string>Project</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuCollection">
+   <widget class="QMenu" name="menuTool">
     <property name="title">
      <string>Tools</string>
     </property>
@@ -1374,8 +1382,8 @@
      <string>View</string>
     </property>
    </widget>
-   <addaction name="menuhe_p"/>
-   <addaction name="menuCollection"/>
+   <addaction name="menuProject"/>
+   <addaction name="menuTool"/>
    <addaction name="menuView"/>
    <addaction name="menuEdit"/>
    <addaction name="menuRecord"/>

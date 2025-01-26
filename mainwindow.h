@@ -14,6 +14,8 @@
 #include <QSpinBox>
 #include <QQueue>
 #include <QComboBox>
+#include <QMenu>
+#include <QAction>
 
 
 QT_BEGIN_NAMESPACE
@@ -34,8 +36,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
-public slots:
     void setFrameRateFromBoard(int value);
 
 
@@ -69,6 +69,7 @@ private slots:
     void resetTotal();
     void updateQueueSize(int value);
     void setFrameRate(int value);
+    void grabBtnChecked();
 
 private:
     QByteArray testData;
@@ -97,6 +98,14 @@ private:
     QQueue<float> pixQ;
     int queueSize;
     int frameRate;
+    QMenu* menuProject;
+    QMenu* menuTool;
+    QMenu* menuView;
+    QMenu* menuEdit;
+    QMenu* menuRecord;
+    QMenu* menuHelp;
+    QAction *recordingAction;
+    QAction *grabCoAction;
 
 
     //ui

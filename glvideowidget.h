@@ -5,6 +5,7 @@
 #include <QtGui/QImage>
 #include <QOpenGLWidget>
 #include <QOpenGLShaderProgram>
+#include <QMessageBox>
 
 class GLVideoWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {

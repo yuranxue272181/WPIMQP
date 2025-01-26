@@ -92,8 +92,8 @@ public:
     QTableWidget *coordinatesTable;
     QWidget *spin;
     QMenuBar *menuBar;
-    QMenu *menuhe_p;
-    QMenu *menuCollection;
+    QMenu *menuProject;
+    QMenu *menuTool;
     QMenu *menuEdit;
     QMenu *menuRecord;
     QMenu *menuHelp;
@@ -280,7 +280,7 @@ public:
         toolBox->addItem(page, QString::fromUtf8("Brightness"));
         page_2 = new QWidget();
         page_2->setObjectName("page_2");
-        page_2->setGeometry(QRect(0, 0, 181, 61));
+        page_2->setGeometry(QRect(0, 0, 181, 68));
         ContrastSlider = new QSlider(page_2);
         ContrastSlider->setObjectName("ContrastSlider");
         ContrastSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -366,7 +366,7 @@ public:
         toolBox_2->addItem(page_5, QString::fromUtf8("Exposure Time"));
         page_6 = new QWidget();
         page_6->setObjectName("page_6");
-        page_6->setGeometry(QRect(0, 0, 181, 151));
+        page_6->setGeometry(QRect(0, 0, 100, 30));
         gainSlider = new QSlider(page_6);
         gainSlider->setObjectName("gainSlider");
         gainSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -378,7 +378,7 @@ public:
         toolBox_2->addItem(page_6, QString::fromUtf8("Gain"));
         Sharpen_2 = new QWidget();
         Sharpen_2->setObjectName("Sharpen_2");
-        Sharpen_2->setGeometry(QRect(0, 0, 181, 151));
+        Sharpen_2->setGeometry(QRect(0, 0, 100, 30));
         dynamicRangeSlider = new QSlider(Sharpen_2);
         dynamicRangeSlider->setObjectName("dynamicRangeSlider");
         dynamicRangeSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -390,7 +390,7 @@ public:
         toolBox_2->addItem(Sharpen_2, QString::fromUtf8("Dynamic Range"));
         page_9 = new QWidget();
         page_9->setObjectName("page_9");
-        page_9->setGeometry(QRect(0, 0, 181, 121));
+        page_9->setGeometry(QRect(0, 0, 100, 30));
         STNRSlider = new QSlider(page_9);
         STNRSlider->setObjectName("STNRSlider");
         STNRSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -405,6 +405,7 @@ public:
         toolBox_2->addItem(page_9, QString::fromUtf8("Signal-to-Noise Ratio"));
         page_10 = new QWidget();
         page_10->setObjectName("page_10");
+        page_10->setGeometry(QRect(0, 0, 181, 126));
         frameRateComboBox = new QComboBox(page_10);
         frameRateComboBox->setObjectName("frameRateComboBox");
         frameRateComboBox->setGeometry(QRect(40, 10, 69, 22));
@@ -525,13 +526,13 @@ public:
         label_3->setGeometry(QRect(10, 0, 101, 16));
         label_4 = new QLabel(centralwidget);
         label_4->setObjectName("label_4");
-        label_4->setGeometry(QRect(630, 10, 101, 16));
+        label_4->setGeometry(QRect(630, 10, 111, 16));
         label_5 = new QLabel(centralwidget);
         label_5->setObjectName("label_5");
         label_5->setGeometry(QRect(230, 340, 41, 16));
         label_6 = new QLabel(centralwidget);
         label_6->setObjectName("label_6");
-        label_6->setGeometry(QRect(370, 340, 151, 20));
+        label_6->setGeometry(QRect(350, 340, 171, 20));
         label_6->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop);
         coordinatesTable = new QTableWidget(centralwidget);
         if (coordinatesTable->columnCount() < 2)
@@ -572,11 +573,11 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 848, 22));
-        menuhe_p = new QMenu(menuBar);
-        menuhe_p->setObjectName("menuhe_p");
-        menuCollection = new QMenu(menuBar);
-        menuCollection->setObjectName("menuCollection");
+        menuBar->setGeometry(QRect(0, 0, 848, 21));
+        menuProject = new QMenu(menuBar);
+        menuProject->setObjectName("menuProject");
+        menuTool = new QMenu(menuBar);
+        menuTool->setObjectName("menuTool");
         menuEdit = new QMenu(menuBar);
         menuEdit->setObjectName("menuEdit");
         menuRecord = new QMenu(menuBar);
@@ -587,8 +588,8 @@ public:
         menuView->setObjectName("menuView");
         MainWindow->setMenuBar(menuBar);
 
-        menuBar->addAction(menuhe_p->menuAction());
-        menuBar->addAction(menuCollection->menuAction());
+        menuBar->addAction(menuProject->menuAction());
+        menuBar->addAction(menuTool->menuAction());
         menuBar->addAction(menuView->menuAction());
         menuBar->addAction(menuEdit->menuAction());
         menuBar->addAction(menuRecord->menuAction());
@@ -734,8 +735,8 @@ public:
         ___qtablewidgetitem37->setText(QCoreApplication::translate("MainWindow", "- -", nullptr));
         coordinatesTable->setSortingEnabled(__sortingEnabled2);
 
-        menuhe_p->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
-        menuCollection->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
+        menuProject->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
+        menuTool->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
         menuEdit->setTitle(QCoreApplication::translate("MainWindow", "Edit", nullptr));
         menuRecord->setTitle(QCoreApplication::translate("MainWindow", "Record", nullptr));
         menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));

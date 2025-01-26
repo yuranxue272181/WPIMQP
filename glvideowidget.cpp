@@ -171,7 +171,7 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
 
 }
 
-// render one frame
+// input one frame, and render one frame
 void GLVideoWidget::setFrameData(const QByteArray &data)
 {
     QMutexLocker lock(&m_mutex);
@@ -200,7 +200,7 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
 }
 
 
-// display video by switching frames (frame rate)
+// input the entire data of a video and display video by switching frames (frame rate)
 void GLVideoWidget::nextFrame(const QByteArray &data) {
     videoData = data;
     currentFrameIndex = 0; // reset
@@ -284,6 +284,10 @@ void GLVideoWidget::saveYUVImageDataToFile() {
                                                     tr("bin Files (*.bin);;All Files (*)"));
     if (filePath.isEmpty()) {
         qDebug() << "No file selected.";
+        QMessageBox::warning(this,
+                             tr("No File Selected"),
+                             tr("You did not select a file path for saving. Please try again."),
+                             QMessageBox::Ok);
         return;
     }
     QFile file(filePath);
@@ -296,17 +300,22 @@ void GLVideoWidget::saveYUVImageDataToFile() {
     }
 }
 
-// save the recording
+// select the saving path
 void GLVideoWidget::saveYUVVideoDataToFile() {
     recordingData.clear();
     qDebug() << "Recording started.";
     filePath = QFileDialog::getSaveFileName(this, tr("Save Grayscale of Video"),
                                                     QString(),
                                                     tr("bin Files (*.bin);;All Files (*)"));
-    if (filePath.isEmpty()) {
+    if (!filePath.isEmpty())
+        return ;
+
         qDebug() << "No file selected.";
-        return;
-    }
+        QMessageBox::warning(this,
+                             tr("No File Selected"),
+                             tr("You did not select a file path for saving. Please try again."),
+                             QMessageBox::Ok);
+        stopRecording();
 }
 
 void GLVideoWidget::writeYUVVideoDataToFile(){

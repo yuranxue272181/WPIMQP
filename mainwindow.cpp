@@ -80,6 +80,31 @@ MainWindow::MainWindow(QWidget *parent)
     STNRValue = ui-> STNR;
     STNRValue->setText("40");
 
+    //menu
+    menuProject = ui->menuProject;
+    menuTool = ui->menuTool;
+    menuView = ui->menuView;
+    menuEdit = ui-> menuEdit;
+    menuRecord = ui-> menuRecord;
+    menuHelp = ui->menuHelp;
+
+    //menu action
+    //view menu
+    QAction *zoomInAction = new QAction(tr("Zoom In"),this);
+    QAction *zoomOutAction = new QAction(tr("Zoom Out"),this);
+    menuView->addAction(zoomInAction);
+    menuView->addAction(zoomOutAction);
+    //tool menu
+    grabCoAction = new QAction(tr("Grab Coordinates"),this);
+    grabCoAction ->setEnabled(false);
+    menuTool->addAction(grabCoAction);
+    //record menu
+    QAction *screenshootAction = new QAction(tr("Screen Capture"),this);
+    recordingAction = new QAction(tr("Video Recording"),this);
+    recordingAction->setEnabled(false);
+    menuRecord->addAction(screenshootAction);
+    menuRecord->addAction(recordingAction);
+
     //checkBox
     minChecker = new QCheckBox("Minimum");
     //minChecker->setStyleSheet("QCheckBox { margin-left: auto; margin-right: auto; }");
@@ -194,6 +219,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(gl, &GLVideoWidget::mouseRelease, this, &MainWindow::resetTotal);
     connect(spin, &QSpinBox::valueChanged,this,&MainWindow::updateQueueSize);
     connect(frameRateCB, &QComboBox::currentIndexChanged, this, &MainWindow::setFrameRate);
+    connect(zoomInAction, &QAction::triggered, this, &MainWindow::zoomIn);
+    connect(zoomOutAction, &QAction::triggered, this, &MainWindow::zoomOut);
+    connect(grabCoAction, &QAction::triggered, this, &MainWindow::grabBtnChecked);
+    connect(screenshootAction, &QAction::triggered, gl, &GLVideoWidget::saveYUVImageDataToFile);
+    connect(recordingAction, &QAction::triggered, this, &MainWindow::recordingStatu);
 
     //updateQueueSize
 
@@ -227,8 +257,10 @@ void MainWindow::renderVideo(){
     startBtn->setEnabled(false);
     shootBtn->setEnabled(true);
     recordBtn->setEnabled(true);
+    recordingAction->setEnabled(true);
     HESlider -> setEnabled(true);
     grabBtn -> setEnabled(true);
+    grabCoAction-> setEnabled(true);
 
     //open the YUV file
     //176x144
@@ -256,11 +288,13 @@ void MainWindow::pauseVideo(){
     if(gl->pauseVideo()){
         playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
         recordBtn->setEnabled(false);
+        recordingAction->setEnabled(false);
         //HESlider -> setEnabled(false);
     }
     else{
         playPauseBtn->setIcon(QIcon(":/icons/play.png"));
         recordBtn->setEnabled(true);
+        recordingAction->setEnabled(true);
         HESlider -> setEnabled(true);
     }
 }
@@ -271,9 +305,11 @@ void MainWindow::onVideoFinished(){
     playPauseBtn->setEnabled(false);
     startBtn->setEnabled(true);
     recordBtn->setEnabled(false);
-    gl->stopRecording();
+    recordingAction->setEnabled(false);
     recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
     HESlider -> setEnabled(false);
+    gl->stopRecording();
+
 }
 
 // Zoom in the video
@@ -418,7 +454,17 @@ void MainWindow::setSTNRValue(int value){
     item->setText(QString::number(value));
 
 }
+//grab coordinates
+void MainWindow::grabBtnChecked(){
+    if(grabBtn->isChecked()){
+        grabBtn->setChecked(false);
+    }else{
+        grabBtn->setChecked(true);}
+    setTrackingEnabled();
 
+}
+
+//grab coordinates
 void MainWindow::setTrackingEnabled(){
     gl -> setTrackingEnabled(grabBtn->isChecked());
     if(grabBtn->isChecked()){
