@@ -16,6 +16,7 @@
 #include <QComboBox>
 #include <QMenu>
 #include <QAction>
+#include <QVBoxLayout>
 
 
 QT_BEGIN_NAMESPACE
@@ -70,6 +71,8 @@ private slots:
     void updateQueueSize(int value);
     void setFrameRate(int value);
     void grabBtnChecked();
+    //test
+    void openGraphDialog();
 
 private:
     QByteArray testData;
@@ -117,12 +120,13 @@ private:
     QToolButton *zoomOutBtn;
     QPushButton *resetBtn;
     QPushButton *grabBtn;
+    //testgraph
+    QPushButton *openGraphButton;
 
     QSpinBox *spin;
 
     QWidget *mainWidget;
     QWidget *videoWdt;
-    QWidget *spinWdt;
     QDockWidget *leftDk;
     QDockWidget *rightDk;
 
@@ -161,6 +165,7 @@ private:
 
     QComboBox *frameRateCB;
 
+    QHBoxLayout *layout;
 
 signals:
     // void glInitialized();

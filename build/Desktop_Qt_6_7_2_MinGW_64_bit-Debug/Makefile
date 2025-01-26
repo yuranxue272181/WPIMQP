@@ -421,6 +421,7 @@ Makefile: ../../mqp1.pro E:/Qt/6.7.2/mingw_64/mkspecs/win32-g++/qmake.conf E:/Qt
 		E:/Qt/6.7.2/mingw_64/mkspecs/features/yacc.prf \
 		E:/Qt/6.7.2/mingw_64/mkspecs/features/lex.prf \
 		../../mqp1.pro \
+		E:/Qt/6.7.2/mingw_64/lib/Qt6Charts.prl \
 		E:/Qt/6.7.2/mingw_64/lib/Qt6OpenGLWidgets.prl \
 		E:/Qt/6.7.2/mingw_64/lib/Qt6OpenGL.prl \
 		E:/Qt/6.7.2/mingw_64/lib/Qt6Widgets.prl \
@@ -781,6 +782,7 @@ E:/Qt/6.7.2/mingw_64/mkspecs/features/exceptions.prf:
 E:/Qt/6.7.2/mingw_64/mkspecs/features/yacc.prf:
 E:/Qt/6.7.2/mingw_64/mkspecs/features/lex.prf:
 ../../mqp1.pro:
+E:/Qt/6.7.2/mingw_64/lib/Qt6Charts.prl:
 E:/Qt/6.7.2/mingw_64/lib/Qt6OpenGLWidgets.prl:
 E:/Qt/6.7.2/mingw_64/lib/Qt6OpenGL.prl:
 E:/Qt/6.7.2/mingw_64/lib/Qt6Widgets.prl:

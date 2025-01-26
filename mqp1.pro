@@ -1,9 +1,10 @@
 QT       += core gui
-QT       += opengl openglwidgets
+QT       += opengl openglwidgets charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
+
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -12,12 +13,14 @@ CONFIG += c++17
 SOURCES += \
     analysis.cpp \
     glvideowidget.cpp \
+    graph.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     analysis.h \
     glvideowidget.h \
+    graph.h \
     mainwindow.h
 
 FORMS += \

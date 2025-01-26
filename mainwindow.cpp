@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "glvideowidget.h"
 #include "analysis.h"
+#include "graph.h"
 
 //ui
 #include <QVBoxLayout>
@@ -11,6 +12,14 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    layout = ui->mainLayout;
+    QWidget * centralWidget = ui->centralwidget;
+    centralWidget->setLayout(layout);
+
+    //testchart
+    openGraphButton = ui->chart;
+    connect(openGraphButton, &QPushButton::clicked, this, &MainWindow::openGraphDialog);
 
     //initialize
     zoomFactor = 1.0f;
@@ -46,12 +55,11 @@ MainWindow::MainWindow(QWidget *parent)
     spin->setMinimum(3);
     spin->setMaximum(50);
     spin->setValue(10);
+    spin->setMinimumSize(80, 25);
     // widget
     videoWdt = ui->videoWidget;
-    spinWdt = ui->spin;
-    QVBoxLayout *layout1 = new QVBoxLayout(spinWdt);
-    layout1->addWidget(spin);
-    spinWdt->setLayout(layout1);
+    QHBoxLayout *layout1 = ui->horizontalLayout_2;
+    layout1->addWidget(spin, 0, Qt::AlignTop);
 
     //slider
     brightnessSlider = ui->BrightnessSlider;
@@ -120,14 +128,36 @@ MainWindow::MainWindow(QWidget *parent)
     frameRateCB->addItem("60");
     frameRateCB->setCurrentText("30");
 
+    //tab widget
+    QTabWidget *tabWidget = ui->tabWidget;
+
+    //tab1
+    QWidget *tab1 = new QWidget();
+    QVBoxLayout *tab1Layout = new QVBoxLayout(tab1);
+    tabWidget->addTab(tab1, "Image Enhancement");
+    QToolBox *tool1 = ui->toolBox;
+    tab1Layout->addWidget(tool1);
+
+    //tab2
+    QWidget *tab2 = new QWidget();
+    QVBoxLayout *tab2Layout = new QVBoxLayout(tab2);
+    tabWidget->addTab(tab2, "Control Component");
+    QToolBox *tool2 = ui->toolBox_2;
+    tab2Layout->addWidget(tool2);
 
     //table
     featuresTable = ui->FeatureTable;
+    featuresTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // column adaption
+    featuresTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch); // row adaption
     coordTable = ui->coordinatesTable;
     QStringList rowHeaders;
     rowHeaders << "x1" << "x2";
     coordTable->setVerticalHeaderLabels(rowHeaders);
+    coordTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // column adaption
+    coordTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch); // row adaption
     analysisTable = ui->analysisTable;
+    analysisTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // column adaption
+    analysisTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch); // row adaption
     analysisTable->setCellWidget(0, 0, minChecker);
     analysisTable->setCellWidget(1, 0, maxChecker);
     analysisTable->setCellWidget(2, 0, averageChecker);
@@ -136,6 +166,8 @@ MainWindow::MainWindow(QWidget *parent)
     analysisTable->setCellWidget(5, 0, columnChecker);
     analysisTable->setEnabled(false);
     analysisTable->setStyleSheet("QTableWidget { background-color: #f0f0f0; color: gray; }");
+
+
 
     //initialize slider and button
     brightnessSlider ->setRange(-100, 100);
@@ -314,9 +346,9 @@ void MainWindow::onVideoFinished(){
 
 // Zoom in the video
 void MainWindow::zoomIn(){
-    if(zoomFactor<qPow(1.05, 6))
+    if(zoomFactor<qPow(1.05, 12))
     zoomFactor *= 1.05;
-    videoWdt->resize(352*zoomFactor, 288*zoomFactor);
+    videoWdt->setFixedSize(352*zoomFactor, 288*zoomFactor);
     if(grabBtn->isChecked()){
         gl->setZoomFactor(zoomFactor);
     }
@@ -328,7 +360,7 @@ void MainWindow::zoomOut(){
         zoomFactor *= 0.95;
     if(zoomFactor<1)
         zoomFactor =1;
-    videoWdt->resize(352*zoomFactor, 288*zoomFactor);
+    videoWdt->setFixedSize(352*zoomFactor, 288*zoomFactor);
     if(grabBtn->isChecked()){
         gl->setZoomFactor(zoomFactor);
     }
@@ -791,6 +823,12 @@ void MainWindow::setFrameRateFromBoard(int value){
     }
 }
 
+//testchart
+void MainWindow::openGraphDialog()
+{
+    GraphDialog *dialog = new GraphDialog(this);
+    dialog->exec();  // open
+}
 
 
 
