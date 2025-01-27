@@ -108,6 +108,7 @@ private:
     QMenu* menuRecord;
     QMenu* menuHelp;
     QAction *recordingAction;
+    QAction *screenshootAction;
     QAction *grabCoAction;
 
 

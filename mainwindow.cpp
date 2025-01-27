@@ -107,7 +107,8 @@ MainWindow::MainWindow(QWidget *parent)
     grabCoAction ->setEnabled(false);
     menuTool->addAction(grabCoAction);
     //record menu
-    QAction *screenshootAction = new QAction(tr("Screen Capture"),this);
+    screenshootAction = new QAction(tr("Screen Capture"),this);
+    screenshootAction->setEnabled(false);
     recordingAction = new QAction(tr("Video Recording"),this);
     recordingAction->setEnabled(false);
     menuRecord->addAction(screenshootAction);
@@ -290,6 +291,7 @@ void MainWindow::renderVideo(){
     shootBtn->setEnabled(true);
     recordBtn->setEnabled(true);
     recordingAction->setEnabled(true);
+    screenshootAction->setEnabled(true);
     HESlider -> setEnabled(true);
     grabBtn -> setEnabled(true);
     grabCoAction-> setEnabled(true);
