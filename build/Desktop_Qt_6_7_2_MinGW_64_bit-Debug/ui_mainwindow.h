@@ -22,7 +22,6 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolBox>
@@ -38,33 +37,32 @@ public:
     QWidget *centralwidget;
     QWidget *horizontalLayoutWidget_3;
     QHBoxLayout *mainLayout;
+    QHBoxLayout *horizontalLayout_4;
     QVBoxLayout *verticalLayout;
-    QLabel *label_3;
     QTableWidget *FeatureTable;
-    QVBoxLayout *verticalLayout_3;
-    QHBoxLayout *horizontalLayout;
-    QToolButton *startButton;
-    QToolButton *playPauseButton;
-    QToolButton *shootButton;
-    QToolButton *recordButton;
-    QToolButton *zoomInButton;
-    QToolButton *zoomOutButton;
-    QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_3;
-    QSpacerItem *horizontalSpacer_2;
-    QWidget *videoWidget;
-    QSpacerItem *horizontalSpacer_3;
+    QWidget *widget_4;
+    QVBoxLayout *verticalLayout_3;
+    QVBoxLayout *mediaPlayerLayout;
+    QVBoxLayout *verticalLayout_2;
     QHBoxLayout *horizontalLayout_2;
+    QWidget *widget_3;
     QLabel *label_5;
     QSpacerItem *horizontalSpacer;
-    QLabel *label_6;
+    QLabel *frameTemNoise;
     QTableWidget *analysisTable;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout_7;
+    QWidget *widget_5;
     QVBoxLayout *verticalLayout_5;
     QLabel *label_4;
     QTabWidget *tabWidget;
     QVBoxLayout *verticalLayout_4;
     QPushButton *grabButton;
     QTableWidget *coordinatesTable;
+    QWidget *widget_6;
+    QWidget *widget_2;
+    QHBoxLayout *horizontalLayout_5;
     QToolBox *toolBox_2;
     QWidget *page_5;
     QSlider *exposureTimeSlider;
@@ -102,6 +100,21 @@ public:
     QLabel *Gamma;
     QWidget *page_8;
     QPushButton *resetButton;
+    QWidget *widget1;
+    QHBoxLayout *playerLayout;
+    QSpacerItem *horizontalSpacer_2;
+    QWidget *videoWidget;
+    QSpacerItem *horizontalSpacer_3;
+    QWidget *horizontalLayoutWidget_4;
+    QHBoxLayout *topButtons;
+    QToolButton *startButton;
+    QToolButton *playPauseButton;
+    QToolButton *shootButton;
+    QToolButton *recordButton;
+    QToolButton *zoomInButton;
+    QToolButton *zoomOutButton;
+    QWidget *horizontalLayoutWidget_7;
+    QHBoxLayout *horizontalLayout_8;
     QMenuBar *menuBar;
     QMenu *menuProject;
     QMenu *menuTool;
@@ -109,13 +122,12 @@ public:
     QMenu *menuRecord;
     QMenu *menuHelp;
     QMenu *menuView;
-    QStatusBar *statusBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(868, 597);
+        MainWindow->resize(1030, 655);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -134,24 +146,31 @@ public:
         centralwidget->setStyleSheet(QString::fromUtf8(""));
         horizontalLayoutWidget_3 = new QWidget(centralwidget);
         horizontalLayoutWidget_3->setObjectName("horizontalLayoutWidget_3");
-        horizontalLayoutWidget_3->setGeometry(QRect(0, 0, 851, 561));
+        horizontalLayoutWidget_3->setGeometry(QRect(0, 0, 851, 581));
         mainLayout = new QHBoxLayout(horizontalLayoutWidget_3);
         mainLayout->setObjectName("mainLayout");
         mainLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setObjectName("horizontalLayout_4");
+
+        mainLayout->addLayout(horizontalLayout_4);
+
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
-        label_3 = new QLabel(horizontalLayoutWidget_3);
-        label_3->setObjectName("label_3");
-        label_3->setAlignment(Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignHCenter);
-
-        verticalLayout->addWidget(label_3);
-
         FeatureTable = new QTableWidget(horizontalLayoutWidget_3);
         if (FeatureTable->columnCount() < 2)
             FeatureTable->setColumnCount(2);
+        QBrush brush(QColor(81, 216, 219, 255));
+        brush.setStyle(Qt::NoBrush);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        __qtablewidgetitem->setBackground(QColor(47, 48, 53));
+        __qtablewidgetitem->setForeground(brush);
         FeatureTable->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QBrush brush1(QColor(81, 216, 219, 255));
+        brush1.setStyle(Qt::NoBrush);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        __qtablewidgetitem1->setBackground(QColor(47, 48, 53));
+        __qtablewidgetitem1->setForeground(brush1);
         FeatureTable->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         if (FeatureTable->rowCount() < 10)
             FeatureTable->setRowCount(10);
@@ -219,9 +238,16 @@ public:
         __qtablewidgetitem21->setTextAlignment(Qt::AlignCenter);
         FeatureTable->setItem(9, 1, __qtablewidgetitem21);
         FeatureTable->setObjectName("FeatureTable");
-        sizePolicy.setHeightForWidth(FeatureTable->sizePolicy().hasHeightForWidth());
-        FeatureTable->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(1);
+        sizePolicy1.setHeightForWidth(FeatureTable->sizePolicy().hasHeightForWidth());
+        FeatureTable->setSizePolicy(sizePolicy1);
+        FeatureTable->setMinimumSize(QSize(160, 0));
         FeatureTable->setEditTriggers(QAbstractItemView::EditTrigger::NoEditTriggers);
+        FeatureTable->setShowGrid(false);
+        FeatureTable->setGridStyle(Qt::PenStyle::NoPen);
+        FeatureTable->setSortingEnabled(false);
         FeatureTable->horizontalHeader()->setHighlightSections(true);
         FeatureTable->verticalHeader()->setVisible(false);
         FeatureTable->verticalHeader()->setProperty("showSortIndicator", QVariant(false));
@@ -231,79 +257,34 @@ public:
 
         mainLayout->addLayout(verticalLayout);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        widget_4 = new QWidget(horizontalLayoutWidget_3);
+        widget_4->setObjectName("widget_4");
+        widget_4->setMinimumSize(QSize(20, 0));
+
+        horizontalLayout_3->addWidget(widget_4);
+
+
+        mainLayout->addLayout(horizontalLayout_3);
+
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName("verticalLayout_3");
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName("horizontalLayout");
-        startButton = new QToolButton(horizontalLayoutWidget_3);
-        startButton->setObjectName("startButton");
-        startButton->setMinimumSize(QSize(30, 30));
+        mediaPlayerLayout = new QVBoxLayout();
+        mediaPlayerLayout->setObjectName("mediaPlayerLayout");
 
-        horizontalLayout->addWidget(startButton);
-
-        playPauseButton = new QToolButton(horizontalLayoutWidget_3);
-        playPauseButton->setObjectName("playPauseButton");
-        playPauseButton->setMinimumSize(QSize(30, 30));
-
-        horizontalLayout->addWidget(playPauseButton);
-
-        shootButton = new QToolButton(horizontalLayoutWidget_3);
-        shootButton->setObjectName("shootButton");
-        shootButton->setMinimumSize(QSize(30, 30));
-
-        horizontalLayout->addWidget(shootButton);
-
-        recordButton = new QToolButton(horizontalLayoutWidget_3);
-        recordButton->setObjectName("recordButton");
-        recordButton->setMinimumSize(QSize(30, 30));
-
-        horizontalLayout->addWidget(recordButton);
-
-        zoomInButton = new QToolButton(horizontalLayoutWidget_3);
-        zoomInButton->setObjectName("zoomInButton");
-        zoomInButton->setMinimumSize(QSize(30, 30));
-
-        horizontalLayout->addWidget(zoomInButton);
-
-        zoomOutButton = new QToolButton(horizontalLayoutWidget_3);
-        zoomOutButton->setObjectName("zoomOutButton");
-        zoomOutButton->setMinimumSize(QSize(30, 30));
-
-        horizontalLayout->addWidget(zoomOutButton);
-
-
-        verticalLayout_3->addLayout(horizontalLayout);
+        verticalLayout_3->addLayout(mediaPlayerLayout);
 
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName("verticalLayout_2");
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName("horizontalLayout_3");
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        horizontalLayout_3->addItem(horizontalSpacer_2);
-
-        videoWidget = new QWidget(horizontalLayoutWidget_3);
-        videoWidget->setObjectName("videoWidget");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(videoWidget->sizePolicy().hasHeightForWidth());
-        videoWidget->setSizePolicy(sizePolicy1);
-        videoWidget->setMinimumSize(QSize(352, 288));
-        videoWidget->setMaximumSize(QSize(2040, 1960));
-        videoWidget->setSizeIncrement(QSize(0, 0));
-
-        horizontalLayout_3->addWidget(videoWidget);
-
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        horizontalLayout_3->addItem(horizontalSpacer_3);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_3);
-
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
+        widget_3 = new QWidget(horizontalLayoutWidget_3);
+        widget_3->setObjectName("widget_3");
+        widget_3->setMinimumSize(QSize(10, 0));
+
+        horizontalLayout_2->addWidget(widget_3);
+
         label_5 = new QLabel(horizontalLayoutWidget_3);
         label_5->setObjectName("label_5");
 
@@ -313,12 +294,12 @@ public:
 
         horizontalLayout_2->addItem(horizontalSpacer);
 
-        label_6 = new QLabel(horizontalLayoutWidget_3);
-        label_6->setObjectName("label_6");
-        label_6->setMinimumSize(QSize(155, 0));
-        label_6->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
+        frameTemNoise = new QLabel(horizontalLayoutWidget_3);
+        frameTemNoise->setObjectName("frameTemNoise");
+        frameTemNoise->setMinimumSize(QSize(160, 0));
+        frameTemNoise->setAlignment(Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter);
 
-        horizontalLayout_2->addWidget(label_6);
+        horizontalLayout_2->addWidget(frameTemNoise);
 
 
         verticalLayout_2->addLayout(horizontalLayout_2);
@@ -426,11 +407,24 @@ public:
         analysisTable->setItem(6, 3, __qtablewidgetitem53);
         analysisTable->setObjectName("analysisTable");
         analysisTable->setEnabled(true);
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(1);
+        sizePolicy2.setHeightForWidth(analysisTable->sizePolicy().hasHeightForWidth());
+        analysisTable->setSizePolicy(sizePolicy2);
         analysisTable->setEditTriggers(QAbstractItemView::EditTrigger::NoEditTriggers);
+        analysisTable->setShowGrid(true);
+        analysisTable->setGridStyle(Qt::PenStyle::SolidLine);
         analysisTable->horizontalHeader()->setDefaultSectionSize(90);
         analysisTable->verticalHeader()->setVisible(false);
 
         verticalLayout_2->addWidget(analysisTable);
+
+        widget = new QWidget(horizontalLayoutWidget_3);
+        widget->setObjectName("widget");
+        widget->setMinimumSize(QSize(0, 10));
+
+        verticalLayout_2->addWidget(widget);
 
 
         verticalLayout_3->addLayout(verticalLayout_2);
@@ -438,16 +432,39 @@ public:
 
         mainLayout->addLayout(verticalLayout_3);
 
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName("horizontalLayout_7");
+        widget_5 = new QWidget(horizontalLayoutWidget_3);
+        widget_5->setObjectName("widget_5");
+        widget_5->setMinimumSize(QSize(10, 0));
+
+        horizontalLayout_7->addWidget(widget_5);
+
+
+        mainLayout->addLayout(horizontalLayout_7);
+
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setObjectName("verticalLayout_5");
+        verticalLayout_5->setSizeConstraint(QLayout::SizeConstraint::SetDefaultConstraint);
         label_4 = new QLabel(horizontalLayoutWidget_3);
         label_4->setObjectName("label_4");
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
+        sizePolicy3.setHorizontalStretch(1);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
+        label_4->setSizePolicy(sizePolicy3);
+        label_4->setMaximumSize(QSize(16777215, 30));
         label_4->setAlignment(Qt::AlignmentFlag::AlignCenter);
 
         verticalLayout_5->addWidget(label_4);
 
         tabWidget = new QTabWidget(horizontalLayoutWidget_3);
         tabWidget->setObjectName("tabWidget");
+        QSizePolicy sizePolicy4(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
+        sizePolicy4.setHorizontalStretch(1);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
+        tabWidget->setSizePolicy(sizePolicy4);
         tabWidget->setMinimumSize(QSize(0, 280));
         tabWidget->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
         tabWidget->setStyleSheet(QString::fromUtf8(""));
@@ -458,6 +475,11 @@ public:
         verticalLayout_4->setObjectName("verticalLayout_4");
         grabButton = new QPushButton(horizontalLayoutWidget_3);
         grabButton->setObjectName("grabButton");
+        QSizePolicy sizePolicy5(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Fixed);
+        sizePolicy5.setHorizontalStretch(1);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(grabButton->sizePolicy().hasHeightForWidth());
+        grabButton->setSizePolicy(sizePolicy5);
         grabButton->setMinimumSize(QSize(158, 0));
 
         verticalLayout_4->addWidget(grabButton);
@@ -485,6 +507,9 @@ public:
         coordinatesTable->setItem(1, 1, __qtablewidgetitem59);
         coordinatesTable->setObjectName("coordinatesTable");
         coordinatesTable->setEnabled(true);
+        sizePolicy4.setHeightForWidth(coordinatesTable->sizePolicy().hasHeightForWidth());
+        coordinatesTable->setSizePolicy(sizePolicy4);
+        coordinatesTable->setMaximumSize(QSize(16777215, 16777215));
         coordinatesTable->setEditTriggers(QAbstractItemView::EditTrigger::NoEditTriggers);
         coordinatesTable->setRowCount(2);
         coordinatesTable->horizontalHeader()->setVisible(true);
@@ -497,24 +522,44 @@ public:
 
         verticalLayout_4->addWidget(coordinatesTable);
 
+        widget_6 = new QWidget(horizontalLayoutWidget_3);
+        widget_6->setObjectName("widget_6");
+        widget_6->setMinimumSize(QSize(0, 10));
+
+        verticalLayout_4->addWidget(widget_6);
+
 
         verticalLayout_5->addLayout(verticalLayout_4);
 
+        verticalLayout_5->setStretch(1, 3);
+        verticalLayout_5->setStretch(2, 2);
 
         mainLayout->addLayout(verticalLayout_5);
 
+        widget_2 = new QWidget(horizontalLayoutWidget_3);
+        widget_2->setObjectName("widget_2");
+        widget_2->setMinimumSize(QSize(20, 0));
+
+        mainLayout->addWidget(widget_2);
+
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName("horizontalLayout_5");
+
+        mainLayout->addLayout(horizontalLayout_5);
+
+        mainLayout->setStretch(3, 2);
         toolBox_2 = new QToolBox(centralwidget);
         toolBox_2->setObjectName("toolBox_2");
         toolBox_2->setGeometry(QRect(900, 40, 91, 101));
-        QSizePolicy sizePolicy2(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(toolBox_2->sizePolicy().hasHeightForWidth());
-        toolBox_2->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy6(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
+        sizePolicy6.setHorizontalStretch(0);
+        sizePolicy6.setVerticalStretch(0);
+        sizePolicy6.setHeightForWidth(toolBox_2->sizePolicy().hasHeightForWidth());
+        toolBox_2->setSizePolicy(sizePolicy6);
         toolBox_2->setStyleSheet(QString::fromUtf8(""));
         page_5 = new QWidget();
         page_5->setObjectName("page_5");
-        page_5->setGeometry(QRect(0, 0, 91, 16));
+        page_5->setGeometry(QRect(0, 0, 74, 16));
         exposureTimeSlider = new QSlider(page_5);
         exposureTimeSlider->setObjectName("exposureTimeSlider");
         exposureTimeSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -538,7 +583,7 @@ public:
         toolBox_2->addItem(page_6, QString::fromUtf8("Gain"));
         Sharpen_2 = new QWidget();
         Sharpen_2->setObjectName("Sharpen_2");
-        Sharpen_2->setGeometry(QRect(0, 0, 91, 16));
+        Sharpen_2->setGeometry(QRect(0, 0, 74, 16));
         dynamicRangeSlider = new QSlider(Sharpen_2);
         dynamicRangeSlider->setObjectName("dynamicRangeSlider");
         dynamicRangeSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -550,7 +595,7 @@ public:
         toolBox_2->addItem(Sharpen_2, QString::fromUtf8("Dynamic Range"));
         page_9 = new QWidget();
         page_9->setObjectName("page_9");
-        page_9->setGeometry(QRect(0, 0, 91, 16));
+        page_9->setGeometry(QRect(0, 0, 74, 16));
         STNRSlider = new QSlider(page_9);
         STNRSlider->setObjectName("STNRSlider");
         STNRSlider->setGeometry(QRect(0, 10, 151, 22));
@@ -562,7 +607,7 @@ public:
         toolBox_2->addItem(page_9, QString::fromUtf8("Signal-to-Noise Ratio"));
         page_10 = new QWidget();
         page_10->setObjectName("page_10");
-        page_10->setGeometry(QRect(0, 0, 91, 16));
+        page_10->setGeometry(QRect(0, 0, 74, 16));
         frameRateComboBox = new QComboBox(page_10);
         frameRateComboBox->setObjectName("frameRateComboBox");
         frameRateComboBox->setGeometry(QRect(40, 10, 69, 22));
@@ -653,10 +698,85 @@ public:
         resetButton->setObjectName("resetButton");
         resetButton->setGeometry(QRect(20, 0, 75, 24));
         toolBox->addItem(page_8, QString::fromUtf8("Reset to Default"));
+        widget1 = new QWidget(centralwidget);
+        widget1->setObjectName("widget1");
+        widget1->setGeometry(QRect(1000, 0, 379, 290));
+        playerLayout = new QHBoxLayout(widget1);
+        playerLayout->setObjectName("playerLayout");
+        playerLayout->setContentsMargins(0, 0, 0, 0);
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        playerLayout->addItem(horizontalSpacer_2);
+
+        videoWidget = new QWidget(widget1);
+        videoWidget->setObjectName("videoWidget");
+        QSizePolicy sizePolicy7(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Preferred);
+        sizePolicy7.setHorizontalStretch(0);
+        sizePolicy7.setVerticalStretch(0);
+        sizePolicy7.setHeightForWidth(videoWidget->sizePolicy().hasHeightForWidth());
+        videoWidget->setSizePolicy(sizePolicy7);
+        videoWidget->setMinimumSize(QSize(352, 288));
+        videoWidget->setMaximumSize(QSize(2040, 1960));
+        videoWidget->setSizeIncrement(QSize(0, 0));
+
+        playerLayout->addWidget(videoWidget);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        playerLayout->addItem(horizontalSpacer_3);
+
+        horizontalLayoutWidget_4 = new QWidget(centralwidget);
+        horizontalLayoutWidget_4->setObjectName("horizontalLayoutWidget_4");
+        horizontalLayoutWidget_4->setGeometry(QRect(980, 300, 259, 32));
+        topButtons = new QHBoxLayout(horizontalLayoutWidget_4);
+        topButtons->setObjectName("topButtons");
+        topButtons->setContentsMargins(0, 0, 0, 0);
+        startButton = new QToolButton(horizontalLayoutWidget_4);
+        startButton->setObjectName("startButton");
+        startButton->setMinimumSize(QSize(30, 30));
+
+        topButtons->addWidget(startButton);
+
+        playPauseButton = new QToolButton(horizontalLayoutWidget_4);
+        playPauseButton->setObjectName("playPauseButton");
+        playPauseButton->setMinimumSize(QSize(30, 30));
+
+        topButtons->addWidget(playPauseButton);
+
+        shootButton = new QToolButton(horizontalLayoutWidget_4);
+        shootButton->setObjectName("shootButton");
+        shootButton->setMinimumSize(QSize(30, 30));
+
+        topButtons->addWidget(shootButton);
+
+        recordButton = new QToolButton(horizontalLayoutWidget_4);
+        recordButton->setObjectName("recordButton");
+        recordButton->setMinimumSize(QSize(30, 30));
+
+        topButtons->addWidget(recordButton);
+
+        zoomInButton = new QToolButton(horizontalLayoutWidget_4);
+        zoomInButton->setObjectName("zoomInButton");
+        zoomInButton->setMinimumSize(QSize(30, 30));
+
+        topButtons->addWidget(zoomInButton);
+
+        zoomOutButton = new QToolButton(horizontalLayoutWidget_4);
+        zoomOutButton->setObjectName("zoomOutButton");
+        zoomOutButton->setMinimumSize(QSize(30, 30));
+
+        topButtons->addWidget(zoomOutButton);
+
+        horizontalLayoutWidget_7 = new QWidget(centralwidget);
+        horizontalLayoutWidget_7->setObjectName("horizontalLayoutWidget_7");
+        horizontalLayoutWidget_7->setGeometry(QRect(860, 490, 160, 80));
+        horizontalLayout_8 = new QHBoxLayout(horizontalLayoutWidget_7);
+        horizontalLayout_8->setObjectName("horizontalLayout_8");
+        horizontalLayout_8->setContentsMargins(0, 0, 0, 0);
         MainWindow->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 868, 21));
+        menuBar->setGeometry(QRect(0, 0, 1030, 21));
         menuProject = new QMenu(menuBar);
         menuProject->setObjectName("menuProject");
         menuTool = new QMenu(menuBar);
@@ -670,9 +790,6 @@ public:
         menuView = new QMenu(menuBar);
         menuView->setObjectName("menuView");
         MainWindow->setMenuBar(menuBar);
-        statusBar = new QStatusBar(MainWindow);
-        statusBar->setObjectName("statusBar");
-        MainWindow->setStatusBar(statusBar);
 
         menuBar->addAction(menuProject->menuAction());
         menuBar->addAction(menuTool->menuAction());
@@ -694,7 +811,6 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label_3->setText(QCoreApplication::translate("MainWindow", "Feature Properties", nullptr));
         QTableWidgetItem *___qtablewidgetitem = FeatureTable->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QCoreApplication::translate("MainWindow", "Property", nullptr));
         QTableWidgetItem *___qtablewidgetitem1 = FeatureTable->horizontalHeaderItem(1);
@@ -744,14 +860,8 @@ public:
         ___qtablewidgetitem21->setText(QCoreApplication::translate("MainWindow", "40", nullptr));
         FeatureTable->setSortingEnabled(__sortingEnabled);
 
-        startButton->setText(QString());
-        playPauseButton->setText(QString());
-        shootButton->setText(QString());
-        recordButton->setText(QString());
-        zoomInButton->setText(QString());
-        zoomOutButton->setText(QString());
         label_5->setText(QCoreApplication::translate("MainWindow", "  ROI ", nullptr));
-        label_6->setText(QCoreApplication::translate("MainWindow", "Frames for temporal noise", nullptr));
+        frameTemNoise->setText(QCoreApplication::translate("MainWindow", "Frames for temporal noise", nullptr));
         QTableWidgetItem *___qtablewidgetitem22 = analysisTable->horizontalHeaderItem(0);
         ___qtablewidgetitem22->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         QTableWidgetItem *___qtablewidgetitem23 = analysisTable->horizontalHeaderItem(1);
@@ -820,6 +930,12 @@ public:
         toolBox->setItemText(toolBox->indexOf(page_7), QCoreApplication::translate("MainWindow", "Gamma Correction", nullptr));
         resetButton->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_8), QCoreApplication::translate("MainWindow", "Reset to Default", nullptr));
+        startButton->setText(QString());
+        playPauseButton->setText(QString());
+        shootButton->setText(QString());
+        recordButton->setText(QString());
+        zoomInButton->setText(QString());
+        zoomOutButton->setText(QString());
         menuProject->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
         menuTool->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
         menuEdit->setTitle(QCoreApplication::translate("MainWindow", "Edit", nullptr));

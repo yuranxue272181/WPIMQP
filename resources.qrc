@@ -10,5 +10,6 @@
         <file>icons/restart.png</file>
         <file>icons/recordGray.png</file>
         <file>icons/recordRed.png</file>
+        <file>style.qss</file>
     </qresource>
 </RCC>

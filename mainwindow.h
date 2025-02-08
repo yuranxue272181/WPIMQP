@@ -73,6 +73,7 @@ private slots:
     void grabBtnChecked();
     //test
     void openGraphDialog();
+    void setButtonIconColor(QToolButton *button, const QString &iconPath, const QColor &color);
 
 private:
     QByteArray testData;
@@ -152,6 +153,7 @@ private:
     QLabel *gainValue;
     QLabel *dynamicRangeValue;
     QLabel *STNRValue;
+    QLabel*frameTemNoise;
 
     QTableWidget *featuresTable;
     QTableWidget *coordTable;
