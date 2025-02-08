@@ -55,7 +55,7 @@ public:
     QHBoxLayout *horizontalLayout_7;
     QWidget *widget_5;
     QVBoxLayout *verticalLayout_5;
-    QLabel *label_4;
+    QWidget *widget_7;
     QTabWidget *tabWidget;
     QVBoxLayout *verticalLayout_4;
     QPushButton *grabButton;
@@ -127,7 +127,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(1030, 655);
+        MainWindow->resize(1395, 655);
         QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -446,17 +446,16 @@ public:
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setObjectName("verticalLayout_5");
         verticalLayout_5->setSizeConstraint(QLayout::SizeConstraint::SetDefaultConstraint);
-        label_4 = new QLabel(horizontalLayoutWidget_3);
-        label_4->setObjectName("label_4");
-        QSizePolicy sizePolicy3(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred);
-        sizePolicy3.setHorizontalStretch(1);
+        widget_7 = new QWidget(horizontalLayoutWidget_3);
+        widget_7->setObjectName("widget_7");
+        QSizePolicy sizePolicy3(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
         sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(label_4->sizePolicy().hasHeightForWidth());
-        label_4->setSizePolicy(sizePolicy3);
-        label_4->setMaximumSize(QSize(16777215, 30));
-        label_4->setAlignment(Qt::AlignmentFlag::AlignCenter);
+        sizePolicy3.setHeightForWidth(widget_7->sizePolicy().hasHeightForWidth());
+        widget_7->setSizePolicy(sizePolicy3);
+        widget_7->setMinimumSize(QSize(0, 15));
 
-        verticalLayout_5->addWidget(label_4);
+        verticalLayout_5->addWidget(widget_7);
 
         tabWidget = new QTabWidget(horizontalLayoutWidget_3);
         tabWidget->setObjectName("tabWidget");
@@ -696,7 +695,7 @@ public:
         page_8->setGeometry(QRect(0, 0, 181, 38));
         resetButton = new QPushButton(page_8);
         resetButton->setObjectName("resetButton");
-        resetButton->setGeometry(QRect(20, 0, 75, 24));
+        resetButton->setGeometry(QRect(0, 0, 181, 24));
         toolBox->addItem(page_8, QString::fromUtf8("Reset to Default"));
         widget1 = new QWidget(centralwidget);
         widget1->setObjectName("widget1");
@@ -776,7 +775,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 1030, 21));
+        menuBar->setGeometry(QRect(0, 0, 1395, 21));
         menuProject = new QMenu(menuBar);
         menuProject->setObjectName("menuProject");
         menuTool = new QMenu(menuBar);
@@ -802,7 +801,7 @@ public:
 
         tabWidget->setCurrentIndex(-1);
         toolBox_2->setCurrentIndex(1);
-        toolBox->setCurrentIndex(0);
+        toolBox->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -860,7 +859,7 @@ public:
         ___qtablewidgetitem21->setText(QCoreApplication::translate("MainWindow", "40", nullptr));
         FeatureTable->setSortingEnabled(__sortingEnabled);
 
-        label_5->setText(QCoreApplication::translate("MainWindow", "  ROI ", nullptr));
+        label_5->setText(QCoreApplication::translate("MainWindow", "Region of Interest", nullptr));
         frameTemNoise->setText(QCoreApplication::translate("MainWindow", "Frames for temporal noise", nullptr));
         QTableWidgetItem *___qtablewidgetitem22 = analysisTable->horizontalHeaderItem(0);
         ___qtablewidgetitem22->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
@@ -887,7 +886,6 @@ public:
         ___qtablewidgetitem31->setText(QCoreApplication::translate("MainWindow", "Column Noise", nullptr));
         analysisTable->setSortingEnabled(__sortingEnabled1);
 
-        label_4->setText(QCoreApplication::translate("MainWindow", "Image Processing", nullptr));
         grabButton->setText(QCoreApplication::translate("MainWindow", "Grab Coordinates", nullptr));
         QTableWidgetItem *___qtablewidgetitem32 = coordinatesTable->horizontalHeaderItem(0);
         ___qtablewidgetitem32->setText(QCoreApplication::translate("MainWindow", "y1", nullptr));

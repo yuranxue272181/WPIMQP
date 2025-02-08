@@ -225,7 +225,6 @@ MainWindow::MainWindow(QWidget *parent)
     QTableView::item {
         background-color:#393e44;
         color: white;
-        gridline-color: grey;
     }
 
     QHeaderView::section {
