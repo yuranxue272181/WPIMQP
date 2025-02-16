@@ -120,6 +120,7 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_resources.cpp
 debug/qrc_resources.cpp: ../../resources.qrc \
 		E:/Qt/6.7.2/mingw_64/bin/rcc.exe \
+		../../style.qss \
 		../../akiyo_qcif.yuv \
 		../../icons/shoot.png \
 		../../icons/recordRed.png \
@@ -1053,6 +1054,11 @@ debug/moc_mainwindow.cpp: ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QMenu \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qmenu.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/QAction \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QVBoxLayout \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		debug/moc_predefs.h \
 		E:/Qt/6.7.2/mingw_64/bin/moc.exe
 	E:\Qt\6.7.2\mingw_64\bin\moc.exe $(DEFINES) --include E:/APPData/Qtdocument/mqp1/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/debug/moc_predefs.h -IE:/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IE:/APPData/Qtdocument/mqp1 -IE:/Qt/6.7.2/mingw_64/include -IE:/Qt/6.7.2/mingw_64/include/QtCharts -IE:/Qt/6.7.2/mingw_64/include/QtOpenGLWidgets -IE:/Qt/6.7.2/mingw_64/include/QtOpenGL -IE:/Qt/6.7.2/mingw_64/include/QtWidgets -IE:/Qt/6.7.2/mingw_64/include/QtGui -IE:/Qt/6.7.2/mingw_64/include/QtCore -I. -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IE:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o debug\moc_mainwindow.cpp
@@ -2080,6 +2086,11 @@ debug/main.o: ../../main.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QMenu \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qmenu.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/QAction \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QVBoxLayout \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/QtCore \
@@ -2451,19 +2462,21 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QMenu \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qmenu.h \
 		E:/Qt/6.7.2/mingw_64/include/QtGui/QAction \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QVBoxLayout \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		ui_mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/QVariant \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QHBoxLayout \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qboxlayout.h \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayoutitem.h \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QHeaderView \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qheaderview.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QMenuBar \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qmenubar.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QSpacerItem \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QTabWidget \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QToolBox \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qtoolbox.h \
@@ -2704,7 +2717,37 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../analysis.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/QVector \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QVBoxLayout
+		../../graph.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/QChartView \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qchartview.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/QAbstractAxis \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qabstractaxis.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/QChartGlobal \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qchartglobal.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qtcharts-config.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qtchartsexports.h \
+		E:/Qt/6.7.2/mingw_64/include/QtGui/QPen \
+		E:/Qt/6.7.2/mingw_64/include/QtGui/QFont \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/QAbstractSeries \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qabstractseries.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/QChart \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qchart.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/QLegend \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qlegend.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QGraphicsWidget \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicswidget.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicslayoutitem.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsitem.h \
+		E:/Qt/6.7.2/mingw_64/include/QtGui/QBrush \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QGraphicsView \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsview.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qscrollarea.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgraphicsscene.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/QLineSeries \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qlineseries.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/QXYSeries \
+		E:/Qt/6.7.2/mingw_64/include/QtCharts/qxyseries.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\..\mainwindow.cpp
 
 debug/qrc_resources.o: debug/qrc_resources.cpp 

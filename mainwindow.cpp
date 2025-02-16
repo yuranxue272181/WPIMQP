@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+
     layout = ui->mainLayout;
     QWidget * centralWidget = ui->centralwidget;
     centralWidget->setLayout(layout);
@@ -55,7 +56,37 @@ MainWindow::MainWindow(QWidget *parent)
     spin->setMinimum(3);
     spin->setMaximum(50);
     spin->setValue(10);
-    spin->setMinimumSize(80, 25);
+    spin->setMinimumSize(70, 25);
+    spin->setObjectName("SpinBox");
+
+
+    //top vboxlayout ui
+    QVBoxLayout * mediaLayout = ui ->mediaPlayerLayout;
+    QWidget * widgetSpace = new QWidget();
+    widgetSpace->setMinimumHeight(20);
+    QWidget * widgetSpace2 = new QWidget();
+    widgetSpace2->setMinimumHeight(5);
+    widgetSpace2->setStyleSheet("background:#393e44;");
+    QWidget * widgetSpace3 = new QWidget();
+    widgetSpace3->setMinimumHeight(20);
+    widgetSpace3->setStyleSheet("background:#393e44;");
+    QWidget * widget1 = new QWidget();
+    widget1->setStyleSheet("background:#393e44;");
+    QWidget * widget2 = new QWidget();
+    widget2->setStyleSheet("background:#393e44;");
+    QHBoxLayout * topButtons = ui-> topButtons;
+    QHBoxLayout * playerLayout = ui->playerLayout;
+    widget1 ->setLayout(topButtons);
+    widget2 ->setLayout(playerLayout);
+    mediaLayout->setSpacing(0);
+    mediaLayout->insertWidget(0,widgetSpace);
+    mediaLayout->insertWidget(1,widgetSpace2);
+    mediaLayout->insertWidget(2,widget1);
+    mediaLayout->insertWidget(3,widget2);
+    mediaLayout->insertWidget(4,widgetSpace3);
+
+
+
     // widget
     videoWdt = ui->videoWidget;
     QHBoxLayout *layout1 = ui->horizontalLayout_2;
@@ -131,6 +162,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //tab widget
     QTabWidget *tabWidget = ui->tabWidget;
+    tabWidget->setStyleSheet("background:#393e44;");
 
     //tab1
     QWidget *tab1 = new QWidget();
@@ -146,28 +178,111 @@ MainWindow::MainWindow(QWidget *parent)
     QToolBox *tool2 = ui->toolBox_2;
     tab2Layout->addWidget(tool2);
 
+
+
+
     //table
     featuresTable = ui->FeatureTable;
     featuresTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // column adaption
     featuresTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch); // row adaption
+    featuresTable->setStyleSheet(R"(
+    QTableView {
+        background-color: #2f3035;
+        color: white;
+        border: none;
+        padding-left: 10px;
+        padding-bottom: 10px;
+    }
+
+    QTableView::item {
+        background-color: #2f3035;
+        color: white;
+    }
+
+    QHeaderView::section {
+        background-color: #2f3035;
+        font-weight: bold;
+        padding: 2px;
+        color: white;
+    }
+
+)");
+
     coordTable = ui->coordinatesTable;
     QStringList rowHeaders;
     rowHeaders << "x1" << "x2";
     coordTable->setVerticalHeaderLabels(rowHeaders);
+    coordTable->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
     coordTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // column adaption
     coordTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch); // row adaption
+    coordTable->setStyleSheet(R"(
+        QTableView {
+        color: white;
+        border: none;
+            padding-left: 10px;
+            padding-bottom: 10px;
+        }
+
+        QTableView::item {
+        color: white;
+        background-color: #393e44;
+        }
+
+        QHeaderView::section {
+        background-color: #393e44;
+        font-weight: bold;
+        padding: 2px;
+        color: white;
+        }
+
+        QTableCornerButton::section {
+        background-color: #393e44;
+        }
+
+    )");
+
+
     analysisTable = ui->analysisTable;
     analysisTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // column adaption
+    analysisTable->horizontalHeader()->setMinimumSectionSize(100);
     analysisTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch); // row adaption
+    analysisTable->setStyleSheet(R"(
+    QTableView {
+        background-color: #393e44;
+        color: #51d7d9;
+        border: none;
+    }
+
+    QTableView::item {
+        background-color:#393e44;
+        color: white;
+    }
+
+    QHeaderView::section {
+        background-color: #393e44;
+        font-weight: bold;
+        padding: 2px;
+        color: white;
+    }
+
+    QHeaderView::section:disabled {
+        background-color:#393e44;
+        color: grey;
+    }
+
+)");
+
     analysisTable->setCellWidget(0, 0, minChecker);
     analysisTable->setCellWidget(1, 0, maxChecker);
     analysisTable->setCellWidget(2, 0, averageChecker);
     analysisTable->setCellWidget(3, 0, pixelChecker);
     analysisTable->setCellWidget(4, 0, rowChecker);
     analysisTable->setCellWidget(5, 0, columnChecker);
+    analysisTable->setRowHidden(6, true);
     analysisTable->setEnabled(false);
-    analysisTable->setStyleSheet("QTableWidget { background-color: #f0f0f0; color: gray; }");
-
+    spin->setEnabled(false);
+    frameTemNoise = ui->frameTemNoise;
+    frameTemNoise->setStyleSheet("color:grey;");
 
 
     //initialize slider and button
@@ -196,22 +311,16 @@ MainWindow::MainWindow(QWidget *parent)
     grabBtn -> setEnabled(false);
 
 
-    // initialize icons
-    startBtn->setIcon(QIcon(":/icons/restart.png"));
-    startBtn->setIconSize(QSize(30,30));
-    playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
-    playPauseBtn->setIconSize(QSize(30,30));
+    setButtonIconColor(startBtn, ":/icons/restart.png", QColor(98,212,214));
+    setButtonIconColor(playPauseBtn, ":/icons/pause.png", QColor(98,212,214));
+    setButtonIconColor(shootBtn, ":/icons/shoot.png", QColor(98,212,214));
+    setButtonIconColor(recordBtn, ":/icons/recordGray.png", QColor(98,212,214));
+    setButtonIconColor(zoomInBtn, ":/icons/zoomIn.png", QColor(98,212,214));
+    setButtonIconColor(zoomOutBtn, ":/icons/zoomOut.png", QColor(98,212,214));
+
     playPauseBtn->setEnabled(false);
-    shootBtn->setIcon(QIcon(":/icons/shoot.png"));
-    shootBtn->setIconSize(QSize(30,30));
     shootBtn->setEnabled(false);
-    recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
-    recordBtn->setIconSize(QSize(30,30));
     recordBtn->setEnabled(false);
-    zoomInBtn->setIcon(QIcon(":/icons/zoomIn.png"));
-    zoomInBtn->setIconSize(QSize(30,30));
-    zoomOutBtn->setIcon(QIcon(":/icons/zoomOut.png"));
-    zoomOutBtn->setIconSize(QSize(30,30));
 
     // openGL
     gl = new GLVideoWidget(this);
@@ -286,7 +395,7 @@ MainWindow::~MainWindow()
 void MainWindow::renderVideo(){
     //button
     playPauseBtn->setEnabled(true);
-    playPauseBtn->setIcon(QIcon(":/icons/play.png"));
+    setButtonIconColor(playPauseBtn, ":/icons/play.png", QColor(98,212,214));
     startBtn->setEnabled(false);
     shootBtn->setEnabled(true);
     recordBtn->setEnabled(true);
@@ -320,13 +429,13 @@ void MainWindow::renderVideo(){
 // Play or pause video, reset UI
 void MainWindow::pauseVideo(){
     if(gl->pauseVideo()){
-        playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
+        setButtonIconColor(playPauseBtn, ":/icons/pause.png", QColor(98,212,214));
         recordBtn->setEnabled(false);
         recordingAction->setEnabled(false);
         //HESlider -> setEnabled(false);
     }
     else{
-        playPauseBtn->setIcon(QIcon(":/icons/play.png"));
+        setButtonIconColor(playPauseBtn, ":/icons/play.png", QColor(98,212,214));
         recordBtn->setEnabled(true);
         recordingAction->setEnabled(true);
         HESlider -> setEnabled(true);
@@ -335,7 +444,7 @@ void MainWindow::pauseVideo(){
 
 // when the video finishes, reset the UI and stop recording
 void MainWindow::onVideoFinished(){
-    playPauseBtn->setIcon(QIcon(":/icons/pause.png"));
+    setButtonIconColor(playPauseBtn, ":/icons/pause.png", QColor(98,212,214));
     playPauseBtn->setEnabled(false);
     startBtn->setEnabled(true);
     recordBtn->setEnabled(false);
@@ -503,11 +612,13 @@ void MainWindow::setTrackingEnabled(){
     gl -> setTrackingEnabled(grabBtn->isChecked());
     if(grabBtn->isChecked()){
         analysisTable->setEnabled(true);
-        analysisTable->setStyleSheet("QTableWidget { background-color: #ffffff; color: black; }");
+        frameTemNoise->setStyleSheet("color:#5ad6d9;");
+        spin->setEnabled(true);
         return;
     }
     analysisTable->setEnabled(false);
-    analysisTable->setStyleSheet("QTableWidget { background-color: #f0f0f0; color: gray; }");
+    frameTemNoise->setStyleSheet("color:grey;");
+    spin->setEnabled(false);
 }
 
 void MainWindow::onSelectionCompleted(const QPointF &start, const QPointF &end) {
@@ -830,6 +941,25 @@ void MainWindow::openGraphDialog()
 {
     GraphDialog *dialog = new GraphDialog(this);
     dialog->exec();  // open
+}
+
+//button icon color set
+void MainWindow::setButtonIconColor(QToolButton *button, const QString &iconPath, const QColor &color)
+{
+    QIcon originalIcon(iconPath);
+
+    QPixmap pixmap = originalIcon.pixmap(QSize(30, 30));
+
+    QPainter painter(&pixmap);
+
+    painter.setCompositionMode(QPainter::CompositionMode_SourceIn);
+
+    painter.fillRect(pixmap.rect(), color);
+
+    painter.end();
+
+    button->setIcon(QIcon(pixmap));
+    button->setIconSize(QSize(30, 30));
 }
 
 

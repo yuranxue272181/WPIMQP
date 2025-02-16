@@ -76,7 +76,12 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
     "updateQueueSize",
     "setFrameRate",
     "grabBtnChecked",
-    "openGraphDialog"
+    "openGraphDialog",
+    "setButtonIconColor",
+    "QToolButton*",
+    "button",
+    "iconPath",
+    "color"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -89,7 +94,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      31,   14, // methods
+      32,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -97,37 +102,38 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  200,    2, 0x08,    1 /* Private */,
-       3,    0,  201,    2, 0x08,    2 /* Private */,
-       4,    0,  202,    2, 0x08,    3 /* Private */,
-       5,    0,  203,    2, 0x08,    4 /* Private */,
-       6,    0,  204,    2, 0x08,    5 /* Private */,
-       7,    0,  205,    2, 0x08,    6 /* Private */,
-       8,    1,  206,    2, 0x08,    7 /* Private */,
-      10,    1,  209,    2, 0x08,    9 /* Private */,
-      11,    1,  212,    2, 0x08,   11 /* Private */,
-      12,    1,  215,    2, 0x08,   13 /* Private */,
-      13,    1,  218,    2, 0x08,   15 /* Private */,
-      14,    1,  221,    2, 0x08,   17 /* Private */,
-      15,    0,  224,    2, 0x08,   19 /* Private */,
-      16,    1,  225,    2, 0x08,   20 /* Private */,
-      17,    1,  228,    2, 0x08,   22 /* Private */,
-      18,    1,  231,    2, 0x08,   24 /* Private */,
-      19,    1,  234,    2, 0x08,   26 /* Private */,
-      20,    0,  237,    2, 0x08,   28 /* Private */,
-      21,    2,  238,    2, 0x08,   29 /* Private */,
-      24,    3,  243,    2, 0x08,   32 /* Private */,
-      29,    0,  250,    2, 0x08,   36 /* Private */,
-      30,    0,  251,    2, 0x08,   37 /* Private */,
-      31,    0,  252,    2, 0x08,   38 /* Private */,
-      32,    0,  253,    2, 0x08,   39 /* Private */,
-      33,    0,  254,    2, 0x08,   40 /* Private */,
-      34,    0,  255,    2, 0x08,   41 /* Private */,
-      35,    0,  256,    2, 0x08,   42 /* Private */,
-      36,    1,  257,    2, 0x08,   43 /* Private */,
-      37,    1,  260,    2, 0x08,   45 /* Private */,
-      38,    0,  263,    2, 0x08,   47 /* Private */,
-      39,    0,  264,    2, 0x08,   48 /* Private */,
+       1,    0,  206,    2, 0x08,    1 /* Private */,
+       3,    0,  207,    2, 0x08,    2 /* Private */,
+       4,    0,  208,    2, 0x08,    3 /* Private */,
+       5,    0,  209,    2, 0x08,    4 /* Private */,
+       6,    0,  210,    2, 0x08,    5 /* Private */,
+       7,    0,  211,    2, 0x08,    6 /* Private */,
+       8,    1,  212,    2, 0x08,    7 /* Private */,
+      10,    1,  215,    2, 0x08,    9 /* Private */,
+      11,    1,  218,    2, 0x08,   11 /* Private */,
+      12,    1,  221,    2, 0x08,   13 /* Private */,
+      13,    1,  224,    2, 0x08,   15 /* Private */,
+      14,    1,  227,    2, 0x08,   17 /* Private */,
+      15,    0,  230,    2, 0x08,   19 /* Private */,
+      16,    1,  231,    2, 0x08,   20 /* Private */,
+      17,    1,  234,    2, 0x08,   22 /* Private */,
+      18,    1,  237,    2, 0x08,   24 /* Private */,
+      19,    1,  240,    2, 0x08,   26 /* Private */,
+      20,    0,  243,    2, 0x08,   28 /* Private */,
+      21,    2,  244,    2, 0x08,   29 /* Private */,
+      24,    3,  249,    2, 0x08,   32 /* Private */,
+      29,    0,  256,    2, 0x08,   36 /* Private */,
+      30,    0,  257,    2, 0x08,   37 /* Private */,
+      31,    0,  258,    2, 0x08,   38 /* Private */,
+      32,    0,  259,    2, 0x08,   39 /* Private */,
+      33,    0,  260,    2, 0x08,   40 /* Private */,
+      34,    0,  261,    2, 0x08,   41 /* Private */,
+      35,    0,  262,    2, 0x08,   42 /* Private */,
+      36,    1,  263,    2, 0x08,   43 /* Private */,
+      37,    1,  266,    2, 0x08,   45 /* Private */,
+      38,    0,  269,    2, 0x08,   47 /* Private */,
+      39,    0,  270,    2, 0x08,   48 /* Private */,
+      40,    3,  271,    2, 0x08,   49 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -161,6 +167,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 41, QMetaType::QString, QMetaType::QColor,   42,   43,   44,
 
        0        // eod
 };
@@ -252,7 +259,12 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         // method 'grabBtnChecked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'openGraphDialog'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'setButtonIconColor'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QToolButton *, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QColor &, std::false_type>
     >,
     nullptr
 } };
@@ -294,7 +306,19 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 28: _t->setFrameRate((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
         case 29: _t->grabBtnChecked(); break;
         case 30: _t->openGraphDialog(); break;
+        case 31: _t->setButtonIconColor((*reinterpret_cast< std::add_pointer_t<QToolButton*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QColor>>(_a[3]))); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 31:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QToolButton* >(); break;
+            }
+            break;
         }
     }
 }
@@ -318,13 +342,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 31)
+        if (_id < 32)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 31;
+        _id -= 32;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 31)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 31;
+        if (_id < 32)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 32;
     }
     return _id;
 }

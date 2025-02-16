@@ -1,0 +1,152 @@
+QWidget {
+    background-color: #22272d;
+    font-family: "Microsoft YaHei", Arial, sans-serif;
+    font-size: 14px;
+}
+
+
+QPushButton {
+    color: white;
+}
+
+QTableWidget {
+    border: 1px solid white;
+    gridline-color: white;
+}
+
+QToolButton {
+    background-color: white;
+}
+
+
+QLabel {
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+QMenuBar {
+    color: white;
+    background-color: #29323a
+}
+
+#videoWidget {
+    background-color: #393e44;
+}
+
+#SpinBox {
+    color: #51d8db;
+    font-size: 12px;
+}
+
+#SpinBox:disabled {
+    color: grey;
+    font-size: 12px;
+}
+
+#frameTemNoise {
+    font-size: 12px;
+}
+
+
+QCheckBox {
+    color: #51d7d9;
+    background-color: #393e44;
+    padding: 5px;
+}
+
+QCheckBox::indicator {
+    border: 1px solid #555;
+    width: 8px;
+    height: 8px;
+}
+
+QCheckBox::indicator:checked {
+    border-color: white;
+    background-color: #51d7d9;
+}
+
+QCheckBox::indicator:unchecked {
+    border-color: white;
+ }
+
+QCheckBox:disabled {
+    color: grey;
+}
+
+QCheckBox::indicator:disabled {
+    border-color: #d3d3d3;
+    background-color: #d3d3d3;
+}
+
+QCheckBox::indicator:checked:disabled {
+    background-color: #a0a0a0;
+}
+
+#grabButton {
+    font-weight: bold;
+    background-color: black;
+    color:#5ad6d9;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#grabButton:disabled {
+    color: grey;
+}
+
+#grabButton:hover {
+    background-color: #5ad6d9;
+    color: black;
+    border-radius: 5px;
+}
+
+#grabButton:checked {
+    background-color: #5ad6d9;
+    color: black;
+    border-radius: 5px;
+}
+
+#resetButton {
+    font-weight: bold;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+
+#resetButton:hover {
+    color: #5ad6d9;
+    border-radius: 5px;
+}
+
+QTabBar::tab{
+    color: white;
+    font-weight: bold;
+}
+
+QTabBar::tab:first:selected {
+    color: #5ad6d9;
+}
+
+QTabBar::tab:last:selected {
+    color: #5ad6d9;
+}
+
+QToolBox::tab {
+    color: white;
+}
+
+QComboBox {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+QComboBox QAbstractItemView {
+    color: white;
+    font-weight: bold;
+}
+
+
+
