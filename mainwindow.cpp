@@ -178,6 +178,9 @@ MainWindow::MainWindow(QWidget *parent)
     QToolBox *tool2 = ui->toolBox_2;
     tab2Layout->addWidget(tool2);
 
+
+
+
     //table
     featuresTable = ui->FeatureTable;
     featuresTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // column adaption
@@ -209,8 +212,36 @@ MainWindow::MainWindow(QWidget *parent)
     QStringList rowHeaders;
     rowHeaders << "x1" << "x2";
     coordTable->setVerticalHeaderLabels(rowHeaders);
+    coordTable->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
     coordTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // column adaption
     coordTable->verticalHeader()->setSectionResizeMode(QHeaderView::Stretch); // row adaption
+    coordTable->setStyleSheet(R"(
+        QTableView {
+        color: white;
+        border: none;
+            padding-left: 10px;
+            padding-bottom: 10px;
+        }
+
+        QTableView::item {
+        color: white;
+        background-color: #393e44;
+        }
+
+        QHeaderView::section {
+        background-color: #393e44;
+        font-weight: bold;
+        padding: 2px;
+        color: white;
+        }
+
+        QTableCornerButton::section {
+        background-color: #393e44;
+        }
+
+    )");
+
+
     analysisTable = ui->analysisTable;
     analysisTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch); // column adaption
     analysisTable->horizontalHeader()->setMinimumSectionSize(100);
