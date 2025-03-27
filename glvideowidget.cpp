@@ -1,6 +1,7 @@
 #include "glvideowidget.h"
 #include <QFile>
 #include <QFileDialog>
+#include <QElapsedTimer>
 
 
 //trans yuv to rgb
@@ -174,6 +175,10 @@ GLVideoWidget::GLVideoWidget(QWidget *parent)
 // input one frame, and render one frame
 void GLVideoWidget::setFrameData(const QByteArray &data)
 {
+    //latency test
+    QElapsedTimer timer;
+    timer.start();
+
     QMutexLocker lock(&m_mutex);
     Q_UNUSED(lock);
     upload_tex = true;
@@ -197,11 +202,15 @@ void GLVideoWidget::setFrameData(const QByteArray &data)
         plane[2].data = plane[1].data + plane[1].stride*videoHeight/2;
     }
     update();
+    // //latency test
+    qint64 latency = timer.elapsed(); // 返回经过的毫秒
+    qDebug() << "Video Playback Latency: " << latency << "ms";
+
 }
 
 
 // input the entire data of a video and display video by switching frames (frame rate)
-void GLVideoWidget::nextFrame(const QByteArray &data) {
+void GLVideoWidget::nextFrame(const QByteArray &data) {    
     videoData = data;
     currentFrameIndex = 0; // reset
     isPaused = false;
@@ -212,7 +221,7 @@ void GLVideoWidget::nextFrame(const QByteArray &data) {
     frameTimer->start(1000/frameRate);
 }
 
-//Get the data for each frame and render it
+//render the data frame by frame
 void GLVideoWidget::processNextFrame() {
     int frameSize = (videoWidth * videoHeight) + (videoWidth / 2 * videoHeight / 2) * 2;
     if (currentFrameIndex * frameSize < videoData.size()) {

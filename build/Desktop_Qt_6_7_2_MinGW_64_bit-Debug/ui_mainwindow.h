@@ -91,8 +91,6 @@ public:
     QSpacerItem *horizontalSpacer_3;
     QWidget *horizontalLayoutWidget_4;
     QHBoxLayout *topButtons;
-    QToolButton *startButton;
-    QToolButton *playPauseButton;
     QToolButton *shootButton;
     QToolButton *recordButton;
     QToolButton *zoomInButton;
@@ -664,18 +662,6 @@ public:
         topButtons = new QHBoxLayout(horizontalLayoutWidget_4);
         topButtons->setObjectName("topButtons");
         topButtons->setContentsMargins(0, 0, 0, 0);
-        startButton = new QToolButton(horizontalLayoutWidget_4);
-        startButton->setObjectName("startButton");
-        startButton->setMinimumSize(QSize(30, 30));
-
-        topButtons->addWidget(startButton);
-
-        playPauseButton = new QToolButton(horizontalLayoutWidget_4);
-        playPauseButton->setObjectName("playPauseButton");
-        playPauseButton->setMinimumSize(QSize(30, 30));
-
-        topButtons->addWidget(playPauseButton);
-
         shootButton = new QToolButton(horizontalLayoutWidget_4);
         shootButton->setObjectName("shootButton");
         shootButton->setMinimumSize(QSize(30, 30));
@@ -919,8 +905,6 @@ public:
         toolBox->setItemText(toolBox->indexOf(page_7), QCoreApplication::translate("MainWindow", "Gamma Correction", nullptr));
         resetButton->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
         toolBox->setItemText(toolBox->indexOf(page_8), QCoreApplication::translate("MainWindow", "Reset to Default", nullptr));
-        startButton->setText(QString());
-        playPauseButton->setText(QString());
         shootButton->setText(QString());
         recordButton->setText(QString());
         zoomInButton->setText(QString());

@@ -43,8 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // ui
     // button
-    startBtn = ui->startButton;
-    playPauseBtn = ui->playPauseButton;
+    //startBtn = ui->startButton;
+    //playPauseBtn = ui->playPauseButton;
     shootBtn = ui->shootButton;
     recordBtn = ui->recordButton;
     zoomInBtn = ui->zoomInButton;
@@ -135,13 +135,13 @@ MainWindow::MainWindow(QWidget *parent)
     menuView->addAction(zoomOutAction);
     //tool menu
     grabCoAction = new QAction(tr("Grab Coordinates"),this);
-    grabCoAction ->setEnabled(false);
+    //grabCoAction ->setEnabled(false);
     menuTool->addAction(grabCoAction);
     //record menu
     screenshootAction = new QAction(tr("Screen Capture"),this);
-    screenshootAction->setEnabled(false);
+    //screenshootAction->setEnabled(false);
     recordingAction = new QAction(tr("Video Recording"),this);
-    recordingAction->setEnabled(false);
+    //recordingAction->setEnabled(false);
     menuRecord->addAction(screenshootAction);
     menuRecord->addAction(recordingAction);
 
@@ -294,7 +294,7 @@ MainWindow::MainWindow(QWidget *parent)
     sharpnessSlider ->setValue(0);
     HESlider -> setRange(0,100);
     HESlider -> setValue(0);
-    HESlider -> setEnabled(false);
+    //HESlider -> setEnabled(false);
     NRSlider ->setRange(0, 100);
     NRSlider ->setValue(0);
     GammaSlider -> setRange(1,30);
@@ -308,19 +308,19 @@ MainWindow::MainWindow(QWidget *parent)
     STNRSlider -> setRange(30,70);
     STNRSlider -> setValue(40);
     grabBtn -> setCheckable(true);
-    grabBtn -> setEnabled(false);
+    //grabBtn -> setEnabled(false);
 
 
-    setButtonIconColor(startBtn, ":/icons/restart.png", QColor(98,212,214));
-    setButtonIconColor(playPauseBtn, ":/icons/pause.png", QColor(98,212,214));
+    //setButtonIconColor(startBtn, ":/icons/restart.png", QColor(98,212,214));
+    //setButtonIconColor(playPauseBtn, ":/icons/pause.png", QColor(98,212,214));
     setButtonIconColor(shootBtn, ":/icons/shoot.png", QColor(98,212,214));
     setButtonIconColor(recordBtn, ":/icons/recordGray.png", QColor(98,212,214));
     setButtonIconColor(zoomInBtn, ":/icons/zoomIn.png", QColor(98,212,214));
     setButtonIconColor(zoomOutBtn, ":/icons/zoomOut.png", QColor(98,212,214));
 
-    playPauseBtn->setEnabled(false);
-    shootBtn->setEnabled(false);
-    recordBtn->setEnabled(false);
+    // playPauseBtn->setEnabled(false);
+    // shootBtn->setEnabled(false);
+    // recordBtn->setEnabled(false);
 
     // openGL
     gl = new GLVideoWidget(this);
@@ -331,9 +331,9 @@ MainWindow::MainWindow(QWidget *parent)
     analysis = new Analysis();
 
     // Connect the signal to the slot
-    connect(startBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
-    connect(playPauseBtn, &QToolButton::clicked, this, &MainWindow::pauseVideo);
-    connect(gl, &GLVideoWidget::videoFinished, this, &MainWindow::onVideoFinished);
+    //connect(startBtn, &QToolButton::clicked, this, &MainWindow::renderVideo);
+    //connect(playPauseBtn, &QToolButton::clicked, this, &MainWindow::pauseVideo);
+    //connect(gl, &GLVideoWidget::videoFinished, this, &MainWindow::onVideoFinished);
     connect(zoomInBtn,&QToolButton::clicked, this, &MainWindow::zoomIn);
     connect(zoomOutBtn,&QToolButton::clicked, this, &MainWindow::zoomOut);
     connect(shootBtn, &QToolButton::clicked, gl, &GLVideoWidget::saveYUVImageDataToFile);
@@ -392,68 +392,68 @@ MainWindow::~MainWindow()
 }
 
 // Render the video by OpenGL, display on the videoWidget, and reset UI
-void MainWindow::renderVideo(){
-    //button
-    playPauseBtn->setEnabled(true);
-    setButtonIconColor(playPauseBtn, ":/icons/play.png", QColor(98,212,214));
-    startBtn->setEnabled(false);
-    shootBtn->setEnabled(true);
-    recordBtn->setEnabled(true);
-    recordingAction->setEnabled(true);
-    screenshootAction->setEnabled(true);
-    HESlider -> setEnabled(true);
-    grabBtn -> setEnabled(true);
-    grabCoAction-> setEnabled(true);
+// void MainWindow::renderVideo(){
+//     //button
+//     playPauseBtn->setEnabled(true);
+//     setButtonIconColor(playPauseBtn, ":/icons/play.png", QColor(98,212,214));
+//     //startBtn->setEnabled(false);
+//     shootBtn->setEnabled(true);
+//     recordBtn->setEnabled(true);
+//     recordingAction->setEnabled(true);
+//     screenshootAction->setEnabled(true);
+//     HESlider -> setEnabled(true);
+//     grabBtn -> setEnabled(true);
+//     grabCoAction-> setEnabled(true);
 
-    //open the YUV file
-    //176x144
-    int width=176;
-    int height = 144;
-    QFile f(":/akiyo_qcif.yuv");
-    f.open(QIODevice::ReadOnly);
-    QByteArray data(f.readAll());
-    //trans the video to only white, black ,and grey
-    int frameSize = (width * height) + (width / 2 * height / 2) * 2;
-    int frameCount = data.size() / frameSize;
-    for (int frame = 0; frame < frameCount; ++frame) {
-        int frameOffset = frame * (width * height + (width / 2) * (height / 2) * 2);
-        for (int j = 0; j < (width / 2) * (height / 2); ++j) {
-            data[frameOffset + width * height + j] = -128; // U
-            data[frameOffset + width * height + (width / 2) * (height / 2) + j] = -128; // V
-        }
-    }
-    qDebug("data size: %lld", data.size());
-    gl->nextFrame(data);
-}
+//     //open the YUV file
+//     //176x144
+//     int width=176;
+//     int height = 144;
+//     QFile f(":/akiyo_qcif.yuv");
+//     f.open(QIODevice::ReadOnly);
+//     QByteArray data(f.readAll());
+//     //trans the video to only white, black ,and grey
+//     int frameSize = (width * height) + (width / 2 * height / 2) * 2;
+//     int frameCount = data.size() / frameSize;
+//     for (int frame = 0; frame < frameCount; ++frame) {
+//         int frameOffset = frame * (width * height + (width / 2) * (height / 2) * 2);
+//         for (int j = 0; j < (width / 2) * (height / 2); ++j) {
+//             data[frameOffset + width * height + j] = -128; // U
+//             data[frameOffset + width * height + (width / 2) * (height / 2) + j] = -128; // V
+//         }
+//     }
+//     qDebug("data size: %lld", data.size());
+//     gl->nextFrame(data);
+// }
 
 // Play or pause video, reset UI
-void MainWindow::pauseVideo(){
-    if(gl->pauseVideo()){
-        setButtonIconColor(playPauseBtn, ":/icons/pause.png", QColor(98,212,214));
-        recordBtn->setEnabled(false);
-        recordingAction->setEnabled(false);
-        //HESlider -> setEnabled(false);
-    }
-    else{
-        setButtonIconColor(playPauseBtn, ":/icons/play.png", QColor(98,212,214));
-        recordBtn->setEnabled(true);
-        recordingAction->setEnabled(true);
-        HESlider -> setEnabled(true);
-    }
-}
+// void MainWindow::pauseVideo(){
+//     if(gl->pauseVideo()){
+//         setButtonIconColor(playPauseBtn, ":/icons/pause.png", QColor(98,212,214));
+//         recordBtn->setEnabled(false);
+//         recordingAction->setEnabled(false);
+//         //HESlider -> setEnabled(false);
+//     }
+//     else{
+//         setButtonIconColor(playPauseBtn, ":/icons/play.png", QColor(98,212,214));
+//         recordBtn->setEnabled(true);
+//         recordingAction->setEnabled(true);
+//         HESlider -> setEnabled(true);
+//     }
+// }
 
 // when the video finishes, reset the UI and stop recording
-void MainWindow::onVideoFinished(){
-    setButtonIconColor(playPauseBtn, ":/icons/pause.png", QColor(98,212,214));
-    playPauseBtn->setEnabled(false);
-    startBtn->setEnabled(true);
-    recordBtn->setEnabled(false);
-    recordingAction->setEnabled(false);
-    recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
-    HESlider -> setEnabled(false);
-    gl->stopRecording();
+// void MainWindow::onVideoFinished(){
+//     // setButtonIconColor(playPauseBtn, ":/icons/pause.png", QColor(98,212,214));
+//     // playPauseBtn->setEnabled(false);
+//     //startBtn->setEnabled(true);
+//     recordBtn->setEnabled(false);
+//     recordingAction->setEnabled(false);
+//     recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
+//     HESlider -> setEnabled(false);
+//     gl->stopRecording();
 
-}
+// }
 
 // Zoom in the video
 void MainWindow::zoomIn(){
@@ -481,9 +481,9 @@ void MainWindow::zoomOut(){
 void MainWindow::recordingStatu(){
     if(gl->toggleRecording()){
         recordBtn->setIcon(QIcon(":/icons/recordRed.png"));
-    }else{
+    }/*else{
         recordBtn->setIcon(QIcon(":/icons/recordGray.png"));
-    }
+    }*/
 }
 void MainWindow::setBrightness(int brightness){
     brightnessValue->setText(QString::number(brightness));

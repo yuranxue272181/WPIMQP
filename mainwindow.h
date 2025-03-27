@@ -41,9 +41,9 @@ public:
 
 
 private slots:
-    void renderVideo();
-    void pauseVideo();
-    void onVideoFinished();
+    //void renderVideo();
+    //void pauseVideo();
+    //void onVideoFinished();
     void zoomIn();
     void zoomOut();
     void recordingStatu();
@@ -114,8 +114,8 @@ private:
 
 
     //ui
-    QToolButton *startBtn;
-    QToolButton *playPauseBtn;
+    //QToolButton *startBtn;
+    //QToolButton *playPauseBtn;
     QToolButton *shootBtn;
     QToolButton *recordBtn;
     QToolButton *zoomInBtn;

@@ -38,11 +38,8 @@ namespace {
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {};
 constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::stringData(
     "MainWindow",
-    "renderVideo",
-    "",
-    "pauseVideo",
-    "onVideoFinished",
     "zoomIn",
+    "",
     "zoomOut",
     "recordingStatu",
     "setBrightness",
@@ -94,7 +91,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-      32,   14, // methods
+      29,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -102,60 +99,54 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,  206,    2, 0x08,    1 /* Private */,
-       3,    0,  207,    2, 0x08,    2 /* Private */,
-       4,    0,  208,    2, 0x08,    3 /* Private */,
-       5,    0,  209,    2, 0x08,    4 /* Private */,
-       6,    0,  210,    2, 0x08,    5 /* Private */,
-       7,    0,  211,    2, 0x08,    6 /* Private */,
-       8,    1,  212,    2, 0x08,    7 /* Private */,
-      10,    1,  215,    2, 0x08,    9 /* Private */,
-      11,    1,  218,    2, 0x08,   11 /* Private */,
-      12,    1,  221,    2, 0x08,   13 /* Private */,
-      13,    1,  224,    2, 0x08,   15 /* Private */,
-      14,    1,  227,    2, 0x08,   17 /* Private */,
-      15,    0,  230,    2, 0x08,   19 /* Private */,
-      16,    1,  231,    2, 0x08,   20 /* Private */,
-      17,    1,  234,    2, 0x08,   22 /* Private */,
-      18,    1,  237,    2, 0x08,   24 /* Private */,
-      19,    1,  240,    2, 0x08,   26 /* Private */,
-      20,    0,  243,    2, 0x08,   28 /* Private */,
-      21,    2,  244,    2, 0x08,   29 /* Private */,
-      24,    3,  249,    2, 0x08,   32 /* Private */,
-      29,    0,  256,    2, 0x08,   36 /* Private */,
-      30,    0,  257,    2, 0x08,   37 /* Private */,
-      31,    0,  258,    2, 0x08,   38 /* Private */,
-      32,    0,  259,    2, 0x08,   39 /* Private */,
-      33,    0,  260,    2, 0x08,   40 /* Private */,
-      34,    0,  261,    2, 0x08,   41 /* Private */,
-      35,    0,  262,    2, 0x08,   42 /* Private */,
-      36,    1,  263,    2, 0x08,   43 /* Private */,
-      37,    1,  266,    2, 0x08,   45 /* Private */,
-      38,    0,  269,    2, 0x08,   47 /* Private */,
-      39,    0,  270,    2, 0x08,   48 /* Private */,
-      40,    3,  271,    2, 0x08,   49 /* Private */,
+       1,    0,  188,    2, 0x08,    1 /* Private */,
+       3,    0,  189,    2, 0x08,    2 /* Private */,
+       4,    0,  190,    2, 0x08,    3 /* Private */,
+       5,    1,  191,    2, 0x08,    4 /* Private */,
+       7,    1,  194,    2, 0x08,    6 /* Private */,
+       8,    1,  197,    2, 0x08,    8 /* Private */,
+       9,    1,  200,    2, 0x08,   10 /* Private */,
+      10,    1,  203,    2, 0x08,   12 /* Private */,
+      11,    1,  206,    2, 0x08,   14 /* Private */,
+      12,    0,  209,    2, 0x08,   16 /* Private */,
+      13,    1,  210,    2, 0x08,   17 /* Private */,
+      14,    1,  213,    2, 0x08,   19 /* Private */,
+      15,    1,  216,    2, 0x08,   21 /* Private */,
+      16,    1,  219,    2, 0x08,   23 /* Private */,
+      17,    0,  222,    2, 0x08,   25 /* Private */,
+      18,    2,  223,    2, 0x08,   26 /* Private */,
+      21,    3,  228,    2, 0x08,   29 /* Private */,
+      26,    0,  235,    2, 0x08,   33 /* Private */,
+      27,    0,  236,    2, 0x08,   34 /* Private */,
+      28,    0,  237,    2, 0x08,   35 /* Private */,
+      29,    0,  238,    2, 0x08,   36 /* Private */,
+      30,    0,  239,    2, 0x08,   37 /* Private */,
+      31,    0,  240,    2, 0x08,   38 /* Private */,
+      32,    0,  241,    2, 0x08,   39 /* Private */,
+      33,    1,  242,    2, 0x08,   40 /* Private */,
+      34,    1,  245,    2, 0x08,   42 /* Private */,
+      35,    0,  248,    2, 0x08,   44 /* Private */,
+      36,    0,  249,    2, 0x08,   45 /* Private */,
+      37,    3,  250,    2, 0x08,   46 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QPointF, QMetaType::QPointF,   22,   23,
-    QMetaType::Void, 0x80000000 | 25, QMetaType::Int, QMetaType::Int,   26,   27,   28,
+    QMetaType::Void, QMetaType::QPointF, QMetaType::QPointF,   19,   20,
+    QMetaType::Void, 0x80000000 | 22, QMetaType::Int, QMetaType::Int,   23,   24,   25,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -163,11 +154,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Int,    9,
-    QMetaType::Void, QMetaType::Int,    9,
+    QMetaType::Void, QMetaType::Int,    6,
+    QMetaType::Void, QMetaType::Int,    6,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 41, QMetaType::QString, QMetaType::QColor,   42,   43,   44,
+    QMetaType::Void, 0x80000000 | 38, QMetaType::QString, QMetaType::QColor,   39,   40,   41,
 
        0        // eod
 };
@@ -181,12 +172,6 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSMainWindowENDCLASS_t,
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
-        // method 'renderVideo'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'pauseVideo'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'onVideoFinished'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'zoomIn'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'zoomOut'
@@ -275,44 +260,41 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->renderVideo(); break;
-        case 1: _t->pauseVideo(); break;
-        case 2: _t->onVideoFinished(); break;
-        case 3: _t->zoomIn(); break;
-        case 4: _t->zoomOut(); break;
-        case 5: _t->recordingStatu(); break;
-        case 6: _t->setBrightness((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 7: _t->setContrast((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 8: _t->setSharpness((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 9: _t->setHEValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 10: _t->setNRValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 11: _t->setGammaValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 12: _t->reset(); break;
-        case 13: _t->setExposureTimeValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 14: _t->setGainValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 15: _t->setDynamicRangeValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 16: _t->setSTNRValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 17: _t->setTrackingEnabled(); break;
-        case 18: _t->onSelectionCompleted((*reinterpret_cast< std::add_pointer_t<QPointF>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QPointF>>(_a[2]))); break;
-        case 19: _t->updateAnalysis((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<QList<int>>>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
-        case 20: _t->minCheck(); break;
-        case 21: _t->maxCheck(); break;
-        case 22: _t->avegCheck(); break;
-        case 23: _t->pixelCheck(); break;
-        case 24: _t->rowCheck(); break;
-        case 25: _t->columnCheck(); break;
-        case 26: _t->resetTotal(); break;
-        case 27: _t->updateQueueSize((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 28: _t->setFrameRate((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
-        case 29: _t->grabBtnChecked(); break;
-        case 30: _t->openGraphDialog(); break;
-        case 31: _t->setButtonIconColor((*reinterpret_cast< std::add_pointer_t<QToolButton*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QColor>>(_a[3]))); break;
+        case 0: _t->zoomIn(); break;
+        case 1: _t->zoomOut(); break;
+        case 2: _t->recordingStatu(); break;
+        case 3: _t->setBrightness((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 4: _t->setContrast((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 5: _t->setSharpness((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 6: _t->setHEValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 7: _t->setNRValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 8: _t->setGammaValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 9: _t->reset(); break;
+        case 10: _t->setExposureTimeValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 11: _t->setGainValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 12: _t->setDynamicRangeValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 13: _t->setSTNRValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 14: _t->setTrackingEnabled(); break;
+        case 15: _t->onSelectionCompleted((*reinterpret_cast< std::add_pointer_t<QPointF>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QPointF>>(_a[2]))); break;
+        case 16: _t->updateAnalysis((*reinterpret_cast< std::add_pointer_t<std::shared_ptr<QList<int>>>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
+        case 17: _t->minCheck(); break;
+        case 18: _t->maxCheck(); break;
+        case 19: _t->avegCheck(); break;
+        case 20: _t->pixelCheck(); break;
+        case 21: _t->rowCheck(); break;
+        case 22: _t->columnCheck(); break;
+        case 23: _t->resetTotal(); break;
+        case 24: _t->updateQueueSize((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 25: _t->setFrameRate((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 26: _t->grabBtnChecked(); break;
+        case 27: _t->openGraphDialog(); break;
+        case 28: _t->setButtonIconColor((*reinterpret_cast< std::add_pointer_t<QToolButton*>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QColor>>(_a[3]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
         switch (_id) {
         default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
-        case 31:
+        case 28:
             switch (*reinterpret_cast<int*>(_a[1])) {
             default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
             case 0:
@@ -342,13 +324,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 32)
+        if (_id < 29)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 29;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 32)
+        if (_id < 29)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 32;
+        _id -= 29;
     }
     return _id;
 }
