@@ -55,10 +55,6 @@ private slots:
     void setNRValue(int value);
     void setGammaValue(int value);
     void reset();
-    void setExposureTimeValue(int value);
-    void setGainValue(int value);
-    void setDynamicRangeValue(int value);
-    void setSTNRValue(int value);
     void setTrackingEnabled();
     void onSelectionCompleted(const QPointF &start, const QPointF &end);
     void updateAnalysis(std::shared_ptr<QVector<int>> grayValues, int selectedWidth, int selectedHeight);
@@ -70,11 +66,11 @@ private slots:
     void columnCheck();
     void resetTotal();
     void updateQueueSize(int value);
-    void setFrameRate(int value);
     void grabBtnChecked();
-    //test
-    void openGraphDialog();
+
     void setButtonIconColor(QToolButton *button, const QString &iconPath, const QColor &color);
+    //***control component***future work***
+    //void setFrameRate(int value);
 
 private:
     QByteArray testData;
@@ -114,6 +110,7 @@ private:
     QAction *grabCoAction;
 
 
+
     //ui
     QToolButton *startBtn;
     QToolButton *playPauseBtn;
@@ -139,10 +136,7 @@ private:
     QSlider *HESlider;
     QSlider *NRSlider;
     QSlider *GammaSlider;
-    QSlider *exposureTimeSlider;
-    QSlider *gainSlider;
-    QSlider *dynamicRangeSlider;
-    QSlider *STNRSlider;
+
 
     QLabel *brightnessValue;
     QLabel *contrastValue;
@@ -150,10 +144,6 @@ private:
     QLabel *HEValue;
     QLabel *NRValue;
     QLabel *GammaValue;
-    QLabel *exposureTimeValue;
-    QLabel *gainValue;
-    QLabel *dynamicRangeValue;
-    QLabel *STNRValue;
     QLabel*frameTemNoise;
 
     QTableWidget *featuresTable;
@@ -167,9 +157,22 @@ private:
     QCheckBox *columnChecker;
     QCheckBox *pixelChecker;
 
-    QComboBox *frameRateCB;
-
     QHBoxLayout *layout;
+    /*control component***future work***
+    QSlider *exposureTimeSlider;
+    QSlider *gainSlider;
+    QSlider *dynamicRangeSlider;
+    QSlider *STNRSlider;
+    QLabel *exposureTimeValue;
+    QLabel *gainValue;
+    QLabel *dynamicRangeValue;
+    QLabel *STNRValue;
+    QComboBox *frameRateCB;
+    void openGraphDialog();
+    void setExposureTimeValue(int value);
+    void setGainValue(int value);
+    void setDynamicRangeValue(int value);
+    void setSTNRValue(int value);*/
 
 signals:
     // void glInitialized();

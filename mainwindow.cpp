@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 #include "glvideowidget.h"
 #include "analysis.h"
-#include "graph.h"
 
 //ui
 #include <QVBoxLayout>
@@ -17,10 +16,6 @@ MainWindow::MainWindow(QWidget *parent)
     layout = ui->mainLayout;
     QWidget * centralWidget = ui->centralwidget;
     centralWidget->setLayout(layout);
-
-    //testchart
-    openGraphButton = ui->chart;
-    connect(openGraphButton, &QPushButton::clicked, this, &MainWindow::openGraphDialog);
 
     //initialize
     zoomFactor = 1.0f;
@@ -99,10 +94,6 @@ MainWindow::MainWindow(QWidget *parent)
     HESlider = ui->HESlider;
     NRSlider = ui->NRSlider;
     GammaSlider = ui -> GammaSlider;
-    exposureTimeSlider = ui->exposureTimeSlider;
-    gainSlider = ui-> gainSlider;
-    dynamicRangeSlider = ui-> dynamicRangeSlider;
-    STNRSlider = ui-> STNRSlider;
 
     //label
     brightnessValue = ui->brightness;
@@ -112,12 +103,6 @@ MainWindow::MainWindow(QWidget *parent)
     NRValue = ui->NR;
     GammaValue = ui ->Gamma;
     GammaValue->setText("1");
-    exposureTimeValue = ui-> exposureTime;
-    gainValue = ui-> gain;
-    dynamicRangeValue = ui-> dynamicRange;
-    dynamicRangeValue->setText("60");
-    STNRValue = ui-> STNR;
-    STNRValue->setText("40");
 
     //menu
     menuProject = ui->menuProject;
@@ -154,30 +139,18 @@ MainWindow::MainWindow(QWidget *parent)
     columnChecker= new QCheckBox("Column Noise");
     pixelChecker= new QCheckBox("Pixel Noise");
 
-    //combo box
-    frameRateCB = ui->frameRateComboBox;
-    frameRateCB->addItem("30");
-    frameRateCB->addItem("60");
-    frameRateCB->setCurrentText("30");
-
-    //tab widget
-    QTabWidget *tabWidget = ui->tabWidget;
-    tabWidget->setStyleSheet("background:#393e44;");
-
-    //tab1
-    QWidget *tab1 = new QWidget();
-    QVBoxLayout *tab1Layout = new QVBoxLayout(tab1);
-    tabWidget->addTab(tab1, "Image Enhancement");
-    QToolBox *tool1 = ui->toolBox;
-    tab1Layout->addWidget(tool1);
-
-    //tab2
-    QWidget *tab2 = new QWidget();
-    QVBoxLayout *tab2Layout = new QVBoxLayout(tab2);
-    tabWidget->addTab(tab2, "Control Component");
-    QToolBox *tool2 = ui->toolBox_2;
-    tab2Layout->addWidget(tool2);
-
+    //QStackedWidget
+    QStackedWidget *stackedWidget = ui->stackedWidget;
+    stackedWidget->setStyleSheet("background:#393e44;");
+    QWidget *page1 = new QWidget();
+    QVBoxLayout *page1Layout = new QVBoxLayout(page1);
+    QLabel *titleLabel = new QLabel("Image Enhancement");
+    titleLabel->setAlignment(Qt::AlignCenter);
+    page1Layout->addWidget(titleLabel);
+    QToolBox *toolBox = ui->toolBox;
+    page1Layout->addWidget(toolBox);
+    page1Layout->setStretch(0, 1);
+    stackedWidget->addWidget(page1);
 
 
 
@@ -299,14 +272,7 @@ MainWindow::MainWindow(QWidget *parent)
     NRSlider ->setValue(0);
     GammaSlider -> setRange(1,30);
     GammaSlider -> setValue(10);
-    exposureTimeSlider -> setRange(0,100);
-    exposureTimeSlider -> setValue(0);
-    gainSlider -> setRange(0,30);
-    gainSlider -> setValue(0);
-    dynamicRangeSlider -> setRange(60,120);
-    dynamicRangeSlider -> setValue(60);
-    STNRSlider -> setRange(30,70);
-    STNRSlider -> setValue(40);
+
     grabBtn -> setCheckable(true);
     grabBtn -> setEnabled(false);
 
@@ -345,10 +311,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(HESlider, &QSlider::sliderMoved, this, &MainWindow::setHEValue);
     connect(NRSlider, &QSlider::sliderMoved, this, &MainWindow::setNRValue);
     connect(GammaSlider, &QSlider::sliderMoved, this, &MainWindow::setGammaValue);
-    connect(exposureTimeSlider, &QSlider::sliderMoved, this, &MainWindow::setExposureTimeValue);
-    connect(gainSlider, &QSlider::sliderMoved, this, &MainWindow::setGainValue);
-    connect(dynamicRangeSlider, &QSlider::sliderMoved, this, &MainWindow::setDynamicRangeValue);
-    connect(STNRSlider, &QSlider::sliderMoved, this, &MainWindow::setSTNRValue);
+
     connect(grabBtn,&QPushButton::clicked,this,&MainWindow::setTrackingEnabled);
     connect(gl, &GLVideoWidget::selectionCompleted, this, &MainWindow::onSelectionCompleted);
     connect(gl, &GLVideoWidget::updateGrayValues, this, &MainWindow::updateAnalysis);
@@ -360,7 +323,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(columnChecker, &QCheckBox::stateChanged, this, &MainWindow::columnCheck);
     connect(gl, &GLVideoWidget::mouseRelease, this, &MainWindow::resetTotal);
     connect(spin, &QSpinBox::valueChanged,this,&MainWindow::updateQueueSize);
-    connect(frameRateCB, &QComboBox::currentIndexChanged, this, &MainWindow::setFrameRate);
     connect(zoomInAction, &QAction::triggered, this, &MainWindow::zoomIn);
     connect(zoomOutAction, &QAction::triggered, this, &MainWindow::zoomOut);
     connect(grabCoAction, &QAction::triggered, this, &MainWindow::grabBtnChecked);
@@ -396,7 +358,7 @@ void MainWindow::renderVideo(){
     //button
     playPauseBtn->setEnabled(true);
     setButtonIconColor(playPauseBtn, ":/icons/play.png", QColor(98,212,214));
-    startBtn->setEnabled(false);
+    //startBtn->setEnabled(false);
     shootBtn->setEnabled(true);
     recordBtn->setEnabled(true);
     recordingAction->setEnabled(true);
@@ -583,34 +545,7 @@ void MainWindow::reset(){
     gl -> refreshData();
 }
 
-//hardware set exposure time
-void MainWindow::setExposureTimeValue(int value){
-    exposureTimeValue -> setText(QString::number(value));
-    QTableWidgetItem *item = featuresTable->item(6,1);
-    item->setText(QString::number(value));
 
-}
-//hardware set gain
-void MainWindow::setGainValue(int value){
-    gainValue -> setText(QString::number(value));
-    QTableWidgetItem *item = featuresTable->item(7,1);
-    item->setText(QString::number(value));
-
-}
-//hardware set dynamic range
-void MainWindow::setDynamicRangeValue(int value){
-    dynamicRangeValue -> setText(QString::number(value));
-    QTableWidgetItem *item = featuresTable->item(8,1);
-    item->setText(QString::number(value));
-
-}
-//hardware set signal to noise ratio
-void MainWindow::setSTNRValue(int value){
-    STNRValue-> setText(QString::number(value));
-    QTableWidgetItem *item = featuresTable->item(9,1);
-    item->setText(QString::number(value));
-
-}
 //grab coordinates
 void MainWindow::grabBtnChecked(){
     if(grabBtn->isChecked()){
@@ -923,39 +858,6 @@ void MainWindow::updateQueueSize(int value){
     queueSize = value;
 }
 
-//update the frame rate from the user inteface
-//Here's the interface to the board about frame rate, the frame rate is stored in <frameRate>, with number 30, or 60
-void MainWindow::setFrameRate(int index){
-    frameRate = (frameRateCB->itemText(index)).toInt();
-    gl->setFrameRate(frameRate);
-
-}
-
-//update the frame rate from the board
-void MainWindow::setFrameRateFromBoard(int value){
-    switch (value) {
-        case 30:
-            frameRate = value;
-            frameRateCB->setCurrentText("30");
-            gl->setFrameRate(frameRate);
-            break;
-        case 60:
-            frameRate = value;
-            frameRateCB->setCurrentText("60");
-            gl->setFrameRate(frameRate);
-            break;
-        default:
-            qDebug()<<"Unsupported frame rate: "<<value;
-            break;
-    }
-}
-
-//testchart
-void MainWindow::openGraphDialog()
-{
-    GraphDialog *dialog = new GraphDialog(this);
-    dialog->exec();  // open
-}
 
 //button icon color set
 void MainWindow::setButtonIconColor(QToolButton *button, const QString &iconPath, const QColor &color)
@@ -976,6 +878,111 @@ void MainWindow::setButtonIconColor(QToolButton *button, const QString &iconPath
     button->setIconSize(QSize(30, 30));
 }
 
+/***control component**future work****
+
+    frameRateCB = ui->frameRateComboBox;
+    frameRateCB->addItem("30");
+    frameRateCB->addItem("60");
+    frameRateCB->setCurrentText("30");
+
+    exposureTimeSlider = ui->exposureTimeSlider;
+    gainSlider = ui-> gainSlider;
+    dynamicRangeSlider = ui-> dynamicRangeSlider;
+    STNRSlider = ui-> STNRSlider;
+
+// update the frame rate from the user inteface
+// Here's the interface to the board about frame rate, the frame rate is stored in <frameRate>, with number 30, or 60
+void MainWindow::setFrameRate(int index){
+    frameRate = (frameRateCB->itemText(index)).toInt();
+    gl->setFrameRate(frameRate);
+}
+
+    exposureTimeValue = ui-> exposureTime;
+    gainValue = ui-> gain;
+    dynamicRangeValue = ui-> dynamicRange;
+    dynamicRangeValue->setText("60");
+    STNRValue = ui-> STNR;
+    STNRValue->setText("40");
+
+//update the frame rate from the board
+void MainWindow::setFrameRateFromBoard(int value){
+    switch (value) {
+        case 30:
+            frameRate = value;
+            frameRateCB->setCurrentText("30");
+            gl->setFrameRate(frameRate);
+            break;
+        case 60:
+            frameRate = value;
+            frameRateCB->setCurrentText("60");
+            gl->setFrameRate(frameRate);
+            break;
+        default:
+            qDebug()<<"Unsupported frame rate: "<<value;
+            break;
+    }
+}
+
+    //testchart
+    openGraphButton = ui->chart;
+    connect(openGraphButton, &QPushButton::clicked, this, &MainWindow::openGraphDialog);
+
+//testchart
+void MainWindow::openGraphDialog()
+{
+    GraphDialog *dialog = new GraphDialog(this);
+    dialog->exec();  // open
+}
+
+    exposureTimeSlider -> setRange(0,100);
+    exposureTimeSlider -> setValue(0);
+    gainSlider -> setRange(0,30);
+    gainSlider -> setValue(0);
+    dynamicRangeSlider -> setRange(60,120);
+    dynamicRangeSlider -> setValue(60);
+    STNRSlider -> setRange(30,70);
+    STNRSlider -> setValue(40);
+
+    connect(exposureTimeSlider, &QSlider::sliderMoved, this, &MainWindow::setExposureTimeValue);
+    connect(gainSlider, &QSlider::sliderMoved, this, &MainWindow::setGainValue);
+    connect(dynamicRangeSlider, &QSlider::sliderMoved, this, &MainWindow::setDynamicRangeValue);
+    connect(STNRSlider, &QSlider::sliderMoved, this, &MainWindow::setSTNRValue);
+
+connect(frameRateCB, &QComboBox::currentIndexChanged, this, &MainWindow::setFrameRate);
+
+//hardware set exposure time
+void MainWindow::setExposureTimeValue(int value){
+    exposureTimeValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(6,1);
+    item->setText(QString::number(value));
+
+}
+//hardware set gain
+void MainWindow::setGainValue(int value){
+    gainValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(7,1);
+    item->setText(QString::number(value));
+
+}
+//hardware set dynamic range
+void MainWindow::setDynamicRangeValue(int value){
+    dynamicRangeValue -> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(8,1);
+    item->setText(QString::number(value));
+
+}
+//hardware set signal to noise ratio
+void MainWindow::setSTNRValue(int value){
+    STNRValue-> setText(QString::number(value));
+    QTableWidgetItem *item = featuresTable->item(9,1);
+    item->setText(QString::number(value));
+
+}
 
 
-
+    //tab2
+    // QWidget *tab2 = new QWidget();
+    // QVBoxLayout *tab2Layout = new QVBoxLayout(tab2);
+    // tabWidget->addTab(tab2, "Control Component");
+    // QToolBox *tool2 = ui->toolBox_2;
+    // tab2Layout->addWidget(tool2);*/

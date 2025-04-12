@@ -22,7 +22,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolBox>
 #include <QtWidgets/QToolButton>
@@ -56,7 +56,7 @@ public:
     QWidget *widget_5;
     QVBoxLayout *verticalLayout_5;
     QWidget *widget_7;
-    QTabWidget *tabWidget;
+    QStackedWidget *stackedWidget;
     QVBoxLayout *verticalLayout_4;
     QPushButton *grabButton;
     QTableWidget *coordinatesTable;
@@ -457,18 +457,18 @@ public:
 
         verticalLayout_5->addWidget(widget_7);
 
-        tabWidget = new QTabWidget(horizontalLayoutWidget_3);
-        tabWidget->setObjectName("tabWidget");
+        stackedWidget = new QStackedWidget(horizontalLayoutWidget_3);
+        stackedWidget->setObjectName("stackedWidget");
         QSizePolicy sizePolicy4(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Expanding);
         sizePolicy4.setHorizontalStretch(1);
         sizePolicy4.setVerticalStretch(0);
-        sizePolicy4.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
-        tabWidget->setSizePolicy(sizePolicy4);
-        tabWidget->setMinimumSize(QSize(0, 280));
-        tabWidget->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
-        tabWidget->setStyleSheet(QString::fromUtf8(""));
+        sizePolicy4.setHeightForWidth(stackedWidget->sizePolicy().hasHeightForWidth());
+        stackedWidget->setSizePolicy(sizePolicy4);
+        stackedWidget->setMinimumSize(QSize(0, 280));
+        stackedWidget->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+        stackedWidget->setStyleSheet(QString::fromUtf8(""));
 
-        verticalLayout_5->addWidget(tabWidget);
+        verticalLayout_5->addWidget(stackedWidget);
 
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setObjectName("verticalLayout_4");
@@ -531,7 +531,6 @@ public:
 
         verticalLayout_5->addLayout(verticalLayout_4);
 
-        verticalLayout_5->setStretch(1, 3);
         verticalLayout_5->setStretch(2, 2);
 
         mainLayout->addLayout(verticalLayout_5);
@@ -551,6 +550,8 @@ public:
         toolBox = new QToolBox(centralwidget);
         toolBox->setObjectName("toolBox");
         toolBox->setGeometry(QRect(950, 330, 251, 241));
+        sizePolicy.setHeightForWidth(toolBox->sizePolicy().hasHeightForWidth());
+        toolBox->setSizePolicy(sizePolicy);
         toolBox->setStyleSheet(QString::fromUtf8(""));
         page = new QWidget();
         page->setObjectName("page");
@@ -708,7 +709,7 @@ public:
         horizontalLayout_8->setContentsMargins(0, 0, 0, 0);
         toolBox_2 = new QToolBox(centralwidget);
         toolBox_2->setObjectName("toolBox_2");
-        toolBox_2->setGeometry(QRect(880, 170, 111, 171));
+        toolBox_2->setGeometry(QRect(1260, 360, 111, 171));
         QSizePolicy sizePolicy7(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
         sizePolicy7.setHorizontalStretch(0);
         sizePolicy7.setVerticalStretch(0);
@@ -800,9 +801,8 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(-1);
-        toolBox->setCurrentIndex(6);
-        toolBox_2->setCurrentIndex(4);
+        toolBox->setCurrentIndex(1);
+        toolBox_2->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
