@@ -184,6 +184,10 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
 )");
+    featuresTable->setRowHidden(7, true);
+    featuresTable->setRowHidden(8, true);
+    featuresTable->setRowHidden(9, true);
+    featuresTable->setRowHidden(10, true);
 
     coordTable = ui->coordinatesTable;
     QStringList rowHeaders;
