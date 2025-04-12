@@ -71,7 +71,7 @@ static const char kFragmentShader[] = glsl(
     uniform float u_Gamma;
     void main()
     {
-        vec2 texOffset = vec2(1.0 / 176.0, 1.0 / 144.0);
+        vec2 texOffset = vec2(1.0 / 320.0, 1.0 / 240.0);
         vec4 color = u_colorMatrix
                              * vec4(
                                  texture2D(u_Texture0, v_TexCoords).r,
@@ -768,8 +768,8 @@ void GLVideoWidget::setTrackingEnabled(bool enabled) {
 
 //convert map coordinates to image coordinates
 QPoint GLVideoWidget::mapToImageCoordinates(const QPoint &point) {
-    float xRatio = static_cast<float>(176) / this->width();
-    float yRatio = static_cast<float>(144) / this->height();
+    float xRatio = static_cast<float>(320) / this->width();
+    float yRatio = static_cast<float>(240) / this->height();
     QPoint newPoint = QPoint(point.x() * xRatio, point.y() * yRatio);
     if (newPoint.x() < 0.0) newPoint.setX(0.0);
     else if (newPoint.x() > videoWidth-1) newPoint.setX(videoWidth-1);

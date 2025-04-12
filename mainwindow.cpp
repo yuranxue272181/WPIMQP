@@ -295,7 +295,7 @@ MainWindow::MainWindow(QWidget *parent)
     // openGL
     gl = new GLVideoWidget(this);
     QApplication::setAttribute(Qt::AA_UseOpenGLES);
-    gl-> setYUV420pParameters(176, 144); //call once, frame size
+    gl-> setYUV420pParameters(320, 240); //call once, frame size
 
     //analysis
     analysis = new Analysis();
@@ -374,9 +374,9 @@ void MainWindow::renderVideo(){
     grabCoAction-> setEnabled(true);
 
     //open the YUV file
-    //176x144
-    int width=176;
-    int height = 144;
+    //320x240
+    int width=320;
+    int height = 240;
     // QFile f(":/mqp_rowing_video.yuv");
     // f.open(QIODevice::ReadOnly);
     // QByteArray data(f.readAll());

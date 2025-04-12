@@ -14,7 +14,6 @@ SOURCES += \
     AboutUS.cpp \
     analysis.cpp \
     glvideowidget.cpp \
-    graph.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -22,7 +21,6 @@ HEADERS += \
     AboutUS.h \
     analysis.h \
     glvideowidget.h \
-    graph.h \
     mainwindow.h
 
 FORMS += \
