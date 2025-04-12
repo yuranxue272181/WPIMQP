@@ -17,6 +17,7 @@
 #include <QMenu>
 #include <QAction>
 #include <QVBoxLayout>
+#include <QFileDialog>
 
 
 QT_BEGIN_NAMESPACE

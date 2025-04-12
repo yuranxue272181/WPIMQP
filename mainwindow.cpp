@@ -409,9 +409,23 @@ void MainWindow::renderVideo(){
     //176x144
     int width=176;
     int height = 144;
-    QFile f(":/akiyo_qcif.yuv");
-    f.open(QIODevice::ReadOnly);
-    QByteArray data(f.readAll());
+    // QFile f(":/mqp_rowing_video.yuv");
+    // f.open(QIODevice::ReadOnly);
+    // QByteArray data(f.readAll());
+
+    QString fileName = QFileDialog::getOpenFileName(nullptr, "Select YUV File", "", "YUV Files (*.yuv);;All Files (*)");
+
+    if (fileName.isEmpty()) {
+        qDebug() << "No file selected.";
+        return;
+    }
+    QFile f(fileName);
+    if (!f.open(QIODevice::ReadOnly)) {
+        qDebug() << "Failed to open file:" << fileName;
+        return;
+    }
+    QByteArray data = f.readAll();
+
     //trans the video to only white, black ,and grey
     int frameSize = (width * height) + (width / 2 * height / 2) * 2;
     int frameCount = data.size() / frameSize;

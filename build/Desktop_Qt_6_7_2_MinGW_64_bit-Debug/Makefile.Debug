@@ -121,7 +121,6 @@ compiler_rcc_clean:
 debug/qrc_resources.cpp: ../../resources.qrc \
 		E:/Qt/6.7.2/mingw_64/bin/rcc.exe \
 		../../style.qss \
-		../../akiyo_qcif.yuv \
 		../../icons/shoot.png \
 		../../icons/recordRed.png \
 		../../icons/record.png \
@@ -1059,6 +1058,16 @@ debug/moc_mainwindow.cpp: ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayoutitem.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QFileDialog \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qfiledialog.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qdir.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qfileinfo.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qdatetime.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qcalendar.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qtimezone.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 		debug/moc_predefs.h \
 		E:/Qt/6.7.2/mingw_64/bin/moc.exe
 	E:\Qt\6.7.2\mingw_64\bin\moc.exe $(DEFINES) --include E:/APPData/Qtdocument/mqp1/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/debug/moc_predefs.h -IE:/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -IE:/APPData/Qtdocument/mqp1 -IE:/Qt/6.7.2/mingw_64/include -IE:/Qt/6.7.2/mingw_64/include/QtCharts -IE:/Qt/6.7.2/mingw_64/include/QtOpenGLWidgets -IE:/Qt/6.7.2/mingw_64/include/QtOpenGL -IE:/Qt/6.7.2/mingw_64/include/QtWidgets -IE:/Qt/6.7.2/mingw_64/include/QtGui -IE:/Qt/6.7.2/mingw_64/include/QtCore -I. -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IE:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IE:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\..\mainwindow.h -o debug\moc_mainwindow.cpp
@@ -2091,6 +2100,16 @@ debug/main.o: ../../main.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayoutitem.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QFileDialog \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qfiledialog.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qdir.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qfileinfo.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qdatetime.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qcalendar.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qtimezone.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/QtCore \
@@ -2115,10 +2134,8 @@ debug/main.o: ../../main.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qbuffer.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qbytearraymatcher.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcache.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qcalendar.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcborarray.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcborvalue.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qdatetime.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcborcommon.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/quuid.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcbormap.h \
@@ -2130,11 +2147,6 @@ debug/main.o: ../../main.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcommandlineparser.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcryptographichash.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qdir.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qfileinfo.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qtimezone.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qdiriterator.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qeasingcurve.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qfactoryinterface.h \
@@ -2467,6 +2479,16 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayout.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qlayoutitem.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qgridlayout.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QFileDialog \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qfiledialog.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qdir.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qfileinfo.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qdatetime.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qcalendar.h \
+		E:/Qt/6.7.2/mingw_64/include/QtCore/qtimezone.h \
+		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 		ui_mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/QVariant \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
@@ -2505,10 +2527,8 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qbuffer.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qbytearraymatcher.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcache.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qcalendar.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcborarray.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcborvalue.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qdatetime.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcborcommon.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/quuid.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcbormap.h \
@@ -2520,11 +2540,6 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcommandlineparser.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qconcatenatetablesproxymodel.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qcryptographichash.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qdir.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qfile.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qfiledevice.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qfileinfo.h \
-		E:/Qt/6.7.2/mingw_64/include/QtCore/qtimezone.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qdiriterator.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qeasingcurve.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/qfactoryinterface.h \
@@ -2713,7 +2728,6 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		E:/Qt/6.7.2/mingw_64/include/QtOpenGL/QOpenGLShaderProgram \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/QMessageBox \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qmessagebox.h \
-		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 		E:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 		../../analysis.h \
 		E:/Qt/6.7.2/mingw_64/include/QtCore/QVector \

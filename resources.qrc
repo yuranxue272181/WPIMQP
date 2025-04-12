@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>akiyo_qcif.yuv</file>
         <file>icons/play.png</file>
         <file>icons/pause.png</file>
         <file>icons/record.png</file>
