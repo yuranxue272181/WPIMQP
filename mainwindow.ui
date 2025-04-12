@@ -1581,11 +1581,6 @@
      <string>Tools</string>
     </property>
    </widget>
-   <widget class="QMenu" name="menuEdit">
-    <property name="title">
-     <string>Edit</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuRecord">
     <property name="title">
      <string>Record</string>
@@ -1593,7 +1588,7 @@
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>About</string>
     </property>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -1604,7 +1599,6 @@
    <addaction name="menuProject"/>
    <addaction name="menuTool"/>
    <addaction name="menuView"/>
-   <addaction name="menuEdit"/>
    <addaction name="menuRecord"/>
    <addaction name="menuHelp"/>
   </widget>

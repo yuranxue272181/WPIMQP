@@ -10,5 +10,6 @@
         <file>icons/recordGray.png</file>
         <file>icons/recordRed.png</file>
         <file>style.qss</file>
+        <file>icons/WPI.png</file>
     </qresource>
 </RCC>

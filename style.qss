@@ -148,5 +148,6 @@ QComboBox QAbstractItemView {
     font-weight: bold;
 }
 
-
-
+QMenu::item {
+    color: #5ad6d9;
+}

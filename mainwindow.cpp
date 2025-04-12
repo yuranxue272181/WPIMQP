@@ -2,9 +2,9 @@
 #include "ui_mainwindow.h"
 #include "glvideowidget.h"
 #include "analysis.h"
+#include "AboutUS.h"
 
-//ui
-#include <QVBoxLayout>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -108,11 +108,13 @@ MainWindow::MainWindow(QWidget *parent)
     menuProject = ui->menuProject;
     menuTool = ui->menuTool;
     menuView = ui->menuView;
-    menuEdit = ui-> menuEdit;
     menuRecord = ui-> menuRecord;
     menuHelp = ui->menuHelp;
 
     //menu action
+    //project menu
+    QAction *openFIleAction = new QAction(tr("Open File"),this);
+    menuProject->addAction(openFIleAction);
     //view menu
     QAction *zoomInAction = new QAction(tr("Zoom In"),this);
     QAction *zoomOutAction = new QAction(tr("Zoom Out"),this);
@@ -129,7 +131,9 @@ MainWindow::MainWindow(QWidget *parent)
     recordingAction->setEnabled(false);
     menuRecord->addAction(screenshootAction);
     menuRecord->addAction(recordingAction);
-
+    //about us menu
+    QAction *aboutUsAction = new QAction(tr("About us"),this);
+    menuHelp->addAction(aboutUsAction);
     //checkBox
     minChecker = new QCheckBox("Minimum");
     //minChecker->setStyleSheet("QCheckBox { margin-left: auto; margin-right: auto; }");
@@ -323,11 +327,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(columnChecker, &QCheckBox::stateChanged, this, &MainWindow::columnCheck);
     connect(gl, &GLVideoWidget::mouseRelease, this, &MainWindow::resetTotal);
     connect(spin, &QSpinBox::valueChanged,this,&MainWindow::updateQueueSize);
+    connect(openFIleAction,&QAction::triggered,this,&MainWindow::renderVideo);
     connect(zoomInAction, &QAction::triggered, this, &MainWindow::zoomIn);
     connect(zoomOutAction, &QAction::triggered, this, &MainWindow::zoomOut);
     connect(grabCoAction, &QAction::triggered, this, &MainWindow::grabBtnChecked);
     connect(screenshootAction, &QAction::triggered, gl, &GLVideoWidget::saveYUVImageDataToFile);
     connect(recordingAction, &QAction::triggered, this, &MainWindow::recordingStatu);
+    connect(aboutUsAction, &QAction::triggered, this, &MainWindow::on_aboutUsButton_clicked);
 
     //updateQueueSize
 
@@ -876,6 +882,12 @@ void MainWindow::setButtonIconColor(QToolButton *button, const QString &iconPath
 
     button->setIcon(QIcon(pixmap));
     button->setIconSize(QSize(30, 30));
+}
+//open the about us page
+void MainWindow::on_aboutUsButton_clicked()
+{
+    AboutUS aboutUSDialog;
+    aboutUSDialog.exec();  // 弹出模态窗口
 }
 
 /***control component**future work****

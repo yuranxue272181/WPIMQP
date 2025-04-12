@@ -1,0 +1,11 @@
+release/AboutUS.o
+release/analysis.o
+release/glvideowidget.o
+release/graph.o
+release/main.o
+release/mainwindow.o
+release/qrc_resources.o
+release/moc_AboutUS.o
+release/moc_glvideowidget.o
+release/moc_graph.o
+release/moc_mainwindow.o

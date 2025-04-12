@@ -118,7 +118,6 @@ public:
     QMenuBar *menuBar;
     QMenu *menuProject;
     QMenu *menuTool;
-    QMenu *menuEdit;
     QMenu *menuRecord;
     QMenu *menuHelp;
     QMenu *menuView;
@@ -782,8 +781,6 @@ public:
         menuProject->setObjectName("menuProject");
         menuTool = new QMenu(menuBar);
         menuTool->setObjectName("menuTool");
-        menuEdit = new QMenu(menuBar);
-        menuEdit->setObjectName("menuEdit");
         menuRecord = new QMenu(menuBar);
         menuRecord->setObjectName("menuRecord");
         menuHelp = new QMenu(menuBar);
@@ -795,7 +792,6 @@ public:
         menuBar->addAction(menuProject->menuAction());
         menuBar->addAction(menuTool->menuAction());
         menuBar->addAction(menuView->menuAction());
-        menuBar->addAction(menuEdit->menuAction());
         menuBar->addAction(menuRecord->menuAction());
         menuBar->addAction(menuHelp->menuAction());
 
@@ -937,9 +933,8 @@ public:
         toolBox_2->setItemText(toolBox_2->indexOf(page_10), QCoreApplication::translate("MainWindow", "Frame Rate", nullptr));
         menuProject->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
         menuTool->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
-        menuEdit->setTitle(QCoreApplication::translate("MainWindow", "Edit", nullptr));
         menuRecord->setTitle(QCoreApplication::translate("MainWindow", "Record", nullptr));
-        menuHelp->setTitle(QCoreApplication::translate("MainWindow", "Help", nullptr));
+        menuHelp->setTitle(QCoreApplication::translate("MainWindow", "About", nullptr));
         menuView->setTitle(QCoreApplication::translate("MainWindow", "View", nullptr));
     } // retranslateUi
 

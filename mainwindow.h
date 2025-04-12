@@ -18,6 +18,7 @@
 #include <QAction>
 #include <QVBoxLayout>
 #include <QFileDialog>
+#include <QVBoxLayout>
 
 
 QT_BEGIN_NAMESPACE
@@ -67,6 +68,7 @@ private slots:
     void resetTotal();
     void updateQueueSize(int value);
     void grabBtnChecked();
+    void on_aboutUsButton_clicked();
 
     void setButtonIconColor(QToolButton *button, const QString &iconPath, const QColor &color);
     //***control component***future work***
@@ -102,7 +104,6 @@ private:
     QMenu* menuProject;
     QMenu* menuTool;
     QMenu* menuView;
-    QMenu* menuEdit;
     QMenu* menuRecord;
     QMenu* menuHelp;
     QAction *recordingAction;

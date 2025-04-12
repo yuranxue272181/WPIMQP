@@ -1,0 +1,11 @@
+debug/AboutUS.o
+debug/analysis.o
+debug/glvideowidget.o
+debug/graph.o
+debug/main.o
+debug/mainwindow.o
+debug/qrc_resources.o
+debug/moc_AboutUS.o
+debug/moc_glvideowidget.o
+debug/moc_graph.o
+debug/moc_mainwindow.o
