@@ -1,5 +1,7 @@
 WPI MQP Image Process Software Demo. This project is a basic YUV video player with OpenGL rendering. The current UI is very simple and rough (and ugly :)) and will be gradually improved.
 
+We built a cross-platform video player using Qt, C++, and OpenGL, fully powered by the GPU for smooth, real-time performance. All the image enhancement—like brightness and contrast adjustments—is done right on the GPU using fragment shaders, so the visual feedback is instant, with zero burden on the CPU. This helps users spot fine details and textures more easily, and even uncover issues like sensor noise or pixel instability. It also makes ROI analysis—region of interest—more accurate and insightful. So, since we’ve mentioned ROI--let’s take a closer look at how this feature actually works, and why it’s so powerful for analysis and debugging.​
+
 Basic Development Information
 -
 1. Language: C++
@@ -24,14 +26,12 @@ Currently Implemented Features
 - Noise Reduction: <br>Use the slider to control the noise reduction and display it on the feature properties.
 - Gamma Correction: <br>Use the slider to control the Gamma correction and display it on the feature properties.
 - Reset to Default: <br>This button is used to reset all the image enhancement features to default.
+10. Region of Interest Analysis
 
 Future Improvements
 -
-1. UI Optimization: <br>The user interface will be redesigned and optimized in future versions to enhance the overall user experience.
-2. Board Testing: <br>Once the hardware board is successfully set up, we will test the data directly from the board.
-3. RGB Data Support: <br>Will convert RGB data into video if needed.
-4. Feature Prioritization: <br>If any key features are identified, we will work on them earlier.
+1. 
 
 Challenges
 -
-1. Window adaption is difficult to achieve.
+1. 
