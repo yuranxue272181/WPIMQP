@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 
     //with ui
     MainWindow mainWindow;
-    mainWindow.setWindowTitle("AySight");
+    mainWindow.setWindowTitle("Secure CMOS Image Sensor");
     mainWindow.show();
 
     return a.exec();
