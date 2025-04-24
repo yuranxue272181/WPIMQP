@@ -382,7 +382,7 @@
               </size>
              </property>
              <property name="text">
-              <string>Frames for temporal noise</string>
+              <string>Temporal Frames of ROI</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>

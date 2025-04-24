@@ -772,7 +772,7 @@ public:
         FeatureTable->setSortingEnabled(__sortingEnabled);
 
         label_5->setText(QCoreApplication::translate("MainWindow", "Region of Interest", nullptr));
-        frameTemNoise->setText(QCoreApplication::translate("MainWindow", "Frames for temporal noise", nullptr));
+        frameTemNoise->setText(QCoreApplication::translate("MainWindow", "Temporal Frames of ROI", nullptr));
         QTableWidgetItem *___qtablewidgetitem22 = analysisTable->horizontalHeaderItem(0);
         ___qtablewidgetitem22->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         QTableWidgetItem *___qtablewidgetitem23 = analysisTable->horizontalHeaderItem(1);
