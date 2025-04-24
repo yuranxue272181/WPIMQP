@@ -12,7 +12,6 @@
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QComboBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -99,22 +98,6 @@ public:
     QToolButton *zoomOutButton;
     QWidget *horizontalLayoutWidget_7;
     QHBoxLayout *horizontalLayout_8;
-    QToolBox *toolBox_2;
-    QWidget *page_5;
-    QSlider *exposureTimeSlider;
-    QLabel *exposureTime;
-    QWidget *page_6;
-    QSlider *gainSlider;
-    QLabel *gain;
-    QWidget *Sharpen_2;
-    QSlider *dynamicRangeSlider;
-    QLabel *dynamicRange;
-    QWidget *page_9;
-    QSlider *STNRSlider;
-    QLabel *STNR;
-    QWidget *page_10;
-    QComboBox *frameRateComboBox;
-    QPushButton *chart;
     QMenuBar *menuBar;
     QMenu *menuProject;
     QMenu *menuTool;
@@ -706,73 +689,6 @@ public:
         horizontalLayout_8 = new QHBoxLayout(horizontalLayoutWidget_7);
         horizontalLayout_8->setObjectName("horizontalLayout_8");
         horizontalLayout_8->setContentsMargins(0, 0, 0, 0);
-        toolBox_2 = new QToolBox(centralwidget);
-        toolBox_2->setObjectName("toolBox_2");
-        toolBox_2->setGeometry(QRect(1260, 360, 111, 171));
-        QSizePolicy sizePolicy7(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Preferred);
-        sizePolicy7.setHorizontalStretch(0);
-        sizePolicy7.setVerticalStretch(0);
-        sizePolicy7.setHeightForWidth(toolBox_2->sizePolicy().hasHeightForWidth());
-        toolBox_2->setSizePolicy(sizePolicy7);
-        toolBox_2->setStyleSheet(QString::fromUtf8(""));
-        page_5 = new QWidget();
-        page_5->setObjectName("page_5");
-        page_5->setGeometry(QRect(0, 0, 111, 26));
-        exposureTimeSlider = new QSlider(page_5);
-        exposureTimeSlider->setObjectName("exposureTimeSlider");
-        exposureTimeSlider->setGeometry(QRect(0, 10, 200, 22));
-        exposureTimeSlider->setOrientation(Qt::Orientation::Horizontal);
-        exposureTime = new QLabel(page_5);
-        exposureTime->setObjectName("exposureTime");
-        exposureTime->setGeometry(QRect(200, 10, 31, 21));
-        exposureTime->setAlignment(Qt::AlignmentFlag::AlignCenter);
-        toolBox_2->addItem(page_5, QString::fromUtf8("Exposure Time"));
-        page_6 = new QWidget();
-        page_6->setObjectName("page_6");
-        page_6->setGeometry(QRect(0, 0, 111, 26));
-        gainSlider = new QSlider(page_6);
-        gainSlider->setObjectName("gainSlider");
-        gainSlider->setGeometry(QRect(0, 10, 200, 22));
-        gainSlider->setOrientation(Qt::Orientation::Horizontal);
-        gain = new QLabel(page_6);
-        gain->setObjectName("gain");
-        gain->setGeometry(QRect(200, 10, 31, 21));
-        gain->setAlignment(Qt::AlignmentFlag::AlignCenter);
-        toolBox_2->addItem(page_6, QString::fromUtf8("Gain"));
-        Sharpen_2 = new QWidget();
-        Sharpen_2->setObjectName("Sharpen_2");
-        Sharpen_2->setGeometry(QRect(0, 0, 111, 26));
-        dynamicRangeSlider = new QSlider(Sharpen_2);
-        dynamicRangeSlider->setObjectName("dynamicRangeSlider");
-        dynamicRangeSlider->setGeometry(QRect(0, 10, 200, 22));
-        dynamicRangeSlider->setOrientation(Qt::Orientation::Horizontal);
-        dynamicRange = new QLabel(Sharpen_2);
-        dynamicRange->setObjectName("dynamicRange");
-        dynamicRange->setGeometry(QRect(200, 10, 31, 21));
-        dynamicRange->setAlignment(Qt::AlignmentFlag::AlignCenter);
-        toolBox_2->addItem(Sharpen_2, QString::fromUtf8("Dynamic Range"));
-        page_9 = new QWidget();
-        page_9->setObjectName("page_9");
-        page_9->setGeometry(QRect(0, 0, 111, 26));
-        STNRSlider = new QSlider(page_9);
-        STNRSlider->setObjectName("STNRSlider");
-        STNRSlider->setGeometry(QRect(0, 10, 200, 22));
-        STNRSlider->setOrientation(Qt::Orientation::Horizontal);
-        STNR = new QLabel(page_9);
-        STNR->setObjectName("STNR");
-        STNR->setGeometry(QRect(200, 10, 31, 21));
-        STNR->setAlignment(Qt::AlignmentFlag::AlignCenter);
-        toolBox_2->addItem(page_9, QString::fromUtf8("Signal-to-Noise Ratio"));
-        page_10 = new QWidget();
-        page_10->setObjectName("page_10");
-        page_10->setGeometry(QRect(0, 0, 111, 26));
-        frameRateComboBox = new QComboBox(page_10);
-        frameRateComboBox->setObjectName("frameRateComboBox");
-        frameRateComboBox->setGeometry(QRect(20, 10, 200, 30));
-        chart = new QPushButton(page_10);
-        chart->setObjectName("chart");
-        chart->setGeometry(QRect(40, 50, 75, 23));
-        toolBox_2->addItem(page_10, QString::fromUtf8("Frame Rate"));
         MainWindow->setCentralWidget(centralwidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
@@ -798,7 +714,6 @@ public:
         retranslateUi(MainWindow);
 
         toolBox->setCurrentIndex(1);
-        toolBox_2->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -921,16 +836,6 @@ public:
         recordButton->setText(QString());
         zoomInButton->setText(QString());
         zoomOutButton->setText(QString());
-        exposureTime->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        toolBox_2->setItemText(toolBox_2->indexOf(page_5), QCoreApplication::translate("MainWindow", "Exposure Time", nullptr));
-        gain->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        toolBox_2->setItemText(toolBox_2->indexOf(page_6), QCoreApplication::translate("MainWindow", "Gain", nullptr));
-        dynamicRange->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        toolBox_2->setItemText(toolBox_2->indexOf(Sharpen_2), QCoreApplication::translate("MainWindow", "Dynamic Range", nullptr));
-        STNR->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
-        toolBox_2->setItemText(toolBox_2->indexOf(page_9), QCoreApplication::translate("MainWindow", "Signal-to-Noise Ratio", nullptr));
-        chart->setText(QCoreApplication::translate("MainWindow", "chart", nullptr));
-        toolBox_2->setItemText(toolBox_2->indexOf(page_10), QCoreApplication::translate("MainWindow", "Frame Rate", nullptr));
         menuProject->setTitle(QCoreApplication::translate("MainWindow", "Project", nullptr));
         menuTool->setTitle(QCoreApplication::translate("MainWindow", "Tools", nullptr));
         menuRecord->setTitle(QCoreApplication::translate("MainWindow", "Record", nullptr));
