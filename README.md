@@ -1,4 +1,4 @@
-WPI MQP Image Process Software Demo. This project is a basic YUV video player with OpenGL rendering. The current UI is very simple and rough (and ugly :)) and will be gradually improved.
+WPI MQP Image Process Software Demo.
 
 Basic Development Information
 -
@@ -24,14 +24,4 @@ Currently Implemented Features
 - Noise Reduction: <br>Use the slider to control the noise reduction and display it on the feature properties.
 - Gamma Correction: <br>Use the slider to control the Gamma correction and display it on the feature properties.
 - Reset to Default: <br>This button is used to reset all the image enhancement features to default.
-
-Future Improvements
--
-1. UI Optimization: <br>The user interface will be redesigned and optimized in future versions to enhance the overall user experience.
-2. Board Testing: <br>Once the hardware board is successfully set up, we will test the data directly from the board.
-3. RGB Data Support: <br>Will convert RGB data into video if needed.
-4. Feature Prioritization: <br>If any key features are identified, we will work on them earlier.
-
-Challenges
--
-1. Window adaption is difficult to achieve.
+10. Region of Interest Analysis
